@@ -1,5 +1,6 @@
 
 Locating queue directory is a bit tricky because on disk, only values of MD5 hashes are used, not queue names. Here's how to find out the virtual host directory
+The directory name is predictable in that it is generated from the MD5 sum of the vhost name. You can get this name by running the following command:
 
 rabbitmqctl eval 'rabbit_vhost:dir("/").'
 
