@@ -12,7 +12,7 @@ rabbitmqadmin declare binding source=up-exchange destination=qq-up routing_key=q
 # down
 rabbitmqadmin declare exchange name=down-exchange type=direct
 rabbitmqadmin declare queue name=qq-down arguments='{"x-queue-type": "quorum"}'
-rabbitmqadmin declare binding source=fed-up-demo destination=qq-down routing_key=qq-down
+rabbitmqadmin declare binding source=down-exchange destination=qq-down routing_key=qq-down
 
 
 
