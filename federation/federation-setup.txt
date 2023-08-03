@@ -17,5 +17,4 @@ rabbitmqadmin declare binding source=down-exchange destination=qq-down routing_k
 
 
 rabbitmqctl set_parameter federation-upstream fed-demo '{"uri":"amqp://admin:password@localhost:5672"}'
-rabbitmqctl set_policy policy-demo "^down" '{"federation-upstream":"fed-demo"}' --apply-to exchange
-
+rabbitmqctl set_policy policy-demo "^qq-down" '{"federation-upstream":"fed-demo"}' --apply-to=exchanges
