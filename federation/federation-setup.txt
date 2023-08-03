@@ -5,14 +5,14 @@ rabbitmq-plugins enable rabbitmq_federation_management
 
 
 # up
-rabbitmqadmin declare exchange name=up-exchange type=direct
-rabbitmqadmin declare queue name=qq-up arguments='{"x-queue-type": "quorum"}'
-rabbitmqadmin declare binding source=up-exchange destination=qq-up routing_key=qq-up
+rabbitmqadmin declare exchange name=demo-exchange type=direct
+rabbitmqadmin declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
+rabbitmqadmin declare binding source=demo-exchange destination=qq1 routing_key=qq1
 
 # down
-rabbitmqadmin declare exchange name=down-exchange type=direct
-rabbitmqadmin declare queue name=qq-down arguments='{"x-queue-type": "quorum"}'
-rabbitmqadmin declare binding source=down-exchange destination=qq-down routing_key=qq-down
+rabbitmqadmin declare exchange name=demo-exchange type=direct
+rabbitmqadmin declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
+rabbitmqadmin declare binding source=demo-exchange destination=qq1 routing_key=qq1
 
 
 
