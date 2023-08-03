@@ -27,3 +27,9 @@ for i in $(seq 100); do rabbitmqadmin publish exchange=demo-exchange routing_key
 
 the message will be sync from up to down
 
+
+
+
+
+# consume the message
+rabbitmqadmin get queue=qq1 ackmode=ack_requeue_true count=1000
