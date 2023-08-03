@@ -1,7 +1,7 @@
 # install the latest erlang 
 add-apt-repository ppa:rabbitmq/rabbitmq-erlang
 apt update
-apt install erlang
+apt install erlang -y
 
 
 # install the default erlang
