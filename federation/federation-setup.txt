@@ -18,3 +18,12 @@ rabbitmqadmin declare binding source=demo-exchange destination=qq1 routing_key=q
 
 rabbitmqctl set_parameter federation-upstream fed-demo '{"uri":"amqp://admin:password@X.X.X.X:5672"}'
 rabbitmqctl set_policy policy-demo "^demo-exchange" '{"federation-upstream":"fed-demo"}' --apply-to=exchanges
+
+
+
+# publish the message in the up node
+for i in $(seq 100); do rabbitmqadmin publish exchange=demo-exchange routing_key="qq1" payload="hello, world  $i"; done
+
+
+the message will be sync from up to down
+
