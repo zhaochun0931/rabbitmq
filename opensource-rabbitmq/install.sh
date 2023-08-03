@@ -1,5 +1,10 @@
-# install erlang
+# install the latest erlang 
+add-apt-repository ppa:rabbitmq/rabbitmq-erlang
+apt update
+apt install erlang
 
+
+# install the default erlang
 apt update
 
 apt install curl software-properties-common apt-transport-https lsb-release -y
