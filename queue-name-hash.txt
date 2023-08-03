@@ -3,6 +3,8 @@ Locating queue directory is a bit tricky because on disk, only values of MD5 has
 
 rabbitmqctl eval 'rabbit_vhost:msg_store_dir_path(<<"/">>).'
 
+rabbitmqctl eval 'rabbit_vhost:msg_store_dir_path(<<"VHOST_NAME">>).'
+
 rabbitmqctl eval '<<Num:128>> = erlang:md5(<<"queue", <<"VHOST_NAME">>/binary, <<"QUEUE_NAME">>/binary>>), rabbit_misc:format("~.36B", [Num]).'
 
 
