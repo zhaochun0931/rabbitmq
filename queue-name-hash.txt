@@ -20,3 +20,5 @@ rabbitmqctl eval '<<Num:128>> = erlang:md5(<<"queue", <<"VHOST_NAME">>/binary, <
 rabbitmqctl eval "rabbit_misc:version()."
 
 rabbitmqctl eval "rabbit_misc:otp_release()."
+
+rabbitmqctl eval 'node().'
