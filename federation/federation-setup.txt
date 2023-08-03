@@ -1,5 +1,16 @@
+
+
 rabbitmq-plugins enable rabbitmq_federation
 rabbitmq-plugins enable rabbitmq_federation_management
+
+
+
+rabbitmqadmin declare exchange name=fed-up-demo type=direct
+rabbitmqadmin declare queue name=qq-demo arguments='{"x-queue-type": "quorum"}'
+rabbitmqadmin declare binding source=fed-up-demo destination=qq-demo routing_key=qq-demo
+
+
+
 
 
 
