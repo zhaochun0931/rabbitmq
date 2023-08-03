@@ -1,0 +1,8 @@
+rabbitmq-plugins enable rabbitmq_federation
+rabbitmq-plugins enable rabbitmq_federation_management
+
+
+
+rabbitmqctl set_parameter federation-upstream upstream-demo '{"uri":"amqp://admin:password@localhost:5672"}'
+rabbitmqctl set_policy policy-demo "^qq" '{"federation-upstream":"upstream-demo"}' --apply-to all
+
