@@ -1,6 +1,8 @@
 
 Locating queue directory is a bit tricky because on disk, only values of MD5 hashes are used, not queue names. Here's how to find out the virtual host directory
 
+rabbitmqctl eval 'rabbit_vhost:dir("/").'
+
 rabbitmqctl eval 'rabbit_vhost:msg_store_dir_path(<<"/">>).'
 
 rabbitmqctl eval 'rabbit_vhost:msg_store_dir_path(<<"VHOST_NAME">>).'
