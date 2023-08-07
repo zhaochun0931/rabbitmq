@@ -1,0 +1,34 @@
+$ erl
+Erlang/OTP 25 [erts-13.2] [source] [64-bit] [smp:10:10] [ds:10:10:10] [async-threads:1] [jit] [dtrace]
+
+Eshell V13.2  (abort with ^G)
+1> c(hello_world).
+{ok,hello_world}
+2>
+2>
+2> m(hello_world).
+Module: hello_world
+MD5: 680994b92b08ab709248f79bd5e04e48
+Object file: /Users/Download/hello_world.beam
+Compiler options:  []
+Exports:
+         hello/0
+         module_info/0
+         module_info/1
+         world/0
+ok
+3>
+3>
+3> hello_world:hello().
+"Hello Erlang"
+4>
+4>
+4>
+4> hello_world:world().
+"Hello World"
+5>
+5>
+5>
+5> 
+5> halt().
+$
