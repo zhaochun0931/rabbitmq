@@ -1,0 +1,1 @@
+-define(TEXT, "Hello yyy").
