@@ -1,0 +1,19 @@
+rabbitmq-diagnostics erlang_cookie_sources --formatter json
+
+
+make sure the .erlang.cookie file is the identical
+
+/var/lib/rabbitmq/.erlang.cookie
+$HOME/.erlang.cookie
+
+
+systemctl restart rabbitmq-server.service
+
+
+
+node1:
+
+
+
+node2:
+
