@@ -14,13 +14,7 @@ systemctl restart rabbitmq-server.service
 gemfire-a-1:
 
 
-
-
-
-
 gemfire-a-2:
-
-
 rabbitmqctl stop_app
 
 rabbitmqctl reset
@@ -46,6 +40,11 @@ Clustering node rabbit@gemfire-a-2 with rabbit@gemfire-a-1
 # rabbitmqctl start_app
 Starting node rabbit@gemfire-a-2 ...
 #
+
+
+
+
+
 
 
 
