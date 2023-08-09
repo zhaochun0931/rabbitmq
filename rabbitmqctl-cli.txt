@@ -1,4 +1,11 @@
-# create policy
+# create and delete policy
 
 rabbitmqctl set_policy ha-all "^qq" '{"ha-mode":"all"}' --apply-to=queues
+
+rabbitmqctl list_policies
+
+rabbitmqctl clear_policy ha-all
+
+
+
 
