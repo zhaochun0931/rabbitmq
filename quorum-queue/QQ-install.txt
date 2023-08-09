@@ -3,7 +3,7 @@ The quorum queue will be automatically mirrored across the cluster. the minimum 
 Don't need to create the additional policy for the quorum queue. It's easier than the mirrored classis queue.
 
 All you need to do are:
-create at least 3 nodes cluster
+create a cluster with at least 3 nodes
 crete a quorum queue
 
 
