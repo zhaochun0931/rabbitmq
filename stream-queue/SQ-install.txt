@@ -1,0 +1,16 @@
+stream queue is simiar with the quorum queue
+
+all you need to do is to create a cluster with at least 3  nodes, and create a stream queue.
+
+
+
+
+2023-08-09 03:14:07.844027+00:00 [info] <0.489.0> rabbit on node 'rabbit@gemfire-a-1' down
+2023-08-09 03:14:07.862461+00:00 [info] <0.11908.0> __sq-1_1691550748746638938 [osiris_replica:handle_info/2] replica reader <13212.6424.0> exited with shutdown
+2023-08-09 03:14:07.894132+00:00 [info] <0.12401.0> Stream: __sq-1_1691550748746638938 will use /var/lib/rabbitmq/mnesia/rabbit@gemfire-b-1/stream/__sq-1_1691550748746638938 for osiris log data directory
+2023-08-09 03:14:07.896424+00:00 [info] <0.12401.0> osiris_writer:init/1: name: __sq-1_1691550748746638938 last offset: 1 committed chunk id: -1 epoch: 2
+2023-08-09 03:14:07.897606+00:00 [info] <0.489.0> node 'rabbit@gemfire-a-1' down: connection_closed
+2023-08-09 03:14:07.910740+00:00 [info] <0.12404.0> __sq-1_1691550748746638938 [osiris_replica_reader:init/1] starting osiris replica reader at offset 2
+2023-08-09 03:15:17.520681+00:00 [warning] <0.13066.0> AMQP 0-9-1 client call timeout was 70000 ms, is updated to a safe effective value of 130000 ms
+
+
