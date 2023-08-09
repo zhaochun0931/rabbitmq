@@ -1,0 +1,6 @@
+# the queue beginning with cq will be mirrored to all the nodes of the cluster, stop any node will not impact the service
+
+
+
+rabbitmqctl set_policy ha-cq "^cq" '{"ha-mode":"all"}' --apply-to=queues
+
