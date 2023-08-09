@@ -10,6 +10,97 @@ crete a quorum queue
 
 
 
+root@gemfire-a-1:~# rabbitmqctl cluster_status
+Cluster status of node rabbit@gemfire-a-1 ...
+Basics
+
+Cluster name: rabbit@gemfire-a-1
+Total CPU cores available cluster-wide: 6
+
+Disk Nodes
+
+rabbit@gemfire-a-1
+rabbit@gemfire-a-2
+rabbit@gemfire-b-1
+
+Running Nodes
+
+rabbit@gemfire-a-1
+rabbit@gemfire-a-2
+rabbit@gemfire-b-1
+
+Versions
+
+rabbit@gemfire-a-2: RabbitMQ 3.12.2 on Erlang 26.0.2
+rabbit@gemfire-a-1: RabbitMQ 3.12.2 on Erlang 26.0.2
+rabbit@gemfire-b-1: RabbitMQ 3.12.2 on Erlang 26.0.2
+
+CPU Cores
+
+Node: rabbit@gemfire-a-2, available CPU cores: 2
+Node: rabbit@gemfire-a-1, available CPU cores: 2
+Node: rabbit@gemfire-b-1, available CPU cores: 2
+
+Maintenance status
+
+Node: rabbit@gemfire-a-2, status: not under maintenance
+Node: rabbit@gemfire-a-1, status: not under maintenance
+Node: rabbit@gemfire-b-1, status: not under maintenance
+
+Alarms
+
+(none)
+
+Network Partitions
+
+(none)
+
+Listeners
+
+Node: rabbit@gemfire-a-2, interface: [::], port: 15672, protocol: http, purpose: HTTP API
+Node: rabbit@gemfire-a-2, interface: [::], port: 25672, protocol: clustering, purpose: inter-node and CLI tool communication
+Node: rabbit@gemfire-a-2, interface: [::], port: 5672, protocol: amqp, purpose: AMQP 0-9-1 and AMQP 1.0
+Node: rabbit@gemfire-a-1, interface: [::], port: 15672, protocol: http, purpose: HTTP API
+Node: rabbit@gemfire-a-1, interface: [::], port: 25672, protocol: clustering, purpose: inter-node and CLI tool communication
+Node: rabbit@gemfire-a-1, interface: [::], port: 5672, protocol: amqp, purpose: AMQP 0-9-1 and AMQP 1.0
+Node: rabbit@gemfire-b-1, interface: [::], port: 15672, protocol: http, purpose: HTTP API
+Node: rabbit@gemfire-b-1, interface: [::], port: 25672, protocol: clustering, purpose: inter-node and CLI tool communication
+Node: rabbit@gemfire-b-1, interface: [::], port: 5672, protocol: amqp, purpose: AMQP 0-9-1 and AMQP 1.0
+
+Feature flags
+
+Flag: classic_mirrored_queue_version, state: enabled
+Flag: classic_queue_type_delivery_support, state: enabled
+Flag: direct_exchange_routing_v2, state: enabled
+Flag: drop_unroutable_metric, state: enabled
+Flag: empty_basic_get_metric, state: enabled
+Flag: feature_flags_v2, state: enabled
+Flag: implicit_default_bindings, state: enabled
+Flag: listener_records_in_ets, state: enabled
+Flag: maintenance_mode_status, state: enabled
+Flag: quorum_queue, state: enabled
+Flag: restart_streams, state: enabled
+Flag: stream_queue, state: enabled
+Flag: stream_sac_coordinator_unblock_group, state: enabled
+Flag: stream_single_active_consumer, state: enabled
+Flag: tracking_records_in_ets, state: enabled
+Flag: user_limits, state: enabled
+Flag: virtual_host_metadata, state: enabled
+root@gemfire-a-1:~#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 when you shutdown one node(gemfire-a-2) , you will get similar message, the cluster will choose a new leader(gemfire-a-1).
 
 2023-08-09 02:50:19.685185+00:00 [info] <0.489.0> rabbit on node 'rabbit@gemfire-a-2' down
