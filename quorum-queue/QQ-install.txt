@@ -1,0 +1,12 @@
+The quorum queue will be automatically mirrored across the cluster. the minimum node of the quorum cluster is 3 and other nodes should be working well if one node is broken.
+Don't need to create the additional policy for the quorum queue. It's easier than the mirrored classis queue.
+
+
+
+when you shutdown one node(gemfire-a-2) , you will get similar message, the cluster will choose a new leader(gemfire-a-1).
+
+2023-08-09 02:50:19.685185+00:00 [info] <0.489.0> rabbit on node 'rabbit@gemfire-a-2' down
+2023-08-09 02:50:19.694571+00:00 [info] <0.552.0> queue 'qq-1' in vhost '/': Leader monitor down with shutdown, setting election timeout
+2023-08-09 02:50:19.728716+00:00 [info] <0.489.0> node 'rabbit@gemfire-a-2' down: connection_closed
+2023-08-09 02:50:19.744556+00:00 [info] <0.552.0> queue 'qq-1' in vhost '/': granting vote for {'%2F_qq-1','rabbit@gemfire-a-1'} with last indexterm {111,2} for term 3 previous term was 2
+2023-08-09 02:50:19.762598+00:00 [info] <0.552.0> queue 'qq-1' in vhost '/': detected a new leader {'%2F_qq-1','rabbit@gemfire-a-1'} in term 3
