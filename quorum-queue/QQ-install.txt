@@ -3,7 +3,7 @@ The quorum queue will be automatically mirrored across the cluster. the minimum 
 Don't need to create the additional policy for the quorum queue. It's easier than the mirrored classis queue.
 
 All you need to do are:
-create a cluster with at least 3 nodes
+create a cluster with at least 3 nodes, in this example, we have 3 nodes (gemfire-a-1,gemfire-a-2,gemfire-b-1)
 crete a quorum queue
 
 
