@@ -26,7 +26,7 @@ password="$(kubectl get secret downstream-rabbit-default-user -n rabbitmq-system
 echo "password: $password"
 
 
-
+# create a quorum queue for test
 
 kubectl exec -it downstream-rabbit-server-0 -n rabbitmq-system -- bash
 
