@@ -4,7 +4,7 @@ https://core.vmware.com/resource/vmware-rabbitmq-warm-standby-replication#warm-s
 
 
 
-
+# primary 
 nohup kubectl port-forward service/upstream-rabbit -n rabbitmq-system --address 0.0.0.0 15672:15672 5672:5672 5552:5552 &
 
 
@@ -17,6 +17,8 @@ echo "password: $password"
 
 
 
+
+# standby
 
 nohup kubectl port-forward service/downstream-rabbit -n rabbitmq-system --address 0.0.0.0 15672:15672 5672:5672 5552:5552 &
 
@@ -31,7 +33,7 @@ echo "password: $password"
 kubectl exec -it downstream-rabbit-server-0 -n rabbitmq-system -- bash
 
 
-# run below commands in the downstream
+# run below commands in the standby(downstream)
 rabbitmqctl list_vhosts_available_for_standby_replication_recovery
 rabbitmq-diagnostics inspect_standby_downstream_metrics
 rabbitmqctl promote_standby_replication_downstream_cluster
