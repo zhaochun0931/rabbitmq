@@ -31,16 +31,27 @@ echo "password: $password"
 kubectl exec -it downstream-rabbit-server-0 -n rabbitmq-system -- bash
 
 
-kubectl exec -it downstream-rabbit-server-0 -n rabbitmq-system -- rabbitmqctl list_vhosts_available_for_standby_replication_recovery
-
-kubectl exec -it downstream-rabbit-server-0 -n rabbitmq-system -- rabbitmq-diagnostics inspect_standby_downstream_metrics
-
-kubectl exec -it downstream-rabbit-server-0 -n rabbitmq-system -- rabbitmqctl promote_standby_replication_downstream_cluster
-
-
-
-kubectl exec -it downstream-rabbit-server-0 -n rabbitmq-system -- rabbitmqctl display_standby_promotion_summary
+# run below commands in the downstream
+rabbitmqctl list_vhosts_available_for_standby_replication_recovery
+rabbitmq-diagnostics inspect_standby_downstream_metrics
+rabbitmqctl promote_standby_replication_downstream_cluster
+rabbitmqctl display_standby_promotion_summary
 
 
+
+
+rabbitmq [ ~ ]$ rabbitmqctl list_vhosts_available_for_standby_replication_recovery
+Listing virtual hosts available for multi-DC replication recovery on node rabbit@downstream-rabbit-server-0.downstream-rabbit-nodes.rabbitmq-system
+/
+rabbitmq [ ~ ]$ rabbitmq-diagnostics inspect_standby_downstream_metrics
+Inspecting standby downstream metrics related to recovery...
+queue	timestamp	vhost
+qq100	1691987720487	/
+rabbitmq [ ~ ]$ rabbitmqctl promote_standby_replication_downstream_cluster
+
+Will promote cluster to upstream...
+first_timestamp	last_timestamp	message_count	virtual_host
+2023-08-14 04:35:20	2023-08-14 04:35:20	1	/
+rabbitmq [ ~ ]$
 
 
