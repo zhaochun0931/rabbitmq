@@ -15,7 +15,7 @@ rabbitmqadmin declare binding source=xxx destination=qq1 routing_key=qq1
 
 
 
-# configure the federation in the down node
+# configure the federation in the down node, x.x.x.x is the ip of the up node
 rabbitmqctl set_parameter federation-upstream yyy '{"uri":"amqp://admin:password@X.X.X.X:5672"}'
 rabbitmqctl set_policy policy-demo "^xxx" '{"federation-upstream":"yyy"}' --apply-to=exchanges
 
