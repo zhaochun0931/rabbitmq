@@ -1,0 +1,17 @@
+# enable the plugin
+
+rabbitmq-plugins enable rabbitmq_shovel
+rabbitmq-plugins enable rabbitmq_shovel_management
+
+
+rabbitmqctl set_parameter shovel xxx '{"src-uri": "amqp://admin:password@localhost:5672","src-queue": "q200","dest-uri": "amqp://admin:password@localhost:5672","dest-queue": "q300"}'
+
+
+# rabbitmqctl shovel_status --formatter=pretty_table
+Shovel status on node rabbit@ip-10-1-1-28
+┌──────┬─────────┬─────────┬───────────────────────┬───────┬───────────────────────┬─────────────────────┬────────────────────┬──────────────────────┬─────────────────┬──────────────┬───────────────────┐
+│ name │ type    │ state   │ source                │ vhost │ destination           │ last_changed        │ termination_reason │ destination_protocol │ source_protocol │ source_queue │ destination_queue │
+├──────┼─────────┼─────────┼───────────────────────┼───────┼───────────────────────┼─────────────────────┼────────────────────┼──────────────────────┼─────────────────┼──────────────┼───────────────────┤
+│ xxx  │ dynamic │ running │ amqp://localhost:5672 │ /     │ amqp://localhost:5672 │ 2023-08-15 14:19:12 │                    │ amqp091              │ amqp091         │ q200         │ q300              │
+└──────┴─────────┴─────────┴───────────────────────┴───────┴───────────────────────┴─────────────────────┴────────────────────┴──────────────────────┴─────────────────┴──────────────┴───────────────────┘
+#
