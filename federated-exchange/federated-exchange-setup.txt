@@ -16,8 +16,8 @@ rabbitmqadmin declare binding source=xxx destination=qq1 routing_key=qq1
 
 
 # configure the federation in the down node
-rabbitmqctl set_parameter federation-upstream fed-demo '{"uri":"amqp://admin:password@X.X.X.X:5672"}'
-rabbitmqctl set_policy policy-demo "^demo-exchange" '{"federation-upstream":"fed-demo"}' --apply-to=exchanges
+rabbitmqctl set_parameter federation-upstream yyy '{"uri":"amqp://admin:password@X.X.X.X:5672"}'
+rabbitmqctl set_policy policy-demo "^xxx" '{"federation-upstream":"yyy"}' --apply-to=exchanges
 
 
 
