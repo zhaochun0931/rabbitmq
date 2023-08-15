@@ -8,12 +8,12 @@ rabbitmq-plugins enable rabbitmq_federation_management
 
 
 # up node, the exchange name should be identical with the down node
-rabbitmqadmin declare exchange name=demo-exchange type=direct
+rabbitmqadmin declare exchange name=xxx type=direct
 rabbitmqadmin declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
 rabbitmqadmin declare binding source=demo-exchange destination=qq1 routing_key=qq1
 
 # down node
-rabbitmqadmin declare exchange name=demo-exchange type=direct
+rabbitmqadmin declare exchange name=xxx type=direct
 rabbitmqadmin declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
 rabbitmqadmin declare binding source=demo-exchange destination=qq1 routing_key=qq1
 
