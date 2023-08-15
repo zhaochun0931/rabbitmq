@@ -7,15 +7,12 @@ rabbitmq-plugins enable rabbitmq_federation
 rabbitmq-plugins enable rabbitmq_federation_management
 
 
-# up node, the exchange name should be identical with the down node
+# create the exchange and the quorum on both up and down node, the exchange name should be identical with the down node
 rabbitmqadmin declare exchange name=xxx type=direct
 rabbitmqadmin declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
-rabbitmqadmin declare binding source=demo-exchange destination=qq1 routing_key=qq1
+rabbitmqadmin declare binding source=xxx destination=qq1 routing_key=qq1
 
-# down node
-rabbitmqadmin declare exchange name=xxx type=direct
-rabbitmqadmin declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
-rabbitmqadmin declare binding source=demo-exchange destination=qq1 routing_key=qq1
+
 
 
 # configure the federation in the down node
