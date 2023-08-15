@@ -21,7 +21,7 @@ rabbitmqctl set_policy policy-demo "^xxx" '{"federation-upstream":"yyy"}' --appl
 
 
 
-# publish the message in the up node
+# publish the message to the exchange in the up node
 for i in $(seq 100); do rabbitmqadmin publish exchange=demo-exchange routing_key="qq1" payload="hello, world  $i"; done
 
 
