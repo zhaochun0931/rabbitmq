@@ -29,6 +29,7 @@ apt install erlang -y
 
 
 
+# apt-get purge erlang* -y
 
 
 
