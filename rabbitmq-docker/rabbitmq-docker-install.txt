@@ -1,0 +1,10 @@
+
+docker run -d --hostname rmq1 --name rmq1 rabbitmq:3.10.25-management
+docker logs rmq1
+
+
+
+
+docker exec -it rmq1 bash
+
+
