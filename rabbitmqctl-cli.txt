@@ -5,7 +5,18 @@ rabbitmqctl set_policy ha-all "^qq" '{"ha-mode":"all"}' --apply-to=queues
 rabbitmqctl list_policies
 
 rabbitmqctl clear_policy ha-all
+rabbitmqctl version
 
 
+
+
+
+
+rabbitmqctl eval "rabbit_misc:version()."
+rabbitmqctl eval "rabbit_misc:otp_release()."
+rabbitmqctl eval 'node().'
+rabbitmqctl eval 'application:get_all_env(rabbit).'
+rabbitmqctl eval 'application:get_env(rabbit, log).'
+rabbitmqctl eval 'application:get_env(rabbit, loopback_users).'
 
 
