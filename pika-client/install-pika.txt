@@ -1,2 +1,2 @@
-apt install python3-pip
+apt install python3-pip -y
 pip install pika
