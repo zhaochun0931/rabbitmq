@@ -4,9 +4,9 @@ docker run -d --hostname rmq1 --name rmq1 --network rabbitmq_vnet -p 5552:5552 -
 docker run -d --hostname rmq2 --name rmq2 --network rabbitmq_vnet -p 5553:5552 -p 5673:5672 -p 15673:15672 rabbitmq:3.10.25-management
 docker run -d --hostname rmq3 --name rmq3 --network rabbitmq_vnet -p 5554:5552 -p 5674:5672 -p 15674:15672 rabbitmq:3.10.25-management
 
-docker cp erlangcookie rmq1:/var/lib/rabbitmq/.erlang.cookie
-docker cp erlangcookie rmq2:/var/lib/rabbitmq/.erlang.cookie
-docker cp erlangcookie rmq3:/var/lib/rabbitmq/.erlang.cookie
+docker cp erlangcookie rmq1:/var/lib/rabbitmq/.erlang.cookie -a
+docker cp erlangcookie rmq2:/var/lib/rabbitmq/.erlang.cookie -a
+docker cp erlangcookie rmq3:/var/lib/rabbitmq/.erlang.cookie -a
 
 
 
