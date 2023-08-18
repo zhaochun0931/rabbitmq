@@ -1,10 +1,12 @@
-# enable the plugin
+# enable the plugin, a core RabbitMQ plugin that unidirectionally moves messages from a source to a destination
+# it can move the message between the classic queue and the quorum queue
+
 
 rabbitmq-plugins enable rabbitmq_shovel
 rabbitmq-plugins enable rabbitmq_shovel_management
 
 
-rabbitmqctl set_parameter shovel xxx-shovel '{"src-uri": "amqp://admin:password@localhost:5672","src-queue": "shovel-from","dest-uri": "amqp://admin:password@localhost:5672","dest-queue": "shovel-to"}'
+rabbitmqctl set_parameter shovel xxx-shovel '{"src-uri": "amqp://admin:password@localhost:5672","src-queue": "qq100","dest-uri": "amqp://admin:password@localhost:5672","dest-queue": "qq200"}'
 
 
 # rabbitmqctl shovel_status --formatter=pretty_table
