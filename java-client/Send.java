@@ -11,7 +11,7 @@ public class Send {
 
     public static void main(String[] argv) throws Exception {
         
-        for(int i=1;i<1000;i++){
+        for(int i=1;i<=1000;i++){
             ConnectionFactory factory = new ConnectionFactory();
             factory.setHost("localhost");
             try (Connection connection = factory.newConnection();
