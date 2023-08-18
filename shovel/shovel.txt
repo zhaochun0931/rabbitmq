@@ -4,7 +4,7 @@ rabbitmq-plugins enable rabbitmq_shovel
 rabbitmq-plugins enable rabbitmq_shovel_management
 
 
-rabbitmqctl set_parameter shovel xxx '{"src-uri": "amqp://admin:password@localhost:5672","src-queue": "q200","dest-uri": "amqp://admin:password@localhost:5672","dest-queue": "q300"}'
+rabbitmqctl set_parameter shovel xxx-shovel '{"src-uri": "amqp://admin:password@localhost:5672","src-queue": "shovel-from","dest-uri": "amqp://admin:password@localhost:5672","dest-queue": "shovel-to"}'
 
 
 # rabbitmqctl shovel_status --formatter=pretty_table
