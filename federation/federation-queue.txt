@@ -1,3 +1,6 @@
+did not work
+
+
 up node: 10.0.0.8
 down node: 10.0.0.9
 
@@ -13,4 +16,11 @@ rabbitmq-plugins enable rabbitmq_federation_management
   
 # down
 rabbitmqctl set_parameter federation-upstream yyy '{"uri":"amqp://admin:password@10.0.0.8:5672"}'
-rabbitmqctl set_policy policy-yyy "^xxx" '{"federation-upstream":"yyy"}' --apply-to=queues
+rabbitmqctl set_policy policy-yyy "^qq" '{"federation-upstream":"yyy"}' --apply-to=queues
+
+
+# up
+rabbitmqadmin declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
+
+# down
+rabbitmqadmin declare queue name=qq2 arguments='{"x-queue-type": "quorum"}'
