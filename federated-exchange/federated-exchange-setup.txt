@@ -1,5 +1,3 @@
-Federated exchanges allow for messages published to an exchange on an upstream node to transparently be published to an exchange of the same name on the downstream node.
-
 
 
 
