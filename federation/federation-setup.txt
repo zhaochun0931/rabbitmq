@@ -12,7 +12,7 @@ rabbitmq-plugins enable rabbitmq_federation_management
 
 # configure the federation upstream in the down node, 10.0.0.8 is the ip of the up node
 rabbitmqctl set_parameter federation-upstream yyy '{"uri":"amqp://admin:password@10.0.0.8:5672"}'
-rabbitmqctl set_policy policy-demo "^xxx" '{"federation-upstream":"yyy"}' --apply-to=exchanges
+rabbitmqctl set_policy policy-yyy "^xxx" '{"federation-upstream":"yyy"}' --apply-to=exchanges
 
 
 
