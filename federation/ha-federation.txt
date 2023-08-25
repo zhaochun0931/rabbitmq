@@ -1,0 +1,20 @@
+up node: 10.0.0.8
+down node: 10.0.0.9
+
+
+
+
+# enable federation plugin in the down node
+rabbitmq-plugins enable rabbitmq_federation
+rabbitmq-plugins enable rabbitmq_federation_management
+
+
+# up
+rabbitmqctl set_parameter federation-upstream yyy '{"uri":"amqp://admin:password@10.0.0.9:5672"}'
+rabbitmqctl set_policy policy-yyy "^xxx" '{"federation-upstream":"yyy"}' --apply-to=exchanges
+
+  
+# down
+rabbitmqctl set_parameter federation-upstream yyy '{"uri":"amqp://admin:password@10.0.0.8:5672"}'
+rabbitmqctl set_policy policy-yyy "^xxx" '{"federation-upstream":"yyy"}' --apply-to=exchanges
+
