@@ -1,9 +1,11 @@
 
 
 https://www.rabbitmq.com/federated-exchanges.html
+https://www.rabbitmq.com/federated-exchanges.html#limitations
 
-A federated exchange links to other exchanges. 
-Conceptually, messages published to the upstream exchanges are copied to the federated exchange, as though they were published directly to the federated exchange. The upstream exchanges do not need to be reconfigured. 
+
+
+
 
 
 
