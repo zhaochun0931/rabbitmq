@@ -1,11 +1,7 @@
-
-
 https://www.rabbitmq.com/federated-exchanges.html
 https://www.rabbitmq.com/federated-exchanges.html#limitations
 
-
-
-
+The default exchange (with the blank name) cannot be federated as it is not a typical exchange.
 
 
 
