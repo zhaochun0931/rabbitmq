@@ -47,6 +47,10 @@ apt install rabbitmq-server -y
 
 
 
+# enable management plugin
+rabbitmq-plugins enable rabbitmq_management
+
+
 # The RabbitMQ server gives you a default username and password, that is guest:guest. Note that guest:guest won't work for remote a RabbitMQ server later than version 3.3
 # add user and assign the permssion 
 
@@ -60,5 +64,5 @@ rabbitmqctl set_permissions --vhost / admin ".*" ".*" ".*"
 
 
 
-rabbitmq-plugins enable rabbitmq_management
+
 
