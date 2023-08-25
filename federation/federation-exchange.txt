@@ -13,7 +13,7 @@ down node: 10.0.0.9
 
 
 
-
+# enable federation plugin in the down node
 rabbitmq-plugins enable rabbitmq_federation
 rabbitmq-plugins enable rabbitmq_federation_management
 
@@ -27,9 +27,39 @@ rabbitmqctl set_policy policy-yyy "^xxx" '{"federation-upstream":"yyy"}' --apply
 
 
 # create the exchange and the quorum queue on both up and down node, the exchange name should be identical with the down node
+
+# up
+
 rabbitmqadmin declare exchange name=xxx type=direct
 rabbitmqadmin declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
-rabbitmqadmin declare binding source=xxx destination=qq1 routing_key=qq1
+rabbitmqadmin declare queue name=qq3 arguments='{"x-queue-type": "quorum"}'
+rabbitmqadmin declare queue name=qq5 arguments='{"x-queue-type": "quorum"}'
+
+
+
+# bind the queue to the exchange,the routing key can be empty
+rabbitmqadmin declare binding source=xxx destination=qq1 routing_key=""
+
+or 
+
+rabbitmqadmin declare binding source=xxx destination=qq1 routing_key=
+#
+
+
+
+
+
+# down
+
+rabbitmqadmin declare exchange name=xxx type=direct
+rabbitmqadmin declare queue name=qq2 arguments='{"x-queue-type": "quorum"}'
+rabbitmqadmin declare queue name=qq4 arguments='{"x-queue-type": "quorum"}'
+rabbitmqadmin declare queue name=qq6 arguments='{"x-queue-type": "quorum"}'
+
+rabbitmqadmin declare binding source=xxx destination=qq2 routing_key=
+rabbitmqadmin declare binding source=xxx destination=qq4 routing_key=
+rabbitmqadmin declare binding source=xxx destination=qq6 routing_key=
+
 
 
 
@@ -40,6 +70,10 @@ rabbitmqadmin declare binding source=xxx destination=qq1 routing_key=qq1
 
 # publish the message to the exchange in the up node
 for i in $(seq 100); do rabbitmqadmin publish exchange=demo-exchange routing_key="qq1" payload="hello, world  $i"; done
+
+
+rabbitmqadmin publish exchange=xxx payload=000000  routing_key=
+
 
 
 the message will be sync from up to down
