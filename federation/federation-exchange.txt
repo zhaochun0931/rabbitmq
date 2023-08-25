@@ -31,25 +31,19 @@ rabbitmqctl set_policy policy-yyy "^xxx" '{"federation-upstream":"yyy"}' --apply
 # up
 
 rabbitmqadmin declare exchange name=xxx type=direct
+
 rabbitmqadmin declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
 rabbitmqadmin declare queue name=qq3 arguments='{"x-queue-type": "quorum"}'
 rabbitmqadmin declare queue name=qq5 arguments='{"x-queue-type": "quorum"}'
 
 
 
-rabbitmqadmin declare binding source=xxx destination=qq1 routing_key=
-rabbitmqadmin declare binding source=xxx destination=qq3 routing_key=
-rabbitmqadmin declare binding source=xxx destination=qq5 routing_key=
-
-
-
-# bind the queue to the exchange,the routing key can be empty
 rabbitmqadmin declare binding source=xxx destination=qq1 routing_key=""
+rabbitmqadmin declare binding source=xxx destination=qq3 routing_key=""
+rabbitmqadmin declare binding source=xxx destination=qq5 routing_key=""
 
-or 
 
-rabbitmqadmin declare binding source=xxx destination=qq1 routing_key=
-#
+
 
 
 
