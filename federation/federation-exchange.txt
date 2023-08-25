@@ -52,6 +52,7 @@ rabbitmqadmin declare binding source=xxx destination=qq5 routing_key=""
 # down
 
 rabbitmqadmin declare exchange name=xxx type=direct
+
 rabbitmqadmin declare queue name=qq2 arguments='{"x-queue-type": "quorum"}'
 rabbitmqadmin declare queue name=qq4 arguments='{"x-queue-type": "quorum"}'
 rabbitmqadmin declare queue name=qq6 arguments='{"x-queue-type": "quorum"}'
