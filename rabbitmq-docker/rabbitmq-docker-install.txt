@@ -13,14 +13,15 @@ docker exec -it rmq1 chmod 600 /var/lib/rabbitmq/.erlang.cookie
 
 docker run -d -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.12-management
 
+docker port rabbitmq
 
 
-docker run -d --hostname rmq2 --name rmq2 --network rabbitmq_vnet -p 5553:5552 -p 5673:5672 -p 15673:15672 rabbitmq:3.10.25-management
-docker run -d --hostname rmq3 --name rmq3 --network rabbitmq_vnet -p 5554:5552 -p 5674:5672 -p 15674:15672 rabbitmq:3.10.25-management
+
+
+
 
 docker cp erlangcookie rmq1:/var/lib/rabbitmq/.erlang.cookie -a
-docker cp erlangcookie rmq2:/var/lib/rabbitmq/.erlang.cookie -a
-docker cp erlangcookie rmq3:/var/lib/rabbitmq/.erlang.cookie -a
+
 
 
 
