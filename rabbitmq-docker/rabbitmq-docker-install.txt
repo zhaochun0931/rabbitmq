@@ -24,7 +24,8 @@ docker cp erlangcookie rmq3:/var/lib/rabbitmq/.erlang.cookie -a
 
 
 
-docker logs rmq1
+docker logs -f rmq1
+
 
 
 
