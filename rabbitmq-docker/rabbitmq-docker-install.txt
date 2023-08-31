@@ -1,6 +1,16 @@
 docker network create rabbitmq_vnet
 
-docker run -d --hostname rmq1 --name rmq1 --network rabbitmq_vnet -p 5552:5552 -p 5672:5672 -p 15672:15672 rabbitmq:3.10.25-management
+echo rabbitmq > .erlang.cookie
+
+docker run -d -it --hostname rmq1 --name rmq1 --network rabbitmq_vnet \
+-p 5552:5552 -p 5672:5672 -p 15672:15672 \
+-v "$(pwd)"/.erlang.cookie:/var/lib/rabbitmq/.erlang.cookie:rw rabbitmq:3.10.25-management bash
+
+docker exec -it rmq1 chown rabbitmq:rabbitmq /var/lib/rabbitmq/.erlang.cookie
+docker exec -it rmq1 chmod 600 /var/lib/rabbitmq/.erlang.cookie
+
+
+
 docker run -d --hostname rmq2 --name rmq2 --network rabbitmq_vnet -p 5553:5552 -p 5673:5672 -p 15673:15672 rabbitmq:3.10.25-management
 docker run -d --hostname rmq3 --name rmq3 --network rabbitmq_vnet -p 5554:5552 -p 5674:5672 -p 15674:15672 rabbitmq:3.10.25-management
 
