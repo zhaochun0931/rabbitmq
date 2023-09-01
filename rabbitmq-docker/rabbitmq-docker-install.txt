@@ -13,6 +13,12 @@ docker run -d -it --rm --name rabbitmq4 --hostname rabbitmq4 -p 5674:5672 -p 156
 
 
 
+# setup cluster
+rabbitmqctl stop_app
+rabbitmqctl reset
+rabbitmqctl join_cluster rabbit@rabbitmq2
+rabbitmqctl start_app
+
 
 
 docker port rabbitmq
