@@ -1,2 +1,4 @@
-docker run -d --rm --name haproxy --network rabbitmq_vnet -p 1080:1080 -p 5677:5677 -v $(PWD)/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro haproxy:latest
+docker run -d --rm --name haproxy --network rabbitmq_vnet \
+-p 1080:1080 -p 5677:5677 \
+-v $(PWD)/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro haproxy:latest
 
