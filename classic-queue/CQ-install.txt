@@ -1,3 +1,8 @@
+
+In a cluster, the classic queue can be mirrored to other nodes of the cluster by default, but it cannot be persistent without the HA policy. 
+In other words, the message will lost across the node reboot.
+
+
 # the queue beginning with cq will be mirrored to all the nodes of the cluster, stop any node will not impact the service
 
 
@@ -10,7 +15,7 @@ rabbitmqctl set_policy ha-cq "^cq" '{"ha-mode":"all"}' --apply-to=queues
 
 
 
-In a cluster, the classic queue can be mirrored to other nodes of the cluster, but it cannot be persistent without the HA policy. In other words, the message will lost across the node reboot.
+
 
 
 
