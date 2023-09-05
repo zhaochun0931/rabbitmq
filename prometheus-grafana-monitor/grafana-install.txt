@@ -1,0 +1,4 @@
+wget https://dl.grafana.com/enterprise/release/grafana-enterprise-10.1.1.darwin-amd64.tar.gz
+tar -zxvf grafana-enterprise-10.1.1.darwin-amd64.tar.gz
+
+
