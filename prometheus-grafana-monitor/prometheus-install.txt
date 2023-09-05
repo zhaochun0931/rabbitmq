@@ -5,4 +5,16 @@ tar -xvzf prometheus-2.46.0.linux-amd64.tar.gz
 
 
 
+./prometheus
+
+
+./prometheus --config.file=prometheus.yml
+
+
+
+
+
+
+curl localhost:9090/metrics
+
 
