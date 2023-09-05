@@ -3,12 +3,19 @@ rabbitmq-plugins enable rabbitmq_prometheus
 
 
 
-rabbitmqctl status
+# rabbitmqctl status
 
 Interface: [::], port: 15692, protocol: http/prometheus, purpose: Prometheus exporter API over HTTP
 
 
 the port 15692 is listening
+
+
+
+curl localhost:15692/metrics
+
+
+
 
 
 
