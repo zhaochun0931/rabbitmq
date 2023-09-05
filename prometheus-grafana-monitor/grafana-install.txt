@@ -2,3 +2,9 @@ wget https://dl.grafana.com/enterprise/release/grafana-enterprise-10.1.1.darwin-
 tar -zxvf grafana-enterprise-10.1.1.darwin-amd64.tar.gz
 
 
+
+cd grafana-10.1.1/bin
+./grafana server
+
+
+http://localhost:3000/
