@@ -2,3 +2,11 @@ brew install loki
 brew install promtail
 
 
+brew services start promtail
+brew services start loki
+
+
+brew services list
+
+
+
