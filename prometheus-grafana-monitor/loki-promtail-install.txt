@@ -1,0 +1,4 @@
+brew install loki
+brew install promtail
+
+
