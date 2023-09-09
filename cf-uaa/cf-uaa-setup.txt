@@ -8,4 +8,14 @@ As an OAuth 2.0 provider, UAA plays the role of the authorization server. This m
 
 
 
+# install uaac client
+
+apt install rubygems
+gem install cf-uaac
+
+ruby --version
+gem --version
+
+
+
 
