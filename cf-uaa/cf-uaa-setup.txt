@@ -19,6 +19,9 @@ apt-get install software-properties-common -y
 apt-add-repository -y ppa:rael-gc/rvm
 apt-get update
 apt-get install rvm -y
+
+# logout - login again to take effect
+
 rvm version
 
 rvm install ruby
