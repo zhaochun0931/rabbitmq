@@ -1,0 +1,5 @@
+Cloud Foundry User Account and Authentication (CF UAA) is an identity management and authorization service. 
+More precisely, it’s an OAuth 2.0 provider allowing authentication and issuing tokens to Client applications.
+
+
+
