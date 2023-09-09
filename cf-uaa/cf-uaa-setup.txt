@@ -44,6 +44,46 @@ cd uaa/
 
 
 
+#configure uaac to point to our running instance of UAA 
+uaac target http://localhost:8080/uaa
+
+
+uaac token client get admin -s adminsecret
+
+# Basically, we can read this command as: “Give me a token, using client credentials with the client_id of admin and a secret of adminsecret“.
+
+
+
+
+
+
+
+
+
+
+
+
+# uaac target http://localhost:8080/uaa
+Unknown key: Max-Age = 86400
+Unknown key: SameSite = Lax
+
+Target: http://localhost:8080/uaa
+
+#
+#
+#
+# uaac token client get admin -s adminsecret
+Unknown key: Max-Age = 86400
+Unknown key: SameSite = Lax
+WARNING: Decoding token without verifying it was signed by its authoring UAA
+
+Successfully fetched token via client credentials grant.
+Target: http://localhost:8080/uaa
+Context: admin, from client admin
+
+#
+
+
 
 
 
