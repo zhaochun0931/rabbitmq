@@ -5,6 +5,13 @@ More precisely, it’s an OAuth 2.0 provider allowing authentication and issuing
 The OAuth 2.0 specification defines four participants that can connect to each other: a Resource Owner, a Resource Server, a Client, and an Authorization Server.
 As an OAuth 2.0 provider, UAA plays the role of the authorization server. This means its primary goal is issuing access tokens for client applications and validating these tokens for resource servers.
 
+https://github.com/cloudfoundry/uaa
+
+
+
+
+
+
 
 
 # install the latest ruby first
@@ -25,6 +32,14 @@ apt install ruby-full
 apt install rubygems
 gem install cf-uaac
 gem --version
+
+
+# install uaa
+git clone https://github.com/cloudfoundry/uaa.git
+cd uaa/
+./gradlew run
+
+
 
 
 
