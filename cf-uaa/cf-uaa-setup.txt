@@ -2,4 +2,10 @@ Cloud Foundry User Account and Authentication (CF UAA) is an identity management
 More precisely, it’s an OAuth 2.0 provider allowing authentication and issuing tokens to Client applications.
 
 
+The OAuth 2.0 specification defines four participants that can connect to each other: a Resource Owner, a Resource Server, a Client, and an Authorization Server.
+As an OAuth 2.0 provider, UAA plays the role of the authorization server. This means its primary goal is issuing access tokens for client applications and validating these tokens for resource servers.
+
+
+
+
 
