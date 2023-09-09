@@ -7,15 +7,23 @@ As an OAuth 2.0 provider, UAA plays the role of the authorization server. This m
 
 
 
+# install the latest ruby first
+apt-get install software-properties-common -y
+apt-add-repository -y ppa:rael-gc/rvm
+apt-get update
+apt-get install rvm -y
+rvm version
+
+rvm install ruby
+ruby --version
+
+
 
 # install uaac client
-
 apt update
 apt install ruby-full
 apt install rubygems
 gem install cf-uaac
-
-ruby --version
 gem --version
 
 
