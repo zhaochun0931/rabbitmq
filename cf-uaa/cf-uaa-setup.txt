@@ -43,6 +43,11 @@ cd uaa/
 ./gradlew run
 
 
+lsof | grep uaa.log
+tail -f  /tmp/uaa-8080/logs/uaa.log
+
+
+
 
 #configure uaac to point to our running instance of UAA 
 uaac target http://localhost:8080/uaa
