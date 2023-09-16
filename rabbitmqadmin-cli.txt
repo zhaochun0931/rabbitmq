@@ -1,0 +1,17 @@
+# declare an exchange
+
+rabbitmqadmin -u admin -p password declare exchange name=xxx type=direct
+
+
+
+# declare a queue
+
+rabbitmqadmin -u admin -p password declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
+
+
+# bind the queue to the exchange
+
+rabbitmqadmin -u admin -p password declare binding source=xxx destination=qq1 routing_key=""
+
+
+# publish the message
