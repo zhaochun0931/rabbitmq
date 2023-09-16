@@ -1,4 +1,6 @@
-did not work
+
+# Federated queues only move messages to nodes that have consumers. If there are no consumers on a node, no messages will be moved there. Local consumers always take precedence over remote ones: federation links consume with the lowest priority possible https://www.rabbitmq.com/consumer-priority.html
+
 
 
 up node: 10.0.0.8
@@ -23,12 +25,13 @@ rabbitmq-plugins enable rabbitmq_federation_management
 # down
 
 rabbitmqctl set_parameter federation-upstream yyy '{"uri":"amqp://admin:password@10.0.0.8:5672"}'
-rabbitmqctl set_policy policy-yyy "^qq" '{"federation-upstream":"yyy"}' --apply-to=queues
+rabbitmqctl set_policy policy-yyy "^qq" '{"federation-upstream":"yyy"}' --priority 10 --apply-to=queues
 
+the queue name is the identical by default 
 
 # up
 
 rabbitmqadmin declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
 
 # down
-rabbitmqadmin declare queue name=qq2 arguments='{"x-queue-type": "quorum"}'
+rabbitmqadmin declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
