@@ -1,4 +1,5 @@
 
+
 # Federated queues only move messages to nodes that have consumers. If there are no consumers on a node, no messages will be moved there. Local consumers always take precedence over remote ones: federation links consume with the lowest priority possible https://www.rabbitmq.com/consumer-priority.html
 
 
@@ -35,3 +36,11 @@ rabbitmqadmin declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
 
 # down
 rabbitmqadmin declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
+
+
+
+
+
+# down
+rabbitmqctl list_consumers --formatter pretty_table
+
