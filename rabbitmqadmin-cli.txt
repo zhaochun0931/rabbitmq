@@ -15,3 +15,12 @@ rabbitmqadmin -u admin -p password declare binding source=xxx destination=qq1 ro
 
 
 # publish the message
+
+rabbitmqadmin -u admin -p password publish exchange=xxx routing_key="" payload="hello, world"
+
+
+
+
+# consume the message
+
+rabbitmqadmin -u admin -p password get queue=qq1 ackmode=ack_requeue_true count=1000
