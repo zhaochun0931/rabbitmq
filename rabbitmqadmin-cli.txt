@@ -19,6 +19,11 @@ rabbitmqadmin -u admin -p password declare binding source=xxx destination=qq1 ro
 rabbitmqadmin -u admin -p password publish exchange=xxx routing_key="" payload="hello, world"
 
 
+rabbitmqadmin publish --vhost=test exchange=amq.default routing_key=qq200 payload="hello, world" 
+
+rabbitmqadmin --host=localhost --port=15672 --user=USERNAME --password=PASSWORD publish --vhost=test exchange=amq.default routing_key=qq200 payload="hello, world"
+
+rabbitmqadmin --host=localhost --port=15672 --user=USERNAME --password=PASSWORD get --vhost=test queue=qq200 ackmode=ack_requeue_true
 
 
 # consume the message
