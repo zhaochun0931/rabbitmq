@@ -1,5 +1,6 @@
 # enable the plugin, a core RabbitMQ plugin that unidirectionally moves messages from a source to a destination
-# it can move the message between the classic queue and the quorum queue
+# it can move the message between the classic queue and the quorum queue, after the shovel, the source queue will be empty. all the message will go to the target queue.
+
 
 
 rabbitmq-plugins enable rabbitmq_shovel
