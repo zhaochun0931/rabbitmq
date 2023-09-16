@@ -5,8 +5,7 @@ docker run -d -it --rm --name rabbitmq1 --hostname rabbitmq1 -p 5672:5672 -p 156
 -e RABBITMQ_ERLANG_COOKIE=rabbitmq \
 -e RABBITMQ_DEFAULT_USER=admin \
 -e RABBITMQ_DEFAULT_PASS=password \
-rabbitmq:3.8-management
-
+rabbitmq:3.9-management
 
 
 
@@ -14,7 +13,8 @@ rabbitmq:3.8-management
 
 # green
 
+
+
 docker run -d -it --rm --name rabbitmq2 --hostname rabbitmq2 -p 5673:5672 -p 25672:15672 \
---network rabbitmq_vnet -e RABBITMQ_ERLANG_COOKIE=rabbitmq -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=password rabbitmq:3.9-management
-
-
+--network rabbitmq_vnet -e RABBITMQ_ERLANG_COOKIE=rabbitmq -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=password \
+rabbitmq:3.12-management
