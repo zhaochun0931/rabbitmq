@@ -1,0 +1,1 @@
+rabbitmqctl set_parameter shovel xxxshovel '{"src-uri": "amqps://admin:password@rabbitmq1:5671?cacertfile=/tmp/rootCA.crt&certfile=/tmp/mydomain.crt&keyfile=/tmp/mydomain.key","src-queue": "foobar","dest-uri":"amqps://admin:password@rabbitmq2:5671?cacertfile=/tmp/rootCA.crt&certfile=/tmp/mydomain.crt&keyfile=/tmp/mydomain.key","dest-queue":"xxx"}'
