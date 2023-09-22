@@ -54,11 +54,12 @@ docker exec -it rmq1 bash
 
 
 # enable ssl
-docker run -d -it --rm --name rabbitmq1 --hostname rabbitmq1 -p 5672:5672 -p 15672:15672 -p 15671:15671 --network rabbitmq_vnet \
+docker run -d -it --rm --name rabbitmq1 --hostname rabbitmq1 -p 5672:5672 -p 15672:15672 -p 15671:15671 -p 5671:5671 --network rabbitmq_vnet \
 -e RABBITMQ_ERLANG_COOKIE=rabbitmq -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=password \
 --mount type=bind,source="$(pwd)"/rabbitmq.conf,target=/etc/rabbitmq/rabbitmq.conf,readonly \
---mount type=bind,source="$(pwd)"/domain.crt,target=/tmp/domain.crt,readonly \
---mount type=bind,source="$(pwd)"/domain.key,target=/tmp/domain.key,readonly \
+--mount type=bind,source="$(pwd)"/mydomain.crt,target=/tmp/mydomain.crt,readonly \
+--mount type=bind,source="$(pwd)"/mydomain.key,target=/tmp/mydomain.key,readonly \
+--mount type=bind,source="$(pwd)"/rootCA.crt,target=/tmp/rootCA.crt,readonly \
 rabbitmq:3.9-management
 
 
