@@ -52,8 +52,11 @@ tail -f  /tmp/uaa-8080/logs/uaa.log
 #configure uaac to point to our running instance of UAA 
 uaac target http://localhost:8080/uaa
 
-
 uaac token client get admin -s adminsecret
+
+	
+uaac context
+
 
 # Basically, we can read this command as: “Give me a token, using client credentials with the client_id of admin and a secret of adminsecret“.
 
