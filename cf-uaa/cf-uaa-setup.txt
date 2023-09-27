@@ -118,3 +118,10 @@ uaac client add webappclient -s webappclientsecret \
 
 
 
+uaac user add username --password password --emails zchun@vmware.com
+
+
+
+
+
+
