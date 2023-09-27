@@ -119,6 +119,13 @@ uaac client add webappclient -s webappclientsecret \
 
 
 uaac user add username --password password --emails zchun@vmware.com
+uaac member add cloud_controller.admin username
+uaac member add uaa.admin username
+uaac member add scim.read username
+uaac member add scim.write username
+
+
+
 
 
 
