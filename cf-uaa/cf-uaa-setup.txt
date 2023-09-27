@@ -23,7 +23,6 @@ apt-get install rvm -y
 # logout - login again to take effect
 
 rvm version
-
 rvm install ruby
 ruby --version
 
