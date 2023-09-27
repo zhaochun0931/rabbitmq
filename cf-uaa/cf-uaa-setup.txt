@@ -129,10 +129,26 @@ uaac client add pulse -s pulse \
 
 
 uaac user add username --password password --emails zchun@vmware.com
+
 uaac member add cloud_controller.admin username
 uaac member add uaa.admin username
 uaac member add scim.read username
 uaac member add scim.write username
+
+
+
+
+uaac group add "CLUSTER:READ"
+uaac group add "CLUSTER:WRITE"
+uaac group add "DATA:READ"
+uaac group add "DATA:WRITE"
+
+
+uaac member add "CLUSTER:READ" username
+uaac member add "CLUSTER:WRITE" username
+uaac member add "DATA:WRITE" username
+uaac member add "DATA:READ" username
+
 
 
 
