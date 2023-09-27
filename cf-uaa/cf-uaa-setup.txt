@@ -128,6 +128,7 @@ uaac member add scim.write username
 
 
 
+uaac client update client_name --scope CLUSTER:READ,CLUSTER:WRITE,DATA:READ,DATA:WRITE
 
 
 
