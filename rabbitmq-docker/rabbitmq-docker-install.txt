@@ -51,6 +51,8 @@ docker logs -f rmq1
 
 docker exec -it rmq1 bash
 
+docker port rabbitmq1
+
 
 
 # enable ssl
