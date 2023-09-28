@@ -8,6 +8,20 @@ crete a quorum queue
 
 
 
+rabbitmq-queues add_member qq1 rabbit@gemfire-b-1
+rabbitmq-queues rebalance quorum
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 root@gemfire-a-1:~# rabbitmqctl cluster_status
