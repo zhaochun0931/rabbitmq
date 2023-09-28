@@ -56,10 +56,12 @@ tail -f  /tmp/uaa-8080/logs/uaa.log
 
 
 
-#configure uaac to point to our running instance of UAA 
+#configure uaac to point to our running instance of UAA
+
 uaac target http://localhost:8080/uaa
 
 #the password "adminsecret" is specified in the database, you cannot use another password
+
 uaac token client get admin -s adminsecret
 uaac context
 uaac token decode
@@ -78,27 +80,6 @@ uaac token decode
 
 
 
-
-
-# uaac target http://localhost:8080/uaa
-Unknown key: Max-Age = 86400
-Unknown key: SameSite = Lax
-
-Target: http://localhost:8080/uaa
-
-#
-#
-#
-# uaac token client get admin -s password
-Unknown key: Max-Age = 86400
-Unknown key: SameSite = Lax
-WARNING: Decoding token without verifying it was signed by its authoring UAA
-
-Successfully fetched token via client credentials grant.
-Target: http://localhost:8080/uaa
-Context: admin, from client admin
-
-#
 
 
 
@@ -128,12 +109,12 @@ uaac client add pulse -s pulse \
 
 
 
-uaac user add username --password password --emails zchun@vmware.com
+uaac user add myuser --password mypassword --emails zchun@vmware.com
 
-uaac member add cloud_controller.admin username
-uaac member add uaa.admin username
-uaac member add scim.read username
-uaac member add scim.write username
+uaac member add cloud_controller.admin myuser
+uaac member add uaa.admin myuser
+uaac member add scim.read myuser
+uaac member add scim.write myuser
 
 
 
@@ -144,10 +125,10 @@ uaac group add "DATA:READ"
 uaac group add "DATA:WRITE"
 
 
-uaac member add "CLUSTER:READ" username
-uaac member add "CLUSTER:WRITE" username
-uaac member add "DATA:WRITE" username
-uaac member add "DATA:READ" username
+uaac member add "CLUSTER:READ" myuser
+uaac member add "CLUSTER:WRITE" myuser
+uaac member add "DATA:WRITE" myuser
+uaac member add "DATA:READ" myuser
 
 
 
