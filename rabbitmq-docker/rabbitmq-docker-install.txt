@@ -20,8 +20,8 @@ rabbitmqctl join_cluster rabbit@rabbitmq2
 rabbitmqctl start_app
 
 
-# leave the cluster
-rabbitmqctl stop_app
+# leave the cluster (run these commands on othe nodes)
+rabbitmqctl -n rabbit@rabbitmq1 stop_app
 rabbitmqctl forget_cluster_node rabbit@rabbitmq1
 
 
