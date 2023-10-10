@@ -64,9 +64,9 @@ docker run -d -it --rm --name rabbitmq1 --hostname rabbitmq1 \
 -e RABBITMQ_DEFAULT_USER=admin \
 -e RABBITMQ_DEFAULT_PASS=password \
 --mount type=bind,source="$(pwd)"/rabbitmq.conf,target=/etc/rabbitmq/rabbitmq.conf,readonly \
---mount type=bind,source="$(pwd)"/mydomain.crt,target=/tmp/mydomain.crt,readonly \
---mount type=bind,source="$(pwd)"/mydomain.key,target=/tmp/mydomain.key,readonly \
---mount type=bind,source="$(pwd)"/rootCA.crt,target=/tmp/rootCA.crt,readonly \
+--mount type=bind,source="$(pwd)"/tls.crt,target=/tmp/tls.crt,readonly \
+--mount type=bind,source="$(pwd)"/tls.key,target=/tmp/tls.key,readonly \
+--mount type=bind,source="$(pwd)"/ca.crt,target=/tmp/ca.crt,readonly \
 rabbitmq:3.9-management
 
 
