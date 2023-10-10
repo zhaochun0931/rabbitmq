@@ -11,16 +11,6 @@ rabbitmq:3.9-management
 
 
 
-docker run -d -it --rm --name rabbitmq2 --hostname rabbitmq2 -p 5673:5672 -p 25672:15672 \
---network rabbitmq_vnet -e RABBITMQ_ERLANG_COOKIE=rabbitmq -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=password rabbitmq:3.9-management
-
-
-
-
-
-docker run -d -it --rm --name rabbitmq3 --hostname rabbitmq3 -p 5674:5672 -p 35672:15672 \
---network rabbitmq_vnet -e RABBITMQ_ERLANG_COOKIE=rabbitmq -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=password rabbitmq:3.9-management
-
 
 
 # setup cluster
@@ -64,6 +54,7 @@ docker run -d -it --rm --name rabbitmq1 --hostname rabbitmq1 \
 -e RABBITMQ_DEFAULT_USER=admin \
 -e RABBITMQ_DEFAULT_PASS=password \
 --mount type=bind,source="$(pwd)"/rabbitmq.conf,target=/etc/rabbitmq/rabbitmq.conf,readonly \
+--mount type=bind,source="$(pwd)"/rabbitmq-env.conf,target=/etc/rabbitmq/rabbitmq-env.conf,readonly \
 --mount type=bind,source="$(pwd)"/tls.crt,target=/tmp/tls.crt,readonly \
 --mount type=bind,source="$(pwd)"/tls.key,target=/tmp/tls.key,readonly \
 --mount type=bind,source="$(pwd)"/ca.crt,target=/tmp/ca.crt,readonly \
