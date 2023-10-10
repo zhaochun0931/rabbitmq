@@ -24,17 +24,13 @@ rabbitmq:3.11.23-management
 
 
 
+docker exec -it rabbitmq2 bash
+rabbitmqctl stop_app
+rabbitmqctl reset
+rabbitmqctl join_cluster rabbit@rabbitmq1
+rabbitmqctl start_app
 
-  
-docker exec rabbitmq2 rabbitmqctl stop_app
-docker exec rabbitmq2 rabbitmqctl reset
-docker exec rabbitmq2 rabbitmqctl join_cluster rabbit@rabbitmq1
-docker exec rabbitmq2 rabbitmqctl start_app
 
-docker exec rabbitmq3 rabbitmqctl stop_app
-docker exec rabbitmq3 rabbitmqctl reset
-docker exec rabbitmq3 rabbitmqctl join_cluster rabbit@rabbitmq1
-docker exec rabbitmq3 rabbitmqctl start_app
 
 
 
