@@ -20,6 +20,17 @@ rabbitmqctl join_cluster rabbit@rabbitmq2
 rabbitmqctl start_app
 
 
+# leave the cluster
+rabbitmqctl stop_app
+rabbitmqctl forget_cluster_node rabbit@rabbitmq1
+
+
+
+
+
+
+
+
 
 docker port rabbitmq
 
