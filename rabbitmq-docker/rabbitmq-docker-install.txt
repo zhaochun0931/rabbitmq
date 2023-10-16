@@ -31,7 +31,7 @@ rabbitmq:3.11-management
 # setup cluster
 rabbitmqctl stop_app
 rabbitmqctl reset
-rabbitmqctl join_cluster rabbit@rabbitmq2
+rabbitmqctl join_cluster rabbit@rabbitmq1
 rabbitmqctl start_app
 
 
