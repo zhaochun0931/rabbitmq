@@ -8,6 +8,41 @@ crete a quorum queue
 
 
 
+
+
+
+
+
+
+
+
+# create a quorum queue
+2023-10-16 01:17:37.006377+00:00 [debug] <0.1264.0> Will start up to 3 replicas for quorum queue 'qq1' in vhost '/' with leader on node 'rabbit@rabbitmq1'
+2023-10-16 01:17:37.014838+00:00 [debug] <0.1269.0> queue 'qq1' in vhost '/': ra_log:init recovered last_index_term {0,0} first index 0
+2023-10-16 01:17:37.017917+00:00 [debug] <0.1269.0> queue 'qq1' in vhost '/': post_init -> recover in term: 0 machine version: 3
+2023-10-16 01:17:37.018062+00:00 [debug] <0.1269.0> queue 'qq1' in vhost '/': recovering state machine version 0:3 from index 0 to 0
+2023-10-16 01:17:37.018111+00:00 [debug] <0.1269.0> queue 'qq1' in vhost '/': recovery of state machine version 0:3 from index 0 to 0 took 0ms
+2023-10-16 01:17:37.018145+00:00 [debug] <0.1269.0> queue 'qq1' in vhost '/': recover -> recovered in term: 0 machine version: 3
+2023-10-16 01:17:37.018209+00:00 [debug] <0.1269.0> queue 'qq1' in vhost '/': recovered -> follower in term: 0 machine version: 3
+2023-10-16 01:17:37.018854+00:00 [debug] <0.1269.0> queue 'qq1' in vhost '/': election triggered by <0.1264.0>
+2023-10-16 01:17:37.018908+00:00 [debug] <0.1269.0> queue 'qq1' in vhost '/': pre_vote election called for in term 0
+2023-10-16 01:17:37.022507+00:00 [debug] <0.1269.0> queue 'qq1' in vhost '/': follower -> pre_vote in term: 0 machine version: 3
+2023-10-16 01:17:37.022600+00:00 [debug] <0.1269.0> queue 'qq1' in vhost '/': pre_vote granted #Ref<0.1080616617.76808193.16202> for term 0 votes 1
+2023-10-16 01:17:37.022873+00:00 [debug] <0.1269.0> queue 'qq1' in vhost '/': pre_vote granted #Ref<0.1080616617.76808193.16202> for term 0 votes 2
+2023-10-16 01:17:37.022896+00:00 [debug] <0.1269.0> queue 'qq1' in vhost '/': election called for in term 1
+2023-10-16 01:17:37.024645+00:00 [debug] <0.1269.0> queue 'qq1' in vhost '/': pre_vote -> candidate in term: 1 machine version: 3
+2023-10-16 01:17:37.024698+00:00 [debug] <0.1269.0> queue 'qq1' in vhost '/': vote granted for term 1 votes 1
+2023-10-16 01:17:37.028411+00:00 [debug] <0.1269.0> queue 'qq1' in vhost '/': vote granted for term 1 votes 2
+2023-10-16 01:17:37.028497+00:00 [notice] <0.1269.0> queue 'qq1' in vhost '/': candidate -> leader in term: 1 machine version: 3
+2023-10-16 01:17:37.028716+00:00 [info] <0.1264.0> ra: started cluster %2F_qq1 with 2 servers
+2023-10-16 01:17:37.028716+00:00 [info] <0.1264.0> 0 servers failed to start: []
+2023-10-16 01:17:37.028716+00:00 [info] <0.1264.0> Leader: {'%2F_qq1',rabbit@rabbitmq1}
+2023-10-16 01:17:37.029798+00:00 [debug] <0.1269.0> queue 'qq1' in vhost '/': enabling ra cluster changes in 1, index 1
+2023-10-16 01:17:37.029853+00:00 [debug] <0.1269.0> queue 'qq1' in vhost '/': applying new machine version 3 current 0
+
+
+
+
 rabbitmq-queues add_member qq1 rabbit@gemfire-b-1
 rabbitmq-queues rebalance quorum
 
