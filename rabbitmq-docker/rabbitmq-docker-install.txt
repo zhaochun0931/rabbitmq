@@ -38,6 +38,19 @@ rabbitmqctl join_cluster rabbit@rabbitmq1
 rabbitmqctl start_app
 
 
+# log
+
+2023-10-16 01:15:32.984590+00:00 [info] <0.652.0> node rabbit@rabbitmq2 up
+2023-10-16 01:15:33.449018+00:00 [debug] <0.652.0> Node 'rabbit@rabbitmq2' has joined the cluster
+2023-10-16 01:15:40.204429+00:00 [info] <0.652.0> rabbit on node rabbit@rabbitmq2 up
+
+
+
+
+
+
+
+
 # leave the cluster (run these commands on othe nodes)
 rabbitmqctl -n rabbit@rabbitmq1 stop_app
 rabbitmqctl forget_cluster_node rabbit@rabbitmq1
