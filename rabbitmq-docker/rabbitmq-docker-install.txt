@@ -1,3 +1,6 @@
+the default user/password is guest/guest but you can overwrite them
+
+
 docker network create rabbitmq_vnet
 docker network ls
 
@@ -52,7 +55,6 @@ docker port rabbitmq
 
 
 
-the default user/password is guest/guest
 
 
 
