@@ -10,12 +10,12 @@ rabbitmq_password  = pika.PlainCredentials(username,password)
 
 logging.basicConfig(level=logging.DEBUG)
 
-rabbitmq_context = ssl.create_default_context(cafile="/Users/Downloads/rootCA.crt")
+rabbitmq_context = ssl.create_default_context(cafile="/tmp/ca.crt")
 rabbitmq_context.verify_mode = ssl.CERT_REQUIRED
 # context.verify_mode = ssl.CERT_OPTIONAL
 # context.verify_mode = ssl.CERT_NONE
 
-rabbitmq_context.load_cert_chain("/Users/Downloads//mydomain.crt", "/Users/Downloads/mydomain.key")
+rabbitmq_context.load_cert_chain("/tmp/tls.crt", "/tmp/tls.key")
 rabbitmq_ssl_options = pika.SSLOptions(rabbitmq_context, "www.xiaoming.com")
 
 
