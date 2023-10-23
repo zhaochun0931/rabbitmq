@@ -1,0 +1,22 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: rabbitmq2
+  namespace: rabbitmq-system
+spec:
+  replicas: 1
+  rabbitmq:
+    additionalPlugins:
+      - rabbitmq_stream
+      - rabbitmq_schema_definition_sync
+      - rabbitmq_schema_definition_sync_prometheus
+      - rabbitmq_standby_replication
+    additionalConfig: |
+      schema_definition_sync.operating_mode = upstream
+      standby.replication.operating_mode = upstream
+
+
+
+
+---
+
