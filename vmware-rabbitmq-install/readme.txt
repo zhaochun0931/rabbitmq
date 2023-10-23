@@ -31,13 +31,28 @@ echo "password: $password"
 
 
 # standby
-
 nohup kubectl port-forward service/downstream-rabbit -n rabbitmq-system --address 0.0.0.0 15672:15672 5672:5672 5552:5552 &
 
 username="$(kubectl get secret downstream-rabbit-default-user -n rabbitmq-system -o jsonpath='{.data.username}' | base64 --decode)"
-echo "username: $username"
 password="$(kubectl get secret downstream-rabbit-default-user -n rabbitmq-system -o jsonpath='{.data.password}' | base64 --decode)"
+echo "username: $username"
 echo "password: $password"
+
+
+
+
+
+nohup kubectl port-forward service/rabbitmq2 -n rabbitmq-system --address 0.0.0.0 15672:15672 5672:5672 5552:5552 &
+
+username="$(kubectl get secret rabbitmq2-default-user -n rabbitmq-system -o jsonpath='{.data.username}' | base64 --decode)"
+password="$(kubectl get secret rabbitmq2-default-user -n rabbitmq-system -o jsonpath='{.data.password}' | base64 --decode)"
+echo "username: $username"
+echo "password: $password"
+
+
+
+
+
 
 
 # create a quorum queue for test
