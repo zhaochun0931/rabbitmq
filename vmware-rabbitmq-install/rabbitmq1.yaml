@@ -1,0 +1,137 @@
+# MUST replace the UPSTREAMIP
+# MUST replace the UPSTREAMIP
+# MUST replace the UPSTREAMIP
+
+
+
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: rabbitmq1
+  namespace: rabbitmq-system
+spec:
+  replicas: 1
+  rabbitmq:
+    additionalPlugins:
+      - rabbitmq_stream
+      - rabbitmq_schema_definition_sync
+      - rabbitmq_schema_definition_sync_prometheus
+      - rabbitmq_standby_replication
+    additionalConfig: |
+      schema_definition_sync.operating_mode = upstream
+      standby.replication.operating_mode = upstream
+      standby.replication.retention.size_limit.messages = 5000000000
+  resources:
+    requests:
+      cpu: 100m
+      memory: 500Mi
+    limits:
+      cpu: 100m
+      memory: 500Mi
+
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: upstream-secret
+  namespace: rabbitmq-system
+type: Opaque
+stringData:
+  username: test-user
+  password: test-password
+
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: User
+metadata:
+  name: rabbitmq-replicator
+  namespace: rabbitmq-system
+spec:
+  rabbitmqClusterReference:
+    name:  rabbitmq1 # the upstream RabbitMQ cluster name. It must be in the same namespace and it is a mandatory value.
+  importCredentialsSecret:
+    name: upstream-secret
+
+
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Permission
+metadata:
+  name: rabbitmq-replicator.rabbitmq-schema-definition-sync.all
+  namespace: rabbitmq-system
+spec:
+  vhost: "rabbitmq_schema_definition_sync" # name of a vhost
+  userReference:
+    name: rabbitmq-replicator
+  permissions:
+    write: ".*"
+    configure: ".*"
+    read: ".*"
+  rabbitmqClusterReference:
+    name: rabbitmq1  # the upstream RabbitMQ cluster name. It must be in the same namespace and it is a mandatory value.
+
+
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: SchemaReplication
+metadata:
+  name: upstream
+  namespace: rabbitmq-system  
+spec:
+  endpoints: "UPSTREAMIP:5672" # port 5672
+  upstreamSecret:
+    name: upstream-secret
+  rabbitmqClusterReference:
+    name: rabbitmq1  # the upstream RabbitMQ cluster name. It must be in the same namespace and it is a mandatory value.
+
+
+---
+apiVersion: rabbitmq.tanzu.vmware.com/v1beta1
+kind: StandbyReplication
+metadata:
+  name: upstream-configuration
+  namespace: rabbitmq-system
+spec:
+  operatingMode: "upstream" # has to be "upstream" to configure an upstream RabbitMQ cluster; required value
+  upstreamModeConfiguration: # list of policies that Operator will create
+    replicationPolicies:
+      - name: test-policy # policy name; required value
+        pattern: "^.*" # any regex expression that will be used to match quorum queues name; required value
+        vhost: "test" # vhost name; must be an existing vhost; required value
+  rabbitmqClusterReference:
+    name: rabbitmq1 # the upstream RabbitMQ cluster name. It must be in the same namespace and it is a mandatory value.
+
+
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Vhost
+metadata:
+  name: default
+  namespace: rabbitmq-system
+spec:
+  name: "test" # vhost name
+  tags: ["standby_replication"]
+  rabbitmqClusterReference:
+    name: rabbitmq1 # the upstream RabbitMQ cluster name. It must be in the same namespace and it is a mandatory value.
+
+
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Permission
+metadata:
+  name: rabbitmq-replicator.defaultvhost.all
+  namespace: rabbitmq-system
+spec:
+  vhost: "test" # name of a vhost
+  userReference:
+    name: rabbitmq-replicator
+  permissions:
+    write: ".*"
+    configure: ".*"
+    read: ".*"
+  rabbitmqClusterReference:
+    name: rabbitmq1  # the upstream RabbitMQ cluster name. It must be in the same namespace and it is a mandatory value.
+
+---
