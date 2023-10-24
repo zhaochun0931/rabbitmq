@@ -21,7 +21,6 @@ spec:
     additionalConfig: |
       schema_definition_sync.operating_mode = upstream
       standby.replication.operating_mode = upstream
-      standby.replication.retention.size_limit.messages = 5000000000
   resources:
     requests:
       cpu: 100m
