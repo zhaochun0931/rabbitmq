@@ -95,6 +95,7 @@ docker run -d -it --rm --name rabbitmq1 --hostname rabbitmq1 \
 -e RABBITMQ_DEFAULT_USER=admin \
 -e RABBITMQ_DEFAULT_PASS=password \
 --mount type=bind,source="$(pwd)"/rabbitmq.conf,target=/etc/rabbitmq/rabbitmq.conf,readonly \
+--mount type=bind,source="$(pwd)"/advanced.config,target=/etc/rabbitmq/advanced.config,readonly \
 --mount type=bind,source="$(pwd)"/rabbitmq-env.conf,target=/etc/rabbitmq/rabbitmq-env.conf,readonly \
 --mount type=bind,source="$(pwd)"/tls.crt,target=/tmp/tls.crt,readonly \
 --mount type=bind,source="$(pwd)"/tls.key,target=/tmp/tls.key,readonly \
