@@ -71,6 +71,11 @@ rabbitmqctl display_standby_promotion_summary
 
 
 
+# post promotion, run below command in the new primary cluster
+rabbitmqctl delete_all_data_on_standby_replication_cluster
+
+
+
 
 rabbitmq [ ~ ]$ rabbitmqctl list_vhosts_available_for_standby_replication_recovery
 Listing virtual hosts available for multi-DC replication recovery on node rabbit@downstream-rabbit-server-0.downstream-rabbit-nodes.rabbitmq-system
