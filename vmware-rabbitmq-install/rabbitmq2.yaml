@@ -1,6 +1,5 @@
-# MUST replace the UPSTREAMIP
-# MUST replace the UPSTREAMIP
-# MUST replace the UPSTREAMIP
+# MUST replace the 1.1.1.1 with the actual IP of upstream node
+
 
 ---
 apiVersion: rabbitmq.com/v1beta1
@@ -85,7 +84,7 @@ metadata:
   name: downstream
   namespace: rabbitmq-system
 spec:
-  endpoints: "UPSTREAMIP:5672"
+  endpoints: "1.1.1.1:5672"
   upstreamSecret:
     name: upstream-secret
   rabbitmqClusterReference:
@@ -100,7 +99,7 @@ metadata:
 spec:
   operatingMode: "downstream" # has to be "downstream" to configure an downstream RabbitMQ cluster
   downstreamModeConfiguration:
-    endpoints: "UPSTREAMIP:5552" # comma separated list of endpoints to the upstream RabbitMQ and port 5552
+    endpoints: "1.1.1.1:5552" # comma separated list of endpoints to the upstream RabbitMQ and port 5552
     upstreamSecret:
       name: upstream-secret # an existing Kubernetes secret; required value
   rabbitmqClusterReference:
