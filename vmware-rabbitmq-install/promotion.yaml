@@ -1,0 +1,57 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: rabbitmq2
+  namespace: rabbitmq-system
+spec:
+  replicas: 1
+  rabbitmq:
+    additionalConfig: |
+      schema_definition_sync.operating_mode = upstream
+      standby.replication.operating_mode = upstream
+    additionalPlugins:
+    - rabbitmq_stream
+    - rabbitmq_schema_definition_sync
+    - rabbitmq_schema_definition_sync_prometheus
+    - rabbitmq_standby_replication
+  replicas: 1
+  resources:
+    limits:
+      cpu: 100m
+      memory: 500Mi
+    requests:
+      cpu: 100m
+      memory: 500Mi
+
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: SchemaReplication
+metadata:
+  name: upstream
+  namespace: rabbitmq-system
+spec:
+  endpoints: "10.0.0.6:5672" # port 5672
+  upstreamSecret:
+    name: upstream-secret
+  rabbitmqClusterReference:
+    name: rabbitmq2  # the upstream RabbitMQ cluster name. It must be in the same namespace and it is a mandatory value.
+
+
+
+
+---
+apiVersion: rabbitmq.tanzu.vmware.com/v1beta1
+kind: StandbyReplication
+metadata:
+  name: upstream-configuration
+  namespace: rabbitmq-system
+spec:
+  operatingMode: "upstream" # has to be "upstream" to configure an upstream RabbitMQ cluster; required value
+  upstreamModeConfiguration: # list of policies that Operator will create
+    replicationPolicies:
+      - name: test-policy # policy name; required value
+        pattern: "^.*" # any regex expression that will be used to match quorum queues name; required value
+        vhost: "test" # vhost name; must be an existing vhost; required value
+  rabbitmqClusterReference:
+    name: rabbitmq2 # the upstream RabbitMQ cluster name. It must be in the same namespace and it is a mandatory value.
+
