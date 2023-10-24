@@ -1,6 +1,5 @@
-# MUST replace the UPSTREAMIP
-# MUST replace the UPSTREAMIP
-# MUST replace the UPSTREAMIP
+# MUST replace the 1.1.1.1 with the actual IP of upstream node
+
 
 
 
@@ -79,7 +78,7 @@ metadata:
   name: upstream
   namespace: rabbitmq-system  
 spec:
-  endpoints: "UPSTREAMIP:5672" # port 5672
+  endpoints: "1.1.1.1:5672" # port 5672
   upstreamSecret:
     name: upstream-secret
   rabbitmqClusterReference:
