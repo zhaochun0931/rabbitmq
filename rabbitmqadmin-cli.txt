@@ -9,6 +9,10 @@ rabbitmqadmin -u admin -p password declare exchange name=xxx type=direct
 rabbitmqadmin -u admin -p password declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
 
 
+# delete queue
+rabbitmqadmin --vhost="/" delete queue name='qq1' --username admin --password password
+
+
 # bind the queue to the exchange
 
 rabbitmqadmin -u admin -p password declare binding source=xxx destination=qq1 routing_key=""
