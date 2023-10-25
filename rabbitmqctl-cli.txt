@@ -13,6 +13,8 @@ rabbitmqctl version
 # delete queue
 rabbitmqctl --vhost="/" delete_queue 'qq1'
 
+rabbitmqctl eval 'Q = rabbit_misc:r(<<"/">>, queue, <<"qq1">>), rabbit_amqqueue:internal_delete(Q, <<"cli">>).'
+
 
 
 rabbitmqctl eval "rabbit_misc:version()."
@@ -21,5 +23,8 @@ rabbitmqctl eval 'node().'
 rabbitmqctl eval 'application:get_all_env(rabbit).'
 rabbitmqctl eval 'application:get_env(rabbit, log).'
 rabbitmqctl eval 'application:get_env(rabbit, loopback_users).'
+
+
+
 
 
