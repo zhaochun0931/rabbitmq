@@ -92,3 +92,8 @@ first_timestamp	last_timestamp	message_count	virtual_host
 rabbitmq [ ~ ]$
 
 
+
+
+you can create the vhost manually with standby_replication tag from the Rabbitmq UI, it can also replicate the message.
+
+
