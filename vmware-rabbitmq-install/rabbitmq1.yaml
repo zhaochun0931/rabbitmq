@@ -77,7 +77,7 @@ spec:
 apiVersion: rabbitmq.com/v1beta1
 kind: SchemaReplication
 metadata:
-  name: upstream
+  name: rabbitmq1-schema
   namespace: rabbitmq-system  
 spec:
   endpoints: "1.1.1.1:5672" # port 5672
@@ -91,7 +91,7 @@ spec:
 apiVersion: rabbitmq.tanzu.vmware.com/v1beta1
 kind: StandbyReplication
 metadata:
-  name: upstream-configuration
+  name: rabbitmq1-standby
   namespace: rabbitmq-system
 spec:
   operatingMode: "upstream" # has to be "upstream" to configure an upstream RabbitMQ cluster; required value
