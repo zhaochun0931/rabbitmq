@@ -58,6 +58,18 @@ echo "password: $password"
 
 
 
+kubectl get -n rabbitmq-system permission
+kubectl get -n rabbitmq-system users
+kubectl get -n rabbitmq-system SchemaReplication
+kubectl get -n rabbitmq-system StandbyReplication
+kubectl get -n rabbitmq-system Secret
+kubectl get -n rabbitmq-system RabbitmqCluster
+
+
+
+
+
+
 # create a quorum queue for test
 
 kubectl exec -it downstream-rabbit-server-0 -n rabbitmq-system -- bash
