@@ -1,5 +1,5 @@
 docker run --detach --rm --name openldap \
-  --network my-network \
+  --network rabbitmq_vnet \
   --env LDAP_ADMIN_USERNAME=admin \
   --env LDAP_ADMIN_PASSWORD=password \
   --env LDAP_USERS=user \
