@@ -10,6 +10,9 @@ rabbitmqctl version
 
 
 
+# delete queue
+rabbitmqctl --vhost="/" delete_queue 'qq1'
+
 
 
 rabbitmqctl eval "rabbit_misc:version()."
