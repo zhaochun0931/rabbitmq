@@ -7,3 +7,8 @@ docker run --detach --rm --name openldap \
   --env LDAP_ROOT=dc=example,dc=org \
   --env LDAP_ADMIN_DN=cn=admin,dc=example,dc=org \
   bitnami/openldap:latest
+
+
+
+docker run --rm -d -it --network rabbitmq_vnet --name=busybox busybox
+
