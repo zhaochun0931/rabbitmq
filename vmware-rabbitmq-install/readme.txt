@@ -95,5 +95,6 @@ rabbitmq [ ~ ]$
 
 
 you can create the vhost manually with standby_replication tag from the Rabbitmq UI, it can also replicate the message.
+you should also create the policy with remote-dc-replicate:	true and apply to the queue
 
 
