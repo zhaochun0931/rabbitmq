@@ -124,4 +124,21 @@ Upstream username: default_user_xqOMl4yrRHtiav0Oo5N
 $
 
 
+$ rabbitmqctl schema_replication_status
+Schema replication status on node rabbit@rabbitmq1-server-0.rabbitmq1-nodes.rabbitmq-system
+Operating mode: upstream
+State: syncing
+Upstream endpoint(s): 10.0.0.4:5672
+Upstream username: test-user
+$
+
+$ rabbitmqctl schema_replication_status
+Schema replication status on node rabbit@rabbitmq2-server-0.rabbitmq2-nodes.rabbitmq-system
+Operating mode: downstream
+State: syncing
+Upstream endpoint(s): 10.0.0.4:5672
+Upstream username: test-user
+$
+
+
 
