@@ -1,6 +1,4 @@
 # MUST replace the 1.1.1.1 with the actual IP of upstream node
-
-
 ---
 apiVersion: rabbitmq.com/v1beta1
 kind: RabbitmqCluster
@@ -31,7 +29,6 @@ spec:
       cpu: 100m
       memory: 500Mi
 
-
 ---
 apiVersion: v1
 kind: Secret
@@ -42,8 +39,6 @@ type: Opaque
 stringData:
   username: test-user
   password: test-password
-
-
 
 ---
 apiVersion: rabbitmq.com/v1beta1
@@ -56,8 +51,6 @@ spec:
     name: rabbitmq2 # the downstream RabbitMQ cluster name. It must be in the same namespace and it is a mandatory value.
   importCredentialsSecret:
     name: upstream-secret
-
-
 
 ---
 apiVersion: rabbitmq.com/v1beta1
@@ -75,9 +68,6 @@ spec:
     read: ".*"
   rabbitmqClusterReference:
     name: rabbitmq2  # the downstream RabbitMQ cluster name. It must be in the same namespace and it is a mandatory value.
-
-
-
 
 ---
 apiVersion: rabbitmq.com/v1beta1
@@ -106,7 +96,6 @@ spec:
       name: upstream-secret # an existing Kubernetes secret; required value
   rabbitmqClusterReference:
     name: rabbitmq2 # the downstream RabbitMQ cluster name. It must be in the same namespace and it is a mandatory value.
-
 
 ---
 apiVersion: rabbitmq.com/v1beta1
