@@ -1,8 +1,4 @@
 # MUST replace the 1.1.1.1 with the actual IP of upstream node
-
-
-
-
 ---
 apiVersion: rabbitmq.com/v1beta1
 kind: RabbitmqCluster
@@ -30,7 +26,6 @@ spec:
       cpu: 100m
       memory: 500Mi
 
-
 ---
 apiVersion: v1
 kind: Secret
@@ -54,7 +49,6 @@ spec:
   importCredentialsSecret:
     name: upstream-secret
 
-
 ---
 apiVersion: rabbitmq.com/v1beta1
 kind: Permission
@@ -72,7 +66,6 @@ spec:
   rabbitmqClusterReference:
     name: rabbitmq1  # the upstream RabbitMQ cluster name. It must be in the same namespace and it is a mandatory value.
 
-
 ---
 apiVersion: rabbitmq.com/v1beta1
 kind: SchemaReplication
@@ -85,7 +78,6 @@ spec:
     name: upstream-secret
   rabbitmqClusterReference:
     name: rabbitmq1  # the upstream RabbitMQ cluster name. It must be in the same namespace and it is a mandatory value.
-
 
 ---
 apiVersion: rabbitmq.tanzu.vmware.com/v1beta1
@@ -103,7 +95,6 @@ spec:
   rabbitmqClusterReference:
     name: rabbitmq1 # the upstream RabbitMQ cluster name. It must be in the same namespace and it is a mandatory value.
 
-
 ---
 apiVersion: rabbitmq.com/v1beta1
 kind: Vhost
@@ -115,7 +106,6 @@ spec:
   tags: ["standby_replication"]
   rabbitmqClusterReference:
     name: rabbitmq1 # the upstream RabbitMQ cluster name. It must be in the same namespace and it is a mandatory value.
-
 
 ---
 apiVersion: rabbitmq.com/v1beta1
