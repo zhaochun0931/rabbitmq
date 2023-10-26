@@ -83,7 +83,7 @@ spec:
 apiVersion: rabbitmq.com/v1beta1
 kind: SchemaReplication
 metadata:
-  name: downstream
+  name: rabbitmq2-schema
   namespace: rabbitmq-system
 spec:
   endpoints: "1.1.1.1:5672"
@@ -96,7 +96,7 @@ spec:
 apiVersion: rabbitmq.tanzu.vmware.com/v1beta1
 kind: StandbyReplication
 metadata:
-  name: downstream-configuration
+  name: rabbitmq2-standby
   namespace: rabbitmq-system
 spec:
   operatingMode: "downstream" # has to be "downstream" to configure an downstream RabbitMQ cluster
