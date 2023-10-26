@@ -110,3 +110,18 @@ you can create the vhost manually with standby_replication tag from the Rabbitmq
 you should also create the policy with remote-dc-replicate:	true and apply to the queue
 
 
+
+
+
+CLI:
+
+$ rabbitmqctl schema_replication_status
+Schema replication status on node rabbit@rabbitmq1-server-0.rabbitmq1-nodes.rabbitmq-system
+Operating mode: upstream
+State: recover
+Upstream endpoint(s):
+Upstream username: default_user_xqOMl4yrRHtiav0Oo5N
+$
+
+
+
