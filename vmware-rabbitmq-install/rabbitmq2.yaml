@@ -21,8 +21,9 @@ spec:
       schema_definition_sync.downstream.locals.users = ^default_user_
       schema_definition_sync.downstream.locals.global_parameters = ^standby
       schema_definition_sync.downstream.minimum_sync_interval = 30
+      # message stream retention limit (can either be size or time based)
       standby.replication.retention.size_limit.messages = 5000000000
-      standby.replication.retention.time_limit.messages = 12h
+      # standby.replication.retention.time_limit.messages = 12h
   resources:
     requests:
       cpu: 100m
