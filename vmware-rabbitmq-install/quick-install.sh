@@ -14,6 +14,5 @@ kubectl apply -f https://raw.githubusercontent.com/zhaochun-vmware/rabbitmq/main
 kubectl get packages
 
 
-kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/odeploy/local-path-storage.yaml
-
+kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
 kubectl annotate storageclass local-path storageclass.kubernetes.io/is-default-class=true
