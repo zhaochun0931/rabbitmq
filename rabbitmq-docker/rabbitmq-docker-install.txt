@@ -114,7 +114,7 @@ docker run -d -it --rm --name rabbitmq1 --hostname rabbitmq1 \
 --mount type=bind,source="$(pwd)"/tls.crt,target=/tmp/tls.crt,readonly \
 --mount type=bind,source="$(pwd)"/tls.key,target=/tmp/tls.key,readonly \
 --mount type=bind,source="$(pwd)"/ca.crt,target=/tmp/ca.crt,readonly \
-rabbitmq:3.9-management
+rabbitmq:3.11-management
 
 
 
