@@ -8,7 +8,7 @@ password = 'password'
 rabbitmq_password  = pika.PlainCredentials(username,password)
 
 
-logging.basicConfig(level=logging.DEBUG)
+# logging.basicConfig(level=logging.DEBUG)
 
 rabbitmq_context = ssl.create_default_context(cafile="/tmp/ca.crt")
 rabbitmq_context.verify_mode = ssl.CERT_REQUIRED
