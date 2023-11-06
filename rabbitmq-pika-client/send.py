@@ -17,7 +17,7 @@ conn =  pika.BlockingConnection(pika.ConnectionParameters('localhost','5672','/'
 chan = conn.channel()
 
 # chan.queue_declare(queue='qq1',durable=True)
-chan.queue_declare(queue='qq-1',durable=True,arguments={"x-queue-type": "quorum"})
+chan.queue_declare(queue='qq1',durable=True,arguments={"x-queue-type": "quorum"})
 
 
 
@@ -32,7 +32,7 @@ for i in range(10000):
 
 
     chan.basic_publish(exchange='',
-                       routing_key='qq-1',
+                       routing_key='qq1',
                        body='hello world 1111' + dt_string,mandatory=True)
     chan.confirm_delivery()
 
