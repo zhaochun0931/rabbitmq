@@ -5,7 +5,7 @@ erl -eval '{ok, Version} = file:read_file(filename:join([code:root_dir(), "relea
 
 
 
-
+otp_src_26.0.2.tar.gz
 
 # compile the source code
 ./configure
