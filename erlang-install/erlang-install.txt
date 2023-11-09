@@ -4,3 +4,10 @@ erl -eval '{ok, Version} = file:read_file(filename:join([code:root_dir(), "relea
 
 
 
+
+
+
+# compile the source code
+./configure
+make
+make install
