@@ -1,5 +1,12 @@
 apt update
 
-apt install -y elixir
+apt-get install -y --no-install-recommends \
+		build-essential \
+		ca-certificates \
+		gnupg \
+		libncurses5-dev \
+		wget
+
+apt install -y elixir curl
 
 
