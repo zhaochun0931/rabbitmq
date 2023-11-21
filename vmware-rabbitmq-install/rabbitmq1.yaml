@@ -24,10 +24,11 @@ spec:
   resources:
     requests:
       cpu: 100m
-      memory: 500Mi
+      memory: 1Gi
     limits:
       cpu: 100m
-      memory: 500Mi
+      #memory: 500Mi
+      memory: 1Gi
 
 ---
 apiVersion: v1
