@@ -142,3 +142,21 @@ $
 
 
 
+
+
+2023-11-21 09:29:50.995029+00:00 [info] <0.6816.0> Schema definition sync: will delete 0 objects (post-whitelisting) that only exist locally in category global_parameters
+2023-11-21 09:29:51.494703+00:00 [info] <0.6816.0> Schema definition sync: applying definition delta took 1406 millisecond(s)
+2023-11-21 09:29:55.190907+00:00 [info] <0.8855.0> OSR downstream recovery: asked to be promoted to an upstream...
+2023-11-21 09:29:55.288649+00:00 [info] <0.8855.0> OSR downstream recovery: will recover only new messages for vhosts test
+2023-11-21 09:29:55.292533+00:00 [info] <0.8855.0> OSR downstream recovery: selected offset for vhost test is 1700558881402. Last attempted recovery timestamp is 1700558881402 and the oldest unconfirmed message timestamp transferred from the upstream is 1700558723212
+2023-11-21 09:30:00.893474+00:00 [info] <0.8855.0> OSR downstream recovery: virtual host 'test': recovered 6774 messages from '1700558881402' to '1700558936867'
+2023-11-21 09:30:00.893474+00:00 [info] <0.8855.0>
+2023-11-21 09:30:19.993369+00:00 [info] <0.6816.0> Importing concurrently 1 vhosts...
+2023-11-21 09:30:19.998008+00:00 [info] <0.6816.0> Schema definition sync: will delete 0 objects (post-whitelisting) that only exist locally in category users
+2023-11-21 09:30:19.998084+00:00 [warning] <0.496.0> OSR downstream: virtual host 'rabbitmq_schema_definition_sync' is not owned by us, will not start a transfer link
+2023-11-21 09:30:19.998106+00:00 [info] <0.6816.0> Schema definition sync: will delete 0 objects (post-whitelisting) that only exist locally in category global_parameters
+2023-11-21 09:30:20.588875+00:00 [info] <0.6816.0> Schema definition sync: applying definition delta took 595 millisecond(s)
+
+
+
+
