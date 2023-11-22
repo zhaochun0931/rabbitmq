@@ -6,7 +6,7 @@ metadata:
   name: rabbitmq2
   namespace: rabbitmq-system
 spec:
-  replicas: 3
+  replicas: 1
   imagePullSecrets:
   - name: tanzu-rabbitmq-registry-creds
   rabbitmq:
