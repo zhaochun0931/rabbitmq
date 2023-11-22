@@ -6,7 +6,11 @@ metadata:
   name: rabbitmq2
   namespace: rabbitmq-system
 spec:
-  replicas: 1
+  replicas: 3
+  override:
+    statefulSet:
+      spec:
+        podManagementPolicy: OrderedReady
   imagePullSecrets:
   - name: tanzu-rabbitmq-registry-creds
   rabbitmq:
