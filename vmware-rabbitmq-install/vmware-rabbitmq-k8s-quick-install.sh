@@ -37,5 +37,13 @@ kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisione
 kubectl annotate storageclass local-path storageclass.kubernetes.io/is-default-class=true
 
 
+wget https://raw.githubusercontent.com/zhaochun-vmware/rabbitmq/main/vmware-rabbitmq-install/rabbitmq1.yaml
+wget https://raw.githubusercontent.com/zhaochun-vmware/rabbitmq/main/vmware-rabbitmq-install/rabbitmq2.yaml
+sed -i "s/1.1.1.1/$ip/g" rabbitmq1.yaml
+sed -i "s/1.1.1.1/$ip/g" rabbitmq2.yaml
+
 
 echo -e "\n\n\nInstallation successfully! \nYou can deloy Rabbitmq cluster now."
+
+echo "kubectl apply -f rabbitmq1.yaml on cluster1"
+echo "kubectl apply -f rabbitmq2.yaml on cluster2"
