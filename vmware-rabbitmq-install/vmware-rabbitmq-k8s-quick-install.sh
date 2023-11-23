@@ -1,5 +1,7 @@
 read -p "input the tanzu net username:" username
 read -p "input the tanzu net password:" password
+read -p "input the ip of the upstream:" ip
+
 
 echo "installing...\n"
 
