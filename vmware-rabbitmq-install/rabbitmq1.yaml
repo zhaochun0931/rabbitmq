@@ -6,11 +6,11 @@ metadata:
   name: rabbitmq1
   namespace: rabbitmq-system
 spec:
-  replicas: 3
-  override:
-    statefulSet:
-      spec:
-        podManagementPolicy: OrderedReady
+  # replicas: 3
+  # override:
+  #   statefulSet:
+  #     spec:
+  #       podManagementPolicy: OrderedReady
   imagePullSecrets:
   - name: tanzu-rabbitmq-registry-creds
   rabbitmq:
@@ -28,10 +28,12 @@ spec:
       vm_memory_high_watermark.relative = 0.9
   resources:
     requests:
-      cpu: 100m
+      # cpu: 100m
+      cpu: 1
       memory: 2Gi
     limits:
-      cpu: 100m
+      # cpu: 100m
+      cpu: 1
       #memory: 500Mi
       memory: 2Gi
 
