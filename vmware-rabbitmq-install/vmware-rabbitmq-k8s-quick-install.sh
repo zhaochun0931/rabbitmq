@@ -1,3 +1,9 @@
+
+wget https://raw.githubusercontent.com/zhaochun-vmware/rabbitmq/main/vmware-rabbitmq-install/01-cluster-essential.sh
+
+wget https://raw.githubusercontent.com/zhaochun-vmware/rabbitmq/main/vmware-rabbitmq-install/02-secret.yaml
+
+
 kubectl apply -f https://raw.githubusercontent.com/zhaochun-vmware/rabbitmq/main/vmware-rabbitmq-install/03-packageRepository.yaml
 
 
