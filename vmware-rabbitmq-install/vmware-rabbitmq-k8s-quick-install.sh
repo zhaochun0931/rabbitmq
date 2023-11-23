@@ -47,5 +47,6 @@ sed -i "s/1.1.1.1/$ip/g" rabbitmq2.yaml
 
 echo -e "\n\n\nInstallation successfully! \nYou can deloy Rabbitmq cluster now."
 
-echo "kubectl apply -f rabbitmq1.yaml on cluster1"
-echo "kubectl apply -f rabbitmq2.yaml on cluster2"
+echo -e "run below command on cluster1:\nkubectl apply -f rabbitmq1.yaml"
+echo
+echo -e "run below command on cluster2:\nkubectl apply -f rabbitmq2.yaml"
