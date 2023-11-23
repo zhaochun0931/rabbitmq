@@ -18,8 +18,8 @@ export INSTALL_BUNDLE=registry.tanzu.vmware.com/tanzu-cluster-essentials/cluster
 
 
 export INSTALL_REGISTRY_HOSTNAME=registry.tanzu.vmware.com
-export INSTALL_REGISTRY_USERNAME=TANZU-NET-USER
-export INSTALL_REGISTRY_PASSWORD=TANZU-NET-PASSWORD
+export INSTALL_REGISTRY_USERNAME=tanzu-net-username
+export INSTALL_REGISTRY_PASSWORD=tanzu-net-password
 
 ./install.sh --yes
 
