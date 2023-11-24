@@ -35,7 +35,7 @@ echo "password: $password"
 username="$(kubectl get secret rabbitmq1-default-user -n rabbitmq-system -o jsonpath='{.data.username}' | base64 --decode)"
 password="$(kubectl get secret rabbitmq1-default-user -n rabbitmq-system -o jsonpath='{.data.password}' | base64 --decode)"
 service="$(kubectl get service rabbitmq1 -n rabbitmq-system -o jsonpath='{.spec.clusterIP}')"
-kubectl run perf-test --image=pivotalrabbitmq/perf-test -- --uri amqp://$username:$password@$service/test --quorum-queue --queue qq1
+kubectl run perf-test --image=pivotalrabbitmq/perf-test -- --uri amqp://$username:$password@$service/test --quorum-queue --queue qq1 -x 2 -y 2
 
 
 
