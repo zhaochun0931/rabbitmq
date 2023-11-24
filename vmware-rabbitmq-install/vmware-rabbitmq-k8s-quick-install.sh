@@ -44,8 +44,8 @@ wget https://raw.githubusercontent.com/zhaochun-vmware/rabbitmq/main/vmware-rabb
 sed -i "s/1.1.1.1/$ip/g" rabbitmq1.yaml
 sed -i "s/1.1.1.1/$ip/g" rabbitmq2.yaml
 
-sed -i "s/1.1.1.1/$replicano/g" rabbitmq1.yaml
-sed -i "s/1.1.1.1/$replicano/g" rabbitmq2.yaml
+sed -i "s/replicas: 3/replicas: $replicano/g" rabbitmq1.yaml
+sed -i "s/replicas: 3/replicas: $replicano/g" rabbitmq2.yaml
 
 
 echo -e "\n\n\nInstallation successfully! \nYou can deloy Rabbitmq cluster now."
