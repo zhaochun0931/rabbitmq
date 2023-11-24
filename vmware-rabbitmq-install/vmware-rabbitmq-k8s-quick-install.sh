@@ -3,7 +3,7 @@ echo "please upload the tanzu cluster essential"
 read -p "input the tanzu net username:" username
 read -p "input the tanzu net password:" password
 read -p "input the ip of the upstream:" ip
-
+read -p "input the number of the replicas:" replicano
 
 echo "installing...\n"
 
@@ -43,6 +43,9 @@ wget https://raw.githubusercontent.com/zhaochun-vmware/rabbitmq/main/vmware-rabb
 wget https://raw.githubusercontent.com/zhaochun-vmware/rabbitmq/main/vmware-rabbitmq-install/rabbitmq2.yaml
 sed -i "s/1.1.1.1/$ip/g" rabbitmq1.yaml
 sed -i "s/1.1.1.1/$ip/g" rabbitmq2.yaml
+
+sed -i "s/1.1.1.1/$replicano/g" rabbitmq1.yaml
+sed -i "s/1.1.1.1/$replicano/g" rabbitmq2.yaml
 
 
 echo -e "\n\n\nInstallation successfully! \nYou can deloy Rabbitmq cluster now."
