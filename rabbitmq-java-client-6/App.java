@@ -32,8 +32,8 @@ public class App {
             qtype.put("x-queue-type", "quorum");
 
 
-            for (int i = 2; i <= 6000; i++) {
-                System.out.println("hello");
+            for (int i = 1; i <= 6000; i++) {
+                System.out.println("hello" + i);
                 channel.queueDeclare("qq" +i , true, false, false, qtype);
 
 
