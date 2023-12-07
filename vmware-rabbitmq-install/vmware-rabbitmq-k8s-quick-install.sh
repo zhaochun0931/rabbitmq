@@ -7,27 +7,27 @@ read -p "input the number of the replicas:" replicano
 
 echo "installing...\n"
 
-wget https://raw.githubusercontent.com/zhaochun-vmware/rabbitmq/main/vmware-rabbitmq-install/01-cluster-essential.sh
+wget https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/vmware-rabbitmq-install/01-cluster-essential.sh
 sed -i "s/tanzu-net-username/$username/g" 01-cluster-essential.sh
 sed -i "s/tanzu-net-password/$password/g" 01-cluster-essential.sh
 bash 01-cluster-essential.sh
 
-wget https://raw.githubusercontent.com/zhaochun-vmware/rabbitmq/main/vmware-rabbitmq-install/02-secret.yaml
+wget https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/vmware-rabbitmq-install/02-secret.yaml
 sed -i "s/tanzu-net-username/$username/g" 02-secret.yaml
 sed -i "s/tanzu-net-password/$password/g" 02-secret.yaml
 kubectl apply -f 02-secret.yaml
 
 
 
-kubectl apply -f https://raw.githubusercontent.com/zhaochun-vmware/rabbitmq/main/vmware-rabbitmq-install/03-packageRepository.yaml
+kubectl apply -f https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/vmware-rabbitmq-install/03-packageRepository.yaml
 
 
-kubectl apply -f https://raw.githubusercontent.com/zhaochun-vmware/rabbitmq/main/vmware-rabbitmq-install/04-serviceAccount.yaml
+kubectl apply -f https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/vmware-rabbitmq-install/04-serviceAccount.yaml
 
 
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.5.3/cert-manager.yaml
 
-kubectl apply -f https://raw.githubusercontent.com/zhaochun-vmware/rabbitmq/main/vmware-rabbitmq-install/06-packageInstall.yaml
+kubectl apply -f https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/vmware-rabbitmq-install/06-packageInstall.yaml
 
 
 
@@ -39,8 +39,8 @@ kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisione
 kubectl annotate storageclass local-path storageclass.kubernetes.io/is-default-class=true
 
 
-wget https://raw.githubusercontent.com/zhaochun-vmware/rabbitmq/main/vmware-rabbitmq-install/rabbitmq1.yaml
-wget https://raw.githubusercontent.com/zhaochun-vmware/rabbitmq/main/vmware-rabbitmq-install/rabbitmq2.yaml
+wget https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/vmware-rabbitmq-install/rabbitmq1.yaml
+wget https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/vmware-rabbitmq-install/rabbitmq2.yaml
 sed -i "s/1.1.1.1/$ip/g" rabbitmq1.yaml
 sed -i "s/1.1.1.1/$ip/g" rabbitmq2.yaml
 
