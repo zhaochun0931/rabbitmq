@@ -169,3 +169,12 @@ $
 
 
 
+
+
+rabbitmq-streams add_replica --vhost test rabbitmq.internal.osr.messages node_name
+
+rabbitmq-streams add_replica --vhost test rabbitmq.internal.osr.metrics node_name
+
+
+
+
