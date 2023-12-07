@@ -20,8 +20,8 @@ public class App {
         factory.setHost("localhost");
 // 注意这里写5672，是amqp协议端口
         factory.setPort(5672);
-        factory.setUsername("default_user_NLv82E0apnOPVrcCM5R");
-        factory.setPassword("_v--3BLf1D-QMzu_ffONO5TbYONCoufs");
+        factory.setUsername("admin");
+        factory.setPassword("password");
         factory.setVirtualHost("test");
 
 
