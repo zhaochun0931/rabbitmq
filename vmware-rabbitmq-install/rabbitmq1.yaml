@@ -19,6 +19,7 @@ spec:
       - rabbitmq_schema_definition_sync
       - rabbitmq_schema_definition_sync_prometheus
       - rabbitmq_standby_replication
+      - rabbitmq_top
     additionalConfig: |
       schema_definition_sync.operating_mode = upstream
       standby.replication.operating_mode = upstream
