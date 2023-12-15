@@ -19,23 +19,5 @@ curl localhost:15692/metrics
 
 
 
-
-add below line to prometheus.yml
-
-scrape_configs:
-  - job_name: "prometheus"
-
-
-    static_configs:
-      - targets: ["localhost:9090"]
-
-  - job_name: "xxx-rabbitmq"
-
-
-    static_configs:
-      - targets: ["localhost:15692"]
-
-
-
 restart the prometheus process or reload it with below command:
 kill -HUP 12345
