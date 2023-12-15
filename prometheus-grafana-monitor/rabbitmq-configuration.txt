@@ -15,7 +15,7 @@ the port 15692 is listening
 curl localhost:15692/metrics
 
 
-
+http://localhost:15692/metrics
 
 
 
