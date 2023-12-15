@@ -28,3 +28,9 @@ rabbitmqctl eval 'application:get_env(rabbit, loopback_users).'
 
 
 
+# print process
+rabbitmq-diagnostics remote_shell
+recon_trace:calls({erlang, spawn, return_trace}, 25).
+
+
+
