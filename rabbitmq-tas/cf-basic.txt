@@ -19,20 +19,28 @@ cf marketplace
 cf m -e p.rabbitmq
 
 
-# create a service 
-cf create-service p.rabbitmq single-node xxxrabbitmq1
-cf create-service p.rabbitmq single-node xxxrabbitmq1 -c '{ "plugins": { "rabbitmq_auth_backend_ldap": true } }' 
 
-cf service xxxrabbitmq1 --guid
+
+
+
+
+
+
+
+# create a service 
+cf create-service p.rabbitmq single-node rabbitmq1
+cf create-service p.rabbitmq single-node rabbitmq1 -c '{ "plugins": { "rabbitmq_auth_backend_ldap": true } }' 
+
+cf service rabbitmq1 --guid
 
 
 # delete a service
-cf delete-service xxxrabbitmq1
+cf delete-service rabbitmq1
 
 
 
 
-$ cf service xxxrabbitmq1 --guid
+$ cf service rabbitmq1 --guid
 9c5a3943-2d41-40f5-88e9-971cfcd5dd25
 $
 
@@ -47,13 +55,13 @@ bosh -d service-instance_9c5a3943-2d41-40f5-88e9-971cfcd5dd25 logs -f
 
 
 # on-demand
-cf create-service-key xxxrabbitmq1 mykey -c '{"tags":"administrator"}'
+cf create-service-key rabbitmq1 mykey -c '{"tags":"administrator"}'
 
-cf service-keys xxxrabbitmq1
+cf service-keys rabbitmq1
 
-cf service-key xxxrabbitmq1 mykey
+cf service-key rabbitmq1 mykey
 
-cf delete-service-key xxxrabbitmq1 mykey
+cf delete-service-key rabbitmq1 mykey
 
 
 
