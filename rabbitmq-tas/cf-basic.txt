@@ -231,3 +231,11 @@ $
 
 
 bosh delete-deployment -d service-instance_9c5a3943-2d41-40f5-88e9-971cfcd5dd25
+
+
+
+
+# delete the service forcelly
+cf purge-service-instance rabbitmq1
+bosh delete-deployment -d service-instance_aedabd0e-f951-4806-9a80-bdfc7a9a132b
+
