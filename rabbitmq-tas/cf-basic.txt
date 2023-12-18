@@ -1,0 +1,225 @@
+cf -v
+
+
+
+cf create-org gemfire-org
+cf delete-org gemfire-org
+
+cf create-space gemfire-space
+cf delete-space gemfire-space
+
+
+cf orgs
+
+cf target -o gemfire-org -s gemfire-space
+
+
+cf marketplace
+
+cf m -e p.rabbitmq
+
+
+# create a service 
+cf create-service p.rabbitmq single-node xxxrabbitmq1
+cf create-service p.rabbitmq single-node xxxrabbitmq1 -c '{ "plugins": { "rabbitmq_auth_backend_ldap": true } }' 
+
+cf service xxxrabbitmq1 --guid
+
+
+# delete a service
+cf delete-service xxxrabbitmq1
+
+
+
+
+$ cf service xxxrabbitmq1 --guid
+9c5a3943-2d41-40f5-88e9-971cfcd5dd25
+$
+
+
+bosh -d service-instance_9c5a3943-2d41-40f5-88e9-971cfcd5dd25 logs -f
+
+
+
+
+
+
+
+
+# on-demand
+cf create-service-key xxxrabbitmq1 mykey -c '{"tags":"administrator"}'
+
+cf service-keys xxxrabbitmq1
+
+cf service-key xxxrabbitmq1 mykey
+
+cf delete-service-key xxxrabbitmq1 mykey
+
+
+
+
+cf curl /v3/service_instances/9c5a3943-2d41-40f5-88e9-971cfcd5dd25
+$ cf curl /v3/service_instances/9c5a3943-2d41-40f5-88e9-971cfcd5dd25
+{
+  "guid": "9c5a3943-2d41-40f5-88e9-971cfcd5dd25",
+  "created_at": "2023-07-28T00:39:58Z",
+  "updated_at": "2023-07-28T00:40:00Z",
+  "name": "rabbitmq-demo",
+  "tags": [
+
+  ],
+  "last_operation": {
+    "type": "create",
+    "state": "succeeded",
+    "description": "Instance provisioning completed",
+    "updated_at": "2023-07-28T00:45:18Z",
+    "created_at": "2023-07-28T00:45:18Z"
+  },
+  "type": "managed",
+  "maintenance_info": {
+    "version": "2.0.17-build.84",
+    "description": "RabbitMQ tile version \"2.0.17-build.84\""
+  },
+  "upgrade_available": false,
+  "dashboard_url": "https://rmq-9c5a3943-2d41-40f5-88e9-971cfcd5dd25.run-07.slot-34.tanzu-gss-labs.vmware.com",
+  "relationships": {
+    "space": {
+      "data": {
+        "guid": "1f85d159-96b5-4026-aabc-8c68055f4419"
+      }
+    },
+    "service_plan": {
+      "data": {
+        "guid": "0d6598c7-4bf9-4b75-8f54-6cd51a80b163"
+      }
+    }
+  },
+  "metadata": {
+    "labels": {
+
+    },
+    "annotations": {
+
+    }
+  },
+  "links": {
+    "self": {
+      "href": "https://api.run-07.slot-34.tanzu-gss-labs.vmware.com/v3/service_instances/9c5a3943-2d41-40f5-88e9-971cfcd5dd25"
+    },
+    "space": {
+      "href": "https://api.run-07.slot-34.tanzu-gss-labs.vmware.com/v3/spaces/1f85d159-96b5-4026-aabc-8c68055f4419"
+    },
+    "service_credential_bindings": {
+      "href": "https://api.run-07.slot-34.tanzu-gss-labs.vmware.com/v3/service_credential_bindings?service_instance_guids=9c5a3943-2d41-40f5-88e9-971cfcd5dd25"
+    },
+    "service_route_bindings": {
+      "href": "https://api.run-07.slot-34.tanzu-gss-labs.vmware.com/v3/service_route_bindings?service_instance_guids=9c5a3943-2d41-40f5-88e9-971cfcd5dd25"
+    },
+    "service_plan": {
+      "href": "https://api.run-07.slot-34.tanzu-gss-labs.vmware.com/v3/service_plans/0d6598c7-4bf9-4b75-8f54-6cd51a80b163"
+    },
+    "parameters": {
+      "href": "https://api.run-07.slot-34.tanzu-gss-labs.vmware.com/v3/service_instances/9c5a3943-2d41-40f5-88e9-971cfcd5dd25/parameters"
+    },
+    "shared_spaces": {
+      "href": "https://api.run-07.slot-34.tanzu-gss-labs.vmware.com/v3/service_instances/9c5a3943-2d41-40f5-88e9-971cfcd5dd25/relationships/shared_spaces"
+    }
+  }
+}
+$
+
+
+
+cf curl /v3/spaces/1f85d159-96b5-4026-aabc-8c68055f4419
+
+$ cf curl /v3/spaces/1f85d159-96b5-4026-aabc-8c68055f4419
+{
+  "guid": "1f85d159-96b5-4026-aabc-8c68055f4419",
+  "created_at": "2023-07-28T00:37:09Z",
+  "updated_at": "2023-07-28T00:37:09Z",
+  "name": "gemfire-space",
+  "relationships": {
+    "organization": {
+      "data": {
+        "guid": "8d751cde-c77a-411e-b945-02ba24de0fe1"
+      }
+    },
+    "quota": {
+      "data": null
+    }
+  },
+  "metadata": {
+    "labels": {
+
+    },
+    "annotations": {
+
+    }
+  },
+  "links": {
+    "self": {
+      "href": "https://api.run-07.slot-34.tanzu-gss-labs.vmware.com/v3/spaces/1f85d159-96b5-4026-aabc-8c68055f4419"
+    },
+    "organization": {
+      "href": "https://api.run-07.slot-34.tanzu-gss-labs.vmware.com/v3/organizations/8d751cde-c77a-411e-b945-02ba24de0fe1"
+    },
+    "features": {
+      "href": "https://api.run-07.slot-34.tanzu-gss-labs.vmware.com/v3/spaces/1f85d159-96b5-4026-aabc-8c68055f4419/features"
+    },
+    "apply_manifest": {
+      "href": "https://api.run-07.slot-34.tanzu-gss-labs.vmware.com/v3/spaces/1f85d159-96b5-4026-aabc-8c68055f4419/actions/apply_manifest",
+      "method": "POST"
+    }
+  }
+}
+$
+
+
+
+
+cf curl /v3/organizations/8d751cde-c77a-411e-b945-02ba24de0fe1
+
+$ cf curl /v3/organizations/8d751cde-c77a-411e-b945-02ba24de0fe1
+{
+  "guid": "8d751cde-c77a-411e-b945-02ba24de0fe1",
+  "created_at": "2023-07-28T00:34:56Z",
+  "updated_at": "2023-07-28T00:34:56Z",
+  "name": "gemfire-demo",
+  "suspended": false,
+  "relationships": {
+    "quota": {
+      "data": {
+        "guid": "ee311ade-7b54-49a8-9661-33a19f5f8e3f"
+      }
+    }
+  },
+  "metadata": {
+    "labels": {
+
+    },
+    "annotations": {
+
+    }
+  },
+  "links": {
+    "self": {
+      "href": "https://api.run-07.slot-34.tanzu-gss-labs.vmware.com/v3/organizations/8d751cde-c77a-411e-b945-02ba24de0fe1"
+    },
+    "domains": {
+      "href": "https://api.run-07.slot-34.tanzu-gss-labs.vmware.com/v3/organizations/8d751cde-c77a-411e-b945-02ba24de0fe1/domains"
+    },
+    "default_domain": {
+      "href": "https://api.run-07.slot-34.tanzu-gss-labs.vmware.com/v3/organizations/8d751cde-c77a-411e-b945-02ba24de0fe1/domains/default"
+    },
+    "quota": {
+      "href": "https://api.run-07.slot-34.tanzu-gss-labs.vmware.com/v3/organization_quotas/ee311ade-7b54-49a8-9661-33a19f5f8e3f"
+    }
+  }
+}
+$
+
+
+
+
+
+bosh delete-deployment -d service-instance_9c5a3943-2d41-40f5-88e9-971cfcd5dd25
