@@ -21,6 +21,8 @@ public class App
         factory.setHost("localhost");
         factory.setUsername("admin");
         factory.setPassword("password");
+        factory.setVirtualHost("test");
+        
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()) {
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
