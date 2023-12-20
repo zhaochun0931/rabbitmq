@@ -242,3 +242,11 @@ bosh delete-deployment -d service-instance_aedabd0e-f951-4806-9a80-bdfc7a9a132b
 
 /var/vcap/sys/log
 
+
+wget https://raw.githubusercontent.com/rabbitmq/support-tools/main/scripts/rabbitmq-collect-env
+bash rabbitmq-collect-env
+/var/vcap/sys/log/rabbitmq-server/rabbitmq-env-a3c56170-b29d-487a-9f8a-caaf0888b5f7-20231220-025738.tgz
+
+
+
+
