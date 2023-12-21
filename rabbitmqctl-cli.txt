@@ -9,6 +9,23 @@ rabbitmqctl version
 
 
 
+# create vhost
+rabbitmqctl add_vhost vhost1 --default-queue-type quorum
+rabbitmqctl update_vhost_metadata / --default-queue-type quorum
+
+
+curl -u admin:password -X PUT http://localhost:15672/api/vhosts/vhost2
+
+curl -u admin:password -X PUT http://localhost:15672/api/vhosts/vhost3 \
+-H "content-type: application/json" \
+--data-raw '{"description": "QA environment 1", "tags": "qa,project-a", "default_queue_type": "quorum"}'
+
+
+
+
+
+
+
 
 # delete queue
 rabbitmqctl --vhost="/" delete_queue 'qq1'
