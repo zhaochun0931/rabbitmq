@@ -1,4 +1,5 @@
 https://cloudsmith.io/
+https://www.rabbitmq.com/install-debian.html#apt-cloudsmith
 
 
 
