@@ -40,6 +40,8 @@ public class App {
         channel.queueDeclare("rabbitmq-java-test", false, true, true, null);
         channel.basicPublish("", "rabbitmq-java-test", null, "Hello, World".getBytes());
 
+        channel.queueDeclare("qq", false, false, false, null);
+
         GetResponse chResponse = channel.basicGet("rabbitmq-java-test", false);
         if (chResponse == null) {
             System.out.println("No message retrieved");
