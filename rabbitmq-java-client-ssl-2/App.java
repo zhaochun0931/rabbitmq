@@ -29,8 +29,10 @@ public class App {
         c.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
 
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost");
+        factory.setHost("10.0.0.4");
         factory.setPort(5671);
+        factory.setUsername("admin");
+        factory.setPassword("password");
         factory.useSslProtocol(c);
 //        factory.enableHostnameVerification();
 
