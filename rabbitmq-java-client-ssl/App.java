@@ -31,8 +31,8 @@ public class App {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
         factory.setPort(5671);
-        factory.setUsername("guest");
-        factory.setPassword("guest");
+        factory.setUsername("admin");
+        factory.setPassword("password");
         factory.useSslProtocol(c);
         Connection connection = factory.newConnection();
         // 进行其他操作
