@@ -3,6 +3,12 @@ rabbitmq-plugins list
 
 
 
+#
+rabbitmq-diagnostics server_version
+rabbitmq-diagnostics erlang_version
+rabbitmq-diagnostics -q log_location 
+
+
 # create and delete policy
 
 rabbitmqctl set_policy ha-all "^qq" '{"ha-mode":"all"}' --apply-to=queues
