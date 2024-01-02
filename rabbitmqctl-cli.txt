@@ -3,6 +3,16 @@ rabbitmq-plugins list
 
 
 
+# users
+rabbitmqctl list_users
+
+
+#
+rabbitmqctl status
+rabbitmq-diagnostics status
+
+
+
 #
 rabbitmq-diagnostics server_version
 rabbitmq-diagnostics erlang_version
