@@ -72,3 +72,17 @@ recon_trace:calls({erlang, spawn, return_trace}, 25).
 
 
 
+
+
+
+# encryption
+
+# rabbitmqctl encode '123' mypassphrase
+Encrypting value ...
+{encrypted,<<"Ouc5vNRG4LbRGZsZ9OoSmhTTQeBGjoUmSB6bVibENdzYLIrGOEl8mGMtWhsiJuJd">>}
+#
+
+# rabbitmqctl decode '{encrypted,<<"Ouc5vNRG4LbRGZsZ9OoSmhTTQeBGjoUmSB6bVibENdzYLIrGOEl8mGMtWhsiJuJd">>}' mypassphrase
+Decrypting value...
+123
+#
