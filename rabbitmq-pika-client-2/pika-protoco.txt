@@ -1,0 +1,16 @@
+tcp handshake
+
+Connection.Start
+Connection.Start-OK
+
+Connection.Tune
+Connection.Tune-OK
+
+Connection.Open vhost=xxx
+Connection.Open-OK
+
+Channel.Open
+Channel.Open-OK
+
+Basic.Get q=xxx
+Basic.Get-OK 
