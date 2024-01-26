@@ -14,9 +14,8 @@ rabbitmqadmin --vhost="/" delete queue name='qq1' --username admin --password pa
 
 
 # bind the queue to the exchange
-
 rabbitmqadmin -u admin -p password declare binding source=xxx destination=qq1 routing_key=""
-
+rabbitmqadmin list bindings
 
 
 
