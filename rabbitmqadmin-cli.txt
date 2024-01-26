@@ -1,7 +1,9 @@
 # declare an exchange
-
 rabbitmqadmin -u admin -p password declare exchange name=xxx type=direct
 rabbitmqadmin list exchanges
+
+
+
 
 
 # declare a queue
@@ -9,8 +11,14 @@ rabbitmqadmin -u admin -p password declare queue name=qq1 arguments='{"x-queue-t
 rabbitmqadmin -u admin -p password declare queue name=qq1 durable=true queue_type=quorum
 rabbitmqadmin list queues
 
+
+
+
 # delete queue
 rabbitmqadmin --vhost="/" delete queue name='qq1' --username admin --password password
+
+
+
 
 
 # bind the queue to the exchange
