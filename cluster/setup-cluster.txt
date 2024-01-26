@@ -1,3 +1,24 @@
+rabbitmq cluster basic
+
+In a RabbitMQ cluster, runtime state containing exchanges, queues, bindings, users, virtual hosts, and policies are available to every node.
+clusters are designed for low-latency environments. You should never create RabbitMQ clusters across a WAN or internet connection.
+You can run RabbitMQ in cloud environments such as Amazon EC2, but not across availability zones.
+
+
+To synchronize RabbitMQ messages in high-latency environments, you’ll want to look at the Shovel and Federation tools.
+
+
+
+
+
+
+
+
+
+
+
+
+
 rabbitmq-diagnostics erlang_cookie_sources --formatter json
 
 
