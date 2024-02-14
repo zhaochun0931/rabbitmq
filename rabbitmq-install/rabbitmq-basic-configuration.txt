@@ -6,7 +6,8 @@ management.ssl.port       = 15671
 management.ssl.cacertfile = /tmp/ca.crt
 management.ssl.certfile   = /tmp/tls.crt
 management.ssl.keyfile    = /tmp/tls.key
-
+## This key must only be used if private key is password protected
+# management.ssl.password   = bunnies
 
 chmod 644 /tmp/tls.*
 
@@ -22,3 +23,5 @@ systemctl restart rabbitmq-server.service
 
 
 /etc/rabbitmq/advanced.config
+
+
