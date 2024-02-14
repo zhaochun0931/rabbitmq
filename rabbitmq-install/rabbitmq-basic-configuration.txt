@@ -14,3 +14,11 @@ chmod 644 /tmp/tls.*
 
 
 systemctl restart rabbitmq-server.service
+
+
+
+
+
+
+
+/etc/rabbitmq/advanced.config
