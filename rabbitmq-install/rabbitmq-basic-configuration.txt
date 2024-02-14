@@ -1,0 +1,16 @@
+/etc/rabbitmq/rabbitmq.conf
+
+
+
+management.ssl.port       = 15671
+management.ssl.cacertfile = /tmp/ca.crt
+management.ssl.certfile   = /tmp/tls.crt
+management.ssl.keyfile    = /tmp/tls.key
+
+
+chmod 644 /tmp/tls.*
+
+
+
+
+systemctl restart rabbitmq-server.service
