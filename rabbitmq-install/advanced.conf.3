@@ -1,0 +1,33 @@
+[
+
+
+    {rabbit, [
+
+        {config_entry_decoder, [
+               {passphrase, <<"bunnies">>}
+           ]}
+      ]},
+
+
+
+    {rabbitmq_management,
+     [
+        %%{config_entry_decoder, [ {passphrase, <<"password">>}  ]},
+
+
+      {listener, [{port,     15671},
+                  {ssl,      true},
+                  {ssl_opts, [{cacertfile, "/tmp/tls-gen/basic/result/ca_certificate.pem"},
+                              {certfile,   "/tmp/tls-gen/basic/result/server_g11_certificate.pem"},
+                              {keyfile,    "/tmp/tls-gen/basic/result/server_g11_key.pem"},
+    %%                         {password, "bunnies"}
+
+                            {password, {encrypted,<<"9dOeU0QbnI955cX9BflIuUZY3GJSSUXrtPp1DEmA8pUefGZT7WgJ7m4qJWfrDtjd">>}}
+
+
+
+
+                              ]}
+                 ]}
+     ]}
+   ].
