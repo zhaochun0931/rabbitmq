@@ -1,0 +1,5 @@
+     <dependency>
+       <groupId>com.swiftmq</groupId>
+       <artifactId>swiftmq-client</artifactId>
+       <version>12.3.3</version>
+     </dependency>
