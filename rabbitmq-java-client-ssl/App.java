@@ -21,7 +21,7 @@ public class App {
 
         char[] truststorePassphrase = "password".toCharArray();
         KeyStore tks = KeyStore.getInstance("JKS");
-        tks.load(new FileInputStream("/tmp/tls-ts.jks"), truststorePassphrase);
+        tks.load(new FileInputStream("/tmp/tls.truststore"), truststorePassphrase);
         TrustManagerFactory tmf = TrustManagerFactory.getInstance("SunX509");
         tmf.init(tks);
 
