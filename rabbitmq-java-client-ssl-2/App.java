@@ -20,7 +20,7 @@ public class App {
 
         char[] trustPassphrase = "password".toCharArray();
         KeyStore tks = KeyStore.getInstance("JKS");
-        tks.load(new FileInputStream("/tmp/tls-ts.jks"), trustPassphrase);
+        tks.load(new FileInputStream("/tmp/tls.truststore"), trustPassphrase);
 
         TrustManagerFactory tmf = TrustManagerFactory.getInstance("SunX509");
         tmf.init(tks);
@@ -29,7 +29,7 @@ public class App {
         c.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
 
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("10.0.0.4");
+        factory.setHost("localhost");
         factory.setPort(5671);
         factory.setUsername("admin");
         factory.setPassword("password");
