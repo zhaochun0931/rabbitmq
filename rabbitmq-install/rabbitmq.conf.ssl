@@ -36,3 +36,10 @@ systemctl restart rabbitmq-server.service
 
 journalctl -xeu rabbitmq-server.service
 
+
+
+
+
+openssl s_client -connect localhost:15671
+
+
