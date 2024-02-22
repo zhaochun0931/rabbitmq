@@ -5,7 +5,7 @@ https://github.com/rabbitmq/rabbitmq-server/blob/main/deps/rabbit/docs/rabbitmq.
 
 
 
-
+/etc/rabbitmq/rabbitmq.conf
 
 
 max_message_size = 10000000
@@ -15,9 +15,9 @@ max_message_size = 10000000
 # enable the mgmt https
 
 management.ssl.port       = 15671
-management.ssl.cacertfile = /tmp/domain.crt
-management.ssl.certfile   = /tmp/domain.crt
-management.ssl.keyfile    = /tmp/domain.key
+management.ssl.cacertfile = /tmp/ca.crt
+management.ssl.certfile   = /tmp/tls.crt
+management.ssl.keyfile    = /tmp/tls.key
 
 
 
@@ -26,3 +26,13 @@ management.ssl.keyfile    = /tmp/domain.key
 default_user = xxx
 default_pass = xxx
 default_user_tags.administrator = true
+
+
+
+
+
+
+systemctl restart rabbitmq-server.service
+
+journalctl -xeu rabbitmq-server.service
+
