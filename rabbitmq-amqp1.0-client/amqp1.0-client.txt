@@ -1,0 +1,30 @@
+https://github.com/rabbitmq/omq
+
+
+terminal 1:
+java -jar perf-test-2.20.0.jar -qq -u qq -c 1 -r 2
+
+
+
+
+terminal 2:
+omq amqp -x 0 -T /amq/queue/qq
+
+
+
+
+
+
+if you just start with a fresh RMQ node and run perf-test (which uses AMQP-1.0) like this:
+perf-test -qq -u qq -c 1 -r 2
+you will see it publishes 2 messages a second (-r 2) and consumes 2 messages per second as well (since that's as much as the publisher produces). 
+
+
+Then in a separate terminal you can run
+omq amqp -x 0 -T /amq/queue/qq
+
+omq doesn't print per-second output/stats like perf-test currently, but you will see that the number of messages received by perf-test will drop to 1 per second, 
+because it now competes for messages from the same queue with the AMQP-1.0 client (and RMQ uses a round robin between the consumers)
+
+
+                                                                                                 
