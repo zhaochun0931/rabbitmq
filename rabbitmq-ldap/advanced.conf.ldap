@@ -1,0 +1,19 @@
+[
+  {rabbit, [
+    {auth_backends, [rabbit_auth_backend_ldap]}
+  ]},
+
+  {rabbitmq_auth_backend_ldap, [
+    {servers, ["10.0.0.4"]},
+
+    {user_dn_pattern, "uid=${username},ou=people,dc=example,dc=com"},
+
+    {tag_queries, [
+                    {administrator, {constant, true}},
+                    {management, {constant, true}}
+    ]},
+
+    {log, network}
+  ]}
+
+].
