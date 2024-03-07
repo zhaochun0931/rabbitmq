@@ -4,6 +4,18 @@ https://www.rabbitmq.com/install-debian.html#apt-cloudsmith
 
 
 
+Release	Distribution
+Ubuntu 23.04	jammy
+Ubuntu 22.04	jammy
+Ubuntu 20.04	focal
+Ubuntu 18.04	bionic
+
+
+
+
+
+
+
 curl -1sLf \
   'https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/setup.deb.sh' \
   | sudo -E bash
