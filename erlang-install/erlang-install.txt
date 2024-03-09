@@ -49,7 +49,7 @@ Executing the  setup script for the 'rabbitmq/rabbitmq-erlang' repository ...
 
 keyring_location=/usr/share/keyrings/rabbitmq-rabbitmq-erlang-archive-keyring.gpg
 ERLANG_VERSION=1:26.1.2-1
-
+ERLANG_VERSION=1:26.2.3-1
 
 apt-get install -y \
 erlang-base=$ERLANG_VERSION \
