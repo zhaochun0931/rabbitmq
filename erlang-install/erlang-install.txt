@@ -57,3 +57,8 @@ erlang-asn1=$ERLANG_VERSION erlang-crypto=$ERLANG_VERSION erlang-eldap=$ERLANG_V
 erlang-mnesia=$ERLANG_VERSION erlang-os-mon=$ERLANG_VERSION erlang-parsetools=$ERLANG_VERSION erlang-public-key=$ERLANG_VERSION \
 erlang-runtime-tools=$ERLANG_VERSION erlang-snmp=$ERLANG_VERSION erlang-ssl=$ERLANG_VERSION \
 erlang-syntax-tools=$ERLANG_VERSION erlang-tftp=$ERLANG_VERSION erlang-tools=$ERLANG_VERSION erlang-xmerl=$ERLANG_VERSION
+
+
+# check erlang version
+erl -eval '{ok, Version} = file:read_file(filename:join([code:root_dir(), "releases", erlang:system_info(otp_release), "OTP_VERSION"])), io:fwrite(Version), halt().' -noshell
+
