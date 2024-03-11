@@ -1,4 +1,12 @@
-echo "please upload the tanzu cluster essential"
+echo
+echo
+echo
+echo "Please install the tanzu cluster esstential first!!!"
+echo 
+echo 
+echo 
+
+echo "Please upload the tanzu cluster essential"
 
 read -p "input the tanzu net username:" username
 read -p "input the tanzu net password:" password
