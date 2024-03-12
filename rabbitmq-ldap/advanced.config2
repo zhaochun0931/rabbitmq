@@ -1,0 +1,54 @@
+[
+
+    {rabbit, [
+
+        {ssl_options, [
+            {cacertfile, "/tmp/ca.crt"},
+            {certfile, "/tmp/tls.crt"},
+            {keyfile, "/tmp/tls.key"},
+            %% {password,  "xxxyyy"},
+            {password,  {encrypted,<<"p6el2dcOFc7++TIduvHEUxCrAuha9+9q2l4Wrbwp4yVZ0rGPElIk1oAgKnTWTSKc">>}}
+        ]},
+        {ssl_listeners, [5671]},
+
+	{auth_backends, [rabbit_auth_backend_ldap]},
+
+    {config_entry_decoder, [
+        {passphrase, <<"test1234">>}
+    
+    ]}
+    ]},
+
+
+
+	{rabbitmq_management,[
+
+
+    {ssl_config, [
+        {port,     15671},
+        {ssl,      true},
+        {cacertfile, "/tmp/ca.crt"},
+        {certfile,   "/tmp/tls.crt"},
+        {keyfile,    "/tmp/tls.key"},
+        %% {password,  "xxxyyy"}
+        {password,  {encrypted,<<"p6el2dcOFc7++TIduvHEUxCrAuha9+9q2l4Wrbwp4yVZ0rGPElIk1oAgKnTWTSKc">>}}
+
+    ]}
+    ]},
+
+
+
+	{rabbitmq_auth_backend_ldap, [
+        {servers, ["10.0.0.8"]},
+    	{user_dn_pattern, "uid=${username},ou=people,dc=example,dc=com"},
+        {tag_queries, [
+            {administrator, {constant, true}},
+            {management, {constant, true}}
+    ]},
+    
+    {log, network}
+    
+    ]}
+
+
+ ].
