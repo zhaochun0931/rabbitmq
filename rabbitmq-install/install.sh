@@ -69,5 +69,7 @@ rabbitmqctl set_permissions --vhost / admin ".*" ".*" ".*"
 # rabbitmq interactive mode
 export RABBITMQ_ALLOW_INPUT='true'
 
+rabbit_log:debug("test").
+rabbit_log:info("test").
 
 
