@@ -73,3 +73,14 @@ rabbit_log:debug("test").
 rabbit_log:info("test").
 
 
+
+# log collection
+
+wget https://raw.githubusercontent.com/rabbitmq/support-tools/main/scripts/rabbitmq-collect-env
+chmod +x rabbitmq-collect-env
+./rabbitmq-collect-env
+
+upload the tgz file to this ticket
+
+
+
