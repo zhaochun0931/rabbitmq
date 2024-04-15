@@ -3,21 +3,49 @@
 
 
 
+
+
+
+
+
+
+docker run -d -it --rm --name rabbitmq1 --hostname rabbitmq1 \
+-p 5672:5672 -p 15672:15672 -p 15671:15671 -p 5671:5671 \
+--network rabbitmq_vnet \
+-e RABBITMQ_ERLANG_COOKIE=rabbitmq \
+-e RABBITMQ_DEFAULT_USER=admin \
+-e RABBITMQ_DEFAULT_PASS=password \
+--mount type=bind,source="$(pwd)"/tls.crt,target=/tmp/tls.crt,readonly \
+--mount type=bind,source="$(pwd)"/tls.key,target=/tmp/tls.key,readonly \
+--mount type=bind,source="$(pwd)"/ca.crt,target=/tmp/ca.crt,readonly \
+rabbitmq:3.12.13-management
+
+
+docker run -d -it --rm --name rabbitmq2 --hostname rabbitmq2 \
+-p 6672:5672 -p 16672:15672 -p 16671:15671 -p 6671:5671 \
+--network rabbitmq_vnet \
+-e RABBITMQ_ERLANG_COOKIE=rabbitmq \
+-e RABBITMQ_DEFAULT_USER=admin \
+-e RABBITMQ_DEFAULT_PASS=password \
+--mount type=bind,source="$(pwd)"/tls.crt,target=/tmp/tls.crt,readonly \
+--mount type=bind,source="$(pwd)"/tls.key,target=/tmp/tls.key,readonly \
+--mount type=bind,source="$(pwd)"/ca.crt,target=/tmp/ca.crt,readonly \
+rabbitmq:3.9.16-management
+
+
+
 rabbitmq-plugins enable rabbitmq_shovel
 rabbitmq-plugins enable rabbitmq_shovel_management
 
 
-rabbitmqctl set_parameter shovel xxx-shovel '{"src-uri": "amqp://admin:password@localhost:5672","src-queue": "qq100","dest-uri": "amqp://admin:password@localhost:5672","dest-queue": "qq200"}'
+
+
+
+# rabbitmq1
+rabbitmqctl set_parameter shovel shovel-demo '{ "src-uri": "amqp://admin:password@rabbitmq1:5672","src-queue": "qq1", "dest-uri": "amqp://admin:password@rabbitmq2:5672","dest-queue": "qq1" }'
 
 
 rabbitmqctl shovel_status --formatter=pretty_table
 
 
-┌───────────────────────┬──────────────────────┬───────────────────┬─────────────────────┬─────────────┬───────────────────────┬─────────────────┬──────────────┬─────────┬────────────────────┬─────────┬───────┐
-│ destination           │ destination_protocol │ destination_queue │ last_changed        │ name        │ source                │ source_protocol │ source_queue │ state   │ termination_reason │ type    │ vhost │
-├───────────────────────┼──────────────────────┼───────────────────┼─────────────────────┼─────────────┼───────────────────────┼─────────────────┼──────────────┼─────────┼────────────────────┼─────────┼───────┤
-│ amqp://localhost:5672 │ amqp091              │ cq2               │ 2023-09-16 03:07:12 │ xxx-shovel  │ amqp://localhost:5672 │ amqp091         │ qq1          │ running │                    │ dynamic │ /     │
-├───────────────────────┼──────────────────────┼───────────────────┼─────────────────────┼─────────────┼───────────────────────┼─────────────────┼──────────────┼─────────┼────────────────────┼─────────┼───────┤
-│ amqp://localhost:5672 │ amqp091              │ qq3               │ 2023-09-16 03:11:09 │ xxx-shovel2 │ amqp://localhost:5672 │ amqp091         │ cq2          │ running │                    │ dynamic │ /     │
-└───────────────────────┴──────────────────────┴───────────────────┴─────────────────────┴─────────────┴───────────────────────┴─────────────────┴──────────────┴─────────┴────────────────────┴─────────┴───────┘
 
