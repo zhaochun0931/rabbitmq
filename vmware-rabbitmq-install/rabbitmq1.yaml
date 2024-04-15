@@ -29,10 +29,10 @@ spec:
       vm_memory_high_watermark.relative = 0.9
   resources:
     requests:
-      cpu: 500m
+      cpu: 100m
       memory: 4Gi
     limits:
-      cpu: 500m
+      cpu: 100m
       #cpu: 1
       #memory: 500Mi
       memory: 4Gi
