@@ -80,3 +80,11 @@ erl -eval '{ok, Version} = file:read_file(filename:join([code:root_dir(), "relea
 # install generic rabbitmq
 
 wget https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.12.12/rabbitmq-server-generic-unix-3.12.12.tar.xz
+
+tar -xf rabbitmq-server-generic-unix-3.12.12.tar.xz
+
+cd rabbitmq_server-3.12.12/sbin
+./rabbitmq-server
+
+
+
