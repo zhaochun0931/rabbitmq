@@ -72,3 +72,11 @@ erlang-syntax-tools=$ERLANG_VERSION erlang-tftp=$ERLANG_VERSION erlang-tools=$ER
 # check erlang version
 erl -eval '{ok, Version} = file:read_file(filename:join([code:root_dir(), "releases", erlang:system_info(otp_release), "OTP_VERSION"])), io:fwrite(Version), halt().' -noshell
 
+
+
+
+
+
+# install generic rabbitmq
+
+wget https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.12.12/rabbitmq-server-generic-unix-3.12.12.tar.xz
