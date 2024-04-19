@@ -1,7 +1,4 @@
-
-
-
-    <!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client -->
+<!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client -->
     <dependency>
       <groupId>com.rabbitmq</groupId>
       <artifactId>amqp-client</artifactId>
