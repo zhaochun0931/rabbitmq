@@ -69,6 +69,32 @@ erlang-runtime-tools=$ERLANG_VERSION erlang-snmp=$ERLANG_VERSION erlang-ssl=$ERL
 erlang-syntax-tools=$ERLANG_VERSION erlang-tftp=$ERLANG_VERSION erlang-tools=$ERLANG_VERSION erlang-xmerl=$ERLANG_VERSION
 
 
+
+
+
+#
+
+
+
+curl -1sLf \
+  'https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/setup.deb.sh' \
+  | sudo -E bash
+
+
+version=1:25.3.2.11-1
+echo $version
+
+apt-get install -y \
+erlang-base=$version \
+erlang-asn1=$version erlang-crypto=$version erlang-eldap=$version erlang-ftp=$version erlang-inets=$version \
+erlang-mnesia=$version erlang-os-mon=$version erlang-parsetools=$version erlang-public-key=$version \
+erlang-runtime-tools=$version erlang-snmp=$version erlang-ssl=$version \
+erlang-syntax-tools=$version erlang-tftp=$version erlang-tools=$version erlang-xmerl=$version
+
+
+
+
+
 # check erlang version
 erl -eval '{ok, Version} = file:read_file(filename:join([code:root_dir(), "releases", erlang:system_info(otp_release), "OTP_VERSION"])), io:fwrite(Version), halt().' -noshell
 
