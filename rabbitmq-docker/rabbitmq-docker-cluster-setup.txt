@@ -45,6 +45,7 @@ rabbitmq:3.11.23-management
 
 
 docker exec -it rabbitmq3 bash
+
 rabbitmqctl stop_app
 rabbitmqctl reset
 rabbitmqctl join_cluster rabbit@rabbitmq2
