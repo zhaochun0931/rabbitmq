@@ -80,7 +80,7 @@ wget https://raw.githubusercontent.com/rabbitmq/support-tools/main/scripts/rabbi
 chmod +x rabbitmq-collect-env
 ./rabbitmq-collect-env
 
-upload the tgz file to this ticket
+Please upload the tgz file to this ticket
 
 
 
