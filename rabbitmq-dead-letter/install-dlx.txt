@@ -1,1 +1,21 @@
-xxx
+# create a dead letter exchange and the queue to recevie the dead letter(message)
+
+rabbitmqadmin --username=admin --password=password declare exchange name=dlx-e type=direct
+rabbitmqadmin --username=admin --password=password declare queue name=dlx-q
+rabbitmqadmin --username=admin --password=password declare binding source=dlx-e destination=dlx-q routing_key=qq1
+
+
+
+
+
+
+
+rabbitmqadmin --username=admin --password=password declare queue name=qq1 arguments='{"x-dead-letter-exchange": "dlx-e"}'
+
+
+
+
+
+
+publish the message from default exchange
+
