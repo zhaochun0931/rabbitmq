@@ -1,4 +1,5 @@
 # create a dead letter exchange and the queue to recevie the dead letter(message)
+# must specify the routing key when binding
 
 rabbitmqadmin -u admin -p password declare exchange name=dlx-e type=direct
 rabbitmqadmin -u admin -p password declare queue name=dlx-q
