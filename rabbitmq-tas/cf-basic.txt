@@ -43,10 +43,9 @@ cf delete-service rabbitmq1
 
 
 
+# list the guid of the service
+cf service rabbitmq1 --guid
 
-$ cf service rabbitmq1 --guid
-9c5a3943-2d41-40f5-88e9-971cfcd5dd25
-$
 
 
 bosh -d service-instance_9c5a3943-2d41-40f5-88e9-971cfcd5dd25 logs -f
