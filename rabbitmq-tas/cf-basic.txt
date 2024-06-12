@@ -47,6 +47,8 @@ cf delete-service rabbitmq1
 cf service rabbitmq1 --guid
 
 
+# ssh into the service instance
+bosh -d deployment-id ssh instance-id
 
 bosh -d service-instance_9c5a3943-2d41-40f5-88e9-971cfcd5dd25 logs -f
 
