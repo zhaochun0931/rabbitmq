@@ -73,6 +73,11 @@ cf delete-service-key rabbitmq1 mykey
 bosh -d deployment_id manifest > rabbitmq1.yaml
 
 
+# redeploy
+bosh -d deployment_id deploy rabbitmq2.yaml
+
+
+
 cf curl /v3/service_instances/9c5a3943-2d41-40f5-88e9-971cfcd5dd25
 $ cf curl /v3/service_instances/9c5a3943-2d41-40f5-88e9-971cfcd5dd25
 {
