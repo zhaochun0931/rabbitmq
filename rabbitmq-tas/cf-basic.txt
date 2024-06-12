@@ -14,7 +14,10 @@ cf orgs
 cf target -o gemfire-org -s gemfire-space
 
 
+# list all service offerings from marketplace
 cf marketplace
+cf m
+
 
 cf m -e p.rabbitmq
 
