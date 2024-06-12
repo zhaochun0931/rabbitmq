@@ -27,6 +27,8 @@ cf m -e p.rabbitmq
 
 
 
+# list services
+cf services
 
 
 
