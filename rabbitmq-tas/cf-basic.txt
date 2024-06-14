@@ -266,3 +266,10 @@ bash rabbitmq-collect-env
 
 
 
+
+# collect instance log
+bosh logs -d deployment_id
+
+
+
+
