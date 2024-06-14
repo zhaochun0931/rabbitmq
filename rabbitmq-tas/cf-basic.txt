@@ -271,5 +271,6 @@ bash rabbitmq-collect-env
 bosh logs -d deployment_id
 
 
-
+log bundle name:
+service-instance_guid-20240614-021754-413112219.tgz
 
