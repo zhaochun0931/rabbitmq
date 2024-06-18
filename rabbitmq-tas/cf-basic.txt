@@ -267,6 +267,13 @@ bash rabbitmq-collect-env
 
 
 
+# list the variables
+bosh variables -d deployment_id
+
+
+
+
+
 # collect instance log
 bosh logs -d deployment_id
 
