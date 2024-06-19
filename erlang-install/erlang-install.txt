@@ -54,8 +54,8 @@ Executing the  setup script for the 'rabbitmq/rabbitmq-erlang' repository ...
 
 keyring_location=/usr/share/keyrings/rabbitmq-rabbitmq-erlang-archive-keyring.gpg
 ERLANG_VERSION=1:26.1.2-1
-
 ERLANG_VERSION=1:26.2.3-1
+ERLANG_VERSION=1:25.3.2.11-1
 
 
 
@@ -71,25 +71,6 @@ erlang-syntax-tools=$ERLANG_VERSION erlang-tftp=$ERLANG_VERSION erlang-tools=$ER
 
 
 
-
-#
-
-
-
-curl -1sLf \
-  'https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/setup.deb.sh' \
-  | sudo -E bash
-
-
-version=1:25.3.2.11-1
-echo $version
-
-apt-get install -y \
-erlang-base=$version \
-erlang-asn1=$version erlang-crypto=$version erlang-eldap=$version erlang-ftp=$version erlang-inets=$version \
-erlang-mnesia=$version erlang-os-mon=$version erlang-parsetools=$version erlang-public-key=$version \
-erlang-runtime-tools=$version erlang-snmp=$version erlang-ssl=$version \
-erlang-syntax-tools=$version erlang-tftp=$version erlang-tools=$version erlang-xmerl=$version
 
 
 
@@ -109,8 +90,15 @@ wget https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.12.12/rabb
 
 tar -xf rabbitmq-server-generic-unix-3.12.12.tar.xz
 
-cd rabbitmq_server-3.12.12/sbin
-./rabbitmq-server
+
+cat << done >> .bash_profile
+export PATH=/root/rabbitmq_server-3.12.12/sbin:$PATH
+done
+
+
+
+# run rabbitmq server in the backgound
+rabbitmq-server -detached
 
 
 
