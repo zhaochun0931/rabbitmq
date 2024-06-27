@@ -1,0 +1,1 @@
+curl -i -u admin:password  http://localhost:15672/api/vhosts
