@@ -31,12 +31,10 @@ rabbitmqctl set_policy policy-yyy "^qq" '{"federation-upstream":"yyy"}' --priori
 the queue name is the identical by default 
 
 # up
-
-rabbitmqadmin declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
+rabbitmqadmin -u admin -p password declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
 
 # down
-rabbitmqadmin declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
-
+rabbitmqadmin -u admin -p password declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
 
 
 
