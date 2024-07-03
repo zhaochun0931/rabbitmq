@@ -3,28 +3,27 @@ https://www.rabbitmq.com/federated-exchanges.html#limitations
 
 The default exchange (with the blank name) cannot be federated as it is not a typical exchange.
 
+the federation exchange only copy new message( the message published after the setup of the federation) from the up node to the down node.
 
 
 
+up node: 172.18.0.2
 
-up node: 10.0.0.8
-down node: 10.0.0.9
+down node: 172.18.0.3
 
 
 
 
 # enable federation plugin in the down node
-
 rabbitmq-plugins enable rabbitmq_federation
-
 rabbitmq-plugins enable rabbitmq_federation_management
 
 
 
-# configure the federation upstream in the down node, 10.0.0.8 is the ip of the up node
+# configure the federation upstream in the down node, 172.18.0.2 is the ip of the up node
 
-rabbitmqctl set_parameter federation-upstream yyy '{"uri":"amqp://admin:password@10.0.0.8:5672"}'
-rabbitmqctl set_policy policy-yyy "^xxx" '{"federation-upstream":"yyy"}' --apply-to=exchanges
+rabbitmqctl set_parameter federation-upstream xxx '{"uri":"amqp://admin:password@172.18.0.2:5672"}'
+rabbitmqctl set_policy policy_1 "^test" '{"federation-upstream":"xxx"}' --apply-to=exchanges
 
 
 
@@ -33,7 +32,7 @@ rabbitmqctl set_policy policy-yyy "^xxx" '{"federation-upstream":"yyy"}' --apply
 
 # up
 
-rabbitmqadmin -u admin -p password declare exchange name=xxx type=direct
+rabbitmqadmin -u admin -p password declare exchange name=test type=direct
 
 rabbitmqadmin -u admin -p password declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
 rabbitmqadmin -u admin -p password declare queue name=qq3 arguments='{"x-queue-type": "quorum"}'
@@ -41,9 +40,9 @@ rabbitmqadmin -u admin -p password declare queue name=qq5 arguments='{"x-queue-t
 
 
 
-rabbitmqadmin -u admin -p password declare binding source=xxx destination=qq1 routing_key=""
-rabbitmqadmin -u admin -p password declare binding source=xxx destination=qq3 routing_key=""
-rabbitmqadmin -u admin -p password declare binding source=xxx destination=qq5 routing_key=""
+rabbitmqadmin -u admin -p password declare binding source=test destination=qq1 routing_key=""
+rabbitmqadmin -u admin -p password declare binding source=test destination=qq3 routing_key=""
+rabbitmqadmin -u admin -p password declare binding source=test destination=qq5 routing_key=""
 
 
 
@@ -54,15 +53,15 @@ rabbitmqadmin -u admin -p password declare binding source=xxx destination=qq5 ro
 
 # down
 
-rabbitmqadmin -u admin -p password declare exchange name=xxx type=direct
+rabbitmqadmin -u admin -p password declare exchange name=test type=direct
 
 rabbitmqadmin -u admin -p password declare queue name=qq2 arguments='{"x-queue-type": "quorum"}'
 rabbitmqadmin -u admin -p password declare queue name=qq4 arguments='{"x-queue-type": "quorum"}'
 rabbitmqadmin -u admin -p password declare queue name=qq6 arguments='{"x-queue-type": "quorum"}'
 
-rabbitmqadmin -u admin -p password declare binding source=xxx destination=qq2 routing_key=
-rabbitmqadmin -u admin -p password declare binding source=xxx destination=qq4 routing_key=
-rabbitmqadmin -u admin -p password declare binding source=xxx destination=qq6 routing_key=
+rabbitmqadmin -u admin -p password declare binding source=test destination=qq2 routing_key=
+rabbitmqadmin -u admin -p password declare binding source=test destination=qq4 routing_key=
+rabbitmqadmin -u admin -p password declare binding source=test destination=qq6 routing_key=
 
 
 
@@ -73,7 +72,7 @@ rabbitmqadmin -u admin -p password declare binding source=xxx destination=qq6 ro
 
 
 # publish the message to the exchange in the up node
-for i in $(seq 100); do rabbitmqadmin -u admin -p password publish exchange=xxx routing_key="" payload="hello, world  $i"; done
+for i in $(seq 100); do rabbitmqadmin -u admin -p password publish exchange=test routing_key="" payload="hello, world  $i"; done
 
 
 rabbitmqadmin publish exchange=xxx payload=000000  routing_key=
