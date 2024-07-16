@@ -32,7 +32,7 @@ public class App
             channel.basicPublish("", QUEUE_NAME, null, message.getBytes(StandardCharsets.UTF_8));
             System.out.println(" [x] Sent '" + message + "'");
             
-Thread.sleep(10000);
+            Thread.sleep(10000);
         }
 
 
