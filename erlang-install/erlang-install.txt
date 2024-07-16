@@ -152,3 +152,15 @@ done
 # run rabbitmq server in the backgound
 rabbitmq-server -detached
 
+
+
+
+
+
+
+
+# kill the erlang process manually
+
+ps aux | grep beam
+kill -9 PID
+
