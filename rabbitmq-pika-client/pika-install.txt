@@ -27,6 +27,8 @@ pip --versio
 
 # install pika
 pip install pika
+pip install pika --break-system-packages
+
 pip list
 
 
