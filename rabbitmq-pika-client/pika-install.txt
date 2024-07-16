@@ -2,12 +2,30 @@
 apt update
 apt install -y python3-pip
 
+
+
+
+
+
 # install pip in Mac
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
 
 
 
+
+
+# check version info
+python3 --version
+pip --versio
+
+
+
+
+
+
+
+# install pika
 pip install pika
 pip list
 
@@ -20,6 +38,5 @@ pip list
 
 
 
-python3 --version
-pip --versio
+
 
