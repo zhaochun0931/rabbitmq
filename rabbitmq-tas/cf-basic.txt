@@ -38,8 +38,17 @@ cf create-service p.rabbitmq single-node rabbitmq1 -c '{ "plugins": { "rabbitmq_
 cf service rabbitmq1 --guid
 
 
+
+# delete the service forcelly
+cf purge-service-instance rabbitmq1
+bosh delete-deployment -d service-instance_aedabd0e-f951-4806-9a80-bdfc7a9a132b
+
 # delete a service
 cf delete-service rabbitmq1
+
+
+
+
 
 
 
@@ -242,14 +251,9 @@ $
 
 
 
-bosh delete-deployment -d service-instance_9c5a3943-2d41-40f5-88e9-971cfcd5dd25
 
 
 
-
-# delete the service forcelly
-cf purge-service-instance rabbitmq1
-bosh delete-deployment -d service-instance_aedabd0e-f951-4806-9a80-bdfc7a9a132b
 
 
 
