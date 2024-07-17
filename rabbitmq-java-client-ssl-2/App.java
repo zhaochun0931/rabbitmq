@@ -33,6 +33,7 @@ public class App {
         factory.setPort(5671);
         factory.setUsername("admin");
         factory.setPassword("password");
+        factory.setVirtualHost(VIRTUAL_HOST);
         factory.useSslProtocol(c);
 //        factory.enableHostnameVerification();
 
