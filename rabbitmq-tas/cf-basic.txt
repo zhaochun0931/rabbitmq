@@ -71,7 +71,7 @@ bosh -d service-instance_9c5a3943-2d41-40f5-88e9-971cfcd5dd25 logs -f
 
 
 
-# on-demand, create the service key to access the service 
+# service key on-demand 
 cf create-service-key rabbitmq1 mykey -c '{"tags":"administrator"}'
 cf service-keys rabbitmq1
 cf service-key rabbitmq1 mykey
