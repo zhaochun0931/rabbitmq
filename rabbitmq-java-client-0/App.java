@@ -21,7 +21,7 @@ public class App
     public static void main(String[] argv) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
-        factory.setUsername("admin");
+        factory.setUsername("username");
         factory.setPassword("password");
         factory.setVirtualHost("/");
 
@@ -29,10 +29,13 @@ public class App
              Channel channel = connection.createChannel()) {
             channel.queueDeclare(QUEUE_NAME, false, false, false, null);
             String message = "Hello World!";
+            
+        while (true) {
             channel.basicPublish("", QUEUE_NAME, null, message.getBytes(StandardCharsets.UTF_8));
             System.out.println(" [x] Sent '" + message + "'");
-            
-            Thread.sleep(10000);
+            Thread.sleep(1000);
+        }
+
         }
 
 
