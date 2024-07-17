@@ -20,7 +20,7 @@ public class App {
 
         char[] trustPassphrase = "password".toCharArray();
         KeyStore tks = KeyStore.getInstance("JKS");
-        tks.load(new FileInputStream("/tmp/tls.truststore"), trustPassphrase);
+        tks.load(new FileInputStream("/tmp/tls-truststore.jks"), trustPassphrase);
 
         TrustManagerFactory tmf = TrustManagerFactory.getInstance("SunX509");
         tmf.init(tks);
@@ -39,10 +39,11 @@ public class App {
         Connection conn = factory.newConnection();
         Channel channel = conn.createChannel();
 
-        channel.queueDeclare("rabbitmq-java-test", false, true, true, null);
-        channel.basicPublish("", "rabbitmq-java-test", null, "Hello, World".getBytes());
+        channel.queueDeclare("rabbitmq-java-test", false, false, false, null);
+        channel.basicPublish("", "rabbitmq-java-test", null, "Hello, World, rabbitmq-java-test".getBytes());
 
-        channel.queueDeclare("qq", false, false, false, null);
+        channel.queueDeclare("qq-test", false, false, false, null);
+        channel.basicPublish("", "qq-test", null, "Hello, World, qq-test".getBytes());
 
         GetResponse chResponse = channel.basicGet("rabbitmq-java-test", false);
         if (chResponse == null) {
@@ -51,6 +52,20 @@ public class App {
             byte[] body = chResponse.getBody();
             System.out.println("Received: " + new String(body));
         }
+
+
+
+
+        GetResponse chResponse2 = channel.basicGet("qq-test", false);
+        if (chResponse2 == null) {
+            System.out.println("No message retrieved");
+        } else {
+            byte[] body = chResponse2.getBody();
+            System.out.println("Received: " + new String(body));
+        }
+
+
+
 
         channel.close();
         conn.close();
