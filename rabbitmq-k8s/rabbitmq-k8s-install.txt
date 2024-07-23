@@ -30,6 +30,11 @@ kubectl apply -f rabbitmq.yaml
 
 the /var/lib/rabbitmq/.erlang.cookie should be identical within the same cluster.
 
+# the erlang.cookie was saved in the secret
+
+kubectl get secrets
+
+
 
 /etc/hosts
 
