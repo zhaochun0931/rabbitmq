@@ -24,3 +24,10 @@ kubectl get customresourcedefinitions.apiextensions.k8s.io
 
 kubectl apply -f rabbitmq.yaml
 
+
+
+# Up till now, the rabbitmq cluster is up.
+
+the /var/lib/rabbitmq/.erlang.cookie should be identical within the same cluster.
+
+
