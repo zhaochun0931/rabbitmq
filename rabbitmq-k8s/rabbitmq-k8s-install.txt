@@ -31,3 +31,16 @@ kubectl apply -f rabbitmq.yaml
 the /var/lib/rabbitmq/.erlang.cookie should be identical within the same cluster.
 
 
+/etc/hosts
+
+
+$ cat /etc/hosts
+# Kubernetes-managed hosts file.
+127.0.0.1	localhost
+::1	localhost ip6-localhost ip6-loopback
+fe00::0	ip6-localnet
+fe00::0	ip6-mcastprefix
+fe00::1	ip6-allnodes
+fe00::2	ip6-allrouters
+10.85.0.9	hello-world-server-1.hello-world-nodes.default.svc.cluster.local	hello-world-server-1
+$
