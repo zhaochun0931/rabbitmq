@@ -3,3 +3,11 @@ curl -i -u admin:password http://localhost:15672/api/vhosts
 curl -i -u admin:password http://localhost:15672/api/vhosts -v
 
 
+export username=admin
+export password=password
+curl -i -u $username:$password http://localhost:15672/api/vhosts -v
+
+
+
+
+/api/health/checks/alarms	
