@@ -6,6 +6,4 @@ metadata:
 spec:
   fetch:
     imgpkgBundle:
-      #image: registry.tanzu.vmware.com/p-rabbitmq-for-kubernetes/tanzu-rabbitmq-package-repo:1.4.0
-      image: registry.tanzu.vmware.com/p-rabbitmq-for-kubernetes/tanzu-rabbitmq-package-repo:1.5.1
-
+      image: rabbitmq-kubernetes.packages.broadcom.com/tanzu-rabbitmq-package-repo:1.5.3
