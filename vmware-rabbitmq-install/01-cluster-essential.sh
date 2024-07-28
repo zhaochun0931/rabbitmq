@@ -30,5 +30,13 @@ export INSTALL_REGISTRY_PASSWORD=${MY_BROADCOM_SUPPORT_ACCESS_TOKEN}
 
 
 
+After installation, you can verify that Tanzu Cluster Essentials is installed correctly by checking the relevant pods are running. Run this command:
+
+kubectl get all -n kapp-controller
+kubectl get all -n secretgen-controller
+
+
+
+You should see that the STATUS is running for the kapp-controller and secretgen-controller pods.
 
 
