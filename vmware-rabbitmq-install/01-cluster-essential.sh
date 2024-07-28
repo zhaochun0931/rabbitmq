@@ -15,6 +15,7 @@ export INSTALL_BUNDLE=registry.tanzu.vmware.com/tanzu-cluster-essentials/cluster
 
 
 
+# v1.9
 
 
 export INSTALL_REGISTRY_HOSTNAME=registry.tanzu.vmware.com
