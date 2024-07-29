@@ -8,5 +8,4 @@ spec:
   packageRef:
     refName: rabbitmq.tanzu.vmware.com
     versionSelection:
-      #constraints: 1.4.0
-      constraints: 1.5.1
+      constraints: 1.5.3
