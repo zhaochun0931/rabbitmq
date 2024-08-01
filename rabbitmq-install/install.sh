@@ -74,6 +74,21 @@ rabbit_log:info("test").
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # log collection
 
 sudo -i
@@ -90,6 +105,9 @@ rabbitmq-server/8c3624c9-f553-4d9a-ad5d-2241b3c6ed4b:~# ./rabbitmq-collect-env
 [INFO] output archive: '/var/vcap/sys/log/rabbitmq-server/rabbitmq-env-01d47563-3148-4c89-9ce6-0da56fc9b8bb-20240801-003415.tgz'
 rabbitmq-server/8c3624c9-f553-4d9a-ad5d-2241b3c6ed4b:~#
 
+
+
+01d47563-3148-4c89-9ce6-0da56fc9b8bb is the hostname of this rabbitmq VM
 
 
 
