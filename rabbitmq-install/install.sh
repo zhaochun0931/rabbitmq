@@ -107,7 +107,8 @@ rabbitmq-server/8c3624c9-f553-4d9a-ad5d-2241b3c6ed4b:~#
 
 
 
-01d47563-3148-4c89-9ce6-0da56fc9b8bb is the hostname of this rabbitmq VM
+01d47563-3148-4c89-9ce6-0da56fc9b8bb is the hostname of this rabbitmq VM and it can be found from the overview file
+
 
 
 
