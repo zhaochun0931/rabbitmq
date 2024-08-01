@@ -77,7 +77,7 @@ rabbit_log:info("test").
 
 
 
-
+/var/vcap/store/rabbitmq/.erlang.cookie
 
 
 
