@@ -25,6 +25,7 @@ rabbitmq_ssl_options = pika.SSLOptions(rabbitmq_context, "www.xiaoming.com")
 rabbitmq_conn = pika.ConnectionParameters(
     host="localhost",
     port=5671,
+    virtual_host='/',
     credentials=rabbitmq_password,
     ssl_options=rabbitmq_ssl_options,
      )
