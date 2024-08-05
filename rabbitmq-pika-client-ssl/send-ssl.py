@@ -1,9 +1,12 @@
 # working
-
-
 import logging
 import pika
 import ssl
+#from pika import PlainCredentials
+
+
+
+
 
 
 username = 'admin'
@@ -17,9 +20,8 @@ rabbitmq_context = ssl.create_default_context(cafile="/tmp/ca.crt")
 rabbitmq_context.verify_mode = ssl.CERT_REQUIRED
 # context.verify_mode = ssl.CERT_OPTIONAL
 # context.verify_mode = ssl.CERT_NONE
-
 rabbitmq_context.load_cert_chain("/tmp/tls.crt", "/tmp/tls.key")
-rabbitmq_ssl_options = pika.SSLOptions(rabbitmq_context, "www.xiaoming.com")
+rabbitmq_ssl_options = pika.SSLOptions(rabbitmq_context, "your_rabbitmq_dns_name")
 
 
 rabbitmq_conn = pika.ConnectionParameters(
