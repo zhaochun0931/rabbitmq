@@ -1,8 +1,6 @@
 import java.io.*;
 import java.lang.Thread;
 
-
-
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -10,10 +8,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import java.nio.charset.StandardCharsets;
 
 
-/**
- * Hello world!
- *
- */
+
 public class App
 {
     private final static String QUEUE_NAME = "qq1";
@@ -39,10 +34,5 @@ public class App
 
         }
 
-
-
-
-
-
-    }
+     }
 }
