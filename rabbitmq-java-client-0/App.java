@@ -24,6 +24,7 @@ public class App
         factory.setUsername("username");
         factory.setPassword("password");
         factory.setVirtualHost("/");
+        factory.setPort(5672);
 
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()) {
