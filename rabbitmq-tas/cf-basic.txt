@@ -85,6 +85,19 @@ cf delete-service-key rabbitmq1 mykey
 bosh -d deployment_id manifest > rabbitmq1.yaml
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 # redeploy
 bosh -d deployment_id deploy rabbitmq2.yaml
 
