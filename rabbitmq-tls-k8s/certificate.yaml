@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: selfsigned-issuer
-  namespace: examples
+  namespace: rabbitmq-system
 spec:
   selfSigned: {}
 ---
@@ -10,10 +10,10 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: selfsigned-cert
-  namespace: examples
+  namespace: rabbitmq-system
 spec:
   dnsNames:
-    - "*.tls-nodes.examples.svc.cluster.local"
+    - "*.rabbitmq-system.svc.cluster.local"
   secretName: tls-secret
   issuerRef:
     kind: Issuer
