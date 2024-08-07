@@ -35,7 +35,7 @@ spec:
       cpu: 100m
       #cpu: 1
       #memory: 500Mi
-      memory: 4Gi
+      memory: 2Gi
 
 ---
 apiVersion: v1
@@ -84,7 +84,7 @@ metadata:
   name: rabbitmq1-schema
   namespace: rabbitmq-system  
 spec:
-  endpoints: "1.1.1.1:5672" # port 5672
+  endpoints: "10.1.0.5:5672" # port 5672
   upstreamSecret:
     name: upstream-secret
   rabbitmqClusterReference:
