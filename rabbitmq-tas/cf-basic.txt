@@ -39,6 +39,19 @@ cf service rabbitmq1 --guid
 
 
 
+
+delete deployment
+|
+|
+|
+\|/
+\|/
+\|/
+delete service
+
+
+
+
 # delete the service forcefully
 bosh delete-deployment -d service-instance_aedabd0e-f951-4806-9a80-bdfc7a9a132b
 cf purge-service-instance rabbitmq1
@@ -48,6 +61,7 @@ cf purge-service-instance rabbitmq1
 
 # delete a service
 cf delete-service rabbitmq1
+
 
 
 
