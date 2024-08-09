@@ -23,5 +23,11 @@ kubectl apply -f certificate.yaml
 
 
 
+# the Secret must be stored with key 'ca.crt'.
+kubectl create secret generic ca-secret --from-file=ca.crt=/root/ca-cert.pem
 
- kubectl -n rabbitmq-system create secret generic rabbitmq-ca --from-file=ca.crt=/root/ca-cert.pem
+kubectl create secret tls tls-secret --cert=/root/server-cert.pem --key=/root/server-key.pem
+
+
+
+
