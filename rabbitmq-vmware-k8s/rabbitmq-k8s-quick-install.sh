@@ -15,12 +15,12 @@ read -p "input the number of the replicas:" replicano
 
 echo "installing...\n"
 
-wget https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/vmware-rabbitmq-install/01-cluster-essential.sh
+wget https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/rabbitmq-vmware-k8s/01-cluster-essential.sh
 sed -i "s/tanzu-net-username/$username/g" 01-cluster-essential.sh
 sed -i "s/tanzu-net-password/$password/g" 01-cluster-essential.sh
 bash 01-cluster-essential.sh
 
-wget https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/vmware-rabbitmq-install/02-secret.yaml
+wget https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/rabbitmq-vmware-k8s/02-secret.yaml
 sed -i "s/tanzu-net-username/$username/g" 02-secret.yaml
 sed -i "s/tanzu-net-password/$password/g" 02-secret.yaml
 kubectl apply -f 02-secret.yaml
