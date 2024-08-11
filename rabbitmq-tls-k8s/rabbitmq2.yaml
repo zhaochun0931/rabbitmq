@@ -95,7 +95,7 @@ metadata:
   name: rabbitmq2-schema
   namespace: rabbitmq-system
 spec:
-  endpoints: "10.1.0.5:5672"
+  endpoints: "10.1.0.5:5671"
   upstreamSecret:
     name: upstream-secret
   rabbitmqClusterReference:
@@ -110,7 +110,7 @@ metadata:
 spec:
   operatingMode: "downstream" # has to be "downstream" to configure an downstream RabbitMQ cluster
   downstreamModeConfiguration:
-    endpoints: "10.1.0.5:5552" # comma separated list of endpoints to the upstream RabbitMQ and port 5552
+    endpoints: "10.1.0.5:5551" # comma separated list of endpoints to the upstream RabbitMQ and port 5552
     upstreamSecret:
       name: upstream-secret # an existing Kubernetes secret; required value
   rabbitmqClusterReference:
