@@ -27,15 +27,19 @@ kubectl apply -f 02-secret.yaml
 
 
 
-kubectl apply -f https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/vmware-rabbitmq-install/03-packageRepository.yaml
+kubectl apply -f https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/rabbitmq-vmware-k8s/03-packageRepository.yaml
 
 
-kubectl apply -f https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/vmware-rabbitmq-install/04-serviceAccount.yaml
+kubectl apply -f https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/rabbitmq-vmware-k8s/04-serviceAccount.yaml
 
 
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.5.3/cert-manager.yaml
 
-kubectl apply -f https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/vmware-rabbitmq-install/06-packageInstall.yaml
+sleep 10
+
+
+
+kubectl apply -f https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/rabbitmq-vmware-k8s/06-packageInstall.yaml
 
 
 
@@ -47,8 +51,11 @@ kubectl apply -f https://raw.githubusercontent.com/rancher/local-path-provisione
 kubectl annotate storageclass local-path storageclass.kubernetes.io/is-default-class=true
 
 
-wget https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/vmware-rabbitmq-install/rabbitmq1.yaml
-wget https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/vmware-rabbitmq-install/rabbitmq2.yaml
+wget https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/rabbitmq-vmware-k8s/rabbitmq1.yaml
+wget https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/rabbitmq-vmware-k8s/rabbitmq2.yaml
+
+
+
 sed -i "s/1.1.1.1/$ip/g" rabbitmq1.yaml
 sed -i "s/1.1.1.1/$ip/g" rabbitmq2.yaml
 
