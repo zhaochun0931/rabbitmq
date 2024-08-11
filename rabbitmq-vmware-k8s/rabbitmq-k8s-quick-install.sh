@@ -35,6 +35,9 @@ kubectl apply -f https://raw.githubusercontent.com/zhaochun0931/rabbitmq/main/ra
 
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.5.3/cert-manager.yaml
 
+kubectl get pods -n cert-manager
+
+
 sleep 10
 
 
