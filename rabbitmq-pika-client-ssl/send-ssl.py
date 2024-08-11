@@ -34,7 +34,8 @@ rabbitmq_conn = pika.ConnectionParameters(
 
 with pika.BlockingConnection(rabbitmq_conn) as conn:
     ch = conn.channel()
-    ch.queue_declare(queue='foobar',durable=True)
+    #ch.queue_declare(queue='foobar',durable=True)
+    ch.queue_declare(queue='foobar',durable=True,arguments={"x-queue-type": "quorum"})
     # chan.basic_publish(exchange='',
     #                    routing_key='qq2',
     #                    body='hello world!' + dt_string,mandatory=True)
