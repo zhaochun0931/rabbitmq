@@ -90,7 +90,7 @@ metadata:
   name: rabbitmq1-schema
   namespace: rabbitmq-system  
 spec:
-  endpoints: "10.1.0.5:5672" # port 5672
+  endpoints: "10.1.0.5:5671" # port 5672
   upstreamSecret:
     name: upstream-secret
   rabbitmqClusterReference:
