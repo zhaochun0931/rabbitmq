@@ -10,5 +10,26 @@ rabbitmq:3.13
 
 
 
+
+
+
+
+# ssl
+
+docker run -it --rm -d --name rabbitmq1 -p 5552:5552 -p 5551:5551 -p 5672:5672 -p 15672:15672 \
+-e RABBITMQ_DEFAULT_USER=admin \
+-e RABBITMQ_DEFAULT_PASS=password \
+-e RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS='-rabbitmq_stream advertised_host localhost' \
+--mount type=bind,source="$(pwd)"/rabbitmq.conf,target=/etc/rabbitmq/rabbitmq.conf,readonly \
+--mount type=bind,source="$(pwd)"/server-cert.pem,target=/tmp/server-cert.pem,readonly \
+--mount type=bind,source="$(pwd)"/server-key.pem,target=/tmp/server-key.pem,readonly \
+--mount type=bind,source="$(pwd)"/ca-cert.pem,target=/tmp/ca-cert.pem,readonly \
+rabbitmq:3.13
+
+
+
+
+
+
 docker exec rabbitmq1 rabbitmq-plugins enable rabbitmq_stream
 docker exec rabbitmq1 rabbitmq-plugins enable rabbitmq_management rabbitmq_stream_management
