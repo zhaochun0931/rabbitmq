@@ -107,43 +107,6 @@ erl -eval '{ok, Version} = file:read_file(filename:join([code:root_dir(), "relea
 
 
 
-# install erlang from the source code
-
-
-otp_src_26.0.2.tar.gz
-
-
-sudo apt update
-sudo apt install build-essential -y
-gcc --version
-
-
-
-sudo apt update
-sudo apt install libncurses5-dev libncursesw5-dev
-
-
-
-
-
-
-# compile the source code
-tar -xzvf otp_src_26.0.2.tar.gz
-./configure
-make
-make install
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
