@@ -94,6 +94,9 @@ erlang-syntax-tools=$ERLANG_VERSION erlang-tftp=$ERLANG_VERSION erlang-tools=$ER
 # check erlang version
 erl -eval '{ok, Version} = file:read_file(filename:join([code:root_dir(), "releases", erlang:system_info(otp_release), "OTP_VERSION"])), io:fwrite(Version), halt().' -noshell
 
+erl -eval 'application:which_applications().' -s init stop -s
+
+
 
 
 
