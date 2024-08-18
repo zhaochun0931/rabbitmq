@@ -11,7 +11,7 @@ kubectl apply -f certificate.yaml
 
 
 
-
+ kubectl get secret tls-secret -n rabbitmq-system -o jsonpath='{.data.ca\.crt}' | base64 --decode | openssl x509 -text -noout
 
 
 
@@ -64,6 +64,9 @@ search rabbitmq-system.svc.cluster.local svc.cluster.local cluster.local
 options ndots:5
 rabbitmq@rabbitmq1-server-0:/$ 
 rabbitmq@rabbitmq1-server-0:/$
+
+
+
 
 
 
