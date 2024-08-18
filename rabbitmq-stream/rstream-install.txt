@@ -16,9 +16,10 @@ make sure the hostname is identical with the certificate SAN name
 1. /etc/hosts
 10.1.1.1 xiaomingxxx
 
-2. certificate san
-DNS: xiaomingxxx
-
-3. set OS hostname
+2. set OS hostname
 hostnamectl hostname xiaomingxxx
+
+
+3. certificate san
+DNS: xiaomingxxx
 
