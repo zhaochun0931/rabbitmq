@@ -6,12 +6,7 @@ kubectl apply -f certificate.yaml
 
 
 
-
-
-
-
-
- kubectl get secret tls-secret -n rabbitmq-system -o jsonpath='{.data.ca\.crt}' | base64 --decode | openssl x509 -text -noout
+kubectl get secret tls-secret -n rabbitmq-system -o jsonpath='{.data.ca\.crt}' | base64 --decode | openssl x509 -text -noout
 
 
 
