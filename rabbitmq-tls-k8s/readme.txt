@@ -64,5 +64,6 @@ rabbitmq@rabbitmq1-server-0:/$
 
 
 
+kubectl exec -it rabbitmq1-server-0 -n rabbitmq-system -- openssl s_client -connect rabbitmq1-nodes.rabbitmq-system.svc.cluster.local:5671 </dev/null
 
 
