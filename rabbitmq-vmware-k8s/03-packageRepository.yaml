@@ -6,4 +6,4 @@ metadata:
 spec:
   fetch:
     imgpkgBundle:
-      image: rabbitmq-kubernetes.packages.broadcom.com/tanzu-rabbitmq-package-repo:3.13.3
+      image: rabbitmq-kubernetes.packages.broadcom.com/tanzu-rabbitmq-package-repo:3.13.6
