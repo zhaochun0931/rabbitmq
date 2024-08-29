@@ -64,6 +64,19 @@ rabbitmqctl eval 'application:get_env(rabbit, loopback_users).'
 
 
 
+rabbitmqctl status
+rabbitmqctl environment
+rabbitmqctl cluster_status
+rabbitmqctl eval 'rabbit_diagnostics:maybe_stuck().'
+rabbitmqctl eval 'erlang:system_info(process_limit).'
+rabbitmqctl report
+rabbitmqctl eval 'inet:i().'
+
+
+
+
+
+
 
 
 # print process
