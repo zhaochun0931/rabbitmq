@@ -74,6 +74,11 @@ rabbitmqctl eval 'inet:i().'
 
 
 
+rabbitmqctl eval 'rabbit_log:critical("Severity = critical").'
+rabbitmqctl eval 'rabbit_log:error("Severity = error").'
+rabbitmqctl eval 'rabbit_log:warning("Severity = warning").'
+
+
 
 
 
