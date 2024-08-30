@@ -16,10 +16,11 @@ docker run -d -it --rm --name rabbitmq1 --hostname rabbitmq1 \
 -e RABBITMQ_ERLANG_COOKIE=rabbitmq \
 -e RABBITMQ_DEFAULT_USER=admin \
 -e RABBITMQ_DEFAULT_PASS=password \
---mount type=bind,source="$(pwd)"/tls.crt,target=/tmp/tls.crt,readonly \
---mount type=bind,source="$(pwd)"/tls.key,target=/tmp/tls.key,readonly \
---mount type=bind,source="$(pwd)"/ca.crt,target=/tmp/ca.crt,readonly \
 rabbitmq:3.12.13-management
+
+
+
+
 
 
 docker run -d -it --rm --name rabbitmq2 --hostname rabbitmq2 \
@@ -28,10 +29,13 @@ docker run -d -it --rm --name rabbitmq2 --hostname rabbitmq2 \
 -e RABBITMQ_ERLANG_COOKIE=rabbitmq \
 -e RABBITMQ_DEFAULT_USER=admin \
 -e RABBITMQ_DEFAULT_PASS=password \
---mount type=bind,source="$(pwd)"/tls.crt,target=/tmp/tls.crt,readonly \
---mount type=bind,source="$(pwd)"/tls.key,target=/tmp/tls.key,readonly \
---mount type=bind,source="$(pwd)"/ca.crt,target=/tmp/ca.crt,readonly \
 rabbitmq:3.9.16-management
+
+
+
+
+
+
 
 
 
@@ -48,6 +52,19 @@ rabbitmqctl set_parameter shovel shovel-demo '{ "src-uri": "amqp://admin:passwor
 
 
 rabbitmqctl set_parameter shovel shovel-demo '{ "src-uri": "amqp://admin:password@rabbitmq1:5672","src-queue": "qq1", "dest-uri": "amqp://admin:password@rabbitmq1:5672","dest-queue": "qq2", "src-delete-after": 10 }' --vhost /
+
+
+
+
+
+2024-08-30 05:56:25.689112+00:00 [info] <0.1226.0> accepting AMQP connection <0.1226.0> (172.18.0.3:40632 -> 172.18.0.3:5672)
+2024-08-30 05:56:25.689960+00:00 [info] <0.1226.0> Connection <0.1226.0> (172.18.0.3:40632 -> 172.18.0.3:5672) has a client-provided name: Shovel shovel-demo
+2024-08-30 05:56:25.690402+00:00 [info] <0.1226.0> connection <0.1226.0> (172.18.0.3:40632 -> 172.18.0.3:5672 - Shovel shovel-demo): user 'admin' authenticated and granted access to vhost '/'
+
+
+
+
+
 
 
 rabbitmqctl shovel_status --formatter=pretty_table
