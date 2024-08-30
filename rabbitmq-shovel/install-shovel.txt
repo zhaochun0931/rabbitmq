@@ -46,7 +46,7 @@ rabbitmq-plugins enable rabbitmq_shovel_management
 
 
 
-# rabbitmq1
+# you can create the shovel on either node
 rabbitmqctl set_parameter shovel shovel-demo '{ "src-uri": "amqp://admin:password@rabbitmq1:5672","src-queue": "qq1", "dest-uri": "amqp://admin:password@rabbitmq2:5672","dest-queue": "qq1" }' --vhost /
 
 
