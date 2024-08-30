@@ -43,11 +43,11 @@ rabbitmq-plugins enable rabbitmq_shovel_management
 
 
 # rabbitmq1
-rabbitmqctl set_parameter shovel shovel-demo '{ "src-uri": "amqp://admin:password@rabbitmq1:5672","src-queue": "qq1", "dest-uri": "amqp://admin:password@rabbitmq2:5672","dest-queue": "qq1" }'
+rabbitmqctl set_parameter shovel shovel-demo '{ "src-uri": "amqp://admin:password@rabbitmq1:5672","src-queue": "qq1", "dest-uri": "amqp://admin:password@rabbitmq2:5672","dest-queue": "qq1" }' --vhost /
 
 
 
-rabbitmqctl set_parameter shovel shovel-demo '{ "src-uri": "amqp://admin:password@rabbitmq1:5672","src-queue": "qq1", "dest-uri": "amqp://admin:password@rabbitmq1:5672","dest-queue": "qq2", "src-delete-after": 10 }'
+rabbitmqctl set_parameter shovel shovel-demo '{ "src-uri": "amqp://admin:password@rabbitmq1:5672","src-queue": "qq1", "dest-uri": "amqp://admin:password@rabbitmq1:5672","dest-queue": "qq2", "src-delete-after": 10 }' --vhost /
 
 
 rabbitmqctl shovel_status --formatter=pretty_table
