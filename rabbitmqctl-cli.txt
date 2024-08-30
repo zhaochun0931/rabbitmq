@@ -104,3 +104,13 @@ Encrypting value ...
 Decrypting value...
 123
 #
+
+
+
+
+
+
+
+# how to delete the shovel
+rabbitmqctl clear_parameter shovel shovel-name
+
