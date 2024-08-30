@@ -49,11 +49,12 @@ rabbitmq-plugins enable rabbitmq_shovel_management
 # you can create the shovel on either node
 rabbitmqctl set_parameter shovel shovel-demo '{ "src-uri": "amqp://admin:password@rabbitmq1:5672","src-queue": "qq1", "dest-uri": "amqp://admin:password@rabbitmq2:5672","dest-queue": "qq1" }' --vhost /
 
-rabbitmqctl set_parameter shovel shovel-demo2 '{ "src-uri": "amqp://admin:password@rabbitmq1:5672","src-queue": "qq1", "dest-uri": "amqp://admin:password@rabbitmq1:5672","dest-queue": "qq2" }' --vhost /
 
 
+ # this command will move 500 messages at a time and then automatically delete this shovel
+rabbitmqctl set_parameter shovel shovel-demo '{ "src-uri": "amqp://admin:password@rabbitmq1:5672","src-queue": "qq1","src-delete-after": 500, "dest-uri": "amqp://admin:password@rabbitmq2:5672","dest-queue": "qq1" }' --vhost /
 
-rabbitmqctl set_parameter shovel shovel-demo '{ "src-uri": "amqp://admin:password@rabbitmq1:5672","src-queue": "qq1", "dest-uri": "amqp://admin:password@rabbitmq1:5672","dest-queue": "qq2", "src-delete-after": 10 }' --vhost /
+
 
 
 
