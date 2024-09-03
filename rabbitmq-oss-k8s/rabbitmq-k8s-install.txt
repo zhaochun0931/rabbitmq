@@ -57,7 +57,22 @@ kubectl apply -f https://github.com/rabbitmq/messaging-topology-operator/release
 
 
 
-# up till now, you can deploy rabbitmq cluster
+# Up till now, you can deploy rabbitmq cluster
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
