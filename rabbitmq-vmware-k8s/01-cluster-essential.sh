@@ -2,7 +2,7 @@
 
 # do not use single or double quotation mark ' and " in the token
 
-export MY_BROADCOM_SUPPORT_ACCESS_TOKEN=cluster-essential-token
+export MY_BROADCOM_SUPPORT_ACCESS_TOKEN=CLUSTER_ESSENTIAL_TOKEN
 export INSTALL_BUNDLE=cluster-essentials.packages.broadcom.com/tanzu-cluster-essentials/cluster-essentials-bundle@sha256:678c20e14e1065c6a97828632d02b0716ef453e2c9b3c5e1ea0dba1817bd8125
 export INSTALL_REGISTRY_HOSTNAME=cluster-essentials.packages.broadcom.com
 export INSTALL_REGISTRY_USERNAME=username@broadcom.com
