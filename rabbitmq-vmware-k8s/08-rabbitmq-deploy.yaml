@@ -1,7 +1,7 @@
 apiVersion: rabbitmq.com/v1beta1
 kind: RabbitmqCluster
 metadata:
-  name: my-tanzu-rabbit
+  name: my-rabbitmq
   namespace: rabbitmq-system
 spec:
   replicas: 1
@@ -11,6 +11,7 @@ spec:
     requests:
       cpu: 100m
       memory: 1Gi
+      #memory: 500Mi
     limits:
       cpu: 100m
       memory: 1Gi
