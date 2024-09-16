@@ -1,5 +1,8 @@
 # v1.9.1
 
+
+# please make sure the k8s cluster is ready
+
 # do not use single or double quotation mark ' and " in the token
 
 export MY_BROADCOM_SUPPORT_ACCESS_TOKEN=CLUSTER_ESSENTIAL_TOKEN
