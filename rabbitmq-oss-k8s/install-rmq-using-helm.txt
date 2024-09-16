@@ -1,1 +1,10 @@
-helm install my-release oci://registry-1.docker.io/bitnamicharts/rabbitmq
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install my-release-operator bitnami/rabbitmq-cluster-operator
+
+
+
+
+
+
+
+helm install my-release-rabbitmq oci://registry-1.docker.io/bitnamicharts/rabbitmq
