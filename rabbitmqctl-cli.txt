@@ -61,7 +61,7 @@ rabbitmqctl eval 'node().'
 rabbitmqctl eval 'application:get_all_env(rabbit).'
 rabbitmqctl eval 'application:get_env(rabbit, log).'
 rabbitmqctl eval 'application:get_env(rabbit, loopback_users).'
-
+rabbitmqctl eval 'node(), nodes().'
 
 
 rabbitmqctl status
