@@ -80,6 +80,14 @@ rabbitmqctl eval 'rabbit_log:warning("Severity = warning").'
 rabbitmqctl eval "net_adm:ping('rabbit@NODE-NAME')."
 
 
+rabbitmqctl eval "erlang:system_info(dist_buf_busy_limit)."
+
+
+
+
+
+
+
 rabbitmqctl set_cluster_name 
 
 
