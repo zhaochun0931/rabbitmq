@@ -38,6 +38,25 @@ cf create-service p.rabbitmq single-node rabbitmq1 -c '{ "plugins": { "rabbitmq_
 cf service rabbitmq1 --guid
 
 
+# cf service rabbitmq1 --guid
+93535c4e-531b-4064-862f-3b32caca104b
+#
+
+
+
+Deployment 'service-instance_93535c4e-531b-4064-862f-3b32caca104b'
+
+Instance                                              Process State  AZ   IPs           VM CID                                   VM Type  Active  Stemcell
+rabbitmq-server/14006623-6fd7-49a8-bef0-bbf5a370e75d  running        az3  10.225.55.50  vm-3239793c-6848-4ed3-8634-1f525a854d04  large    true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.506
+rabbitmq-server/6744805b-e2d9-4e74-86d0-d334c94b3478  running        az1  10.225.55.51  vm-49d3cb8e-814e-4dcf-a5dc-f2e1601c188d  large    true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.506
+rabbitmq-server/dc5d5850-75bb-4f4b-8ed3-3a8e22083072  running        az2  10.225.55.52  vm-f6bc1f1e-ec05-4088-83be-19845dbbe2f1  large    true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.506
+
+3 vms
+
+
+
+
+
 
 
 delete deployment
