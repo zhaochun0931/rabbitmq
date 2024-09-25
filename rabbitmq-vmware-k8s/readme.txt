@@ -102,6 +102,11 @@ you should also create the policy with remote-dc-replicate:	true and apply to th
 
 CLI:
 
+rabbitmqctl schema_replication_status
+
+
+
+
 $ rabbitmqctl schema_replication_status
 Schema replication status on node rabbit@rabbitmq1-server-0.rabbitmq1-nodes.rabbitmq-system
 Operating mode: upstream
