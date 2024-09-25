@@ -141,6 +141,18 @@ rabbitmqctl schema_replication_status --formatter pretty_table
 rabbitmqctl standby_replication_status --formatter pretty_table
 
 
+$ rabbitmqctl schema_replication_status --formatter pretty_table
+Schema replication status on node rabbit@rabbitmq2-server-2.rabbitmq2-nodes.rabbitmq-system
+┌────────────────────────────────────────────────────────────────────────────┐
+│ Output                                                                     │
+├────────────────────────────────────────────────────────────────────────────┤
+│ ["Operating mode: downstream\n","State: syncing\n",                        │
+│  "Upstream endpoint(s): 10.1.0.5:5672\n","Upstream username: test-user\n", │
+│  "Last connection completion timestamp: 1727249866\n",                     │
+│  "Last synchronisation request timestamp: 1727273748\n"]                   │
+└────────────────────────────────────────────────────────────────────────────┘
+$
+
 
 $ rabbitmqctl standby_replication_status --formatter pretty_table
 Standby replication status on node rabbit@rabbitmq2-server-2.rabbitmq2-nodes.rabbitmq-system
