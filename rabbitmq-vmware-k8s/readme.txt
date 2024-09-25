@@ -136,6 +136,25 @@ $
 
 
 
+
+rabbitmqctl schema_replication_status --formatter pretty_table
+rabbitmqctl standby_replication_status --formatter pretty_table
+
+
+
+$ rabbitmqctl standby_replication_status --formatter pretty_table
+Standby replication status on node rabbit@rabbitmq2-server-2.rabbitmq2-nodes.rabbitmq-system
+┌───────────┬────────────────┬────────────────────┬───────────────────┬──────────────┐
+│ state     │ operating_mode │ upstream_endpoints │ upstream_username │ virtual_host │
+├───────────┼────────────────┼────────────────────┼───────────────────┼──────────────┤
+│ connected │ downstream     │ 10.1.0.5:5552      │ test-user         │ test         │
+└───────────┴────────────────┴────────────────────┴───────────────────┴──────────────┘
+$
+
+
+
+
+
 2023-11-21 09:29:50.995029+00:00 [info] <0.6816.0> Schema definition sync: will delete 0 objects (post-whitelisting) that only exist locally in category global_parameters
 2023-11-21 09:29:51.494703+00:00 [info] <0.6816.0> Schema definition sync: applying definition delta took 1406 millisecond(s)
 2023-11-21 09:29:55.190907+00:00 [info] <0.8855.0> OSR downstream recovery: asked to be promoted to an upstream...
