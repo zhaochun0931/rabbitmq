@@ -5,6 +5,10 @@ bosh logs -d service-instance_93535c4e-531b-4064-862f-3b32caca104b --all-logs
 
 
 
+# how to collect rabbitmq env 
+wget https://raw.githubusercontent.com/rabbitmq/support-tools/master/scripts/rabbitmq-collect-env
+chmod +x rabbitmq-collect-env
+./rabbitmq-collect-env
 
 
 
