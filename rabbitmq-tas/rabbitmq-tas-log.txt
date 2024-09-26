@@ -37,3 +37,10 @@ rabbit@14006623-6fd7-49a8-bef0-bbf5a370e75d.rabbitmq-server.infra.service-instan
 rabbit@6744805b-e2d9-4e74-86d0-d334c94b3478.rabbitmq-server.infra.service-instance-93535c4e-531b-4064-862f-3b32caca104b.bosh
 rabbit@dc5d5850-75bb-4f4b-8ed3-3a8e22083072.rabbitmq-server.infra.service-instance-93535c4e-531b-4064-862f-3b32caca104b.bosh
 
+
+
+
+bosh -d service-instance_93535c4e-531b-4064-862f-3b32caca104b recreate
+
+# recreate vm will not change the instance name
+
