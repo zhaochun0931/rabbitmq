@@ -1,6 +1,10 @@
 bosh vms 
 
 
+bosh logs -d service-instance_93535c4e-531b-4064-862f-3b32caca104b --all-logs
+
+
+
 
 
 
