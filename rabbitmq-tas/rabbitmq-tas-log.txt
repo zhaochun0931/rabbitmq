@@ -1,0 +1,39 @@
+bosh vms 
+
+
+
+
+
+Deployment 'service-instance_93535c4e-531b-4064-862f-3b32caca104b'
+
+Instance                                              Process State  AZ   IPs           VM CID                                   VM Type  Active  Stemcell
+rabbitmq-server/14006623-6fd7-49a8-bef0-bbf5a370e75d  running        az3  10.225.55.53  vm-dc4c8056-7855-41da-929b-a7fa115a85db  large    true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.506
+rabbitmq-server/6744805b-e2d9-4e74-86d0-d334c94b3478  running        az1  10.225.55.54  vm-10a39e2e-206b-4f2e-b5c3-46b78145d5a1  large    true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.506
+rabbitmq-server/dc5d5850-75bb-4f4b-8ed3-3a8e22083072  running        az2  10.225.55.56  vm-063c4f74-e823-44e3-bad3-13b0aa86967a  large    true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.506
+
+3 vms
+
+
+
+
+bosh -d service-instance_93535c4e-531b-4064-862f-3b32caca104b ssh rabbitmq-server/14006623-6fd7-49a8-bef0-bbf5a370e75d
+
+rabbitmq-server/14006623-6fd7-49a8-bef0-bbf5a370e75d:~# hostname
+0c70009d-b3b1-4517-baf1-f2404295ab72
+rabbitmq-server/14006623-6fd7-49a8-bef0-bbf5a370e75d:~#
+
+
+
+rabbitmq-server/14006623-6fd7-49a8-bef0-bbf5a370e75d:~# rabbitmqctl cluster_status
+Cluster status of node rabbit@14006623-6fd7-49a8-bef0-bbf5a370e75d.rabbitmq-server.infra.service-instance-93535c4e-531b-4064-862f-3b32caca104b.bosh ...
+Basics
+
+Cluster name: rabbit@0c70009d-b3b1-4517-baf1-f2404295ab72
+Total CPU cores available cluster-wide: 6
+
+Disk Nodes
+
+rabbit@14006623-6fd7-49a8-bef0-bbf5a370e75d.rabbitmq-server.infra.service-instance-93535c4e-531b-4064-862f-3b32caca104b.bosh
+rabbit@6744805b-e2d9-4e74-86d0-d334c94b3478.rabbitmq-server.infra.service-instance-93535c4e-531b-4064-862f-3b32caca104b.bosh
+rabbit@dc5d5850-75bb-4f4b-8ed3-3a8e22083072.rabbitmq-server.infra.service-instance-93535c4e-531b-4064-862f-3b32caca104b.bosh
+
