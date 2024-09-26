@@ -1,7 +1,15 @@
 bosh vms 
 
 
+
+#
 bosh logs -d service-instance_93535c4e-531b-4064-862f-3b32caca104b --all-logs
+
+
+generate the service-instance_93535c4e-531b-4064-862f-3b32caca104b-20240926-131544-726439233.tgz in the current directory
+
+service-instance_GUID-20240926-131544-726439233.tgz
+
 
 
 
@@ -9,6 +17,18 @@ bosh logs -d service-instance_93535c4e-531b-4064-862f-3b32caca104b --all-logs
 wget https://raw.githubusercontent.com/rabbitmq/support-tools/master/scripts/rabbitmq-collect-env
 chmod +x rabbitmq-collect-env
 ./rabbitmq-collect-env
+
+/var/vcap/sys/log/rabbitmq-server/rabbitmq-env-08888a8d-7b62-492f-ac54-067c3ef6925b-20240926-131133.tgz
+
+08888a8d-7b62-492f-ac54-067c3ef6925b is the rabbitmq hostname
+rabbitmq-env-HOSTNAME-20240926-131133.tgz
+
+
+
+
+
+
+
 
 
 
