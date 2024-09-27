@@ -154,6 +154,11 @@ Schema replication status on node rabbit@rabbitmq2-server-2.rabbitmq2-nodes.rabb
 $
 
 
+
+
+rabbitmqctl standby_replication_status
+
+
 $ rabbitmqctl standby_replication_status --formatter pretty_table
 Standby replication status on node rabbit@rabbitmq2-server-2.rabbitmq2-nodes.rabbitmq-system
 ┌───────────┬────────────────┬────────────────────┬───────────────────┬──────────────┐
