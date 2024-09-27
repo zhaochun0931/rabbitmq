@@ -1,0 +1,131 @@
+rabbitmq cluster basic
+
+In a RabbitMQ cluster, runtime state containing exchanges, queues, bindings, users, virtual hosts, and policies are available to every node.
+clusters are designed for low-latency environments. You should never create RabbitMQ clusters across a WAN or internet connection.
+You can run RabbitMQ in cloud environments such as Amazon EC2, but not across availability zones.
+
+
+To synchronize RabbitMQ messages in high-latency environments, you’ll want to look at the Shovel and Federation tools.
+
+
+
+
+
+
+
+
+
+
+
+
+
+rabbitmq-diagnostics erlang_cookie_sources --formatter json
+
+
+make sure the .erlang.cookie file is the identical
+
+/var/lib/rabbitmq/.erlang.cookie
+$HOME/.erlang.cookie
+
+
+systemctl restart rabbitmq-server.service
+
+
+
+node1:
+
+
+node2:
+rabbitmqctl stop_app
+rabbitmqctl reset
+rabbitmqctl join_cluster rabbit@node1
+rabbitmqctl start_app
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+root@gemfire-a-1:~# rabbitmqctl cluster_status
+Cluster status of node rabbit@gemfire-a-1 ...
+Basics
+
+Cluster name: rabbit@gemfire-a-1
+Total CPU cores available cluster-wide: 4
+
+Disk Nodes
+
+rabbit@gemfire-a-1
+rabbit@gemfire-a-2
+
+Running Nodes
+
+rabbit@gemfire-a-1
+rabbit@gemfire-a-2
+
+Versions
+
+rabbit@gemfire-a-1: RabbitMQ 3.12.2 on Erlang 26.0.2
+rabbit@gemfire-a-2: RabbitMQ 3.12.2 on Erlang 26.0.2
+
+CPU Cores
+
+Node: rabbit@gemfire-a-1, available CPU cores: 2
+Node: rabbit@gemfire-a-2, available CPU cores: 2
+
+Maintenance status
+
+Node: rabbit@gemfire-a-1, status: not under maintenance
+Node: rabbit@gemfire-a-2, status: not under maintenance
+
+Alarms
+
+(none)
+
+Network Partitions
+
+(none)
+
+Listeners
+
+Node: rabbit@gemfire-a-1, interface: [::], port: 15672, protocol: http, purpose: HTTP API
+Node: rabbit@gemfire-a-1, interface: [::], port: 25672, protocol: clustering, purpose: inter-node and CLI tool communication
+Node: rabbit@gemfire-a-1, interface: [::], port: 5672, protocol: amqp, purpose: AMQP 0-9-1 and AMQP 1.0
+Node: rabbit@gemfire-a-2, interface: [::], port: 15672, protocol: http, purpose: HTTP API
+Node: rabbit@gemfire-a-2, interface: [::], port: 25672, protocol: clustering, purpose: inter-node and CLI tool communication
+Node: rabbit@gemfire-a-2, interface: [::], port: 5672, protocol: amqp, purpose: AMQP 0-9-1 and AMQP 1.0
+
+Feature flags
+
+Flag: classic_mirrored_queue_version, state: enabled
+Flag: classic_queue_type_delivery_support, state: enabled
+Flag: direct_exchange_routing_v2, state: enabled
+Flag: drop_unroutable_metric, state: enabled
+Flag: empty_basic_get_metric, state: enabled
+Flag: feature_flags_v2, state: enabled
+Flag: implicit_default_bindings, state: enabled
+Flag: listener_records_in_ets, state: enabled
+Flag: maintenance_mode_status, state: enabled
+Flag: quorum_queue, state: enabled
+Flag: restart_streams, state: enabled
+Flag: stream_queue, state: enabled
+Flag: stream_sac_coordinator_unblock_group, state: enabled
+Flag: stream_single_active_consumer, state: enabled
+Flag: tracking_records_in_ets, state: enabled
+Flag: user_limits, state: enabled
+Flag: virtual_host_metadata, state: enabled
+root@gemfire-a-1:~#
