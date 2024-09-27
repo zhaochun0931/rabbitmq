@@ -1,2 +1,0 @@
-# Pre-Provisioned
-http://pivotal-rabbitmq.SYS-domain
