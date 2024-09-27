@@ -20,6 +20,30 @@ To synchronize RabbitMQ messages in high-latency environments, you’ll want to 
 
 
 rabbitmq-diagnostics erlang_cookie_sources --formatter json
+rabbitmq-diagnostics erlang_cookie_sources --formatter json | jq .
+
+[root@localhost rabbitmq]# rabbitmq-diagnostics erlang_cookie_sources --formatter json | jq .
+{
+  "effective_user": "rabbitmq",
+  "home_dir": "/var/lib/rabbitmq",
+  "cookie_file_path": "/var/lib/rabbitmq/.erlang.cookie",
+  "cookie_file_exists": true,
+  "cookie_file_type": "regular",
+  "cookie_file_access": "read",
+  "cookie_file_size": 20,
+  "switch_cookie_set": false,
+  "switch_cookie_value_length": 0,
+  "os_env_cookie_set": false,
+  "os_env_cookie_value_length": 0
+}
+[root@localhost rabbitmq]#
+
+
+
+
+
+
+
 
 
 make sure the .erlang.cookie file is the identical
