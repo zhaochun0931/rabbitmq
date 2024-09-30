@@ -3,7 +3,7 @@ kind: RabbitmqCluster
 metadata:
   name: hello-world
 spec:
-  replicas: 3
+  replicas: 1
   resources:
     requests:
       cpu: 500m
