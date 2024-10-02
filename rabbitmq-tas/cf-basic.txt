@@ -38,6 +38,11 @@ create a service
 |
 |
 check GUID of the service
+|
+|
+|
+how to access the on-demand service
+
 
 
 # create a service 
@@ -61,6 +66,16 @@ rabbitmq-server/6744805b-e2d9-4e74-86d0-d334c94b3478  running        az1  10.225
 rabbitmq-server/dc5d5850-75bb-4f4b-8ed3-3a8e22083072  running        az2  10.225.55.52  vm-f6bc1f1e-ec05-4088-83be-19845dbbe2f1  large    true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.506
 
 3 vms
+
+
+
+# service key on-demand 
+cf create-service-key rabbitmq1 mykey -c '{"tags":"administrator"}'
+cf service-keys rabbitmq1
+cf service-key rabbitmq1 mykey
+cf delete-service-key rabbitmq1 mykey
+
+
 
 
 
@@ -110,11 +125,6 @@ bosh -d service-instance_9c5a3943-2d41-40f5-88e9-971cfcd5dd25 logs -f
 
 
 
-# service key on-demand 
-cf create-service-key rabbitmq1 mykey -c '{"tags":"administrator"}'
-cf service-keys rabbitmq1
-cf service-key rabbitmq1 mykey
-cf delete-service-key rabbitmq1 mykey
 
 
 
