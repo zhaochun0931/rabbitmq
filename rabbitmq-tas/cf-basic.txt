@@ -32,9 +32,18 @@ cf services
 
 
 
+
+create a service
+|
+|
+|
+check GUID of the service
+
+
 # create a service 
 cf create-service p.rabbitmq single-node rabbitmq1
 cf create-service p.rabbitmq single-node rabbitmq1 -c '{ "plugins": { "rabbitmq_auth_backend_ldap": true } }' 
+
 cf service rabbitmq1 --guid
 
 
@@ -63,9 +72,6 @@ delete deployment
 |
 |
 |
-\|/
-\|/
-\|/
 delete service
 
 
