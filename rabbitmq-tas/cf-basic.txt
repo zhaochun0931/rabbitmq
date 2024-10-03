@@ -360,3 +360,18 @@ service-instance_guid-20240614-021754-413112219.tgz
 # Pre-Provisioned
 http://pivotal-rabbitmq.SYS-domain
 
+
+
+
+
+
+# how to fix the upgrade failed issue
+
+Run bosh -d <rabbitmq-si> manifest > si.yaml (this fetches last successful deployment, with prior version of RMQ)
+Run bosh -d <rabbitmq-si> deploy si.yaml
+RabbitMQ should start in all three nodes
+Enable all feature flags rabbitmqctl enable_feature_flag all
+Apply changes to run the upgrade all service instances errand.
+
+
+
