@@ -113,6 +113,10 @@ $
 
 
 
+kubectl get rabbitmqcluster
+
+
+
 
 # how to access Rabbitmq cluster
 
