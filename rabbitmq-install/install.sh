@@ -86,21 +86,6 @@ rabbit_log:info("test").
 
 
 
-# install generic rabbitmq
-
-wget https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.12.12/rabbitmq-server-generic-unix-3.12.12.tar.xz
-
-tar -xf rabbitmq-server-generic-unix-3.12.12.tar.xz
-
-
-cat << done >> .bash_profile
-export PATH=/root/rabbitmq_server-3.12.12/sbin:$PATH
-done
-
-
-
-# run rabbitmq server in the backgound
-rabbitmq-server -detached
 
 
 
