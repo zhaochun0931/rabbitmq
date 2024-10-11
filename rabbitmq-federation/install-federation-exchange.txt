@@ -52,8 +52,9 @@ rabbitmqctl set_parameter federation-upstream my-fed '{"uri":"amqp://admin:passw
 
 
 # amqps
-amqps://admin:password@10.211.55.14:5671?cacertfile=/root/ca.crt&certfile=/root/server.crt&keyfile=/root/server.key&verify=verify_peer
-rabbitmqctl set_parameter federation-upstream my-fed '{"uri":"amqps://admin:password@10.211.55.14:5671?cacertfile=/root/ca.crt&certfile=/root/server.crt&keyfile=/root/server.key&verify=verify_peer"}'
+amqps://admin:password@10.211.55.14:5671?cacertfile=/root/ca.crt&certfile=/root/server.crt&keyfile=/root/server.key&verify=verify_none
+
+rabbitmqctl set_parameter federation-upstream my-fed '{"uri":"amqps://admin:password@10.211.55.14:5671?cacertfile=/root/ca.crt&certfile=/root/server.crt&keyfile=/root/server.key&verify=verify_none"}'
 
 
 rabbitmqctl set_policy policy_1 "^test" '{"federation-upstream":"my-fed"}' --apply-to=exchanges
