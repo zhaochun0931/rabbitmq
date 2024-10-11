@@ -47,11 +47,15 @@ rabbitmq-plugins enable rabbitmq_federation_management
 # only configure the federation upstream in the down node, 172.18.0.2 is the ip of the up node
 
 
+
 # amqp
 rabbitmqctl set_parameter federation-upstream my-fed '{"uri":"amqp://admin:password@172.18.0.2:5672"}'
 
 
 # amqps
+
+# MUST MAKE SURE THE CERTIFICATE CONTAINS THE HOSTNAME OR IP SPECIFIED IN THE URI
+
 amqps://admin:password@10.211.55.14:5671?cacertfile=/root/ca.crt&certfile=/root/server.crt&keyfile=/root/server.key&verify=verify_none
 
 rabbitmqctl set_parameter federation-upstream my-fed '{"uri":"amqps://admin:password@10.211.55.14:5671?cacertfile=/root/ca.crt&certfile=/root/server.crt&keyfile=/root/server.key&verify=verify_none"}'
