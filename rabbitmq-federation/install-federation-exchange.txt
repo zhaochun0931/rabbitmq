@@ -13,6 +13,8 @@ down node: 172.18.0.3
 
 
 
+# ONLY configure the federation in the DOWN node
+
 
 # enable federation plugin in the down node
 rabbitmq-plugins enable rabbitmq_federation
@@ -20,10 +22,19 @@ rabbitmq-plugins enable rabbitmq_federation_management
 
 
 
-# configure the federation upstream in the down node, 172.18.0.2 is the ip of the up node
+# only configure the federation upstream in the down node, 172.18.0.2 is the ip of the up node
 
-rabbitmqctl set_parameter federation-upstream xxx '{"uri":"amqp://admin:password@172.18.0.2:5672"}'
-rabbitmqctl set_policy policy_1 "^test" '{"federation-upstream":"xxx"}' --apply-to=exchanges
+
+# amqp
+rabbitmqctl set_parameter federation-upstream my-fed '{"uri":"amqp://admin:password@172.18.0.2:5672"}'
+
+
+# amqps
+amqps://admin:password@10.211.55.14:5671?cacertfile=/root/ca.crt&certfile=/root/server.crt&keyfile=/root/server.key&verify=verify_peer
+rabbitmqctl set_parameter federation-upstream my-fed '{"uri":"amqps://admin:password@10.211.55.14:5671?cacertfile=/root/ca.crt&certfile=/root/server.crt&keyfile=/root/server.key&verify=verify_peer"}'
+
+
+rabbitmqctl set_policy policy_1 "^test" '{"federation-upstream":"my-fed"}' --apply-to=exchanges
 
 
 
