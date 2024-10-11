@@ -13,12 +13,34 @@ down node: 172.18.0.3
 
 
 
+
+
+# MUST enable federation plugin on BOTH UP and DOWN NODE, otherwise it will throw the following message: 
+
+operation exchange.declare caused a channel exception precondition_failed: unknown exchange type 'x-federation-upstream'
+
+
+
+
+
+rabbitmq-plugins enable rabbitmq_federation
+rabbitmq-plugins enable rabbitmq_federation_management
+
+
+
+
+
+
+
+
+
+
+
+
+
 # ONLY configure the federation in the DOWN node
 
 
-# enable federation plugin in the down node
-rabbitmq-plugins enable rabbitmq_federation
-rabbitmq-plugins enable rabbitmq_federation_management
 
 
 
@@ -82,7 +104,7 @@ rabbitmqadmin -u admin -p password declare binding source=test destination=qq6 r
 
 
 
-# publish the message to the exchange in the up node
+# publish the message to the EXCHANGE in the up node
 for i in $(seq 100); do rabbitmqadmin -u admin -p password publish exchange=test routing_key="" payload="hello, world  $i"; done
 
 
