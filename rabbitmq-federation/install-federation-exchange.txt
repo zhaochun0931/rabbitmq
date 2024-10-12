@@ -3,7 +3,9 @@ https://www.rabbitmq.com/federated-exchanges.html#limitations
 
 The default exchange (with the blank name) cannot be federated as it is not a typical exchange.
 
-the federation exchange only copy new message( the message published after the setup of the federation) from the up node to the down node.
+the federation exchange only copy new message( the message published after the setup of the federation) from the up node to the down node. you do not need to set upt the cluster when using the federation. 
+
+
 
 
 
