@@ -1,0 +1,17 @@
+%% The classic config format example is provided primarily for completeness sake,
+%% using the modern `rabbitmq.conf` format for configuring this plugin is highly recommended.
+[
+  {rabbitmq_management,
+   [
+    {ssl_config, [{port,     15671},
+                  {ssl,      true},
+                  {cacertfile, "c:\ca.crt"},
+                  {certfile,   "c:\server.crt"},
+                  {keyfile,    "c:\server.key"},
+
+                  %% don't do peer verification to HTTPS clients
+                  {verify,               verify_none},
+                  {fail_if_no_peer_cert, false}
+                ]}
+   ]}
+ ].
