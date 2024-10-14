@@ -1,0 +1,10 @@
+[
+  {rabbit, [
+     {ssl_listeners, [5671]},
+     {ssl_options, [{cacertfile, "c:\ca.crt"},
+                    {certfile,   "c:\server.crt"},
+                    {keyfile,    "c:\server.key"},
+                    {verify,     verify_peer},
+                    {fail_if_no_peer_cert, true}]}
+   ]}
+].
