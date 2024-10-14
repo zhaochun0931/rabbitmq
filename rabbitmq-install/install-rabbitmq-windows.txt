@@ -1,8 +1,8 @@
-
-
-
-cd %USERPROFILE%
 .erlang.cookie
 
 
 
+cd %USERPROFILE%
+
+
+cd C:\Windows\System32\config\systemprofile\
