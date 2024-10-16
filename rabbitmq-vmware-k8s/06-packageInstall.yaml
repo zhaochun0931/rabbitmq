@@ -8,4 +8,4 @@ spec:
   packageRef:
     refName: rabbitmq.tanzu.vmware.com
     versionSelection:
-      constraints: 3.13.6 # install the latest VMware rabbitmq 
+      constraints: 4.0.1 # install the latest VMware rabbitmq 
