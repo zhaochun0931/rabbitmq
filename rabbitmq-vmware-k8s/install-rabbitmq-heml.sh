@@ -12,5 +12,29 @@ helm install tanzu-rabbitmq oci://rabbitmq-helmoci.packages.broadcom.com/tanzu-r
 kubectl get all -n rabbitmq-system
 
 
-
 helm list --namespace rabbitmq-system
+
+
+
+
+
+# you can use the kubectl to deploy a rabbitmq cluster
+
+
+
+
+
+
+
+
+
+
+
+
+# how to install configure the tls in the pod
+
+https://www.rabbitmq.com/kubernetes/operator/using-operator#tls
+
+kubectl create secret tls tls-secret --cert=server.pem --key=server-key.pem
+
+
