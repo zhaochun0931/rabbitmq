@@ -161,6 +161,7 @@ docker run -d -it --rm --name rabbitmq1 --hostname rabbitmq1 \
 --mount type=bind,source="$(pwd)"/tls.key,target=/tmp/tls.key,readonly \
 --mount type=bind,source="$(pwd)"/ca.crt,target=/tmp/ca.crt,readonly \
 --mount type=bind,source="$(pwd)"/data,target=/var/lib/rabbitmq/mnesia/rabbit@rabbitmq1 \
+--mount type=bind,source="$(pwd)"/enabled_plugins,target=/etc/rabbitmq/enabled_plugins,readonly \
 rabbitmq:3.13.7-management
 
 
