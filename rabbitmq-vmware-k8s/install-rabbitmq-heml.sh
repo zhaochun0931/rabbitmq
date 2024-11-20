@@ -46,8 +46,23 @@ helm list --namespace rabbitmq-system
 
 
 
+
+
 # you can use the kubectl to deploy a rabbitmq cluster
 
+
+
+
+
+
+# how to connect the cluster
+
+nohup kubectl port-forward service/my-rabbitmq -n rabbitmq-system --address 0.0.0.0 15672:15672 5672:5672 &
+
+username="$(kubectl get secret my-rabbitmq-default-user -n rabbitmq-system -o jsonpath='{.data.username}' | base64 --decode)"
+password="$(kubectl get secret my-rabbitmq-default-user -n rabbitmq-system -o jsonpath='{.data.password}' | base64 --decode)"
+echo "username: $username"
+echo "password: $password"
 
 
 
