@@ -1,3 +1,8 @@
+# please install helm
+
+
+
+
 helm registry login rabbitmq-helmoci.packages.broadcom.com --username='username' --password='password'
 
 
