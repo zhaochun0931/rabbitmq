@@ -1,0 +1,18 @@
+kubectl -n rabbitmq-system create secret generic rabbitmq-ca --from-file=ca.crt=myca.crt
+
+
+
+kubectl -n rabbitmq-system patch deployment messaging-topology-operator --patch "spec:
+  template:
+    spec:
+      containers:
+      - name: manager
+        volumeMounts:
+        - mountPath: /etc/ssl/certs/rabbitmq-ca.crt
+          name: rabbitmq-ca
+          subPath: ca.crt
+      volumes:
+      - name: rabbitmq-ca
+        secret:
+          defaultMode: 420
+          secretName: rabbitmq-ca"
