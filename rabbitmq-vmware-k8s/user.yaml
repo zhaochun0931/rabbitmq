@@ -1,0 +1,10 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: User
+metadata:
+  name: user-example
+  namespace: rabbitmq-system
+spec:
+  tags:
+  - administrator
+  rabbitmqClusterReference:
+    name: my-rabbitmq
