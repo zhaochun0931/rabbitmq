@@ -17,9 +17,11 @@ spec:
   rabbitmq:
     additionalPlugins:
     - rabbitmq_stream
+    - rabbitmq_stream_management
     - rabbitmq_schema_definition_sync
     - rabbitmq_schema_definition_sync_prometheus
     - rabbitmq_standby_replication
+    - rabbitmq_warm_standby
     additionalConfig: |
       # log.console.level = debug
       schema_definition_sync.operating_mode = upstream
