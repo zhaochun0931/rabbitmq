@@ -15,7 +15,7 @@ metadata:
   namespace: rabbitmq-system
 spec:
   rabbitmqClusterReference:
-    name:  upstream-rabbit # the upstream RabbitMQ cluster name. It must be in the same namespace and it is a mandatory value.
+    name: upstream-rabbit # the upstream RabbitMQ cluster name. It must be in the same namespace and it is a mandatory value.
   importCredentialsSecret:
     name: upstream-secret
 ---
