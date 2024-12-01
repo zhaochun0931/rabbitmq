@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: downstream-secret
-  namespace: rabbitmq-system
+  # namespace: rabbitmq-system
 type: Opaque
 stringData:
   username: test-user
@@ -12,7 +12,7 @@ apiVersion: rabbitmq.com/v1beta1
 kind: User
 metadata:
   name: rabbitmq-replicator
-  namespace: rabbitmq-system
+  # namespace: rabbitmq-system
 spec:
   rabbitmqClusterReference:
     name: downstream-rabbit # the upstream RabbitMQ cluster name. It must be in the same namespace and it is a mandatory value.
@@ -23,7 +23,7 @@ apiVersion: rabbitmq.com/v1beta1
 kind: Permission
 metadata:
   name: rabbitmq-replicator.rabbitmq-schema-definition-sync.all
-  namespace: rabbitmq-system
+  # namespace: rabbitmq-system
 spec:
   vhost: "rabbitmq_schema_definition_sync" # name of a vhost
   userReference:
