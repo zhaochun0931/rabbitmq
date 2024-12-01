@@ -23,14 +23,11 @@ spec:
     - rabbitmq_standby_replication
     - rabbitmq_warm_standby
     additionalConfig: |
-      # log.console.level = debug
+      log.console.level = debug
       schema_definition_sync.operating_mode = upstream
       schema_definition_sync.connection.endpoints.one = localhost:5672
       schema_definition_sync.connection.username = test-user
       schema_definition_sync.connection.password = test-password
-      #
-      #
-      #
       standby.replication.operating_mode = upstream
       standby.replication.connection.endpoints.one = localhost:5552
       standby.replication.connection.username = test-user
