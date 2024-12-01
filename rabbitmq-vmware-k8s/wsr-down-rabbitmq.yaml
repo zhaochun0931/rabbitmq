@@ -1,7 +1,7 @@
 kind: RabbitmqCluster
 metadata:
   name: downstream-rabbit
-  namespace: rabbitmq-system
+  #namespace: rabbitmq-system
 spec:
   replicas: 1
   imagePullSecrets:
