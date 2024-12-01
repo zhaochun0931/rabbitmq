@@ -197,3 +197,8 @@ rabbitmq-streams add_replica --vhost test rabbitmq.internal.osr.metrics node_nam
 
 
 
+
+
+The rabbitmq_schema_definition_sync vhost is automatically created when the cluster is created. 
+
+
