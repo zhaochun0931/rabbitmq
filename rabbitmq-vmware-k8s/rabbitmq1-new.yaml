@@ -1,7 +1,7 @@
 apiVersion: rabbitmq.com/v1beta1
 kind: RabbitmqCluster
 metadata:
-  name: rabbitmq1
+  name: upstream-rabbit
   namespace: rabbitmq-system
 spec:
   replicas: 1
