@@ -3,7 +3,7 @@ apiVersion: rabbitmq.com/v1beta1
 kind: Vhost
 metadata:
   name: default
-  namespace: rabbitmq-system
+  # namespace: rabbitmq-system
 spec:
   name: "test" # vhost name
   tags: ["standby_replication"]
@@ -14,7 +14,7 @@ apiVersion: rabbitmq.com/v1beta1
 kind: Permission
 metadata:
   name: rabbitmq-replicator.rabbitmq-schema-definition-sync.test
-  namespace: rabbitmq-system
+  # namespace: rabbitmq-system
 spec:
   vhost: "test" # name of the vhost
   userReference:
