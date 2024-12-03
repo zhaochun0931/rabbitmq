@@ -114,12 +114,16 @@ $
 
 
 
+
+
+
 kubectl get rabbitmqcluster
 
-$ kubectl get rabbitmqcluster
-NAME          ALLREPLICASREADY   RECONCILESUCCESS   AGE
-hello-world   True               True               115s
-$
+
+
+
+
+
 
 
 
