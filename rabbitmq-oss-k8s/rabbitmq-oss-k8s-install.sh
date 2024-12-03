@@ -92,7 +92,16 @@ the /var/lib/rabbitmq/.erlang.cookie should be identical within the same cluster
 
 # the erlang.cookie was saved in the secret
 
+
 kubectl get secrets
+kubectl get rabbitmqcluster
+
+
+
+
+
+
+
 
 
 
@@ -117,7 +126,6 @@ $
 
 
 
-kubectl get rabbitmqcluster
 
 
 
@@ -128,14 +136,13 @@ kubectl get rabbitmqcluster
 
 
 # how to access Rabbitmq cluster
-
-username="$(kubectl get secret hello-world-default-user -o jsonpath='{.data.username}' | base64 --decode)"
-password="$(kubectl get secret hello-world-default-user -o jsonpath='{.data.password}' | base64 --decode)"
+username="$(kubectl get secret my-rabbitmq-default-user -o jsonpath='{.data.username}' | base64 --decode)"
+password="$(kubectl get secret my-rabbitmq-default-user -o jsonpath='{.data.password}' | base64 --decode)"
 
 echo "username: $username"
 echo "password: $password"
 
-nohup kubectl port-forward service/hello-world --address 0.0.0.0 15672:15672 5672:5672 &
+nohup kubectl port-forward service/my-rabbitmq --address 0.0.0.0 15672:15672 5672:5672 &
 
 
 
