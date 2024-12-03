@@ -9,7 +9,8 @@
 
 
 
-
+- RabbitMQ Cluster Kubernetes Operator
+- RabbitMQ Messaging Topology Operator
 
 
 
