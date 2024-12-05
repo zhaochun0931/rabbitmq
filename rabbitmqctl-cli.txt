@@ -54,7 +54,7 @@ rabbitmqctl --vhost="/" delete_queue 'qq1'
 rabbitmqctl eval 'Q = rabbit_misc:r(<<"/">>, queue, <<"qq1">>), rabbit_amqqueue:internal_delete(Q, <<"cli">>).'
 
 
-
+rabbitmqctl eval 'rabbit_shovel_status:status().'
 rabbitmqctl eval "rabbit_misc:version()."
 rabbitmqctl eval "rabbit_misc:otp_release()."
 rabbitmqctl eval 'node().'
