@@ -3,6 +3,4 @@
 
 
 cd %USERPROFILE%
-
-
-cd C:\Windows\System32\config\systemprofile\
+cd %SystemRoot%\system32\config\systemprofile
