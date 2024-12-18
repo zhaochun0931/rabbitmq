@@ -6,7 +6,7 @@ tar -xf rabbitmq-server-generic-unix-4.0.5.tar.xz
 
 
 cat << done >> ~/.bash_profile
-export PATH=/root/rabbitmq_server-3.13.7/sbin:$PATH
+export PATH=/root/rabbitmq_server-4.0.5/sbin:$PATH
 done
 
 
