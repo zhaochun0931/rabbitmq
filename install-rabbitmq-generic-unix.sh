@@ -17,6 +17,12 @@ done
 
 # run rabbitmq server in the backgound
 rabbitmq-server -detached
+rabbitmqctl shutdown
+
+
+
+
+
 
 
 
@@ -25,9 +31,7 @@ rabbitmq-plugins enable rabbitmq_management
 
 
 
-rabbitmq-server -detached
 
 
 
 
-rabbitmqctl shutdown
