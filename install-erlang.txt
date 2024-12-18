@@ -34,6 +34,12 @@ erl -eval '{ok, Version} = file:read_file(filename:join([code:root_dir(), "relea
 
 
 
+ps -ef | egrep -i epmd
+nc -vz localhost 4369
+
+/usr/lib/erlang/erts-14.2.4/bin/epmd -daemon
+
+
 
 
 
