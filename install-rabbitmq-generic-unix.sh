@@ -15,6 +15,11 @@ done
 
 
 
+
+
+/root/rabbitmq_server-4.0.5/etc/rabbitmq/rabbitmq.conf
+
+
 # run rabbitmq server in the backgound
 rabbitmq-server -detached
 rabbitmqctl shutdown
