@@ -33,7 +33,7 @@ for i in range(10000):
 
     chan.basic_publish(exchange='',
                        routing_key='qq1',
-                       body='hello world 1111' + dt_string,mandatory=True)
+                       body='hello world ' + dt_string,mandatory=True)
     chan.confirm_delivery()
 
 
