@@ -7,3 +7,5 @@ import sys
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
 channel = connection.channel()
 channel.basic_get(queue='hello',auto_ack=True)
+
+# channel.basic_get(queue='hello')
