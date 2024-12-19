@@ -8,6 +8,8 @@ connection = pika.BlockingConnection(
 channel = connection.channel()
 
 channel.queue_declare(queue='Hello')
+channel.queue_declare(queue='Hello-qq', durable=True,arguments={"x-queue-type": "quorum"})
+
 
 channel.basic_publish(exchange='', routing_key='Hello', body='Hey!')
 print(" [x] Sent 'Hello World!' ")
