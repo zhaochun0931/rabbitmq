@@ -1,0 +1,7 @@
+https://github.com/rabbitmq/rabbitmq-stream-java-client
+
+git clone https://github.com/rabbitmq/rabbitmq-stream-java-client.git
+cd rabbitmq-stream-java-client/
+./mvnw clean package -DskipITs -DskipTests
+
+
