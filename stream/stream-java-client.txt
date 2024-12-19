@@ -5,3 +5,4 @@ cd rabbitmq-stream-java-client/
 ./mvnw clean package -DskipITs -DskipTests
 
 
+./mvnw verify -Drabbitmqctl.bin=/root/rabbitmq_server-4.0.5/sbin/rabbitmqctl
