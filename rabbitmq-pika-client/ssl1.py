@@ -25,7 +25,7 @@ try:
 
         # Declare a queue
         queue_name = 'test_ssl_queue'
-        channel.queue_declare(queue=queue_name)
+        channel.queue_declare(queue=queue_name,durable=True,arguments={"x-queue-type": "quorum"})
 
         # Send a message
         message = "Hello, RabbitMQ with SSL and Client Certificate!"
