@@ -7,7 +7,10 @@ connection = pika.BlockingConnection(
 
 channel = connection.channel()
 
+# declare classic queue
 channel.queue_declare(queue='Hello')
+
+# declare quorum queue
 channel.queue_declare(queue='Hello-qq', durable=True,arguments={"x-queue-type": "quorum"})
 
 
