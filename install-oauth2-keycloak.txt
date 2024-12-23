@@ -10,4 +10,8 @@ This command starts Keycloak exposed on the local port 8080 and creates an initi
 http://localhost:8080
 
 
+create a new realm called myrealm
+creeate a new user myuser with the password mypassword
 
+
+http://localhost:8080/realms/myrealm/account
