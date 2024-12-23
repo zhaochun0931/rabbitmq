@@ -15,3 +15,7 @@ creeate a new user myuser with the password mypassword
 
 
 http://localhost:8080/realms/myrealm/account
+
+
+
+http://localhost:8080/admin
