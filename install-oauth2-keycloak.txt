@@ -22,8 +22,19 @@ http://localhost:8080/admin
 
 
 create a client
+myclient
+
 
 create a scope
+rabbitmq.tag:administrator
+rabbitmq.tag:management
+rabbitmq.write:*/*/*
+rabbitmq.configure:*/*/*
+rabbitmq.read:*/*/*
+
+
+
+
 
 assign the scope to the client
 
