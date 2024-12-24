@@ -7,16 +7,24 @@
 create a dead letter exchange dlx with direct type
 dlx
 
+
+
+
 create a dead letter queue and bind it to dead letter exchange
 dlx-qq
 x-max-length-bytes 10
 x-overflow reject-publish
+
+
+
+
 
 creat a normal queue
 qq
 x-max-length-bytes 10
 x-dead-letter-exchange dlx
 x-overflow reject-publish
+dead-letter-strategy at-least-once
 
 
 
