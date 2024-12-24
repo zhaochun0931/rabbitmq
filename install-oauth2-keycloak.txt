@@ -1,5 +1,16 @@
 docker run -p 8080:8080 -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:latest start-dev
 
+
+docker run -p 8080:8080 -p 8443:8443 \
+-e KEYCLOAK_ADMIN=admin \
+-e KEYCLOAK_ADMIN_PASSWORD=admin \
+-v $(pwd)/mycert/:/opt/keycloak/mycert/ quay.io/keycloak/keycloak:latest start-dev
+--import-realm \
+--https-certificate-file=/opt/keycloak/mycert/keycloak.crt \
+--https-certificate-key-file=/opt/keycloak/mycert/keycloak.key
+
+
+
 This command starts Keycloak exposed on the local port 8080 and creates an initial admin user with the username admin and password admin.
 
 
