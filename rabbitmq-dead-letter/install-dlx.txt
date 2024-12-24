@@ -10,7 +10,7 @@ dlx
 create a dead letter queue and bind it to dead letter exchange
 dlx-qq
 x-max-length-bytes 10
-
+x-overflow reject-publish
 
 creat a normal queue
 qq
