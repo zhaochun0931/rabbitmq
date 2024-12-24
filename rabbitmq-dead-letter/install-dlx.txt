@@ -16,7 +16,7 @@ creat a normal queue
 qq
 x-max-length-bytes 10
 x-dead-letter-exchange dlx
-
+x-overflow reject-publish
 
 
 
