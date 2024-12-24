@@ -1,8 +1,7 @@
 # create a dead letter exchange and the queue to recevie the dead letter(message)
 # must specify the routing key when binding
 
-creat a normal queue
-qq
+
 
 
 create a dead letter exchange dlx with direct type
@@ -11,11 +10,12 @@ dlx
 create a dead letter queue and bind it to dead letter exchange
 dlx-qq
 x-max-length-bytes 10
+
+
+creat a normal queue
+qq
+x-max-length-bytes 10
 x-dead-letter-exchange dlx
-
-
-
-
 
 
 
