@@ -1,6 +1,4 @@
-docker run -p 8080:8080 -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:26.0.7 start-dev
-
-
+docker run -p 8080:8080 -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e KC_BOOTSTRAP_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:latest start-dev
 
 This command starts Keycloak exposed on the local port 8080 and creates an initial admin user with the username admin and password admin.
 
@@ -37,4 +35,41 @@ rabbitmq.read:*/*/*
 
 
 assign the scope to the client
+
+
+
+
+http://localhost:8080/realms/myrealm/.well-known/openid-configuration
+
+
+
+curl -X POST "http://localhost:8080/realms/myrealm/protocol/openid-connect/token" \
+-H "Content-Type: application/x-www-form-urlencoded" \
+-d "client_id=<client-id>" \
+-d "client_secret=<client-secret>" \
+-d "grant_type=client_credentials"
+
+
+
+
+
+
+curl -X POST "http://10.211.55.22:8080/realms/test/protocol/openid-connect/token" \
+-H "Content-Type: application/x-www-form-urlencoded" \
+-d "client_id=mgt_api_client" \
+-d "client_secret=LWOuYqJ8gjKg3D2U8CJZDuID3KiRZVDa" \
+-d "grant_type=client_credentials"
+
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJHbmwyWmxiUmgzckFyNld5bWM5ODhfNWNZN1Q1R3VlUGQ1ZHBKbFhESlVrIn0.eyJleHAiOjE3MzUwMDQ0MDYsImlhdCI6MTczNTAwNDEwNiwianRpIjoiZGFlOGZhMmEtYTE0Ny00YmQzLTkxM2UtYzY4OTdjZjA3NzYyIiwiaXNzIjoiaHR0cDovLzEwLjIxMS41NS4yMjo4MDgwL3JlYWxtcy90ZXN0IiwiYXVkIjoicmFiYml0bXEiLCJzdWIiOiIyZTM0OWU1NS04YzJmLTQ0NjEtYjQ0Zi0yOTc3ZDNiMTEzZjMiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJtZ3RfYXBpX2NsaWVudCIsInNjb3BlIjoiZW1haWwgcmFiYml0bXEudGFnOmFkbWluaXN0cmF0b3IiLCJjbGllbnRJZCI6Im1ndF9hcGlfY2xpZW50IiwiY2xpZW50SG9zdCI6IjEwLjIxMS41NS4yMiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiY2xpZW50QWRkcmVzcyI6IjEwLjIxMS41NS4yMiJ9.E85YZiQwXDGExMs4mr_EroiuYHaHOIWpYSvN-ivzHy5l4c4YJ_7SzNtb_YEvVKvALLWHsFG2YL9woYa2EipHNP3gT5skB2wEfbXVTzLONmpBaQzE_FVfZMIVr3D0dDDD7eVC7jYMzd6G2fGCWpTQbgxrKxuUK8K_rPkcnbaUlhavWxBl4TWcaorBaLsKLgHPiFiXj_PrW2NqpyIHhwPoV0-CnHcvo7Vcsxe-LvsoSu5xMGGjMWJBnrGybdKcmWbmJ5rwI2-SlLUOLN3CaYnQcDmkcSGj8qZstai3P5YqmvVPkXXTudWuGxO1UEra7H2BYrZdqO68gF4o8sOcdd3GYw",
+  "expires_in": 300,
+  "refresh_expires_in": 0,
+  "token_type": "Bearer",
+  "not-before-policy": 0,
+  "scope": "email rabbitmq.tag:administrator"
+}
+
+
+
+
 
