@@ -45,7 +45,8 @@ curl -u admin:password -X PUT http://localhost:15672/api/vhosts/vhost3 \
 
 # queue
 rabbitmqctl list_queues --formatter=pretty_table --quiet name type messages messages_ready messages_unacknowledged state
-
+rabbitmqctl list_queues --quiet name pid
+rabbitmqctl list_queues --formatter=pretty_table --quiet name pid
 
 
 
