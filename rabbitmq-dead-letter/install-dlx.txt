@@ -38,7 +38,7 @@ rabbitmqadmin declare queue name=my-target-queue durable=true queue_type=classic
 rabbitmqadmin publish exchange=amq.default routing_key=my-source-queue payload=msg1 properties='{"expiration" : "1000", "delivery_mode" : 2}'
 
 
-
+rabbitmqctl list_queues --formatter=pretty_table --quiet name type messages messages_ready messages_unacknowledged state
 
 
 
