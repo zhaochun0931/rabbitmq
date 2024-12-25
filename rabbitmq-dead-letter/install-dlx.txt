@@ -29,6 +29,28 @@ dead-letter-strategy at-least-once
 
 
 
+the simplies test:
+
+rabbitmqadmin declare queue name=my-source-queue durable=true queue_type=quorum arguments='{"x-dead-letter-exchange" : "", "x-dead-letter-routing-key" : "my-target-queue" , "x-overflow" : "reject-publish"}'
+
+rabbitmqadmin declare queue name=my-target-queue durable=true queue_type=classic
+
+rabbitmqadmin publish exchange=amq.default routing_key=my-source-queue payload=msg1 properties='{"expiration" : "1000", "delivery_mode" : 2}'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 rabbitmqadmin -u admin -p password declare exchange name=dlx-e type=direct
 rabbitmqadmin -u admin -p password declare queue name=dlx-q
