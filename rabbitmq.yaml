@@ -9,8 +9,8 @@ spec:
   - name: tanzu-rabbitmq-registry-creds
   resources:
     limits:
-      cpu: 500m
+      cpu: 100m
       memory: 2Gi
     requests:
-      cpu: 500m
+      cpu: 100m
       memory: 2Gi
