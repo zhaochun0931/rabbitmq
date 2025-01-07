@@ -29,5 +29,6 @@ kubectl create secret docker-registry tanzu-rabbitmq-registry-creds -n secrets-n
 
 kubectl apply -f secretexport.yaml
 
+kapp deploy -a tanzu-rabbitmq-repo -f packagerepository.yaml -y
 
 
