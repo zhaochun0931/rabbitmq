@@ -19,6 +19,13 @@ kubectl get all -n secretgen-controller
 
 
 
+kubectl create ns secrets-ns
+kubectl create secret docker-registry tanzu-rabbitmq-registry-creds -n secrets-ns \
+--docker-server "rabbitmq-kubernetes.packages.broadcom.com" --docker-username "username" \
+--docker-password "password"
+
+
+
 
 
 
