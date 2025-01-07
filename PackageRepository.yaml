@@ -1,0 +1,9 @@
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageRepository
+metadata:
+name: tanzu-rabbitmq-repo
+spec:
+fetch:
+ imgpkgBundle:
+  #  image: rabbitmq-kubernetes.packages.broadcom.com/tanzu-rabbitmq-package-repo:${BUNDLE_VERSION}{-TAG}
+   image: rabbitmq-kubernetes.packages.broadcom.com/tanzu-rabbitmq-package-repo:3.13.3
