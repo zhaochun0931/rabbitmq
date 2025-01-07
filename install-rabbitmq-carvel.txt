@@ -40,4 +40,8 @@ kubectl apply -f secretexport.yaml
 
 kapp deploy -a tanzu-rabbitmq-repo -f packagerepository.yaml -y
 
+kubectl apply -f sa.yaml
+
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.16.2/cert-manager.yaml
+
 
