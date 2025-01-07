@@ -46,4 +46,4 @@ kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/
 
 kapp deploy -a tanzu-rabbitmq -f packageinstall.yaml -y
 
-
+kubectl apply -f rabbitmq.yaml
