@@ -1,1 +1,24 @@
+# install k8s
+
+
+
+# install tanzu-cluster-essentials-linux-amd64-1.10.1.tgz
+tar -xvf tanzu-cluster-essentials-linux-amd64-1.10.1.tgz
+
+
+MY_BROADCOM_SUPPORT_ACCESS_TOKEN="password"
+export INSTALL_BUNDLE=cluster-essentials.packages.broadcom.com/tanzu-cluster-essentials/cluster-essentials-bundle@sha256:887788e1ff359fe110e95f36455d4ebb6e5136bbd455d3756b4bfb4616fc1663
+export INSTALL_REGISTRY_HOSTNAME=cluster-essentials.packages.broadcom.com
+export INSTALL_REGISTRY_USERNAME=username
+export INSTALL_REGISTRY_PASSWORD=${MY_BROADCOM_SUPPORT_ACCESS_TOKEN}
+./install.sh --yes
+
+kubectl get all -n kapp-controller
+kubectl get all -n secretgen-controller
+
+
+
+
+
+
 
