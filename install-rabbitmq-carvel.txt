@@ -27,7 +27,7 @@ kubectl get all -n secretgen-controller
 kubectl create ns secrets-ns
 
 
-# please use the crendential mentioned in the rabbitmq for k8s
+# please use the credential mentioned in the rabbitmq for k8s
 kubectl create secret docker-registry tanzu-rabbitmq-registry-creds -n secrets-ns \
 --docker-server "rabbitmq-kubernetes.packages.broadcom.com" --docker-username "username" \
 --docker-password "password"
