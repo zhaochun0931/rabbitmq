@@ -3,6 +3,11 @@
 
 
 
+# install k8s
+kubectl get pods -A
+
+
+
 # install RabbitMQ Cluster Operator
 https://www.rabbitmq.com/kubernetes/operator/quickstart-operator
 
