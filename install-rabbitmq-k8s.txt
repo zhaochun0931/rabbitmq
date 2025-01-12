@@ -32,3 +32,15 @@ kubectl get all -n cert-manager
 
 # install message topology operator
 kubectl apply -f https://github.com/rabbitmq/messaging-topology-operator/releases/latest/download/messaging-topology-operator-with-certmanager.yaml
+
+
+
+# how to access Rabbitmq cluster
+username="$(kubectl get secret my-rabbitmq-default-user -o jsonpath='{.data.username}' | base64 --decode)"
+password="$(kubectl get secret my-rabbitmq-default-user -o jsonpath='{.data.password}' | base64 --decode)"
+
+echo "username: $username"
+echo "password: $password"
+
+nohup kubectl port-forward service/my-rabbitmq --address 0.0.0.0 15672:15672 5672:5672 &
+
