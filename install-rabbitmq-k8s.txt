@@ -37,6 +37,8 @@ kubectl apply -f https://github.com/rabbitmq/messaging-topology-operator/release
 
 # how to access Rabbitmq cluster
 kubectl get secrets -n rabbitmq-system
+kubectl get svc -n rabbitmq-system
+
 username="$(kubectl get secret my-rabbitmq-default-user -o jsonpath='{.data.username}' | base64 --decode)"
 password="$(kubectl get secret my-rabbitmq-default-user -o jsonpath='{.data.password}' | base64 --decode)"
 
@@ -45,3 +47,7 @@ echo "password: $password"
 
 nohup kubectl port-forward service/my-rabbitmq --address 0.0.0.0 15672:15672 5672:5672 &
 
+
+
+
+kubectl run perf-test --image=pivotalrabbitmq/perf-test -n rabbitmq-system -- --uri amqp://{username}:{password}@{service}
