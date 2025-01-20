@@ -35,6 +35,17 @@ kubectl apply -f https://github.com/rabbitmq/messaging-topology-operator/release
 
 
 
+# deploy a rabbitmq cluster
+
+
+
+
+
+
+
+
+
+
 # how to access Rabbitmq cluster
 kubectl get secrets -n rabbitmq-system
 kubectl get svc -n rabbitmq-system
