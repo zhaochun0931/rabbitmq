@@ -62,3 +62,6 @@ nohup kubectl port-forward service/rabbitmq1 -n rabbitmq-system --address 0.0.0.
 
 
 kubectl run perf-test --image=pivotalrabbitmq/perf-test -n rabbitmq-system -- --uri amqp://username:password@service
+kubectl run perf-test --image=pivotalrabbitmq/perf-test -n rabbitmq-system -- --nack --uri amqp://username:password@service
+
+
