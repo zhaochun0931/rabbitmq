@@ -36,6 +36,7 @@ kubectl apply -f https://github.com/rabbitmq/messaging-topology-operator/release
 
 
 # how to access Rabbitmq cluster
+kubectl get secrets -n rabbitmq-system
 username="$(kubectl get secret my-rabbitmq-default-user -o jsonpath='{.data.username}' | base64 --decode)"
 password="$(kubectl get secret my-rabbitmq-default-user -o jsonpath='{.data.password}' | base64 --decode)"
 
