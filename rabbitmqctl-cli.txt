@@ -1,0 +1,7 @@
+rabbitmqctl eval "rabbit_misc:version()."
+
+rabbitmqctl eval "rabbit_misc:otp_release()."
+
+rabbitmqctl eval 'node().'
+
+rabbitmqctl eval 'application:get_all_env(rabbit).'
