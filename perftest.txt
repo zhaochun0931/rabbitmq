@@ -1,3 +1,10 @@
 java -jar perf-test-2.22.1.jar -h amqp://username:password@localhost:5672 --queue-pattern 'perf-test-%d' \
-  --queue-pattern-from 1 --queue-pattern-to 10 \
-  --producers 3 --consumers 3
+--queue-pattern-from 1 --queue-pattern-to 10 \
+--producers 3 --consumers 3
+
+
+  
+java -jar perf-test-2.22.1.jar -h amqp://username:password@localhost:5672 --queue-pattern 'perf-test-%d' \
+--queue-pattern-from 1 --queue-pattern-to 10 \
+--producers 3 --consumers 3 \
+--quorum-queue --queue qq1
