@@ -4,11 +4,11 @@ import time
 
 username = 'admin'
 password = 'password'
-rabbitmq_password  = pika.PlainCredentials(username,password)
+rabbitmq_credential  = pika.PlainCredentials(username,password)
 
 
 
-#connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost','5672','/',credentials=rabbitmq_password))
+#connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost','5672','/',credentials=rabbitmq_credential))
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
 
 
