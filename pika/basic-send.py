@@ -8,15 +8,15 @@ rabbitmq_password  = pika.PlainCredentials(username,password)
 
 
 
-#connection = pika.BlockingConnection(pika.ConnectionParameters('localhost','5672','/',credentials=rabbitmq_password))
-
+#connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost','5672','/',credentials=rabbitmq_password))
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
 
-#connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost', credentials=credentials))
 
 channel = connection.channel()
 
 channel.queue_declare(queue='hello')
+#channel.queue_declare(queue='qq1', durable=True,arguments={"x-queue-type": "quorum"})
+
 
 channel.basic_publish(exchange='', routing_key='hello', body='Hello World!')
 print(" [x] Sent 'Hello World!'")
