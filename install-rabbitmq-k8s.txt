@@ -57,12 +57,3 @@ echo "username: $username"
 echo "password: $password"
 
 nohup kubectl port-forward service/rabbitmq1 -n rabbitmq-system --address 0.0.0.0 15672:15672 5672:5672 &
-
-
-
-
-kubectl run perf-test --image=pivotalrabbitmq/perf-test -n rabbitmq-system -- --uri amqp://username:password@service
-kubectl run perf-test --image=pivotalrabbitmq/perf-test -n rabbitmq-system -- --nack --uri amqp://username:password@service
-
-kubectl run perf-test --image=pivotalrabbitmq/perf-test -n rabbitmq-system -- --quorum-queue --queue qq1 --nack --uri amqp://username:password@service
-
