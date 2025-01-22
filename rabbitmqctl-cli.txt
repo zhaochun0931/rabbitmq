@@ -5,3 +5,33 @@ rabbitmqctl eval "rabbit_misc:otp_release()."
 rabbitmqctl eval 'node().'
 
 rabbitmqctl eval 'application:get_all_env(rabbit).'
+
+rabbitmqctl eval 'rabbit_shovel_status:status().'
+
+rabbitmqctl eval "rabbit_misc:version()."
+
+rabbitmqctl eval "rabbit_misc:otp_release()."
+
+rabbitmqctl eval 'node().'
+
+rabbitmqctl eval 'application:get_all_env(rabbit).'
+
+rabbitmqctl eval 'application:get_env(rabbit, log).'
+
+rabbitmqctl eval 'application:get_env(rabbit, loopback_users).'
+
+rabbitmqctl eval 'node(), nodes().'
+
+rabbitmqctl eval 'rabbit_log:critical("Severity = critical").'
+
+rabbitmqctl eval 'rabbit_log:error("Severity = error").'
+
+rabbitmqctl eval 'rabbit_log:warning("Severity = warning").'
+
+rabbitmqctl eval "net_adm:ping('rabbit@NODE-NAME')."
+
+rabbitmqctl eval 'rabbit_diagnostics:maybe_stuck().'
+
+rabbitmqctl eval 'erlang:system_info(process_limit).'
+
+rabbitmqctl eval 'inet:i().'
