@@ -8,3 +8,14 @@ java -jar perf-test-2.22.1.jar -h amqp://username:password@localhost:5672 --queu
 --queue-pattern-from 1 --queue-pattern-to 10 \
 --producers 3 --consumers 3 \
 --quorum-queue --queue qq1
+
+
+
+
+
+
+kubectl run perf-test --image=pivotalrabbitmq/perf-test -n rabbitmq-system -- --uri amqp://username:password@service
+
+kubectl run perf-test --image=pivotalrabbitmq/perf-test -n rabbitmq-system -- --nack --uri amqp://username:password@service
+
+kubectl run perf-test --image=pivotalrabbitmq/perf-test -n rabbitmq-system -- --quorum-queue --queue qq1 --nack --uri amqp://username:password@service
