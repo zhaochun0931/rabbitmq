@@ -2,9 +2,16 @@
 import pika
 import time
 
+username = 'admin'
+password = 'password'
+rabbitmq_password  = pika.PlainCredentials(username,password)
 
-connection = pika.BlockingConnection(
-    pika.ConnectionParameters(host='localhost'))
+
+
+#connection = pika.BlockingConnection(pika.ConnectionParameters('localhost','5672','/',credentials=rabbitmq_password))
+
+
+#connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
 channel = connection.channel()
 
 channel.queue_declare(queue='hello')
