@@ -8,8 +8,14 @@ rabbitmq_credential  = pika.PlainCredentials(username,password)
 
 
 
-#connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost','5672','/',credentials=rabbitmq_credential))
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+connection = pika.BlockingConnection(pika.ConnectionParameters(
+    host='localhost',
+    port=5672,
+    virtual_host='/',
+    credentials=rabbitmq_credential
+))
+
+#connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
 
 
 channel = connection.channel()
