@@ -35,3 +35,5 @@ rabbitmqctl eval 'rabbit_diagnostics:maybe_stuck().'
 rabbitmqctl eval 'erlang:system_info(process_limit).'
 
 rabbitmqctl eval 'inet:i().'
+
+rabbitmqctl eval 'rabbit_amqqueue:internal_delete({resource,<<"prod">>,queue,<<"x1">>}).'
