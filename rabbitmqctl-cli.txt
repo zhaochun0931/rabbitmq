@@ -2,7 +2,14 @@ rabbitmqctl eval "rabbit_misc:version()."
 
 rabbitmqctl eval "rabbit_misc:otp_release()."
 
-rabbitmqctl eval 'node().'
+rabbitmqctl eval "node()."
+
+rabbitmqctl eval "nodes()."
+
+rabbitmqctl eval "rabbit_nodes:list_running()."
+
+
+
 
 rabbitmqctl eval 'application:get_all_env(rabbit).'
 
@@ -12,7 +19,6 @@ rabbitmqctl eval "rabbit_misc:version()."
 
 rabbitmqctl eval "rabbit_misc:otp_release()."
 
-rabbitmqctl eval 'node().'
 
 rabbitmqctl eval 'application:get_all_env(rabbit).'
 
