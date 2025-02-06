@@ -8,7 +8,7 @@ rabbitmqctl eval "nodes()."
 
 rabbitmqctl eval "rabbit_nodes:list_running()."
 rabbitmqctl eval 'rabbit_mgmt_metrics_collector:reset_all().'
-
+rabbitmqctl eval 'rabbit_vhost:msg_store_dir_path(<<"/">>).'
 
 
 
