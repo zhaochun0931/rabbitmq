@@ -1,0 +1,4 @@
+egrep -Ri listing rabbitmqctl_report
+
+
+egrep -Ri 'Queue count' rabbitmqctl_report

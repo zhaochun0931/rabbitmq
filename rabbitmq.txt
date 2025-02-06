@@ -1,3 +1,0 @@
-egrep -Ri listing rabbitmqctl_report
-
-
