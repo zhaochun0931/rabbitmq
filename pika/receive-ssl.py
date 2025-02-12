@@ -4,6 +4,8 @@ import ssl
 # Define the RabbitMQ server details
 rabbitmq_host = 'your.rabbitmq.server'
 queue_name = 'your_queue_name'
+username = 'your_username'
+password = 'your_password'
 
 # Paths to SSL certificates and key
 client_cert = '/path/to/client-cert.pem'
@@ -18,11 +20,13 @@ context.load_verify_locations(cafile=ca_cert)
 # SSL context will be used in the connection parameters
 ssl_options = pika.SSLOptions(context, rabbitmq_host)
 
-# Set up the RabbitMQ connection parameters
+# Set up the RabbitMQ connection parameters with username and password
+credentials = pika.PlainCredentials(username, password)
 parameters = pika.ConnectionParameters(
     host=rabbitmq_host,
-    port=5671,  # Default SSL port for RabbitMQ
-    ssl_options=ssl_options
+    port=5671,
+    ssl_options=ssl_options,
+    credentials=credentials  # Add credentials to the connection
 )
 
 # Create a connection and a channel
@@ -30,7 +34,7 @@ connection = pika.BlockingConnection(parameters)
 channel = connection.channel()
 
 # Declare a queue
-channel.queue_declare(queue=queue_name)
+channel.queue_declare(queue=queue_name,durable=True,arguments={"x-queue-type": "quorum"})
 
 # Define the callback for consuming messages
 def callback(ch, method, properties, body):
