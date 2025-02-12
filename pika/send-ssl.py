@@ -27,6 +27,7 @@ connection_parameters = pika.ConnectionParameters(
     port=5671,
     virtual_host='/',
     ssl_options=pika.SSLOptions(context=ssl_context),
+    credentials=rabbitmq_credentials
     # For EXTERNAL authentication, do not set explicit credentials
 )
 
