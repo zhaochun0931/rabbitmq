@@ -1,12 +1,23 @@
 import pika
 import ssl
 
+# Define the RabbitMQ server details
+rabbitmq_host = 'your.rabbitmq.server'
+queue_name = 'your_queue_name'
+username = 'your_username'
+password = 'your_password'
+
+# Paths to SSL certificates and key
+client_cert = '/path/to/client-cert.pem'
+client_key = '/path/to/client-key.pem'
+ca_cert = '/path/to/ca-cert.pem'
+
 # SSL context configuration
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
-ssl_context.load_verify_locations("path/to/ca_certificate.pem")
+ssl_context.load_verify_locations(ca_cert)
 ssl_context.load_cert_chain(
-    certfile="path/to/client_certificate.pem",
-    keyfile="path/to/client_key.pem"
+    certfile=client_cert,
+    keyfile=client_key
 )
 
 # Connection parameters with SSL options
