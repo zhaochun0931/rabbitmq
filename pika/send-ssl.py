@@ -21,6 +21,7 @@ ssl_context.load_cert_chain(
 )
 
 # Connection parameters with SSL options
+rabbitmq_credentials = pika.PlainCredentials(username, password)
 connection_parameters = pika.ConnectionParameters(
     host='your.rabbitmq.host',
     port=5671,
