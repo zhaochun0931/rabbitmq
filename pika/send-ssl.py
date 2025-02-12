@@ -1,5 +1,6 @@
 import pika
 import ssl
+from datetime import datetime
 
 # Define the RabbitMQ server details
 rabbitmq_host = 'your.rabbitmq.server'
@@ -11,6 +12,9 @@ password = 'your_password'
 client_cert = '/path/to/client-cert.pem'
 client_key = '/path/to/client-key.pem'
 ca_cert = '/path/to/ca-cert.pem'
+
+# Get the current date and time
+current_date = datetime.now()
 
 # SSL context configuration
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
@@ -41,7 +45,9 @@ try:
         channel.queue_declare(queue=queue_name,durable=True,arguments={"x-queue-type": "quorum"})
 
         # Send a message
-        message = "Hello, RabbitMQ with SSL and Client Certificate!"
+        # message = "Hello, RabbitMQ with SSL and Client Certificate!"
+        message = f"Hello, RabbitMQ with SSL and Client Certificate! {current_date.strftime('%Y-%m-%d %H:%M:%S')}"
+        
         channel.basic_publish(exchange='', routing_key=queue_name, body=message)
 
         print(f"Message sent to queue '{queue_name}': {message}")
