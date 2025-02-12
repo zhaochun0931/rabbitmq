@@ -21,12 +21,12 @@ context.load_verify_locations(cafile=ca_cert)
 ssl_options = pika.SSLOptions(context, rabbitmq_host)
 
 # Set up the RabbitMQ connection parameters with username and password
-credentials = pika.PlainCredentials(username, password)
+rabbitmq_credentials = pika.PlainCredentials(username, password)
 parameters = pika.ConnectionParameters(
     host=rabbitmq_host,
     port=5671,
     ssl_options=ssl_options,
-    credentials=credentials  # Add credentials to the connection
+    credentials=rabbitmq_credentials  # Add credentials to the connection
 )
 
 # Create a connection and a channel
