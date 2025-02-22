@@ -1,0 +1,23 @@
+# run the prometheus
+docker run -d --rm --name prometheus -p 9090:9090 -v $(pwd)/prometheus.yaml:/etc/prometheus/prometheus.yml prom/prometheus
+
+
+
+
+# mac
+
+wget https://github.com/prometheus/prometheus/releases/download/v2.48.0/prometheus-2.48.0.darwin-amd64.tar.gz
+tar -xzvf prometheus-2.48.0.darwin-amd64.tar.gz
+
+./prometheus-2.48.0.darwin-amd64/prometheus --config.file prometheus.yaml
+
+
+
+
+
+
+
+
+
+# access the prometheus
+http://localhost:9090/targets
