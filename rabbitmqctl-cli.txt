@@ -60,7 +60,7 @@ rabbitmqctl eval 'Q = {resource, <<"virtual host name">>, queue, <<"queue name">
 
 rabbitmq-server –detached
 rabbitmqctl shutdown
-
+rabbitmqctl cluster_status
 
 
 
