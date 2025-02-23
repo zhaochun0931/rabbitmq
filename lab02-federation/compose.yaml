@@ -1,7 +1,7 @@
 services:
-  rabbitmq1:
+  rabbitmq-up:
     image: rabbitmq:management
-    hostname: rabbitmq1
+    hostname: rabbitmq-up
     environment:
       - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
       - RABBITMQ_DEFAULT_USER=admin        # Set the default username
@@ -11,14 +11,14 @@ services:
       - "5671:5672"    # AMQP protocol
     volumes:
       - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
-      - ./definitions.json:/etc/rabbitmq/definitions.json
+      - ./definitions-up.json:/etc/rabbitmq/definitions.json
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
     networks:
       - rabbitmq-net
 
-  rabbitmq2:
+  rabbitmq-down:
     image: rabbitmq:management
-    hostname: rabbitmq2
+    hostname: rabbitmq-down
     environment:
       - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
       - RABBITMQ_DEFAULT_USER=admin        # Set the default username
@@ -28,7 +28,7 @@ services:
       - "5672:5672"    # AMQP protocol
     volumes:
       - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
-      - ./definitions.json:/etc/rabbitmq/definitions.json
+      - ./definitions-down.json:/etc/rabbitmq/definitions.json
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
     networks:
       - rabbitmq-net
