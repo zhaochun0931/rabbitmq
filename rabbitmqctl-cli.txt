@@ -50,3 +50,17 @@ rabbitmqctl eval 'rabbit_amqqueue:internal_delete({resource,<<"prod">>,queue,<<"
 
 rabbitmqctl eval 'Q = {resource, <<"virtual host name">>, queue, <<"queue name">>}, rabbit_amqqueue:internal_delete(Q, <<"CLI">>).'
 
+
+
+
+
+
+
+
+
+rabbitmq-server –detached
+rabbitmqctl shutdown
+
+
+
+
