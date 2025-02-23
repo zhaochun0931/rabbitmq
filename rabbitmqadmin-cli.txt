@@ -1,0 +1,17 @@
+rabbitmqadmin -u admin -p password declare exchange name=test-ex type=direct
+
+
+rabbitmqadmin -u admin -p password declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
+
+rabbitmqadmin -u admin -p password declare binding source=test-ex destination=qq1 routing_key=""
+rabbitmqadmin -u admin -p password declare binding source=test-ex destination=qq1 routing_key=
+
+
+for i in $(seq 100); do rabbitmqadmin -u admin -p password publish exchange=test-ex routing_key="" payload="hello, world  $i"; done
+
+
+rabbitmqadmin publish exchange=test-ex payload=000000  routing_key=
+
+
+
+rabbitmqadmin get queue=qq1 ackmode=ack_requeue_true count=1000
