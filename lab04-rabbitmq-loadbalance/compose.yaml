@@ -50,6 +50,19 @@ services:
     depends_on:
       - rabbitmq1
 
+  haproxy:
+    image: haproxy
+    hostname: haproxy
+    ports:
+      - "9000:9000" # management UI
+      - "8888:8888"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    networks:
+      - rabbitmq-net
+    depends_on:
+      - rabbitmq1
+
 networks:
   rabbitmq-net:
     driver: bridge
