@@ -1,0 +1,74 @@
+{
+  "bindings": [],
+  "permissions": [
+    {
+      "configure": ".*",
+      "read": ".*",
+      "user": "admin",
+      "vhost": "/",
+      "write": ".*"
+    }
+  ],
+  "queues": [
+    {
+      "arguments": {
+        "x-queue-type": "quorum"
+      },
+      "auto_delete": false,
+      "durable": true,
+      "name": "test-queue",
+      "type": "quorum",
+      "vhost": "/"
+    }
+  ],
+  "parameters": [
+    {
+      "component": "federation-upstream",
+      "name": "my-federation",
+      "value": {
+        "ack-mode": "on-confirm",
+        "trust-user-id": false,
+        "uri": "amqp://admin:password@rabbitmq-up:5672/%2f"
+      },
+      "vhost": "/"
+    }
+  ],
+  "policies": [
+    {
+      "apply-to": "queues",
+      "definition": {
+        "federation-upstream": "my-federation"
+      },
+      "name": "my-policy",
+      "pattern": "^test",
+      "priority": 0,
+      "vhost": "/"
+    }
+  ],
+  "rabbitmq_version": "4.0.3",
+  "rabbit_version": "4.0.3",
+  "exchanges": [],
+  "users": [
+    {
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "limits": {},
+      "name": "admin",
+      "password_hash": "6hi4AMGOLxUJF6AzMLSrsXo8yxTsGYa3voalIJLX9Up3Hs5k",
+      "tags": [
+        "administrator"
+      ]
+    }
+  ],
+  "vhosts": [
+    {
+      "limits": [],
+      "metadata": {
+        "description": "Default virtual host",
+        "tags": []
+      },
+      "name": "/"
+    }
+  ],
+  "global_parameters": [],
+  "topic_permissions": []
+}
