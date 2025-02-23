@@ -1,6 +1,6 @@
 services:
   rabbitmq1:
-    image: rabbitmq:4.0-management
+    image: rabbitmq:management
     hostname: rabbitmq1
     environment:
       - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
@@ -17,7 +17,7 @@ services:
 
 
   rabbitmq2:
-    image: rabbitmq:4.0-management
+    image: rabbitmq:management
     hostname: rabbitmq2
     environment:
       - RABBITMQ_ERLANG_COOKIE=rabbitmq  # Same cookie for all nodes
@@ -34,7 +34,7 @@ services:
       - rabbitmq1
 
   rabbitmq3:
-    image: rabbitmq:4.0-management
+    image: rabbitmq:management
     hostname: rabbitmq3
     environment:
       - RABBITMQ_ERLANG_COOKIE=rabbitmq # Same cookie for all nodes
