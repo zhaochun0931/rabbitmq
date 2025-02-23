@@ -11,8 +11,8 @@ services:
       - "5671:5672"    # AMQP protocol
     volumes:
       - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
-      - ./definiton.json:/etc/rabbitmq/definitions.json
-      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf     
+      - ./definitions.json:/etc/rabbitmq/definitions.json
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
     networks:
       - rabbitmq-net
 
@@ -28,7 +28,7 @@ services:
       - "5672:5672"    # AMQP protocol
     volumes:
       - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
-      - ./definiton.json:/etc/rabbitmq/definitions.json
+      - ./definitions.json:/etc/rabbitmq/definitions.json
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
     networks:
       - rabbitmq-net
