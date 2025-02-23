@@ -55,7 +55,7 @@ services:
     hostname: haproxy
     ports:
       - "9000:9000" # management UI
-      - "8888:8888"
+      - "8888:8888" # port for rabbitmq amqp connection
     volumes:
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
     networks:
