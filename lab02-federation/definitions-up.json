@@ -25,7 +25,7 @@
       },
       "auto_delete": false,
       "durable": true,
-      "name": "qq1",
+      "name": "test-queue",
       "type": "quorum",
       "vhost": "/"
     }
