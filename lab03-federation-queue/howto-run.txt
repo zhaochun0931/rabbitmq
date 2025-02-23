@@ -1,0 +1,9 @@
+when you declare the queue in the down, the queue with the same name will be created automatically in the up.
+
+
+send the message to the up, 
+
+connect a consumer client to down and then the message will be moved from the up to down.
+
+the message will not be moved from up to down if there is no consumer connecting to the down
+
