@@ -10,7 +10,7 @@ services:
       - "15671:15672"  # RabbitMQ management UI for node 1
       - "5671:5672"    # AMQP protocol
     volumes:
-      - ./rabbitmq-cluster.conf.nodes:/etc/rabbitmq/rabbitmq.conf
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
     networks:
       - rabbitmq-net
 
@@ -27,7 +27,7 @@ services:
       - "15672:15672"  # RabbitMQ management UI for node 2
       - "5672:5672"    # AMQP protocol
     volumes:
-      - ./rabbitmq-cluster.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
     networks:
       - rabbitmq-net
     depends_on:
@@ -44,7 +44,7 @@ services:
       - "15673:15672"  # RabbitMQ management UI for node 3
       - "5673:5672"    # AMQP protocol
     volumes:
-      - ./rabbitmq-cluster.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
     networks:
       - rabbitmq-net
     depends_on:
