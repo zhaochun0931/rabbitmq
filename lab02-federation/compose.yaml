@@ -15,7 +15,7 @@ services:
   rabbitmq2:
     image: rabbitmq:management
     hostname: rabbitmq2
-    environment2:
+    environment:
       - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
       - RABBITMQ_DEFAULT_USER=admin        # Set the default username
       - RABBITMQ_DEFAULT_PASS=password    # Set the default password
