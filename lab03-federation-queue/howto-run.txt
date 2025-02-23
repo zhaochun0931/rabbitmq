@@ -7,3 +7,11 @@ connect a consumer client to down and then the message will be moved from the up
 
 the message will not be moved from up to down if there is no consumer connecting to the down
 
+
+
+
+
+
+docker compose up
+
+docker compose down -v
