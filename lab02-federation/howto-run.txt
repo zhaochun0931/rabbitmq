@@ -3,3 +3,14 @@ docker compose up
 docker compose down -v
 
 
+
+
+create a test-ex exchange in the down stream, this exchange will be synced automatically to primary
+
+create the queue on both up and down respectively and bind to the test-ex exchange,  the queue name can be different.
+
+send the message to the test-ex exchange(not the queue)in the up
+
+
+
+
