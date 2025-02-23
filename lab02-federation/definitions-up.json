@@ -34,7 +34,16 @@
   "policies": [],
   "rabbitmq_version": "4.0.3",
   "rabbit_version": "4.0.3",
-  "exchanges": [],
+  "exchanges": [
+    {
+      "arguments": {},
+      "auto_delete": false,
+      "durable": true,
+      "name": "test-ex",
+      "type": "direct",
+      "vhost": "/"
+    }
+  ],
   "users": [
     {
       "hashing_algorithm": "rabbit_password_hashing_sha256",
