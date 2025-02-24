@@ -1,3 +1,13 @@
+java -jar perf-test-2.23.0.jar
+
+-x publisher
+-y consumer
+
+
+java -jar perf-test-2.23.0.jar -x 3 -y 5 --quorum-queue --queue qq100 
+
+
+
 java -jar perf-test-2.22.1.jar -h amqp://username:password@localhost:5672 --queue-pattern 'perf-test-%d' \
 --queue-pattern-from 1 --queue-pattern-to 10 \
 --producers 3 --consumers 3
