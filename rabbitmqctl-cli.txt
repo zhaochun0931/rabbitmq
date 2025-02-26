@@ -48,6 +48,40 @@ rabbitmqctl eval 'inet:i().'
 
 rabbitmqctl eval 'rabbit_amqqueue:internal_delete({resource,<<"prod">>,queue,<<"x1">>}).'
 
+
+
+
+# classic queue hash path
+
+├── msg_stores
+│   └── vhosts
+│       └── 628WB79CIFDYO9LJI6DKMI09L
+│           ├── msg_store_persistent
+│           │   └── 0.rdq
+│           ├── msg_store_transient
+│           │   └── 0.rdq
+│           ├── queues
+│           │   └── 8B8P2A9QO5EECHV4KXXKZWUKI
+│           └── recovery.dets
+
+
+
+rabbitmqctl eval '<<Num:128>> = erlang:md5(<<"queue", <<"VHOST_NAME">>/binary, <<"Classic_QUEUE_NAME">>/binary>>), rabbit_misc:format("~.36B", [Num]).'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 rabbitmqctl eval 'Q = {resource, <<"virtual host name">>, queue, <<"queue name">>}, rabbit_amqqueue:internal_delete(Q, <<"CLI">>).'
 
 
