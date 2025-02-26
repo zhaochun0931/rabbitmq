@@ -102,7 +102,8 @@ rabbitmqctl eval 'rabbit_amqqueue:declare({resource,<<"vhost_name">>,queue,<<"qu
 rabbitmqctl eval '{ok, Q} = rabbit_amqqueue:lookup(rabbit_misc:r(<<"vhost_name">>, queue, <<"queue_name">>)), rabbit_amqqueue:delete(Q,false,false,<<"">>).'
 
 
-
+# purge queue
+rabbitmqctl eval '{ok, Q} = rabbit_amqqueue:lookup(rabbit_misc:r(<<"vhost_name">>, queue, <<"queue_name">>)), rabbit_queue_type:purge(Q).'
 
 
 
