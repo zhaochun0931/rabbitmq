@@ -49,10 +49,25 @@ rabbitmqctl eval 'inet:i().'
 rabbitmqctl eval 'rabbit_amqqueue:internal_delete({resource,<<"prod">>,queue,<<"x1">>}).'
 
 
+# vhost name hash path
+rabbitmqctl eval 'rabbit_vhost:dir("VHOST_NAME").'
+
+# rabbitmqctl eval 'rabbit_vhost:dir("/").'
+"628WB79CIFDYO9LJI6DKMI09L"
+#
+
+
+# message store path
+rabbitmqctl eval 'rabbit_vhost:msg_store_dir_path(<<"VHOST_NAME">>).'
+
+
+# rabbitmqctl eval 'rabbit_vhost:msg_store_dir_path(<<"/">>).'
+"/root/rabbitmq_server-4.0.5/var/lib/rabbitmq/mnesia/rabbit@ubuntu1/msg_stores/vhosts/628WB79CIFDYO9LJI6DKMI09L"
+#
+
 
 
 # classic queue hash path
-
 ├── msg_stores
 │   └── vhosts
 │       └── 628WB79CIFDYO9LJI6DKMI09L
