@@ -97,6 +97,7 @@ rabbitmqctl eval '<<Num:128>> = erlang:md5(<<"queue", <<"VHOST_NAME">>/binary, <
 
 # decalre queue
 rabbitmqctl eval 'rabbit_amqqueue:declare({resource,<<"vhost_name">>,queue,<<"queue_name">>}, true, false, [{<<"x-queue-type">>,longstr,<<"quorum">>}], none, <<"">>).'
+rabbitmqctl eval 'rabbit_amqqueue:declare({resource,<<"/">>,queue,<<"qq1">>}, true, false, [{<<"x-queue-type">>,longstr,<<"quorum">>}], none, <<"">>).'
 
 # delete queue
 rabbitmqctl eval '{ok, Q} = rabbit_amqqueue:lookup(rabbit_misc:r(<<"vhost_name">>, queue, <<"queue_name">>)), rabbit_amqqueue:delete(Q,false,false,<<"">>).'
