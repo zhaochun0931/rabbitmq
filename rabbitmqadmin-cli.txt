@@ -1,3 +1,11 @@
+rabbitmqadmin show overview -u admin -p password
+
+
+
+
+
+
+
 rabbitmqadmin -u admin -p password declare exchange name=test-ex type=direct
 
 
