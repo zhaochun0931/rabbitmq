@@ -12,7 +12,7 @@ for i in $(seq 100); do rabbitmqadmin -u admin -p password publish exchange=test
 
 # publish message
 rabbitmqadmin publish exchange=test-ex payload=000000  routing_key=
-rabbitmqadmin publish  routing_key="qq1" payload="Hello World" --username admin --password password
+rabbitmqadmin publish routing_key="qq1" payload="Hello World" --username admin --password password
 
 
 # consume message
