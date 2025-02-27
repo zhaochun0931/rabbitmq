@@ -1,4 +1,7 @@
 rabbitmqadmin show overview -u admin -p password
+rabbitmqadmin --version
+
+
 
 
 
