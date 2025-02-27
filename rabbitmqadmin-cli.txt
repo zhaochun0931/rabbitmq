@@ -23,6 +23,9 @@ rabbitmqadmin publish exchange=test-ex payload=000000  routing_key=
 rabbitmqadmin publish routing_key="qq1" payload="Hello World" --username admin --password password
 
 
+
 # consume message
 rabbitmqadmin get queue=qq1 ackmode=ack_requeue_true count=1000
 rabbitmqadmin get queue=qq1 ackmode=ack_requeue_true count=1000 -u admin -p password
+rabbitmqadmin get queue=qq1 ackmode=ack_requeue_false count=1000 -u admin -p password
+rabbitmqadmin get queue=qq1 ackmode=reject_requeue_false count=1000 -u admin -p password
