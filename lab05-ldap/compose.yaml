@@ -1,0 +1,39 @@
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    hostname: rabbitmq
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15672:15672"  # RabbitMQ management
+      - "5672:5672"    # AMQP protocol
+    volumes:
+      - ./advanced.config:/etc/rabbitmq/advanced.config
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+    networks:
+      - rabbitmq-net
+
+
+
+  openldap:
+    image: bitnami/openldap:latest
+    hostname: openldap
+    environment:
+      - LDAP_ADMIN_USERNAME=admin
+      - LDAP_ADMIN_PASSWORD=password
+      - LDAP_USERS=user01,user02
+      - LDAP_PASSWORDS=password,password
+      - LDAP_ROOT=dc=example,dc=com
+      - LDAP_ADMIN_DN=cn=admin,dc=example,dc=com
+    ports:
+      - "1389:1389"
+    networks:
+      - rabbitmq-net
+    depends_on:
+      - rabbitmq1
+
+networks:
+  rabbitmq-net:
+    driver: bridge
