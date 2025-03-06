@@ -1,4 +1,4 @@
-apt install -y build-essential
+apt install -y build-essential libncurses5-dev libncursesw5-dev
 
 
 
