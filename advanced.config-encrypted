@@ -4,7 +4,7 @@
               {ssl_options, [{cacertfile,"/root/rabbitmq-cert/ca.crt"},
                              {certfile,  "/root/rabbitmq-cert/server.crt"},
                              {keyfile,   "/root/rabbitmq-cert/server.key"},
-                             {password,  {encrypted,<<"qTaLRdQ4lb3CLskPTnYzeL4nqpAqQr+6dvZ/QIZVzJjdPjeHs4h/uLESxbqFzp6F">>}}
+                             {password,  {encrypted,<<"tDTsVe88ETgSTFPBWrHC9uKwbQytD1NeiuWUOOkBpX2hPvzhFeaobSfZJian/C+b">>}}
                             ]},
               {config_entry_decoder, [
               {passphrase, <<"mypassphrase">>}
