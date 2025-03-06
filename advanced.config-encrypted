@@ -6,7 +6,7 @@
             {cacertfile,"/root/rabbitmq-cert/ca.crt"},
             {certfile,  "/root/rabbitmq-cert/server.crt"},
             {keyfile,   "/root/rabbitmq-cert/server.key"},
-            {password,  {encrypted,<<"tDTsVe88ETgSTFPBWrHC9uKwbQytD1NeiuWUOOkBpX2hPvzhFeaobSfZJian/C+b">>}}
+            {password,  {encrypted,<<"7K0p/mJAhH/+EtqUK/vRD5T65NhdNpgclofeqXjFHlvMqrCaix+rkd9sKY/gHUiZ">>}}
         ]},
 
         {config_entry_decoder, [
