@@ -1,0 +1,16 @@
+apt install -y build-essential
+
+
+
+
+wget https://github.com/erlang/otp/releases/download/OTP-27.3/otp_src_27.3.tar.gz
+
+
+tar -xvf otp_src_27.3.tar.gz
+
+
+cd otp_src_27.3/
+
+
+./configure && make && make install
+
