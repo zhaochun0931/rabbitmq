@@ -3,10 +3,10 @@
         {ssl_listeners, [5671]},
 
         {ssl_options, [
-            {cacertfile,"/root/rabbitmq-cert/ca.crt"},
-            {certfile,  "/root/rabbitmq-cert/server.crt"},
-            {keyfile,   "/root/rabbitmq-cert/server.key"},
-            {password,  {encrypted,<<"7K0p/mJAhH/+EtqUK/vRD5T65NhdNpgclofeqXjFHlvMqrCaix+rkd9sKY/gHUiZ">>}}
+            {cacertfile, "/root/rabbitmq-cert/ca.crt"},
+            {certfile, "/root/rabbitmq-cert/server.crt"},
+            {keyfile, "/root/rabbitmq-cert/server.key"},
+            {password, {encrypted,<<"7K0p/mJAhH/+EtqUK/vRD5T65NhdNpgclofeqXjFHlvMqrCaix+rkd9sKY/gHUiZ">>}}
         ]},
 
         {config_entry_decoder, [
