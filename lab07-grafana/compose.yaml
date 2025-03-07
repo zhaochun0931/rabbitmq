@@ -63,7 +63,7 @@ services:
 
   grafana:
     # https://hub.docker.com/r/grafana/grafana/tags
-    image: grafana/grafana
+    image: grafana/grafana-enterprise
     ports:
       - "3000:3000"
     networks:
