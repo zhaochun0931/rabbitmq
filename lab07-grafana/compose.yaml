@@ -57,7 +57,7 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus.yml:/etc/prometheus/prometheus.yaml
     networks:
       - rabbitmq-net
 
@@ -68,14 +68,7 @@ services:
       - "3000:3000"
     networks:
       - rabbitmq-net
-    environment:
-      # https://grafana.com/plugins/flant-statusmap-panel
-      # https://grafana.com/plugins/grafana-piechart-panel
-      # https://grafana.com/plugins/grafana-polystat-panel
-      # https://grafana.com/plugins/jdbranham-diagram-panel
-      # https://grafana.com/plugins/michaeldmoore-multistat-panel
-      # https://grafana.com/plugins/vonage-status-panel
-      # https://grafana.com/plugins/yesoreyeram-boomtable-panel
+
 networks:
   rabbitmq-net:
     driver: bridge
