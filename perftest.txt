@@ -1,3 +1,10 @@
+https://github.com/rabbitmq/rabbitmq-perf-test/releases
+
+
+
+
+
+
 java -jar perf-test-2.23.0.jar
 
 -x publisher
