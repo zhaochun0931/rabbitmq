@@ -52,3 +52,6 @@ http://10.211.55.22:9090
 # import the dashboard to grafana
 
 https://grafana.com/grafana/dashboards/10991-rabbitmq-overview/
+
+
+https://grafana.com/grafana/dashboards/11352-erlang-distribution/
