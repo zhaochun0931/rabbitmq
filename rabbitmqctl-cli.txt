@@ -147,3 +147,16 @@ rabbit_log:info("test").
 rabbitmq-diagnostics erlang_cookie_sources --formatter json | jq .
 
 
+
+
+# how to leave the cluster
+
+# run the following command on the node2 where you want to leave the cluster
+rabbitmqctl stop_app
+
+
+#run following command on other online node
+rabbitmqctl forget_cluster_node rabbit@node2
+
+
+
