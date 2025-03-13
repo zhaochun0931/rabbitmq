@@ -119,6 +119,9 @@ rabbitmqctl cluster_status
 
 
 
+rabbitmq-plugins enable rabbitmq_management
+
+
 # add user
 rabbitmqctl add_user admin password
 rabbitmqctl set_user_tags admin administrator
