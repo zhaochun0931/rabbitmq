@@ -143,3 +143,7 @@ rabbit_log:info("test").
 
 
 
+
+rabbitmq-diagnostics erlang_cookie_sources --formatter json | jq .
+
+
