@@ -26,7 +26,7 @@ spec:
       schema_definition_sync.connection.password = test-password
 
       schema_definition_sync.downstream.locals.users = ^default_user_
-      schema_definition_sync.downstream.locals.permissions = ^default_user_
+      #schema_definition_sync.downstream.locals.permissions = ^default_user_
       schema_definition_sync.downstream.locals.queues = ^local
       schema_definition_sync.downstream.locals.parameters = ^standby
       schema_definition_sync.downstream.locals.global_parameters = ^standby
