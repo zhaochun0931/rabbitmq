@@ -57,7 +57,7 @@ helm list --namespace rabbitmq-system
 
 
 
-# you can use the kubectl to deploy a rabbitmq cluster
+echo "Now you can use the kubectl to deploy a rabbitmq cluster"
 
 
 
