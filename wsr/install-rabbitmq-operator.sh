@@ -83,6 +83,9 @@ rabbitmqctl schema_replication_status
 
 rabbitmqctl standby_replication_status
 
+rabbitmqctl list_vhosts_available_for_standby_replication_recovery
+
+rabbitmq-diagnostics inspect_local_data_available_for_standby_replication_recovery
 
 
 
