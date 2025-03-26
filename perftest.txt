@@ -15,7 +15,7 @@ java -jar perf-test-2.23.0.jar -x 3 -y 5 --quorum-queue --queue qq100
 
 
 
-java -jar perf-test-2.22.1.jar -h amqp://username:password@localhost:5672 --queue-pattern 'perf-test-%d' \
+java -jar perf-test-2.23.0.jar -h amqp://username:password@localhost:5672 --queue-pattern 'perf-test-%d' \
 --queue-pattern-from 1 --queue-pattern-to 10 \
 --producers 3 --consumers 3
 
@@ -32,6 +32,8 @@ java -jar perf-test-2.22.1.jar -h amqp://username:password@localhost:5672 --queu
 
 
 kubectl run perf-test --image=pivotalrabbitmq/perf-test -n rabbitmq-system -- --uri amqp://username:password@service
+
+kubectl run perf-test --image=pivotalrabbitmq/perf-test -n rabbitmq-system -- --uri amqp://username:password@service/vhost
 
 kubectl run perf-test --image=pivotalrabbitmq/perf-test -n rabbitmq-system -- --nack --uri amqp://username:password@service
 
