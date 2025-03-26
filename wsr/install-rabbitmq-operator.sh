@@ -22,7 +22,9 @@ kubectl create ns rabbitmq-system
 # Provide imagePullSecrets
 kubectl create secret docker-registry tanzu-rabbitmq-registry-creds --docker-server "rabbitmq.packages.broadcom.com" \
 --docker-username $USERNAME \
---docker-password $PASSWORD -n rabbitmq-system
+--docker-password $PASSWORD 
+
+# -n rabbitmq-system
 
 
 
@@ -31,7 +33,10 @@ kubectl create secret docker-registry tanzu-rabbitmq-registry-creds --docker-ser
 
 
 # Install the Tanzu RabbitMQ operators
+helm install tanzu-rabbitmq oci://rabbitmq-helmoci.packages.broadcom.com/tanzu-rabbitmq-operators
 helm install tanzu-rabbitmq oci://rabbitmq-helmoci.packages.broadcom.com/tanzu-rabbitmq-operators --namespace rabbitmq-system
+
+
 
 kubectl get secret -A
 kubectl get all -n rabbitmq-system
