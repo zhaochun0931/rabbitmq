@@ -5,8 +5,8 @@ metadata:
   namespace: rabbitmq-system
 spec:
   replicas: 1
-  # imagePullSecrets:
-  # - name: tanzu-rabbitmq-registry-creds
+  imagePullSecrets:
+  - name: tanzu-rabbitmq-registry-creds
   rabbitmq:
     additionalPlugins:
       - rabbitmq_stream
