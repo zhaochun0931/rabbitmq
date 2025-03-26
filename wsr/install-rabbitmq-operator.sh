@@ -79,6 +79,12 @@ echo "password: $password"
 
 
 
+rabbitmqctl schema_replication_status
+
+rabbitmqctl standby_replication_status
+
+
+
 
 
 # how to install configure the tls in the pod
