@@ -39,13 +39,11 @@ kubectl create secret docker-registry tanzu-rabbitmq-registry-creds --docker-ser
 
 
 
-
+# Install the Tanzu RabbitMQ operators
 helm install tanzu-rabbitmq oci://rabbitmq-helmoci.packages.broadcom.com/tanzu-rabbitmq-operators --namespace rabbitmq-system
 
 kubectl get secret -A
-
 kubectl get all -n rabbitmq-system
-
 helm list --namespace rabbitmq-system
 
 
