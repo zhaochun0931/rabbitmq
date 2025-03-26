@@ -12,12 +12,12 @@ kubectl run perf-test --image=pivotalrabbitmq/perf-test -- -x 5 -y 0 --quorum-qu
 
 
 
-kubectl port-forward "service/rabbitmq1" 15672
+kubectl port-forward "service/rabbitmq1" 15672 5672 5552
+kubectl port-forward "service/rabbitmq2" 15672 5672 5552
 
-kubectl port-forward "service/rabbitmq2" 15672
 
-nohup kubectl port-forward service/rabbitmq2 -n rabbitmq-system --address 0.0.0.0 15672:15672 5672:5672 5552:5552 &
+nohup kubectl port-forward service/rabbitmq1 --address 0.0.0.0 15672 5672 5552 &
+nohup kubectl port-forward service/rabbitmq2 --address 0.0.0.0 15672 5672 5552 &
 
-nohup kubectl port-forward service/rabbitmq1 -n rabbitmq-system --address 0.0.0.0 15672:15672 5672:5672 5552:5552 &
 
   
