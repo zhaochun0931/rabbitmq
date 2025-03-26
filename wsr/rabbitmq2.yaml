@@ -2,7 +2,7 @@ apiVersion: rabbitmq.com/v1beta1
 kind: RabbitmqCluster
 metadata:
   name: rabbitmq2
-  namespace: rabbitmq-system
+  # namespace: rabbitmq-system
 spec:
   replicas: 1
   imagePullSecrets:
