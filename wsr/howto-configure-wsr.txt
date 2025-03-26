@@ -20,4 +20,14 @@ nohup kubectl port-forward service/rabbitmq1 --address 0.0.0.0 15672 5672 5552 &
 nohup kubectl port-forward service/rabbitmq2 --address 0.0.0.0 15672 5672 5552 &
 
 
+
+
+
+
+rabbitmqctl schema_replication_status
+
+rabbitmqctl standby_replication_status
+
+
+
   
