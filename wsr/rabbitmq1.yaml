@@ -121,3 +121,19 @@ spec:
     read: ".*"
   rabbitmqClusterReference:
     name: rabbitmq1  # the upstream RabbitMQ cluster name. It must be in the same namespace and it is a mandatory value.
+
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Policy
+metadata:
+  name: upstream-policy
+  namespace: rabbitmq-system
+spec:
+  name: osr # name of the policy
+  vhost: "test" # default to '/' if not provided
+  pattern: "^.*" # regex used to match queues and exchanges
+  applyTo: "queues" # set to 'queues', 'exchanges', or 'all'
+  definition: # policy definition
+    remote-dc-replicate: true
+  rabbitmqClusterReference:
+    name: rabbitmq1 # rabbitmqCluster must exist in the same namespace as this resource
