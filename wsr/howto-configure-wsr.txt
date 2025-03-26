@@ -5,9 +5,9 @@
 
 # pod/perf-test created
 
-username="$(kubectl get secret rabbitmq1-default-user -n rabbitmq-system -o jsonpath='{.data.username}' | base64 --decode)"
-password="$(kubectl get secret rabbitmq1-default-user -n rabbitmq-system -o jsonpath='{.data.password}' | base64 --decode)"
-service="$(kubectl get service rabbitmq1 -n rabbitmq-system -o jsonpath='{.spec.clusterIP}')"
+username="$(kubectl get secret rabbitmq1-default-user -o jsonpath='{.data.username}' | base64 --decode)"
+password="$(kubectl get secret rabbitmq1-default-user -o jsonpath='{.data.password}' | base64 --decode)"
+service="$(kubectl get service rabbitmq1 -o jsonpath='{.spec.clusterIP}')"
 kubectl run perf-test --image=pivotalrabbitmq/perf-test -- -x 5 -y 0 --quorum-queue --queue qq2 --uri amqp://$username:$password@$service/test
 
 
