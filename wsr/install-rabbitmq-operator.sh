@@ -63,13 +63,16 @@ nohup kubectl port-forward service/rabbitmq1 -n rabbitmq-system --address 0.0.0.
 nohup kubectl port-forward service/rabbitmq2 -n rabbitmq-system --address 0.0.0.0 15672:15672 5672:5672 5552:5552 &
 
 
-username="$(kubectl get secret my-rabbitmq-default-user -n rabbitmq-system -o jsonpath='{.data.username}' | base64 --decode)"
-password="$(kubectl get secret my-rabbitmq-default-user -n rabbitmq-system -o jsonpath='{.data.password}' | base64 --decode)"
+username="$(kubectl get secret rabbitmq1-default-user -n rabbitmq-system -o jsonpath='{.data.username}' | base64 --decode)"
+password="$(kubectl get secret rabbitmq1-default-user -n rabbitmq-system -o jsonpath='{.data.password}' | base64 --decode)"
 echo "username: $username"
 echo "password: $password"
 
 
-
+username="$(kubectl get secret rabbitmq2-default-user -n rabbitmq-system -o jsonpath='{.data.username}' | base64 --decode)"
+password="$(kubectl get secret rabbitmq2-default-user -n rabbitmq-system -o jsonpath='{.data.password}' | base64 --decode)"
+echo "username: $username"
+echo "password: $password"
 
 
 
