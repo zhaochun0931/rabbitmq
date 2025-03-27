@@ -1,0 +1,17 @@
+rabbitmqctl schema_replication_status
+
+
+
+
+rabbitmqctl disable_schema_replication
+
+rabbitmqctl enable_schema_replication
+
+rabbitmqctl restart_schema_replication
+
+
+
+
+
+
+rabbitmqctl standby_replication_status
