@@ -1,7 +1,7 @@
 services:
-  rabbitmq1:
+  node1:
     image: rabbitmq:management
-    hostname: rabbitmq1
+    hostname: node1
     environment:
       - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
       - RABBITMQ_DEFAULT_USER=admin        # Set the default username
@@ -16,9 +16,9 @@ services:
 
 
 
-  rabbitmq2:
+  node2:
     image: rabbitmq:management
-    hostname: rabbitmq2
+    hostname: node2
     environment:
       - RABBITMQ_ERLANG_COOKIE=rabbitmq  # Same cookie for all nodes
       - RABBITMQ_DEFAULT_USER=admin        # Set the default username
@@ -31,11 +31,11 @@ services:
     networks:
       - rabbitmq-net
     depends_on:
-      - rabbitmq1
+      - node1
 
-  rabbitmq3:
+  node3:
     image: rabbitmq:management
-    hostname: rabbitmq3
+    hostname: node3
     environment:
       - RABBITMQ_ERLANG_COOKIE=rabbitmq # Same cookie for all nodes
       - RABBITMQ_DEFAULT_USER=admin        # Set the default username
@@ -48,7 +48,7 @@ services:
     networks:
       - rabbitmq-net
     depends_on:
-      - rabbitmq1
+      - node1
 
 networks:
   rabbitmq-net:
