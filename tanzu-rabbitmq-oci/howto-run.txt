@@ -1,3 +1,31 @@
+# upstream
+rabbitmqctl add_vhost rabbitmq_schema_definition_sync
+
+rabbitmqctl add_vhost "vhost1" --tags "standby_replication"
+
+rabbitmqctl set_policy --vhost "vhost1" osr "^.*" '{"remote-dc-replicate": true}' --apply-to "queues"
+
+rabbitmq-diagnostics inspect_standby_upstream_metrics
+
+
+
+
+
+
+# downstream
+rabbitmq-diagnostics inspect_standby_downstream_metrics
+
+rabbitmqctl display_disk_space_used_by_standby_replication_data
+
+
+
+
+
+
+
+
+
+
 rabbitmqctl schema_replication_status
 
 
