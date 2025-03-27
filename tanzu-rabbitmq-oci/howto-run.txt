@@ -1,12 +1,10 @@
 # upstream
 rabbitmqctl add_vhost rabbitmq_schema_definition_sync
-
 rabbitmqctl add_vhost "vhost1" --tags "standby_replication"
 rabbitmqctl set_permissions --vhost vhost1 admin ".*" ".*" ".*"
 rabbitmqctl set_permissions --vhost vhost1 test-user ".*" ".*" ".*"
-
-
 rabbitmqctl set_policy --vhost "vhost1" osr "^.*" '{"remote-dc-replicate": true}' --apply-to "queues"
+
 
 rabbitmq-diagnostics inspect_standby_upstream_metrics
 
