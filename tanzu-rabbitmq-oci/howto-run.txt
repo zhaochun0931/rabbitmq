@@ -27,9 +27,25 @@ rabbitmqctl display_disk_space_used_by_standby_replication_data
 rabbitmq-diagnostics inspect_local_data_available_for_standby_replication_recovery
 
 
+rabbitmqctl promote_standby_replication_downstream_cluster
 
 
 
+
+$ rabbitmqctl promote_standby_replication_downstream_cluster
+Will promote cluster to upstream...
+last_timestamp	first_timestamp	virtual_host	message_count	stream_count
+2025-03-27 08:00:59	2025-03-27 07:44:04	vhost1	2	0
+$
+
+$ rabbitmqctl promote_standby_replication_downstream_cluster --formatter pretty_table
+Will promote cluster to upstream...
+┌─────────────────────┬─────────────────────┬──────────────┬───────────────┬──────────────┐
+│ last_timestamp      │ first_timestamp     │ virtual_host │ message_count │ stream_count │
+├─────────────────────┼─────────────────────┼──────────────┼───────────────┼──────────────┤
+│ 2025-03-27 08:00:59 │ 2025-03-27 08:00:59 │ vhost1       │ 0             │ 0            │
+└─────────────────────┴─────────────────────┴──────────────┴───────────────┴──────────────┘
+$
 
 
 
