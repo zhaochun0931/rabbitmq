@@ -10,7 +10,7 @@ username = "admin"  # Replace with your RabbitMQ username
 password = "password"  # Replace with your RabbitMQ password
 
 # MQTT callback function for when the client connects to the broker
-def on_connect(client, userdata, flags, rc):
+def on_connect(client, userdata, flags, rc, properties):
     print(f"Connected to broker with result code {rc}")
     # Subscribe to the topic once connected
     client.subscribe(topic)
@@ -23,7 +23,7 @@ def on_message(client, userdata, msg):
     print(f"Received message '{message}' from topic '{msg.topic}'")
 
 # Create the MQTT client instance
-client = mqtt.Client()
+client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)  # No need to specify API version
 
 # Set username and password for authentication
 client.username_pw_set(username, password)
@@ -47,4 +47,3 @@ try:
         pass
 except KeyboardInterrupt:
     print("Exiting...")
-
