@@ -27,6 +27,10 @@ java -jar perf-test-2.22.1.jar -h amqp://username:password@localhost:5672 --queu
 --quorum-queue --queue qq1
 
 
+java -jar perf-test-2.23.0.jar -h amqp://admin:password@localhost:5672 --quorum-queue --queue qq1 --queue-args x-max-length=3 x-overflow=reject-publish -x 1 -y 0
+
+
+
 
 
 
