@@ -1,0 +1,116 @@
+# install from pre-built package
+
+apt-get install erlang -y
+
+
+
+
+
+
+
+
+
+
+
+https://cloudsmith.io/~rabbitmq/repos/
+
+https://www.rabbitmq.com/install-debian.html#apt-cloudsmith
+
+
+
+
+Release	Distribution
+Ubuntu 23.04	jammy
+Ubuntu 22.04	jammy
+Ubuntu 20.04	focal
+Ubuntu 18.04	bionic
+
+
+
+
+# install guide
+
+
+curl -1sLf \
+  'https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/setup.deb.sh' \
+  | sudo -E bash
+
+
+
+Executing the  setup script for the 'rabbitmq/rabbitmq-erlang' repository ...
+
+   OK: Checking for required executable 'curl' ...
+   OK: Checking for required executable 'apt-get' ...
+   OK: Detecting your OS distribution and release using system methods ...
+ ^^^^: ... Detected/provided for your OS/distribution, version and architecture:
+ >>>>:
+ >>>>: ... distro=ubuntu  version=22.04  codename=jammy  arch=x86_64
+ >>>>:
+   OK: Checking for apt dependency 'apt-transport-https' ...
+   OK: Checking for apt dependency 'ca-certificates' ...
+   OK: Checking for apt dependency 'gnupg' ...
+   OK: Checking for apt signed-by key support ...
+   OK: Importing 'rabbitmq/rabbitmq-erlang' repository GPG keys ...
+   OK: Checking if upstream install config is OK ...
+   OK: Installing 'rabbitmq/rabbitmq-erlang' repository via apt ...
+   OK: Updating apt repository metadata cache ...
+   OK: The repository has been installed successfully - You're ready to rock!
+
+
+
+
+
+
+
+
+
+
+
+
+keyring_location=/usr/share/keyrings/rabbitmq-rabbitmq-erlang-archive-keyring.gpg
+ERLANG_VERSION=1:26.1.2-1
+ERLANG_VERSION=1:26.2.3-1
+ERLANG_VERSION=1:25.3.2.11-1
+
+
+
+
+
+apt-get install -y \
+erlang-base=$ERLANG_VERSION \
+erlang-asn1=$ERLANG_VERSION erlang-crypto=$ERLANG_VERSION erlang-eldap=$ERLANG_VERSION erlang-ftp=$ERLANG_VERSION erlang-inets=$ERLANG_VERSION \
+erlang-mnesia=$ERLANG_VERSION erlang-os-mon=$ERLANG_VERSION erlang-parsetools=$ERLANG_VERSION erlang-public-key=$ERLANG_VERSION \
+erlang-runtime-tools=$ERLANG_VERSION erlang-snmp=$ERLANG_VERSION erlang-ssl=$ERLANG_VERSION \
+erlang-syntax-tools=$ERLANG_VERSION erlang-tftp=$ERLANG_VERSION erlang-tools=$ERLANG_VERSION erlang-xmerl=$ERLANG_VERSION
+
+
+
+
+
+
+
+# install latest
+add-apt-repository ppa:rabbitmq/rabbitmq-erlang
+apt update
+apt install erlang -y
+
+
+
+
+
+
+
+
+
+# install default
+apt update
+
+apt install curl software-properties-common apt-transport-https lsb-release -y
+
+curl -fsSL https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/erlang.gpg
+
+echo "deb https://packages.erlang-solutions.com/ubuntu $(lsb_release -cs) contrib" | sudo tee /etc/apt/sources.list.d/erlang.list
+
+apt update
+
+apt install erlang -y
