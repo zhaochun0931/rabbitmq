@@ -1,0 +1,32 @@
+epmd -names
+
+
+# epmd -names
+epmd: up and running on port 4369 with data:
+name rabbit at port 25672
+#
+
+/usr/local/lib/erlang/erts-15.2.3/bin/epmd -daemon
+
+
+
+ps -ef | egrep -i beam.smp
+
+
+
+
+
+
+
+# check erlang version
+
+erl -eval '{ok, Version} = file:read_file(filename:join([code:root_dir(), "releases", erlang:system_info(otp_release), "OTP_VERSION"])), io:fwrite(Version), halt().' -noshell
+
+erl -eval 'application:which_applications().' -s init stop -s
+
+
+
+
+
+
+
