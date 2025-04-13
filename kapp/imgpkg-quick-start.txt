@@ -1,0 +1,53 @@
+git clone https://github.com/carvel-dev/imgpkg.git
+cd imgpkg
+
+
+docker login
+
+
+imgpkg push -b index.docker.io/xman1111/simple-app-bundle:v1.0.0 -f examples/basic-step-2
+
+
+$ imgpkg push -b index.docker.io/xman1111/simple-app-bundle:v1.0.0 -f examples/basic-step-2
+dir: .
+dir: .imgpkg
+file: .imgpkg/bundle.yml
+file: .imgpkg/images.yml
+file: config.yml
+Pushed 'index.docker.io/xman1111/simple-app-bundle@sha256:5c2dafe3c70c13990190d643c91e9f67b8129b179257674888178868474f6511'
+Succeeded
+$
+
+
+
+
+imgpkg pull -b index.docker.io/xman1111/simple-app-bundle:v1.0.0 -o ./bundle1
+
+
+$ imgpkg pull -b index.docker.io/xman1111/simple-app-bundle:v1.0.0 -o ./bundle1
+Pulling bundle 'index.docker.io/xman1111/simple-app-bundle@sha256:5c2dafe3c70c13990190d643c91e9f67b8129b179257674888178868474f6511'
+  Extracting layer 'sha256:45e16698e6e721de091b5ecbb811eae1243fb8f2ed5dbd04a9f40cd199c355f9' (1/1)
+
+Locating image lock file images...
+One or more images not found in bundle repo; skipping lock file update
+
+Succeeded
+$ 
+
+
+
+
+
+
+$ imgpkg copy -b index.docker.io/xman1111/simple-app-bundle:v1.0.0 --to-tar ./app1-bundle.tar
+copy | exporting 2 images...
+copy | will export index.docker.io/dkalinin/k8s-simple-app@sha256:4c8b96d4fffdfae29258d94a22ae4ad1fe36139d47288b8960d9958d1e63a9d0
+copy | will export index.docker.io/xman1111/simple-app-bundle@sha256:5c2dafe3c70c13990190d643c91e9f67b8129b179257674888178868474f6511
+copy | exported 2 images
+copy | writing layers...
+copy | done: file 'manifest.json' (46.542µs)
+copy | done: file 'sha256-45e16698e6e721de091b5ecbb811eae1243fb8f2ed5dbd04a9f40cd199c355f9.tar.gz' (206.834µs)
+copy | done: file 'sha256-8ece9ac45f2b7228b2ed95e9f407b4f0dc2ac74f93c62ff1156f24c53042ba54.tar.gz' (463.331584ms)
+
+Succeeded
+$
