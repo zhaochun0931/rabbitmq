@@ -1,0 +1,4 @@
+wget -O- https://carvel.dev/install.sh > install.sh
+
+sudo bash install.sh
+kapp version
