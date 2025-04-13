@@ -2,3 +2,16 @@ wget -O- https://carvel.dev/install.sh > install.sh
 
 sudo bash install.sh
 kapp version
+
+
+
+
+
+# deploy the nginx with kapp
+
+kapp deploy -a nginx-app -f k8s-deploy-4-nginx.yaml
+
+
+kapp list
+
+kapp logs -f -a nginx-app
