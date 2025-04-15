@@ -1,0 +1,13 @@
+docker run -d --rm -p 9092:9092 --name mykafka apache/kafka
+
+docker exec --workdir /opt/kafka/bin/ -it mykafka bash
+
+./kafka-topics.sh --bootstrap-server localhost:9092 --create --topic test-topic
+./kafka-console-producer.sh --bootstrap-server localhost:9092 --topic test-topic
+
+
+
+
+
+# open another terminal
+./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test-topic --from-beginning
