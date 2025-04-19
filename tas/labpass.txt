@@ -1,0 +1,17 @@
+labpass o -l LAB_ID
+
+
+labpass deploy -l LAB_ID
+
+slot34-35_tas_pks_and_services/3.0
+
+
+
+
+labpass c -l LAB_ID
+
+
+
+1. wipe the data
+2. install ops manager
+3. install tas
