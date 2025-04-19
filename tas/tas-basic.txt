@@ -193,3 +193,13 @@ bosh -d <deployment> deploy manifest.yml --fix --skip-drain
 bosh update-resurrection on
 
 
+
+
+
+
+
+
+cf curl /v3/apps/delpoyment-id
+
+
+
