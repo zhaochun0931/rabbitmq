@@ -201,5 +201,51 @@ bosh update-resurrection on
 
 cf curl /v3/apps/delpoyment-id
 
+cf enable-feature-flag diego_docker
+
+cf push xxx-app --docker-image ubuntu
+
+cf feature-flags
+
+
+
+
+
+
+
+
+
+# cf push quickstart
+
+mkdir xxx
+echo "Hello PHP" > xxx/index.php;
+time cf push xxx --random-route -k 300M -m 300M
+
+cf apps
+cf stop xxx
+cf delete xxx
+
+
+
+
+
+
+# cf push quickstart2
+cf push yyy -b binary_buildpack -c 'while true; do sleep 3600; done' -m 64m --no-route
+cf push yyy -b binary_buildpack -c 'while true; do sleep 3600; done' -m 64m --no-route --health-check-type process
+
+
+
+# cf push quickstart3
+cf push yyy -p demo.jar
+
+
+
+
+
+
+
+cf push xxx  -p target/my-app-1.0-SNAPSHOT-jar-with-dependencies.jar --health-check-type process
+
 
 
