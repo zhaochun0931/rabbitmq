@@ -1,0 +1,195 @@
+diagnostic_report.json
+
+
+
+
+bosh -v
+bosh stemcells
+
+
+
+bosh cancel-task <task-id>
+
+
+
+
+
+
+
+Deployment 'cf-d1b70c1a322072e912a1'
+
+Instance                                                            Process State  AZ   IPs            VM CID                                   VM Type      Active  Stemcell
+clock_global/85a926ee-8644-4b19-b292-fdd6d39c0ffb                   running        az1  10.225.50.111  vm-f3e49731-7624-4967-8878-826f386f398c  medium.disk  true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+cloud_controller/cd792de7-5a9a-4b83-8dd7-597cbc70b220               running        az1  10.225.50.72   vm-8c8b6e86-e810-47b9-aa88-37eb75965d06  medium.disk  true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+cloud_controller_worker/6fae4328-fedd-4861-b218-db9624af6f83        running        az1  10.225.50.101  vm-583bf59d-5194-4b0c-a229-9f9f585bdfe3  micro        true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+credhub/8f7a32e0-f0e6-4cba-8798-af16af901c77                        running        az1  10.225.50.114  vm-734cf3f5-2967-4366-a27d-0958c7f1ea9f  large        true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+diego_brain/dffece96-1381-4a92-ac6e-fbdb9ae7c74d                    running        az1  10.225.50.102  vm-aec4243b-e194-41a0-a118-d273f526c6f4  small        true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+diego_cell/afc34a95-c6b0-4f40-97ad-b0a3e338013b                     running        az1  10.225.50.104  vm-9fc0e26f-ced7-4a44-8bbc-c8732003cb18  xlarge.disk  true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+diego_cell/cc99d793-7379-4066-97ba-92c7524bd25a                     running        az2  10.225.50.105  vm-f6385ccc-4f65-4a08-adc3-5f2af7af6cb6  xlarge.disk  true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+diego_database/dbf886b0-342f-4bfe-a664-24eb31a12299                 running        az1  10.225.50.70   vm-680fbd8a-1bea-447b-a91a-38824e78b7b2  micro        true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+doppler/51488d95-b13a-4722-a3d2-4d7d954c65c8                        running        az2  10.225.50.113  vm-8846ad6a-7393-406a-80b1-f82d5d15a098  small        true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+doppler/6ed8ecf8-ec26-4d65-8b1d-b016cea3263b                        running        az1  10.225.50.112  vm-7a4d1ae5-d6a4-458a-afbc-d56b35a3cc3a  small        true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+log_cache/0b1f07b5-88e2-408c-b5b6-0850d911fbac                      running        az3  10.225.50.110  vm-f2c64900-0298-4cbd-bd31-ba4687b0be9c  medium.mem   true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+log_cache/4e17d711-050b-4ae9-9fa0-137f78cf2098                      running        az1  10.225.50.108  vm-843d7342-d494-42b9-9225-2438d10bc309  medium.mem   true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+log_cache/fa42a4be-88aa-495c-b386-b3eb15fa0d80                      running        az2  10.225.50.109  vm-7156149c-8f68-4c57-9362-d58967de9504  medium.mem   true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+loggregator_trafficcontroller/5e9f98b0-299b-4f67-925a-89324d51e169  running        az2  10.225.50.107  vm-475aa789-483c-4380-a3b9-3af466b332b2  micro        true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+loggregator_trafficcontroller/961535a6-cf52-4277-9cb1-90d8bfc769d9  running        az1  10.225.50.106  vm-ddfb07f5-a78a-4955-96b0-e5164b7f2a90  micro        true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+mysql/5657f875-006d-4857-8209-e3a3241d257a                          running        az1  10.225.50.69   vm-8b4a7892-8b59-485a-9f6f-93755e80beff  large.disk   true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+mysql_monitor/6ae79f9e-3b06-4383-9e7e-cc7cfce5b036                  running        az1  10.225.50.103  vm-695d50f7-1f4d-4363-8996-49cd81c19f9a  micro        true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+mysql_proxy/390a6bdd-6577-4de1-9dd4-158dd14b1aa9                    running        az1  10.225.50.68   vm-b29c118b-00fb-4845-ba32-757dcdcc8773  micro        true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+nats/9dfbcf06-2885-4b59-a1f2-8fa0d8aae6c5                           running        az1  10.225.50.66   vm-6ecccd4a-fb98-4f1c-8c20-39c1c209246b  micro        true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+nfs_server/0fdcdd12-539c-48aa-a25f-9f7fd40e908d                     running        az1  10.225.50.67   vm-79c620a7-4e2c-489d-baf0-8ea917ae8e29  medium       true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+router/08282e17-7dff-4ee3-847c-0487756d8c80                         running        az1  10.225.50.119  vm-e3e5ac22-b605-4cd4-9dc8-d6d819111a94  micro.ram    true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+uaa/e6152018-7e15-48d0-a122-76593f97b318                            running        az1  10.225.50.71   vm-82bff7a3-cf71-4b06-ad60-488d07f8ffbb  medium.disk  true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.108
+
+22 vms
+
+Deployment 'haproxy'
+
+Instance                                      Process State  AZ   IPs            VM CID                                   VM Type  Active  Stemcell
+haproxy/36a89c47-b375-4fba-a011-6bf5d550b681  running        az1  10.225.50.124  vm-72295a93-2796-46ac-a3bd-04343984e15b  medium   true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.199
+
+1 vms
+
+
+
+
+
+
+
+bosh deployments
+bosh delete-deployment -d service-instance_8bb907c3-9d0f-4ac3-9aa4-e74d5ad0a2ff
+
+
+bosh task --help
+bosh task FAILED_TASK_ID --debug
+
+
+
+# supportbundle log collection
+bosh logs -d service-instance_4924d628-1cd1-45fd-a18e-6e9f6e9d9ea4
+bosh -d service-instance_93535c4e-531b-4064-862f-3b32caca104b logs
+
+
+
+
+
+
+
+
+
+bosh -d service-instance_8bb907c3-9d0f-4ac3-9aa4-e74d5ad0a2ff vms
+bosh vms -d service-instance_8bb907c3-9d0f-4ac3-9aa4-e74d5ad0a2ff
+bosh vms
+
+
+bosh is -d service-instance_4924d628-1cd1-45fd-a18e-6e9f6e9d9ea4
+bosh -d service-instance_a85b9b8e-d214-405e-a370-d693b805257d is --details
+
+
+
+bosh ssh -d service-instance_8bb907c3-9d0f-4ac3-9aa4-e74d5ad0a2ff rabbitmq-server/7d291961-1f3b-4684-a6ed-27f0a186814b
+bosh -d service-instance_8bb907c3-9d0f-4ac3-9aa4-e74d5ad0a2ff ssh rabbitmq-server/7d291961-1f3b-4684-a6ed-27f0a186814b
+
+
+
+
+
+
+# export the deployment yaml file 
+bosh manifest -d service-instance_4924d628-1cd1-45fd-a18e-6e9f6e9d9ea4 > xx.yaml
+bosh -d service-instance_4924d628-1cd1-45fd-a18e-6e9f6e9d9ea4 manifest > xx.yaml
+
+
+
+
+
+
+        ssl:
+          cacert: "((tls_certificate.ca))"
+          cert: "((tls_certificate.certificate))"
+          disable_non_ssl_listeners: true
+          enabled: true
+          fail_if_no_peer_cert: false
+          key: "((tls_certificate.private_key))"
+          verification_depth: 5
+          verify: false
+
+
+
+
+
+
+
+
+
+
+# apply changes after modification such as increasing the instances of vm
+bosh deploy -d service-instance_4924d628-1cd1-45fd-a18e-6e9f6e9d9ea4 xx.yaml
+bosh -d service-instance_4924d628-1cd1-45fd-a18e-6e9f6e9d9ea4 deploy xx.yaml
+
+
+
+
+
+# recreate all VMs in deployment
+bosh -d service_instance deploy manifest.yml --recreate --fix 
+
+
+
+# recreate the single VM, the IP of VM will change, VM id will change as well， but the disk id will remain the same
+bosh -d service-instance_8bb907c3-9d0f-4ac3-9aa4-e74d5ad0a2ff recreate rabbitmq-server/7d291961-1f3b-4684-a6ed-27f0a186814b
+bosh -d service-instance_8bb907c3-9d0f-4ac3-9aa4-e74d5ad0a2ff recreate rabbitmq-server/7d291961-1f3b-4684-a6ed-27f0a186814b --fix
+
+
+
+
+# list disk id
+bosh -d service_instance instances --details
+
+
+
+
+
+sudo -i
+monit summary
+monit stop all
+monit restart all
+
+
+
+
+/var/vcap/store
+lsof /var/vcap/store
+
+
+/var/vcap/sys/log
+
+
+# scp/copy
+
+bosh scp tls.key -d cf-2e0c501d46b5f0bb0f49 cloud_controller/032f0d86-9a57-46e6-ad91-7b9c510f5e59:/tmp
+bosh -d service-instance_0d483043-219c-4470-a3d5-17d133b211f2 scp  rabbitmq-server/1b0ee764-0e7b-4d8b-afd3-6da874825000:/tmp/xx.json .
+bosh -d service-instance_bee0ffa8-6402-4161-afd6-27fb225270e8 scp ./xx.json rabbitmq-server/0072ddb8-39c9-44d4-a6b9-275d597499ab:/tmp
+
+# 
+
+bosh -d your-rabbbitmq-instance deploy modifed-manifest.yml --fix
+
+
+
+
+/var/vcap/jobs/rabbitmq-server/bin/pre-stop
+
+
+
+
+
+bosh update-resurrection off
+bosh -d <deployment> delete-vm  <vm cid>
+bosh manifest > manifest.yml
+edit manifest to upgraded jammy 1.785
+bosh -d <deployment> deploy manifest.yml --fix --skip-drain
+bosh update-resurrection on
+
+
