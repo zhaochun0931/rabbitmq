@@ -163,3 +163,16 @@ rabbitmqctl forget_cluster_node rabbit@node2
 
 
 
+
+
+
+
+
+On all of the nodes in Raft State "follower" force delete the replica, replace "VHostName" and "QueueName" with the appropriate values
+
+rabbitmqctl eval "ra:force_delete_server(quorum_queues, {'VHostName_QueueName', node()})."
+On the remaining node with Raft State "pre_vote" run:
+
+rabbitmqctl eval "ra_server_proc:force_shrink_members_to_current_member({'VHostName_QueueName', node()})."
+Verify the state of the queue, there should be just one node as leader:
+
