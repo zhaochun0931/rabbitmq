@@ -44,8 +44,8 @@ kubectl apply -f https://github.com/rabbitmq/messaging-topology-operator/release
 
 
 
-
-
+kubectl get rabbitmqclusters.rabbitmq.com
+kubectl get rabbitmqclusters.rabbitmq.com rabbitmq1
 
 
 # how to access Rabbitmq cluster
