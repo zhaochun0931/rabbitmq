@@ -31,7 +31,7 @@ spec:
                 seccompProfile:
                   type: RuntimeDefault
             containers:
-              - name: 111
+              - name: rabbitmq
                 securityContext:
                   allowPrivilegeEscalation: false
                   capabilities:
