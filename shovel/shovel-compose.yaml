@@ -1,1 +1,32 @@
+services:
+  shanghai:
+    image: rabbitmq:management
+    hostname: shanghai
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15672:15672"  # RabbitMQ management
+      - "5672:5672"    # AMQP protocol
+    volumes:
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+    networks:
+      - rabbitmq-net
 
+  hongkong:
+    image: rabbitmq:management
+    hostname: hongkong
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15772:15672"  # RabbitMQ management
+      - "5772:5672"    # AMQP protocol
+    volumes:
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+    networks:
+      - rabbitmq-net
+
+networks:
+  rabbitmq-net:
+    driver: bridge
