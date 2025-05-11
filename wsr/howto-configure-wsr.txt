@@ -1,5 +1,3 @@
-# pod/perf-test created
-
 username="$(kubectl get secret rabbitmq1-default-user -o jsonpath='{.data.username}' | base64 --decode)"
 password="$(kubectl get secret rabbitmq1-default-user -o jsonpath='{.data.password}' | base64 --decode)"
 
@@ -12,6 +10,7 @@ echo -e "password: \t $password"
 
 
 
+# pod/perf-test
 service="$(kubectl get service rabbitmq1 -o jsonpath='{.spec.clusterIP}')"
 kubectl run perf-test --image=pivotalrabbitmq/perf-test -- -x 5 -y 0 --quorum-queue --queue qq2 --uri amqp://$username:$password@$service/test
 
