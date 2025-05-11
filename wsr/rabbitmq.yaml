@@ -5,5 +5,12 @@ metadata:
   # namespace: rabbitmq-system
 spec:
   replicas: 1
+  resources:
+    limits:
+      cpu: "0.1"
+      memory: 500Mi
+    requests:
+      cpu: "0.1"
+      memory: 500Mi
   imagePullSecrets:
   - name: tanzu-rabbitmq-registry-creds
