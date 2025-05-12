@@ -1,0 +1,4 @@
+curl -u username:password http://localhost:15672/api/vhosts 
+
+curl -u username:password http://localhost:15672/api/vhosts | jq 
+
