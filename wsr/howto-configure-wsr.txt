@@ -12,7 +12,8 @@ echo -e "password: \t $password"
 
 # pod/perf-test
 service="$(kubectl get service rabbitmq1 -o jsonpath='{.spec.clusterIP}')"
-kubectl run perf-test --image=pivotalrabbitmq/perf-test -- -x 5 -y 0 --quorum-queue --queue qq2 --uri amqp://$username:$password@$service/test
+kubectl run perf-test --image=pivotalrabbitmq/perf-test -- -x 5 -y 0 --quorum-queue --queue qq2 --uri amqp://$username:$password@$servicename/vhostname
+kubectl run perf-test --image=pivotalrabbitmq/perf-test -- -x 5 -y 0 --quorum-queue --queue qq2 --uri amqp://$username:$password@$service/%2f -s 2000
 
 
 
