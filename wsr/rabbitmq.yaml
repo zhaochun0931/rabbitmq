@@ -5,6 +5,9 @@ metadata:
   # namespace: rabbitmq-system
 spec:
   replicas: 1
+  rabbitmq:
+    additionalPlugins:
+      - rabbitmq_stream
   resources:
     limits:
       cpu: "0.1"
