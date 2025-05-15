@@ -1,3 +1,7 @@
+# will install RabbitMQ Cluster Operator and RabbitMQ Messaging Topology Operator
+
+
+
 # install helm
 
 
@@ -39,6 +43,19 @@ kubectl create secret docker-registry tanzu-rabbitmq-registry-creds \
 # Install the Tanzu RabbitMQ operators
 helm install tanzu-rabbitmq oci://rabbitmq-helmoci.packages.broadcom.com/tanzu-rabbitmq-operators
 helm install tanzu-rabbitmq oci://rabbitmq-helmoci.packages.broadcom.com/tanzu-rabbitmq-operators --namespace rabbitmq-system
+
+
+
+
+kubectl get pods
+
+# kubectl get pods
+NAME                                           READY   STATUS    RESTARTS   AGE
+messaging-topology-operator-67fd4789f9-24dbl   1/1     Running   0          2m18s
+rabbitmq-cluster-operator-f8b46dbbd-dhndg      1/1     Running   0          2m18s
+#
+
+
 
 
 
