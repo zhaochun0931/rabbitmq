@@ -11,6 +11,7 @@ services:
       - "15692:15692"  # prometheus
     volumes:
       - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
     networks:
       - rabbitmq-net
 
