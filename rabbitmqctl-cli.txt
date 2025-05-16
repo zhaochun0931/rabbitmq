@@ -176,3 +176,20 @@ On the remaining node with Raft State "pre_vote" run:
 rabbitmqctl eval "ra_server_proc:force_shrink_members_to_current_member({'VHostName_QueueName', node()})."
 Verify the state of the queue, there should be just one node as leader:
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+egrep -Ri 'Time to start RabbitMQ' *
+
+
