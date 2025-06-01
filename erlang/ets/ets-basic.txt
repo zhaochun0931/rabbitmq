@@ -1,0 +1,3 @@
+In Erlang, ETS stands for Erlang Term Storage. It is a powerful in-memory storage system used to store large amounts of data with high performance.
+
+
