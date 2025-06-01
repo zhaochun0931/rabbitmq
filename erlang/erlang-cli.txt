@@ -33,7 +33,15 @@ erl -eval 'application:which_applications().' -s init stop -s
 
 
 
-erl
+erl -sname mynode -setcookie mycookie
+
+$ erl -sname mynode -setcookie mycookie
+Erlang/OTP 26 [erts-14.2.1] [source] [64-bit] [smp:10:10] [ds:10:10:10] [async-threads:1] [jit] [dtrace]
+
+Eshell V14.2.1 (press Ctrl+G to abort, type help(). for help)
+(mynode@VWG2Q1HXJY)1>
+
+
 
 mnesia:start().
 
