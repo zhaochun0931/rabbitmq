@@ -31,6 +31,36 @@ erl -eval 'application:which_applications().' -s init stop -s
 
 
 
+erl tiny_kv.erl
+
+c(tiny_kv).
+
+tiny_kv:start().
+
+tiny_kv:put(name, "xiaoming").
+
+tiny_kv:get(name).
+
+
+
+
+$ erl tiny_kv.erl
+Erlang/OTP 26 [erts-14.2.1] [source] [64-bit] [smp:10:10] [ds:10:10:10] [async-threads:1] [jit] [dtrace]
+
+Eshell V14.2.1 (press Ctrl+G to abort, type help(). for help)
+1> c(tiny_kv).
+{ok,tiny_kv}
+2> tiny_kv:start().
+my_table
+3> tiny_kv:put(name, "xiaoming").
+true
+4> tiny_kv:get(name).
+"xiaoming"
+5> halt().
+
+
+
+
 
 
 
