@@ -4,24 +4,52 @@ mnesia:create_schema([node()]).
 
 application:start(mnesia).
 
-rd(user, {id, name, age}).
+rd(user1, {id, name, age}).
+rd(user2, {id, name, age}).
 
-mnesia:create_table(user, [
+mnesia:create_table(user1, [
     {attributes, record_info(fields, user)},
     {disc_copies, [node()]}
 ]).
 
 
+mnesia:create_table(user2, [
+    {attributes, record_info(fields, user)},
+    {disc_copies, [node()]}
+]).
+
+
+
+
+
 mnesia:transaction(fun() ->
-    mnesia:write(#user{id = 1, name = "Alice", age = 30})
+    mnesia:write(#user1{id = 1, name = "Alice", age = 30})
+end).
+
+
+mnesia:transaction(fun() ->
+    mnesia:write(#user2{id = 10, name = "xiaoming10", age = 30})
+end).
+
+mnesia:transaction(fun() ->
+    mnesia:write(#user2{id = 11, name = "xiaoming11", age = 30})
+end).
+
+
+
+
+mnesia:transaction(fun() -> 
+    mnesia:read({user1, 1}) 
 end).
 
 
 mnesia:transaction(fun() -> 
-    mnesia:read({user, 1}) 
+    mnesia:read({user2, 10}) 
 end).
 
-
+mnesia:transaction(fun() -> 
+    mnesia:read({user2, 11}) 
+end).
 
 
 halt().
