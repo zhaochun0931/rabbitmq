@@ -41,6 +41,16 @@ mnesia:start().
 
 
 
+mnesia:create_schema([node()]).
+application:start(mnesia).
+application:stop(mnesia).
+
+
+
+halt().
+
+
+
 
 
 
