@@ -3,6 +3,7 @@ services:
     image: erlang
     container_name: node1
     hostname: node1
+    command: erl -sname node1 -setcookie mycookie
     networks:
       erlang-net:
         aliases: [node1]
@@ -12,6 +13,7 @@ services:
     image: erlang
     container_name: node2
     hostname: node2
+    command: erl -sname node2 -setcookie mycookie
     networks:
       erlang-net:
         aliases: [node2]
@@ -21,6 +23,7 @@ services:
     image: erlang
     container_name: node3
     hostname: node3
+    command: erl -sname node3 -setcookie mycookie
     networks:
       erlang-net:
         aliases: [node3]
