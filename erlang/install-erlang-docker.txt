@@ -1,4 +1,4 @@
-docker run -it --rm erlang
+docker run -it --rm --name node1 --hostname node1 erlang
 
 
 
