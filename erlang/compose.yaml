@@ -2,29 +2,29 @@ services:
   node1:
     image: erlang
     container_name: node1
-    command: erl -name node1@node1 -setcookie mycookie -setshortname true
+    hostname: node1
     networks:
-      - erlang-net
+      erlang-net:
+        aliases: [node1]
     tty: true
-    stdin_open: true
 
   node2:
     image: erlang
     container_name: node2
-    command: erl -name node2@node2 -setcookie mycookie -setshortname true
+    hostname: node2
     networks:
-      - erlang-net
+      erlang-net:
+        aliases: [node2]
     tty: true
-    stdin_open: true
 
   node3:
     image: erlang
     container_name: node3
-    command: erl -name node3@node3 -setcookie mycookie -setshortname true
+    hostname: node3
     networks:
-      - erlang-net
+      erlang-net:
+        aliases: [node3]
     tty: true
-    stdin_open: true
 
 networks:
   erlang-net:
