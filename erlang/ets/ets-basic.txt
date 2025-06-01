@@ -1,3 +1,21 @@
 In Erlang, ETS stands for Erlang Term Storage. It is a powerful in-memory storage system used to store large amounts of data with high performance.
 
 
+
+Table = ets:new(my_table, [named_table, public]).
+
+ets:insert(my_table, {id1, "Alice"}).
+ets:insert(my_table, {id2, "Bob"}).
+
+
+
+ets:lookup(my_table, id1).
+ets:lookup(my_table, id2).
+
+
+
+ets:insert(my_table, {id1, "Alice Updated"}).
+
+
+ets:delete(my_table, id1).
+ets:delete(my_table, id2).
