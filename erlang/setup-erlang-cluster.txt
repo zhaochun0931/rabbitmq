@@ -13,9 +13,9 @@
 
 
 
-erl -sname ubuntu1@ubuntu1 -setcookie mycookie
-erl -sname ubuntu2@ubuntu2 -setcookie mycookie
-erl -sname ubuntu3@ubuntu3 -setcookie mycookie
+erl -sname ubuntu1 -setcookie mycookie
+erl -sname ubuntu2 -setcookie mycookie
+erl -sname ubuntu3 -setcookie mycookie
 
 
 
