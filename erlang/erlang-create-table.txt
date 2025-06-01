@@ -1,0 +1,27 @@
+erl -sname mynode -setcookie mycookie
+
+mnesia:create_schema([node()]).
+
+application:start(mnesia).
+
+rd(user, {id, name, age}).
+
+mnesia:create_table(user, [
+    {attributes, record_info(fields, user)},
+    {disc_copies, [node()]}
+]).
+
+
+mnesia:transaction(fun() ->
+    mnesia:write(#user{id = 1, name = "Alice", age = 30})
+end).
+
+
+mnesia:transaction(fun() -> 
+    mnesia:read({user, 1}) 
+end).
+
+
+
+
+halt().
