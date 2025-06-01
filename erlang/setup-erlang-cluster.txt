@@ -1,0 +1,46 @@
+/etc/hosts
+
+
+10.211.55.29 ubuntu1
+10.211.55.30 ubuntu2
+10.211.55.31 ubuntu3
+
+
+
+
+
+
+
+
+
+erl -sname ubuntu1@ubuntu1 -setcookie mycookie
+erl -sname ubuntu2@ubuntu2 -setcookie mycookie
+erl -sname ubuntu3@ubuntu3 -setcookie mycookie
+
+
+
+
+
+net_adm:ping('ubuntu2@ubuntu2').
+
+
+(ubuntu2@ubuntu2)2> net_adm:ping('ubuntu2@ubuntu2').
+pong
+(ubuntu2@ubuntu2)3>
+
+
+
+
+nodes().
+
+
+(ubuntu2@ubuntu2)4> nodes().
+[ubuntu1@ubuntu1,ubuntu3@ubuntu3]
+
+
+
+
+halt().
+
+
+
