@@ -7,10 +7,12 @@ RABBITMQ_HOST = "localhost"
 QUEUE_NAME = "test_queue"
 NUM_THREADS = 10
 MESSAGES_PER_THREAD = 10
+USERNAME='your_name'
+PASSWORD='your_password'
 
 def publish_messages(thread_id):
     # Each thread establishes its own connection
-    credentials = pika.PlainCredentials('admin', 'password')
+    credentials = pika.PlainCredentials(USERNAME, PASSWORD)
     connection = pika.BlockingConnection(pika.ConnectionParameters(host=RABBITMQ_HOST, credentials=credentials))
     channel = connection.channel()
 
