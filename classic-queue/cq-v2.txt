@@ -1,0 +1,3 @@
+To migrate to CQv2 they have to enable a setting in 
+
+To migrate to quorum queues and/or streams they need to declare the new queues and use Shovel or consume from multiple queues in order to migrate the messages from the original ones
