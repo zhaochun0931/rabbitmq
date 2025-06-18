@@ -1,4 +1,5 @@
-To migrate to CQv2 they have to enable a setting in rabbitmq.conf
+To migrate to CQv2 they have to enable a setting in rabbitmq.conf:
 
+classic_queue.default_version = 2
 
 To migrate to quorum queues and/or streams they need to declare the new queues and use Shovel or consume from multiple queues in order to migrate the messages from the original ones
