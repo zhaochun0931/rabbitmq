@@ -7,9 +7,30 @@ In other words, the message will lost across the node reboot.
 
 # create a classic queue
 
-# create a policy for HA
+
+
+# create a policy for HA with CLI
+
 rabbitmqctl set_policy my-cq-mirroring "^cq" '{"ha-mode":"all"}' --apply-to=queues
-rabbitmqctl set_policy my-cq-mirroring "^" '{"ha-mode":"all","ha-sync-mode":"automatic"}'  --vhost / 
+
+rabbitmqctl set_policy my-cq-mirroring "^cq" '{"ha-mode":"all","ha-sync-mode":"automatic"}'  --vhost / 
 
 
-rabbitmqctl list_policies --vhost /
+
+
+
+
+
+
+
+rabbitmqctl list_policies --vhost / --formatter pretty_table
+
+
+# rabbitmqctl list_policies --vhost / --formatter pretty_table
+Listing policies for vhost "/" ...
+┌───────┬─────────────────┬─────────┬──────────┬──────────────────────────────────────────────┬──────────┐
+│ vhost │ name            │ pattern │ apply-to │ definition                                   │ priority │
+├───────┼─────────────────┼─────────┼──────────┼──────────────────────────────────────────────┼──────────┤
+│ /     │ my-cq-mirroring │ ^       │ all      │ {"ha-mode":"all","ha-sync-mode":"automatic"} │ 0        │
+└───────┴─────────────────┴─────────┴──────────┴──────────────────────────────────────────────┴──────────┘
+#
