@@ -8,6 +8,7 @@ rabbitmqadmin --version
 
 
 
+# declare exchange
 
 rabbitmqadmin -u admin -p password declare exchange name=test-ex type=direct
 
