@@ -20,3 +20,7 @@ send the message to the test-ex exchange(not the queue)in the up
 
 amqp://admin:password@rabbitmq-up:5672/%2f
 
+
+
+
+# publish the message from the exchange level not the queue level
