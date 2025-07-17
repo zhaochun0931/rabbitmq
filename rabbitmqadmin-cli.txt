@@ -16,6 +16,8 @@ rabbitmqadmin -u admin -p password declare exchange name=test-ex type=direct
 # declare queue
 rabbitmqadmin -u admin -p password declare queue name=qq1 arguments='{"x-queue-type": "quorum"}'
 
+
+# bind the queue to exchange
 rabbitmqadmin -u admin -p password declare binding source=test-ex destination=qq1 routing_key=""
 rabbitmqadmin -u admin -p password declare binding source=test-ex destination=qq1 routing_key=
 
