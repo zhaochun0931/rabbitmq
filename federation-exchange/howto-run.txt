@@ -14,3 +14,9 @@ send the message to the test-ex exchange(not the queue)in the up
 
 
 
+
+
+# ssh into the downstream node
+
+amqp://admin:password@rabbitmq-up:5672/%2f
+
