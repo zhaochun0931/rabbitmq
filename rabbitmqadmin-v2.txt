@@ -13,8 +13,16 @@ export RABBITMQADMIN_PASSWORD=password
 
 
 
-rabbitmqadmin-2.7.0 list exchanges
+rabbitmqadmin list exchanges
 
 
 rabbitmqadmin queues declare --name foo
 rabbitmqadmin publish message -k foo -m 'Hello World!'
+
+
+
+
+rabbitmqadmin show overview
+
+
+
