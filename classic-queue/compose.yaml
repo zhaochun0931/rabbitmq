@@ -37,8 +37,8 @@ services:
       - RABBITMQ_DEFAULT_USER=admin        # Set the default username
       - RABBITMQ_DEFAULT_PASS=password    # Set the default password
     ports:
-      - "15672:15672"  # RabbitMQ management UI
-      - "5672:5672"    # AMQP protocol
+      - "15673:15672"  # RabbitMQ management UI
+      - "5673:5672"    # AMQP protocol
     volumes:
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
     networks:
