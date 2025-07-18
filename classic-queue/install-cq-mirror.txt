@@ -5,6 +5,8 @@ In other words, the message will lost across the node reboot.
 # the queue beginning with cq will be mirrored to all the nodes of the cluster, stop any node will not impact the service
 
 
+# set up a rabbitmq cluster with 3 nodes
+
 # create a classic queue
 
 
@@ -34,3 +36,10 @@ Listing policies for vhost "/" ...
 │ /     │ my-cq-mirroring │ ^       │ all      │ {"ha-mode":"all","ha-sync-mode":"automatic"} │ 0        │
 └───────┴─────────────────┴─────────┴──────────┴──────────────────────────────────────────────┴──────────┘
 #
+
+
+# create a classic queue begining with cq, for example cq1, cq2
+
+
+
+you will see the replica was synced to the peer nodes
