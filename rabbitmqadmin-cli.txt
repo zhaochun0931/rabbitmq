@@ -53,21 +53,8 @@ rabbitmqadmin get queue=qq1 ackmode=reject_requeue_false count=1000 -u admin -p 
 
 
 
-rabbitmqadmin-2.7.0 --host localhost --port 15672 --username admin --password password list exchanges
 
 
 
-
-
-
-export RABBITMQADMIN_TARGET_HOST=localhost
-export RABBITMQADMIN_TARGET_PORT=15672
-export RABBITMQADMIN_USERNAME=admin
-export RABBITMQADMIN_PASSWORD=password
-
-
-
-
-rabbitmqadmin-2.7.0 list exchanges
 
 
