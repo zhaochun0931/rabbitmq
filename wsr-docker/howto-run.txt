@@ -59,4 +59,22 @@ $
 
 
 rabbitmqctl schema_replication_status
+rabbitmqctl standby_replication_status
+
+
+
+rabbitmq [ ~ ]$ rabbitmqctl schema_replication_status
+Schema replication status on node rabbit@node1
+Operating mode: upstream
+State: syncing
+Upstream endpoint(s): localhost:5672
+Upstream username: test-user
+
+rabbitmq [ ~ ]$
+
+rabbitmq [ ~ ]$ rabbitmqctl standby_replication_status
+Standby replication status on node rabbit@node1
+state	operating_mode	virtual_host
+running	upstream	vhost1
+rabbitmq [ ~ ]$
 
