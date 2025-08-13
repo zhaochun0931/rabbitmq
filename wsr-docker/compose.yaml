@@ -6,7 +6,6 @@ services:
       - RABBITMQ_DEFAULT_USER=admin        # Set the default username
       - RABBITMQ_DEFAULT_PASS=password    # Set the default password
     volumes:
-      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
       - ./rabbitmq-upstream.conf:/etc/rabbitmq/rabbitmq.conf
     ports:
       - "15671:15672"  # RabbitMQ management UI for node 1
@@ -24,7 +23,6 @@ services:
       - RABBITMQ_DEFAULT_USER=admin        # Set the default username
       - RABBITMQ_DEFAULT_PASS=password    # Set the default password
     volumes:
-      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
       - ./rabbitmq-downstream.conf:/etc/rabbitmq/rabbitmq.conf
     ports:
       - "15672:15672"  # RabbitMQ management UI for node 2
