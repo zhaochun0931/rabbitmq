@@ -1,3 +1,11 @@
+# enable the plugin on both nodes
+
+rabbitmq-plugins enable rabbitmq_schema_definition_sync
+rabbitmq-plugins enable rabbitmq_standby_replication
+
+
+
+
 # upstream
 rabbitmqctl add_vhost rabbitmq_schema_definition_sync
 rabbitmqctl add_vhost "vhost1" --tags "standby_replication"
