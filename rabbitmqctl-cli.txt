@@ -131,6 +131,8 @@ rabbitmqctl add_user admin password
 rabbitmqctl set_permissions --vhost / admin ".*" ".*" ".*"
 rabbitmqctl set_user_tags admin administrator
 
+rabbitmqctl set_permissions testuser .* .* .*         
+rabbitmqctl set_user_tags testuser administrator      
 
 
 
