@@ -1,0 +1,105 @@
+rabbitmqctl list_feature_flags --formatter pretty_table
+
+
+# rabbitmqctl  list_feature_flags --formatter pretty_table
+Listing feature flags ...
+┌──────────────────────────────────────┬──────────┐
+│ name                                 │ state    │
+├──────────────────────────────────────┼──────────┤
+│ classic_mirrored_queue_version       │ enabled  │
+├──────────────────────────────────────┼──────────┤
+│ classic_queue_type_delivery_support  │ enabled  │
+├──────────────────────────────────────┼──────────┤
+│ detailed_queues_endpoint             │ disabled │
+├──────────────────────────────────────┼──────────┤
+│ direct_exchange_routing_v2           │ enabled  │
+├──────────────────────────────────────┼──────────┤
+│ drop_unroutable_metric               │ enabled  │
+├──────────────────────────────────────┼──────────┤
+│ empty_basic_get_metric               │ enabled  │
+├──────────────────────────────────────┼──────────┤
+│ feature_flags_v2                     │ enabled  │
+├──────────────────────────────────────┼──────────┤
+│ implicit_default_bindings            │ enabled  │
+├──────────────────────────────────────┼──────────┤
+│ khepri_db                            │ disabled │
+├──────────────────────────────────────┼──────────┤
+│ listener_records_in_ets              │ enabled  │
+├──────────────────────────────────────┼──────────┤
+│ maintenance_mode_status              │ enabled  │
+├──────────────────────────────────────┼──────────┤
+│ message_containers                   │ enabled  │
+├──────────────────────────────────────┼──────────┤
+│ message_containers_deaths_v2         │ disabled │
+├──────────────────────────────────────┼──────────┤
+│ quorum_queue                         │ enabled  │
+├──────────────────────────────────────┼──────────┤
+│ quorum_queue_non_voters              │ disabled │
+├──────────────────────────────────────┼──────────┤
+│ rabbit_exchange_type_local_random    │ disabled │
+├──────────────────────────────────────┼──────────┤
+│ rabbitmq_4.0.0                       │ disabled │
+├──────────────────────────────────────┼──────────┤
+│ rabbitmq_4.1.0                       │ disabled │
+├──────────────────────────────────────┼──────────┤
+│ restart_streams                      │ enabled  │
+├──────────────────────────────────────┼──────────┤
+│ stream_filtering                     │ enabled  │
+├──────────────────────────────────────┼──────────┤
+│ stream_queue                         │ enabled  │
+├──────────────────────────────────────┼──────────┤
+│ stream_sac_coordinator_unblock_group │ enabled  │
+├──────────────────────────────────────┼──────────┤
+│ stream_single_active_consumer        │ enabled  │
+├──────────────────────────────────────┼──────────┤
+│ stream_update_config_command         │ enabled  │
+├──────────────────────────────────────┼──────────┤
+│ tracking_records_in_ets              │ enabled  │
+├──────────────────────────────────────┼──────────┤
+│ user_limits                          │ enabled  │
+├──────────────────────────────────────┼──────────┤
+│ virtual_host_metadata                │ enabled  │
+└──────────────────────────────────────┴──────────┘
+#
+
+
+
+
+
+node1-1  | 2025-08-14 07:16:33.740578+00:00 [notice] <0.297.0> Feature flags: attempt to enable `khepri_db`...
+node1-1  | 2025-08-14 07:16:33.743033+00:00 [notice] <0.297.0> Feature flags: attempt to enable `ram_node_type`...
+node1-1  | 2025-08-14 07:16:33.749802+00:00 [notice] <0.297.0> Feature flags: `ram_node_type` enabled
+node1-1  | 2025-08-14 07:16:33.749989+00:00 [info] <0.764.0> Feature flag `khepri_db`: syncing cluster membership
+node1-1  | 2025-08-14 07:16:33.754299+00:00 [info] <0.765.0> Syncing Mnesia->Khepri clusters membership
+node1-1  | 2025-08-14 07:16:33.756137+00:00 [info] <0.764.0> Feature flag `khepri_db`: cluster membership synchronized; members are: [rabbit@node1]
+node1-1  | 2025-08-14 07:16:33.756221+00:00 [info] <0.764.0> Feature flag `khepri_db`: unregistering legacy projections
+node1-1  | 2025-08-14 07:16:33.759039+00:00 [info] <0.764.0> Feature flag `khepri_db`: registering projections
+node1-1  | 2025-08-14 07:16:34.486543+00:00 [notice] <0.764.0> Feature flags: `khepri_db`: starting migration of 20 tables from Mnesia to Khepri; expect decrease in performance and increase in memory footprint
+node1-1  | 2025-08-14 07:16:34.486628+00:00 [info] <0.764.0> Waiting for Mnesia tables for 30000 ms, 9 retries left
+node1-1  | 2025-08-14 07:16:34.486689+00:00 [info] <0.764.0> Successfully synced tables from a peer
+node1-1  | 2025-08-14 07:16:34.492364+00:00 [info] <0.775.0> Mnesia->Khepri data copy: starting migration "rabbitmq_metadata" from Mnesia to Khepri; tables: [rabbit_vhost,
+node1-1  | 2025-08-14 07:16:34.492364+00:00 [info] <0.775.0>                                                                                                  rabbit_user,
+node1-1  | 2025-08-14 07:16:34.492364+00:00 [info] <0.775.0>                                                                                                  rabbit_user_permission,
+node1-1  | 2025-08-14 07:16:34.492364+00:00 [info] <0.775.0>                                                                                                  rabbit_topic_permission,
+node1-1  | 2025-08-14 07:16:34.492364+00:00 [info] <0.775.0>                                                                                                  rabbit_runtime_parameters,
+node1-1  | 2025-08-14 07:16:34.492364+00:00 [info] <0.775.0>                                                                                                  rabbit_queue,
+node1-1  | 2025-08-14 07:16:34.492364+00:00 [info] <0.775.0>                                                                                                  rabbit_exchange,
+node1-1  | 2025-08-14 07:16:34.492364+00:00 [info] <0.775.0>                                                                                                  rabbit_exchange_serial,
+node1-1  | 2025-08-14 07:16:34.492364+00:00 [info] <0.775.0>                                                                                                  rabbit_route,
+node1-1  | 2025-08-14 07:16:34.492364+00:00 [info] <0.775.0>                                                                                                  rabbit_node_maintenance_states,
+node1-1  | 2025-08-14 07:16:34.492364+00:00 [info] <0.775.0>                                                                                                  mirrored_sup_childspec,
+node1-1  | 2025-08-14 07:16:34.492364+00:00 [info] <0.775.0>                                                                                                  rabbit_durable_queue,
+node1-1  | 2025-08-14 07:16:34.492364+00:00 [info] <0.775.0>                                                                                                  rabbit_durable_exchange,
+node1-1  | 2025-08-14 07:16:34.492364+00:00 [info] <0.775.0>                                                                                                  rabbit_durable_route,
+node1-1  | 2025-08-14 07:16:34.492364+00:00 [info] <0.775.0>                                                                                                  rabbit_semi_durable_route,
+node1-1  | 2025-08-14 07:16:34.492364+00:00 [info] <0.775.0>                                                                                                  rabbit_reverse_route,
+node1-1  | 2025-08-14 07:16:34.492364+00:00 [info] <0.775.0>                                                                                                  rabbit_index_route]
+node1-1  | 2025-08-14 07:16:34.549719+00:00 [info] <0.775.0> Mnesia->Khepri data copy: migration "rabbitmq_metadata" from Mnesia to Khepri finished
+node1-1  | 2025-08-14 07:16:34.549819+00:00 [notice] <0.764.0> Feature flags: `khepri_db`: migration from Mnesia to Khepri finished
+node1-1  | 2025-08-14 07:16:34.869197+00:00 [notice] <0.45.0> Application mnesia exited with reason: stopped
+node1-1  | 2025-08-14 07:16:34.882954+00:00 [notice] <0.297.0> Feature flags: `khepri_db` enabled
+
+
+
+
+
