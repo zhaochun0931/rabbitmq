@@ -1,2 +1,10 @@
+otp_win64_26.2.4\erts-14.2.4\bin> .\erlsrv.exe list
+
+
+
+
+
+
+
 Node data directory: c:/Users/xman/AppData/Roaming/RabbitMQ/db/rabbit@rabbitmq-mnesia
 Raft data directory: c:/Users/xman/AppData/Roaming/RabbitMQ/db/rabbit@rabbitmq-mnesia/quorum/rabbit@rabbitmq
