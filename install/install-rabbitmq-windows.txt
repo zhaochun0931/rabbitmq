@@ -1,0 +1,2 @@
+Node data directory: c:/Users/xman/AppData/Roaming/RabbitMQ/db/rabbit@rabbitmq-mnesia
+Raft data directory: c:/Users/xman/AppData/Roaming/RabbitMQ/db/rabbit@rabbitmq-mnesia/quorum/rabbit@rabbitmq
