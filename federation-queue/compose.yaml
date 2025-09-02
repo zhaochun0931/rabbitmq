@@ -25,7 +25,7 @@ services:
       - "15672:15672"  # RabbitMQ management UI
       - "5672:5672"    # AMQP protocol
     volumes:
-      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
     networks:
       - rabbitmq-net
 
