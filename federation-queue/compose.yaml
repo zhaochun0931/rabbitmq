@@ -1,7 +1,7 @@
 services:
-  rabbitmq-up:
-    image: rabbitmq:management
-    hostname: rabbitmq-up
+  rabbitmq1:
+    image: rabbitmq:3.13.6-management
+    hostname: rabbitmq1
     environment:
       - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
       - RABBITMQ_DEFAULT_USER=admin        # Set the default username
@@ -14,9 +14,9 @@ services:
     networks:
       - rabbitmq-net
 
-  rabbitmq-down:
-    image: rabbitmq:management
-    hostname: rabbitmq-down
+  rabbitmq2:
+    image: rabbitmq:3.13.6-management
+    hostname: rabbitmq2
     environment:
       - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
       - RABBITMQ_DEFAULT_USER=admin        # Set the default username
