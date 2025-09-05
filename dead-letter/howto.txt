@@ -1,6 +1,20 @@
 
 
-rabbitmqctl set_policy mypolicy-dl ".*" '{"dead-letter-exchange":"test1"}' --apply-to queues
+rabbitmqctl set_policy mypolicy-dl ".*" '{"dead-letter-exchange":"amq.fanout"}' --apply-to queues
 
 
+
+
+
+create a queue called qq1 and also specify the amq.fanout exchange
+
+create another queue called qq2 and bind to this amq.fanout exchange
+
+
+send the message to the qq1
+
+
+get the message in the qq1 with reject, requeue = false
+
+the message will go to qq2
 
