@@ -11,15 +11,33 @@ rabbitmqctl set_policy mypolicy-dl ".*" '{"dead-letter-exchange":"amq.fanout"}' 
 
 
 
-create a queue called qq1 and also specify the amq.fanout exchange
+# create a queue called qq1 and also specify the amq.fanout exchange as a dead exchange
 
-create another queue called qq2 and bind to this amq.fanout exchange
-
-
-send the message to the qq1
+rabbitmqadmin --host localhost --port 15672 --username admin --password password declare queue name=qq1 queue_type=quorum arguments='{"x-dead-letter-exchange":"amq.fanout"}'
 
 
-get the message in the qq1 with reject, requeue = false
 
-the message will go to qq2
+# create another queue called qq2 and bind to this amq.fanout exchange
+
+rabbitmqadmin --host localhost --port 15672 --username admin --password password declare queue name=qq2 queue_type=quorum
+rabbitmqadmin --host localhost --port 15672 --username admin --password password declare binding source=amq.fanout destination=qq2
+
+
+
+
+# publish the message to the qq1
+
+rabbitmqadmin --host localhost --port 15672 --username admin --password password publish routing_key=qq1 payload='hello1'
+
+
+# consume the message in the qq1 with reject, requeue = false
+
+rabbitmqadmin --host localhost --port 15672 --username admin --password password get queue=qq1 count=1 ackmode=reject_requeue_false
+
+
+
+# the message will go to qq2
+rabbitmqadmin --host localhost --port 15672 --username admin --password password get queue=qq2 count=1
+rabbitmqadmin --host localhost --port 15672 --username admin --password password get queue=qq2 count=1 ackmode=ack_requeue_true
+
 
