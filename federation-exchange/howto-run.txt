@@ -38,11 +38,19 @@ rabbitmqctl clear_policy mypolicy
 
 
 
-create an exchange 'test' in the down stream, this exchange will be synced automatically to primary
+create an exchange 'test1' in the down stream, this exchange will be synced automatically to up stream
 
-create the queue on both up and down respectively and bind to the test-ex exchange,  the queue name can be different.
+create the queue on both up and down respectively and bind to the test1 exchange,  the queue name can be different.
 
-send the message to the 'test' exchange(not the queue)in the up
+up:
+qq1 -> test1
+
+down:
+qq2 -> test1
+
+send the message to the 'test1' exchange(not the queue) in the up stream
+
+the message will be copied to the down stream
 
 
 
