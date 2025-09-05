@@ -1,1 +1,37 @@
+services:
+  rabbitmq1:
+    image: rabbitmq:management
+    hostname: rabbitmq1
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15671:15672"  # RabbitMQ management UI
+      - "5671:5672"    # AMQP protocol
+    volumes:
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    networks:
+      - rabbitmq-net
 
+  rabbitmq2:
+    image: rabbitmq:management
+    hostname: rabbitmq2
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15672:15672"  # RabbitMQ management UI
+      - "5672:5672"    # AMQP protocol
+    volumes:
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    networks:
+      - rabbitmq-net
+
+
+networks:
+  rabbitmq-net:
+    driver: bridge
