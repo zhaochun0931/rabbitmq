@@ -5,11 +5,44 @@ docker compose down -v
 
 
 
-create a test-ex exchange in the down stream, this exchange will be synced automatically to primary
+
+# go to the down node and add the upstream federation and policy
+
+
+
+
+# Adds a federation upstream named "myfed"
+
+rabbitmqctl set_parameter federation-upstream myfed '{"uri":"amqp://admin:password@rabbitmq1:5672/%2f"}'
+
+
+
+# Adds a policy named "mypolicy"
+
+rabbitmqctl set_policy mypolicy  "^test" '{"federation-upstream-set":"all"}' --apply-to exchanges
+
+or 
+
+rabbitmqctl set_policy mypolicy  "^test" '{"federation-upstream":"myfed"}' --apply-to exchanges
+
+
+
+
+
+# To deactivate federation for the matching exchanges, delete the policy using its name:
+
+rabbitmqctl clear_policy mypolicy
+
+
+
+
+
+
+create an exchange 'test' in the down stream, this exchange will be synced automatically to primary
 
 create the queue on both up and down respectively and bind to the test-ex exchange,  the queue name can be different.
 
-send the message to the test-ex exchange(not the queue)in the up
+send the message to the 'test' exchange(not the queue)in the up
 
 
 
