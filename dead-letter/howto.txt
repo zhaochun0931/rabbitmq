@@ -1,0 +1,6 @@
+
+
+rabbitmqctl set_policy mypolicy-dl ".*" '{"dead-letter-exchange":"test1"}' --apply-to queues
+
+
+
