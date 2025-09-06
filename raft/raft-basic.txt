@@ -1,0 +1,76 @@
+RabbitMQ Clustering
+
+Traditional RabbitMQ clusters used mirrored queues, which relied on Erlang’s Mnesia and a master-slave replication model.
+
+Issues: split-brain, complex failover, eventual consistency.
+
+To fix this, RabbitMQ introduced Quorum Queues, which use Raft for strong consistency.
+
+
+
+
+2️⃣ Raft in RabbitMQ
+
+Raft is a consensus algorithm for managing replicated logs in a distributed system.
+
+Key concepts:
+
+Leader: receives all writes from clients.
+
+Followers: replicate log entries from leader.
+
+Election: if leader fails, followers elect a new leader.
+
+Commit: an entry is considered committed when majority of nodes have replicated it.
+
+
+
+
+3️⃣ RabbitMQ Quorum Queues
+
+A Quorum Queue is essentially a Raft group:
+
+Each queue has N nodes (e.g., 3, 5).
+
+Leader node handles all publishes.
+
+Followers replicate messages.
+
+Once a majority (ceil(N/2)) has acknowledged, the message is committed.
+
+Benefits:
+
+No split-brain (strong consistency).
+
+Automatic failover (leader election).
+
+Durability: messages are persisted once committed.
+
+
+
+
+4️⃣ How It Works in RabbitMQ
+
+Publish:
+
+Client publishes message to leader node of the Raft group.
+
+Leader appends entry to its log.
+
+Replication:
+
+Leader sends log entries to followers.
+
+Followers append to their logs.
+
+Commit:
+
+When majority have stored the entry, leader marks it committed.
+
+Entry is now safe, and leader can ACK client.
+
+Failover:
+
+If leader crashes, followers hold elections.
+
+New leader continues replication, ensuring no messages are lost.
