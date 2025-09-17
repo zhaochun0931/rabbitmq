@@ -6,7 +6,7 @@ docker compose down -v
 
 
 
-# go to the down node and add the upstream federation and policy
+# go to the downstream node and add the upstream federation and policy
 
 
 
@@ -51,6 +51,29 @@ qq2 -> test1
 send the message to the 'test1' exchange(not the queue) in the up stream
 
 the message will be copied to the down stream
+
+
+
+
+
+
+
+
+
+rabbitmqctl federation_status
+
+
+# rabbitmqctl federation_status
+Listing federation links on node rabbit@rabbitmq2...
+[#{error => <<>>,id => <<"2ea459e2">>,status => running,type => exchange,
+   exchange => <<"test1">>,queue => <<>>,
+   uri => <<"amqp://rabbitmq1:5672/%2f">>,vhost => <<"/">>,
+   last_changed => <<"2025-09-17 03:49:26">>,
+   local_connection => <<"<rabbit@rabbitmq2.1758080692.1378.0>">>,
+   upstream_exchange => <<"test1">>,upstream_queue => <<>>,
+   upstream => <<"myfed">>}]
+root@rabbitmq2:/#
+
 
 
 
