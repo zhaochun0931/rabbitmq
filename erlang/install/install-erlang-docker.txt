@@ -4,21 +4,13 @@ docker run -it --rm --name node1 --hostname node1 erlang
 
 
 
-io:format("Hello from Erlang in Docker!~n").
+io:format("Hello world~n").
+
+uptime().
 
 
 
 
-
-
-$ docker run -it --rm erlang
-Erlang/OTP 28 [erts-16.0] [source] [64-bit] [smp:10:10] [ds:10:10:10] [async-threads:1] [jit]
-
-Eshell V16.0 (press Ctrl+G to abort, type help(). for help)
-1> io:format("Hello from Erlang in Docker!~n").
-Hello from Erlang in Docker!
-ok
-2>
 
 
 
