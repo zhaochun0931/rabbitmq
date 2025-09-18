@@ -1,0 +1,4 @@
+docker compose up
+
+
+# Both examples will instruct the node to try LDAP first and then fall back to the internal database if the user cannot be authenticated through LDAP
