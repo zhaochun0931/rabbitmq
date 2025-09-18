@@ -8,10 +8,13 @@ services:
       - RABBITMQ_DEFAULT_PASS=password    # Set the default password
     ports:
       - "15672:15672"  # RabbitMQ management UI for node 1
+      - "15671:15671"  # RabbitMQ management UI for node 1
+      - "5671:5671"    # AMQP over SSL
       - "5672:5672"    # AMQP protocol
       - "1883:1883"    # MQTT protocol
     volumes:
-      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./certs:/etc/rabbitmq/certs
     networks:
       - rabbitmq-net
 
