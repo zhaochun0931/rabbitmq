@@ -1,4 +1,36 @@
-docker run -it --rm --name node1 --hostname node1 erlang
+docker run -it --rm erlang
+
+docker run -it --rm -h test.local erlang erl -name myname
+
+
+$ docker run -it --rm -h test.local erlang erl -name myname
+Erlang/OTP 28 [erts-16.0.3] [source] [64-bit] [smp:10:10] [ds:10:10:10] [async-threads:1] [jit]
+
+Eshell V16.0.3 (press Ctrl+G to abort, type help(). for help)
+(myname@test.local)1> node().
+'myname@test.local'
+(myname@test.local)2>
+
+
+
+
+
+
+
+
+docker run -it --rm -h test.local erlang erl -sname myname
+
+$ docker run -it --rm -h test.local erlang erl -sname myname
+Erlang/OTP 28 [erts-16.0.3] [source] [64-bit] [smp:10:10] [ds:10:10:10] [async-threads:1] [jit]
+
+Eshell V16.0.3 (press Ctrl+G to abort, type help(). for help)
+(myname@test)1> node().
+myname@test
+(myname@test)2>
+
+
+
+
 
 
 
@@ -8,8 +40,7 @@ io:format("Hello world~n").
 
 uptime().
 
-
-
+node().
 
 
 
