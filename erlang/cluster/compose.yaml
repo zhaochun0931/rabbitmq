@@ -3,7 +3,7 @@ services:
     image: erlang:latest
     container_name: node1
     hostname: node1.local
-    command: erl -name node1@node1.local -setcookie secretcookie
+    # command: erl -name node1@node1.local -setcookie secretcookie
     networks:
       erlang-net:
         aliases:
@@ -15,7 +15,7 @@ services:
     image: erlang:latest
     container_name: node2
     hostname: node2.local
-    command: erl -name node2@node2.local -setcookie secretcookie
+    # command: erl -name node2@node2.local -setcookie secretcookie
     networks:
       erlang-net:
         aliases:
@@ -27,7 +27,7 @@ services:
     image: erlang:latest
     container_name: node3
     hostname: node3.local
-    command: erl -name node3@node3.local -setcookie secretcookie
+    # command: erl -name node3@node3.local -setcookie secretcookie
     networks:
       erlang-net:
         aliases:
