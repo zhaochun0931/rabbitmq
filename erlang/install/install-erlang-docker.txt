@@ -42,7 +42,7 @@ uptime().
 
 node().
 
-
+erlang:system_info(otp_release).
 
 
 
