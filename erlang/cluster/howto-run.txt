@@ -22,7 +22,7 @@ erl -name node2@node2.local -setcookie secretcookie
 
 
 
-
+# register a process
 Pid = spawn(fun() ->
     receive
         Msg -> io:format("Received: ~p~n", [Msg])
@@ -32,8 +32,27 @@ register(receiver, Pid).
 
 
 
+
+
+# register a process and save the message to disk
+Pid = spawn(fun() ->
+    receive
+        Msg ->
+            io:format("Received: ~p~n", [Msg]),
+            {ok, Fd} = file:open("messages.log", [append]),
+            io:fwrite(Fd, "Message: ~p~n", [Msg]),
+            file:close(Fd)
+    end
+end),
+register(receiver, Pid).
+
+
+
+
+
 # node1
 
+# send the message to peer
 {receiver, 'node2@node2.local'} ! "Hello from node1!".
 
 
