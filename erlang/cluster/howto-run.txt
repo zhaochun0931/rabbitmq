@@ -1,0 +1,40 @@
+# node1
+docker exec -it node1 bash
+erl -name node1@node1.local -setcookie secretcookie
+
+node().
+  
+nodes().
+
+
+net_adm:ping('node2@node2.local').
+
+nodes().
+
+
+
+
+# node2
+docker exec -it node2 bash
+erl -name node2@node2.local -setcookie secretcookie
+
+
+
+
+
+
+Pid = spawn(fun() ->
+    receive
+        Msg -> io:format("Received: ~p~n", [Msg])
+    end
+end),
+register(receiver, Pid).
+
+
+
+# node1
+
+{receiver, 'node2@node2.local'} ! "Hello from node1!".
+
+
+
