@@ -1,1 +1,40 @@
+services:
+  node1:
+    image: erlang:latest
+    container_name: node1
+    hostname: node1.local
+    command: erl -name node1@node1.local -setcookie secretcookie
+    networks:
+      erlang-net:
+        aliases:
+          - node1.local
+    tty: true
+    stdin_open: true
 
+  node2:
+    image: erlang:latest
+    container_name: node2
+    hostname: node2.local
+    command: erl -name node2@node2.local -setcookie secretcookie
+    networks:
+      erlang-net:
+        aliases:
+          - node2.local
+    tty: true
+    stdin_open: true
+
+  node3:
+    image: erlang:latest
+    container_name: node3
+    hostname: node3.local
+    command: erl -name node3@node3.local -setcookie secretcookie
+    networks:
+      erlang-net:
+        aliases:
+          - node3.local
+    tty: true
+    stdin_open: true
+
+networks:
+  erlang-net:
+    driver: bridge
