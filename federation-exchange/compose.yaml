@@ -2,7 +2,7 @@ services:
   rabbitmq1:
     image: rabbitmq:3.13.7-management
     hostname: rabbitmq1
-    containername: rabbitmq1
+    container_name: rabbitmq1
     environment:
       - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
       - RABBITMQ_DEFAULT_USER=admin        # Set the default username
@@ -20,7 +20,7 @@ services:
   rabbitmq2:
     image: rabbitmq:3.13.7-management
     hostname: rabbitmq2
-    containername: rabbitmq2
+    container_name: rabbitmq2
     environment:
       - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
       - RABBITMQ_DEFAULT_USER=admin        # Set the default username
