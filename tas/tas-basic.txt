@@ -100,6 +100,12 @@ bosh -d p-rabbitmq-9c7bcf1d485a9e65b379 recreate rabbitmq-server/5f70f70d-ad6c-4
 
 
 
+bosh -d p-rabbitmq-9c7bcf1d485a9e65b379 ignore rabbitmq-server/44da3e0a-820e-4e65-99dd-d6bbb4ccd90b
+
+bosh -d p-rabbitmq-9c7bcf1d485a9e65b379 deploy /var/tempest/workspaces/default/deployments/p-rabbitmq-9c7bcf1d485a9e65b379.yml --fix
+
+
+
 
 # export the deployment yaml file 
 bosh manifest -d service-instance_4924d628-1cd1-45fd-a18e-6e9f6e9d9ea4 > xx.yaml
