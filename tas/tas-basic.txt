@@ -93,6 +93,11 @@ bosh -d service-instance_8bb907c3-9d0f-4ac3-9aa4-e74d5ad0a2ff ssh rabbitmq-serve
 
 
 
+# re-create vm
+
+bosh -d p-rabbitmq-9c7bcf1d485a9e65b379 recreate rabbitmq-server/5f70f70d-ad6c-40a5-baa7-fa854fafde56 --no-converge --skip-drain
+
+
 
 
 
