@@ -1,3 +1,21 @@
+docker login rabbitmq.packages.broadcom.com --username='username' --password='password'
+
+
+docker pull rabbitmq.packages.broadcom.com/vmware-tanzu-rabbitmq:4.2.0
+
+
+
+
+
+
+
+docker compose up
+
+
+
+
+
+
 # enable the plugin on both nodes
 
 rabbitmq-plugins enable rabbitmq_schema_definition_sync
