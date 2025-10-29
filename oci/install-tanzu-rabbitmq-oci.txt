@@ -1,4 +1,4 @@
 docker login rabbitmq.packages.broadcom.com --username='username' --password='password'
 
 
-docker pull rabbitmq.packages.broadcom.com/vmware-tanzu-rabbitmq:4.0.7
+docker pull rabbitmq.packages.broadcom.com/vmware-tanzu-rabbitmq:4.2.0
