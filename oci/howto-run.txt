@@ -28,6 +28,13 @@ rabbitmqctl set_permissions --vhost vhost1 test-user ".*" ".*" ".*"
 rabbitmqctl set_policy --vhost "vhost1" osr "^.*" '{"remote-dc-replicate": true}' --apply-to "queues"
 
 
+
+
+
+
+
+
+
 rabbitmq-diagnostics inspect_standby_upstream_metrics
 
 
@@ -54,9 +61,7 @@ rabbitmq-diagnostics inspect_local_data_available_for_standby_replication_recove
 
 
 
-# promote, run this command from the downstream
 
-rabbitmqctl promote_standby_replication_downstream_cluster
 
 
 
@@ -98,4 +103,26 @@ Standby replication status on node rabbit@node1
 state	operating_mode	virtual_host
 running	upstream	vhost1
 rabbitmq [ ~ ]$
+
+
+
+
+
+
+
+
+
+
+# create the queue in the upstream and it will sync up to the downstream automatically
+
+
+
+
+# send the message to the queue in the upstream
+
+
+
+# promote, run this command from the downstream, the message will become available in the downstream
+
+rabbitmqctl promote_standby_replication_downstream_cluster
 
