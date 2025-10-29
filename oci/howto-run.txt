@@ -54,7 +54,8 @@ rabbitmq-diagnostics inspect_local_data_available_for_standby_replication_recove
 
 
 
-# promote 
+# promote, run this command from the downstream
+
 rabbitmqctl promote_standby_replication_downstream_cluster
 
 
