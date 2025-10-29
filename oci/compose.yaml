@@ -2,6 +2,7 @@ services:
   node1:
     image: rabbitmq.packages.broadcom.com/vmware-tanzu-rabbitmq:4.2.0
     hostname: node1
+    container_name: node1
     environment:
       - RABBITMQ_DEFAULT_USER=admin        # Set the default username
       - RABBITMQ_DEFAULT_PASS=password    # Set the default password
@@ -10,7 +11,7 @@ services:
     ports:
       - "15671:15672"  # RabbitMQ management UI for node 1
       - "5671:5672"    # AMQP protocol
-      - "5551:5552"    
+      - "5551:5552"
     networks:
       - rabbitmq-net
 
@@ -19,6 +20,7 @@ services:
   node2:
     image: rabbitmq.packages.broadcom.com/vmware-tanzu-rabbitmq:4.2.0
     hostname: node2
+    container_name: node2
     environment:
       - RABBITMQ_DEFAULT_USER=admin        # Set the default username
       - RABBITMQ_DEFAULT_PASS=password    # Set the default password
