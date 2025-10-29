@@ -8,6 +8,7 @@ services:
       - RABBITMQ_DEFAULT_PASS=password    # Set the default password
     volumes:
       - ./rabbitmq-upstream.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
     ports:
       - "15671:15672"  # RabbitMQ management UI for node 1
       - "5671:5672"    # AMQP protocol
@@ -26,6 +27,7 @@ services:
       - RABBITMQ_DEFAULT_PASS=password    # Set the default password
     volumes:
       - ./rabbitmq-downstream.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
     ports:
       - "15672:15672"  # RabbitMQ management UI for node 2
       - "5672:5672"    # AMQP protocol
