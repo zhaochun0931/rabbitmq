@@ -9,6 +9,11 @@ docker pull rabbitmq.packages.broadcom.com/vmware-tanzu-rabbitmq:4.2.0
 
 
 
+
+
+
+docker container prune -f
+
 docker compose up
 
 
@@ -113,12 +118,15 @@ rabbitmq [ ~ ]$
 
 
 
-# create the queue in the upstream and it will sync up to the downstream automatically
+# create the queue (for example qq1 ) in the vhost1 in the upstream and it will automaticaly created in the downstream.
 
 
 
 
-# send the message to the queue in the upstream
+
+
+
+# send the message to the queue qq1 in the upstream
 
 
 
