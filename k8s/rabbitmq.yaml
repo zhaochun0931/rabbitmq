@@ -2,11 +2,11 @@ apiVersion: rabbitmq.com/v1beta1
 kind: RabbitmqCluster
 metadata:
   name: rabbitmq1
-  # namespace: rabbitmq-system
+  namespace: rabbitmq-system
 spec:
   replicas: 1
-  # imagePullSecrets:
-  # - name: tanzu-rabbitmq-registry-creds
+  imagePullSecrets:
+  - name: tanzu-rabbitmq-registry-creds
   resources:
     limits:
       cpu: 100m
