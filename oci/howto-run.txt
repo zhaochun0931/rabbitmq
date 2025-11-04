@@ -13,6 +13,12 @@ docker pull rabbitmq.packages.broadcom.com/vmware-tanzu-rabbitmq:4.2.0
 
 
 docker container prune -f
+docker compose down -v
+
+
+
+
+
 
 docker compose up
 
