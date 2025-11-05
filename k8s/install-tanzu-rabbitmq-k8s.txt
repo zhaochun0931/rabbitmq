@@ -14,7 +14,7 @@ kubectl create secret docker-registry tanzu-rabbitmq-registry-creds \
 
 
 
-kubectl create secret docker-registry tanzu-rabbitmq-registry-creds \
+kubectl create secret docker-registry my-secret \
 --docker-server "rabbitmq.packages.broadcom.com" \
 --docker-username "username" \
 --docker-password "password" \
