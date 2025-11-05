@@ -2,10 +2,19 @@
 
 
 
+✅ 
 kubectl create ns rabbitmq-system
 
 
+✅
+helm registry login rabbitmq-helmoci.packages.broadcom.com \
+--username='username' \
+--password='password'
 
+
+
+
+✅
 kubectl create secret docker-registry tanzu-rabbitmq-registry-creds \
 --docker-server "rabbitmq-operator.packages.broadcom.com" \
 --docker-username "user" \
@@ -14,6 +23,7 @@ kubectl create secret docker-registry tanzu-rabbitmq-registry-creds \
 
 
 
+✅
 kubectl create secret docker-registry my-secret \
 --docker-server "rabbitmq.packages.broadcom.com" \
 --docker-username "username" \
@@ -22,6 +32,7 @@ kubectl create secret docker-registry my-secret \
 
 
 
+✅
 kubectl delete secret tanzu-rabbitmq-registry-creds -n rabbitmq-system
 
 
@@ -29,17 +40,20 @@ kubectl delete secret tanzu-rabbitmq-registry-creds -n rabbitmq-system
 
 
 
+✅
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.5.3/cert-manager.yaml
 
 
-# install operator
+✅ install operator
 
+✅
 helm install tanzu-rabbitmq oci://rabbitmq-helmoci.packages.broadcom.com/tanzu-rabbitmq-operators \
 --namespace rabbitmq-system
 
 
 
 
+✅
 kubectl get all -n rabbitmq-system
 
 # kubectl get all -n rabbitmq-system
@@ -62,7 +76,9 @@ replicaset.apps/rabbitmq-cluster-operator-685fcdfdc      1         1         1  
 
 
 
+✅
 helm list --namespace rabbitmq-system
+
 
 # helm list --namespace rabbitmq-system
 NAME          	NAMESPACE      	REVISION	UPDATED                                	STATUS  	CHART                         	APP VERSION
@@ -80,7 +96,3 @@ kubectl logs -n rabbitmq-system deploy/messaging-topology-operator
 
 
 kubectl debug -it my-tanzu-rabbit-server-0 -n rabbitmq-system --image ubuntu
-
-
-
-
