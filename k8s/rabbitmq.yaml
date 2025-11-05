@@ -6,7 +6,7 @@ metadata:
 spec:
   replicas: 1
   imagePullSecrets:
-  - name: tanzu-rabbitmq-registry-creds
+  - name: my-secret
   resources:
     limits:
       cpu: 100m
