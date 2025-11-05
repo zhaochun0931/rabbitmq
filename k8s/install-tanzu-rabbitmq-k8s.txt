@@ -6,10 +6,20 @@ kubectl create ns rabbitmq-system
 
 
 
-kubectl create secret docker-registry tanzu-rabbitmq-registry-creds --docker-server "rabbitmq-operator.packages.broadcom.com" \
+kubectl create secret docker-registry tanzu-rabbitmq-registry-creds \
+--docker-server "rabbitmq-operator.packages.broadcom.com" \
 --docker-username "user" \
 --docker-password "password" \
 -n rabbitmq-system
+
+
+
+kubectl create secret docker-registry tanzu-rabbitmq-registry-creds \
+--docker-server "rabbitmq.packages.broadcom.com" \
+--docker-username "username" \
+--docker-password "password" \
+-n rabbitmq-system
+
 
 
 kubectl delete secret tanzu-rabbitmq-registry-creds -n rabbitmq-system
