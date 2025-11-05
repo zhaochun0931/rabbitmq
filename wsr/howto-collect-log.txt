@@ -1,11 +1,8 @@
 kubectl get pod rabbitmq1-server-0 -n rabbitmq-system -o jsonpath='{.spec.containers[*].name}'
 
 
+kubectl debug -it rabbitmq1-server-0 -n rabbitmq-system  --image=$(kubectl get pod rabbitmq1-server-0 -n rabbitmq-system  -o jsonpath='{.spec.containers[0].image}') --target=rabbitmq -- bash
 
-kubectl debug -it rabbitmq1-server-0 -n rabbitmq-system \
-  --image=ubuntu \
-  --target=rabbitmq \
-  -- bash
 
 
 
@@ -13,12 +10,10 @@ kubectl debug -it rabbitmq1-server-0 -n rabbitmq-system \
 kubectl get pod rabbitmq1-server-0 -n rabbitmq-system -o jsonpath='{.spec.ephemeralContainers[*].name}'
 
 
-debugger-mm92v
+debugger-b9kgg
 
 
+kubectl cp rabbitmq-collect-env rabbitmq1-server-0:/tmp -n rabbitmq-system -c debugger-b9kgg
 
 
-kubectl cp rabbitmq-collect-env rabbitmq1-server-0:/tmp -n rabbitmq-system -c debugger-mm92v
-
-
-kubectl cp rabbitmq1-server-0:/tmp/tmp.aydjZuPLFM/rabbitmq-env-rabbitmq1-server-0-20251105-113601.tgz -n rabbitmq-system 2.tgz -c debugger-mm92v
+kubectl cp rabbitmq1-server-0:/tmp/tmp.aydjZuPLFM/rabbitmq-env-rabbitmq1-server-0-20251105-113601.tgz -n rabbitmq-system 2.tgz -c debugger-b9kgg
