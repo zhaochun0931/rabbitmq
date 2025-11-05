@@ -1,0 +1,8 @@
+kubectl get pod rabbitmq1-server-0 -n rabbitmq-system -o jsonpath='{.spec.containers[*].name}'
+
+
+
+kubectl debug -it rabbitmq1-server-0 -n rabbitmq-system \
+  --image=ubuntu \
+  --target=rabbitmq \
+  -- bash
