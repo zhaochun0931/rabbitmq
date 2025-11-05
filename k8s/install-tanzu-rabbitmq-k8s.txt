@@ -12,6 +12,10 @@ kubectl create secret docker-registry tanzu-rabbitmq-registry-creds --docker-ser
 -n rabbitmq-system
 
 
+kubectl delete secret tanzu-rabbitmq-registry-creds -n rabbitmq-system
+
+
+
 
 
 
@@ -25,6 +29,41 @@ helm install tanzu-rabbitmq oci://rabbitmq-helmoci.packages.broadcom.com/tanzu-r
 
 
 
+
+kubectl get all -n rabbitmq-system
+
+# kubectl get all -n rabbitmq-system
+NAME                                               READY   STATUS    RESTARTS   AGE
+pod/messaging-topology-operator-568cc68f98-h2dgt   1/1     Running   0          47s
+pod/rabbitmq-cluster-operator-685fcdfdc-lhf85      1/1     Running   0          47s
+
+NAME                                          TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+service/messaging-topology-operator-webhook   ClusterIP   10.110.241.143   <none>        443/TCP   47s
+
+NAME                                          READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/messaging-topology-operator   1/1     1            1           47s
+deployment.apps/rabbitmq-cluster-operator     1/1     1            1           47s
+
+NAME                                                     DESIRED   CURRENT   READY   AGE
+replicaset.apps/messaging-topology-operator-568cc68f98   1         1         1       47s
+replicaset.apps/rabbitmq-cluster-operator-685fcdfdc      1         1         1       47s
+#
+
+
+
+
+helm list --namespace rabbitmq-system
+
+# helm list --namespace rabbitmq-system
+NAME          	NAMESPACE      	REVISION	UPDATED                                	STATUS  	CHART                         	APP VERSION
+tanzu-rabbitmq	rabbitmq-system	1       	2025-11-04 23:54:47.779642674 +0000 UTC	deployed	tanzu-rabbitmq-operators-4.2.0	4.2.0
+#
+
+
+
+
+kubectl logs -n rabbitmq-system deploy/rabbitmq-cluster-operator
+kubectl logs -n rabbitmq-system deploy/messaging-topology-operator
 
 
 
