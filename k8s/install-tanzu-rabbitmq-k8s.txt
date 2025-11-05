@@ -77,3 +77,10 @@ kubectl logs -n rabbitmq-system deploy/messaging-topology-operator
 
 
 
+
+
+kubectl debug -it my-tanzu-rabbit-server-0 -n rabbitmq-system --image ubuntu
+
+
+
+
