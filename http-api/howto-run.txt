@@ -1,3 +1,9 @@
+docker compose up
+
+
+
+
+
 # create vhost
 
 curl -i -u admin:password -H "content-type:application/json" \
