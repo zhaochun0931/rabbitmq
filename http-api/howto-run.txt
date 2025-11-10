@@ -71,6 +71,12 @@ curl -u admin:password -H "content-type: application/json" \
 
 
 
+# list the number of message
+
+curl -u admin:password http://localhost:15672/api/queues/%2F/your-queue-name
+
+
+
 
 
 curl -u username:password http://localhost:15672/api/vhosts 
