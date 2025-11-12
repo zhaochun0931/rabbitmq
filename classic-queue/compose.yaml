@@ -1,7 +1,8 @@
 services:
-  rabbitmq1:
+  node1:
     image: rabbitmq:3.13.7-management
-    hostname: rabbitmq1
+    hostname: node1
+    container_name: node1
     environment:
       - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
       - RABBITMQ_DEFAULT_USER=admin        # Set the default username
@@ -14,9 +15,10 @@ services:
     networks:
       - rabbitmq-net
 
-  rabbitmq2:
+  node2:
     image: rabbitmq:3.13.7-management
-    hostname: rabbitmq2
+    hostname: node2
+    container_name: node2
     environment:
       - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
       - RABBITMQ_DEFAULT_USER=admin        # Set the default username
@@ -29,9 +31,10 @@ services:
     networks:
       - rabbitmq-net
 
-  rabbitmq3:
+  node3:
     image: rabbitmq:3.13.7-management
-    hostname: rabbitmq3
+    hostname: node3
+    container_name: node3
     environment:
       - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
       - RABBITMQ_DEFAULT_USER=admin        # Set the default username
@@ -44,9 +47,10 @@ services:
     networks:
       - rabbitmq-net
 
-  rabbitmq4:
+  node4:
     image: rabbitmq:3.13.7-management
-    hostname: rabbitmq4
+    hostname: node4
+    container_name: node4
     environment:
       - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
       - RABBITMQ_DEFAULT_USER=admin        # Set the default username
@@ -59,9 +63,10 @@ services:
     networks:
       - rabbitmq-net
   
-  rabbitmq5:
+  node5:
     image: rabbitmq:3.13.7-management
-    hostname: rabbitmq5
+    hostname: node5
+    container_name: node5
     environment:
       - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
       - RABBITMQ_DEFAULT_USER=admin        # Set the default username
