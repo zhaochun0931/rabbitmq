@@ -65,7 +65,7 @@ services:
     networks:
       - rabbitmq-net
     depends_on:
-      - node1
+      - node3
 
   rabbitmq-grale-client:
     image: gradle
