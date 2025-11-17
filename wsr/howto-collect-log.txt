@@ -17,3 +17,12 @@ kubectl cp rabbitmq-collect-env rabbitmq1-server-0:/tmp -n rabbitmq-system -c de
 
 
 kubectl cp rabbitmq1-server-0:/tmp/tmp.aydjZuPLFM/rabbitmq-env-rabbitmq1-server-0-20251105-113601.tgz -n rabbitmq-system 2.tgz -c debugger-b9kgg
+
+
+
+
+
+
+
+kubectl debug -it my-tanzu-rabbit-server-0 -n rabbitmq-system --image ubuntu
+
