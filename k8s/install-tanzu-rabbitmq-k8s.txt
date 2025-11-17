@@ -6,10 +6,14 @@
 kubectl create ns rabbitmq-system
 
 
+
+export USERNAME=
+export PASSWORD=
+
 ✅
 helm registry login rabbitmq-helmoci.packages.broadcom.com \
---username='username' \
---password='password'
+--username=$USERNAME \
+--password=$PASSWORD
 
 
 
@@ -17,8 +21,8 @@ helm registry login rabbitmq-helmoci.packages.broadcom.com \
 ✅
 kubectl create secret docker-registry tanzu-rabbitmq-registry-creds \
 --docker-server "rabbitmq-operator.packages.broadcom.com" \
---docker-username "user" \
---docker-password "password" \
+--docker-username $USERNAME \
+--docker-password $PASSWORD \
 -n rabbitmq-system
 
 
@@ -26,8 +30,8 @@ kubectl create secret docker-registry tanzu-rabbitmq-registry-creds \
 ✅
 kubectl create secret docker-registry my-secret \
 --docker-server "rabbitmq.packages.broadcom.com" \
---docker-username "username" \
---docker-password "password" \
+--docker-username $USERNAME \
+--docker-password $PASSWORD \
 -n rabbitmq-system
 
 
