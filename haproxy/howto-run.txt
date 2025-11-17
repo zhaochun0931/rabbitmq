@@ -10,3 +10,20 @@ docker exec -it rabbitmq-gradle-client bash
 gradle init --type java-application
 
 gradle run
+
+
+
+
+
+
+
+docker exec -it maven-client bash
+
+mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+
+
+cd my-app
+mvn clean install
+mvn exec:java -Dexec.mainClass=com.mycompany.app.App
+
+
