@@ -80,6 +80,20 @@ services:
     networks:
       - rabbitmq-net
 
+
+  maven-client:
+    image: maven
+    container_name: maven-client
+    hostname: maven-client
+    working_dir: /app
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./maven-client:/app
+    command: bash   # <-- stay in bash, do NOT run mvn
+    networks:
+      - rabbitmq-net
+
 networks:
   rabbitmq-net:
     driver: bridge
