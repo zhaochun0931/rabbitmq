@@ -100,5 +100,28 @@ kubectl logs -n rabbitmq-system deploy/messaging-topology-operator
 # create the rabbitmq cluster 
 
 
+kubectl apply -f rabbitmq.yaml
 
+
+
+
+# kubectl get pods -A
+NAMESPACE            NAME                                           READY   STATUS    RESTARTS   AGE
+cert-manager         cert-manager-55cfd7fc65-56r25                  1/1     Running   0          5m2s
+cert-manager         cert-manager-cainjector-565db4fc78-pww9c       1/1     Running   0          5m2s
+cert-manager         cert-manager-webhook-7597b888df-vmnb7          1/1     Running   0          5m2s
+kube-system          calico-kube-controllers-77969b7d87-xh4gg       1/1     Running   0          11m
+kube-system          calico-node-2zgwb                              1/1     Running   0          11m
+kube-system          coredns-668d6bf9bc-8qskj                       1/1     Running   0          11m
+kube-system          coredns-668d6bf9bc-fxplw                       1/1     Running   0          11m
+kube-system          etcd-test                                      1/1     Running   0          11m
+kube-system          kube-apiserver-test                            1/1     Running   0          11m
+kube-system          kube-controller-manager-test                   1/1     Running   0          11m
+kube-system          kube-proxy-ll9lm                               1/1     Running   0          11m
+kube-system          kube-scheduler-test                            1/1     Running   0          11m
+local-path-storage   local-path-provisioner-7d6dddf9dd-7srx9        1/1     Running   0          11m
+rabbitmq-system      messaging-topology-operator-568cc68f98-cj9pp   1/1     Running   0          4m18s
+rabbitmq-system      rabbitmq-cluster-operator-685fcdfdc-bbbzp      1/1     Running   0          4m18s
+rabbitmq-system      rabbitmq1-server-0                             1/1     Running   0          2m33s
+#
 
