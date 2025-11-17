@@ -21,7 +21,8 @@ kubectl cp rabbitmq1-server-0:/tmp/tmp.aydjZuPLFM/rabbitmq-env-rabbitmq1-server-
 
 
 
-
+# ssh into the debug pod 
+kubectl exec -it rabbitmq1-server-0 -n rabbitmq-system -c debugger-b9kgg -- bash
 
 
 kubectl debug -it my-tanzu-rabbit-server-0 -n rabbitmq-system --image ubuntu
