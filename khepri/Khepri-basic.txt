@@ -1,2 +1,6 @@
 Khepri is NOT a message storage engine.
 Khepri is ONLY RabbitMQ’s metadata storage engine.
+
+Khepri replaces Mnesia in RabbitMQ 4.x.
+
+Messages are never stored in Khepri. Only metadata.
