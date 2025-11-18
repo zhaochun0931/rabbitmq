@@ -12,6 +12,8 @@ services:
       - "5671:5672"    # AMQP protocol
     volumes:
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+                  # mount host folder to data directory (Raft logs, message store, Mnesia)
+      - ./data/node1:/var/lib/rabbitmq
     networks:
       - rabbitmq-net
 
@@ -30,6 +32,8 @@ services:
       - "5672:5672"    # AMQP protocol
     volumes:
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+                  # mount host folder to data directory (Raft logs, message store, Mnesia)
+      - ./data/node2:/var/lib/rabbitmq
     networks:
       - rabbitmq-net
     depends_on:
@@ -48,6 +52,8 @@ services:
       - "5673:5672"    # AMQP protocol
     volumes:
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+                  # mount host folder to data directory (Raft logs, message store, Mnesia)
+      - ./data/node3:/var/lib/rabbitmq
     networks:
       - rabbitmq-net
     depends_on:
@@ -97,5 +103,4 @@ services:
 networks:
   rabbitmq-net:
     driver: bridge
-
 
