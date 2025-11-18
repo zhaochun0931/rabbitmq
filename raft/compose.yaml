@@ -1,0 +1,43 @@
+services:
+  node1:
+    build: ./raft
+    container_name: raft-node1
+    environment:
+      - NODE_ID=1
+      - PEERS=raft-node2:5002,raft-node3:5003
+    volumes:
+      - ./data/node1:/app/logs
+    networks: [raft-net]
+
+  node2:
+    build: ./raft
+    container_name: raft-node2
+    environment:
+      - NODE_ID=2
+      - PEERS=raft-node1:5001,raft-node3:5003
+    volumes:
+      - ./data/node2:/app/logs
+    networks: [raft-net]
+
+  node3:
+    build: ./raft
+    container_name: raft-node3
+    environment:
+      - NODE_ID=3
+      - PEERS=raft-node1:5001,raft-node2:5002
+    volumes:
+      - ./data/node3:/app/logs
+    networks: [raft-net]
+
+  client:
+    build: ./client
+    container_name: raft-client
+    depends_on:
+      - node1
+      - node2
+      - node3
+    networks: [raft-net]
+
+networks:
+  raft-net:
+
