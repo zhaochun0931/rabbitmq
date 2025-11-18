@@ -11,6 +11,7 @@ services:
       - "15671:15672"  # RabbitMQ management UI
       - "5671:5672"    # AMQP protocol
     volumes:
+      - ./data/node1:/var/lib/rabbitmq
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
     networks:
       - rabbitmq-net
@@ -27,6 +28,7 @@ services:
       - "15672:15672"  # RabbitMQ management UI
       - "5672:5672"    # AMQP protocol
     volumes:
+      - ./data/node2:/var/lib/rabbitmq
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
     networks:
       - rabbitmq-net
@@ -43,6 +45,7 @@ services:
       - "15673:15672"  # RabbitMQ management UI
       - "5673:5672"    # AMQP protocol
     volumes:
+      - ./data/node3:/var/lib/rabbitmq
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
     networks:
       - rabbitmq-net
