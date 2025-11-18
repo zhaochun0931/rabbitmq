@@ -1,0 +1,20 @@
+docker compose up --build
+
+
+
+
+Attaching to raft-node1, raft-node2, raft-node3
+raft-node2  | [Node 2] started on port 5002
+raft-node3  | [Node 3] started on port 5003
+raft-node1  | [Node 1] started on port 5001
+raft-node3  | [Node 3] Starting election (term 1)
+raft-node2  | [Node 2] Starting election (term 2)
+raft-node3  | 🔥🔥 [Node 3] is LEADER for term 1 🔥🔥
+raft-node1  | [Node 1] Starting election (term 2)
+raft-node3  | [Node 3] Starting election (term 3)
+raft-node2  | [Node 2] Starting election (term 4)
+raft-node3  | 🔥🔥 [Node 3] is LEADER for term 3 🔥🔥
+
+raft-node1  | [Node 1] Starting election (term 4)
+raft-node3  | [Node 3] Starting election (term 5)
+raft-node3  | 🔥🔥 [Node 3] is LEADER for term 5 🔥🔥
