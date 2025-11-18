@@ -1,0 +1,2 @@
+Khepri is NOT a message storage engine.
+Khepri is ONLY RabbitMQ’s metadata storage engine.
