@@ -1,0 +1,70 @@
+services:
+  node1:
+    image: rabbitmq:3.13.7-management
+    hostname: node1
+    container_name: node1
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15671:15672"  # RabbitMQ management UI
+      - "5671:5672"    # AMQP protocol
+    volumes:
+      - ./data/node1:/var/lib/rabbitmq
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    networks:
+      - rabbitmq-net
+
+  node2:
+    image: rabbitmq:3.13.7-management
+    hostname: node2
+    container_name: node2
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15672:15672"  # RabbitMQ management UI
+      - "5672:5672"    # AMQP protocol
+    volumes:
+      - ./data/node2:/var/lib/rabbitmq
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    networks:
+      - rabbitmq-net
+
+  node3:
+    image: rabbitmq:3.13.7-management
+    hostname: node3
+    container_name: node3
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15673:15672"  # RabbitMQ management UI
+      - "5673:5672"    # AMQP protocol
+    volumes:
+      - ./data/node3:/var/lib/rabbitmq
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    networks:
+      - rabbitmq-net
+
+
+  grale-client:
+    image: gradle
+    hostname: gradle-client
+    container_name: gradle-client
+    working_dir: /project
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./gradle-client:/project
+    command: ["/bin/bash"]
+    networks:
+      - rabbitmq-net
+
+      
+networks:
+  rabbitmq-net:
+    driver: bridge
