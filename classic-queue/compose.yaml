@@ -79,6 +79,20 @@ services:
     networks:
       - rabbitmq-net
 
+  grale-client:
+    image: gradle
+    hostname: gradle-client
+    container_name: gradle-client
+    working_dir: /project
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./gradle-client:/project
+    command: ["/bin/bash"]
+    networks:
+      - rabbitmq-net
+
+      
 networks:
   rabbitmq-net:
     driver: bridge
