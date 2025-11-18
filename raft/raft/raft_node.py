@@ -27,7 +27,7 @@ class RaftNode:
     async def start(self):
         asyncio.create_task(self.election_timer())
         asyncio.create_task(self.listen())
-        print(f"[Node {self.node_id}] started on port {PORT}")
+        print(f"[Node {self.node_id}] started on port {PORT}", flush=True)
 
     async def listen(self):
         server = await asyncio.start_server(self.handle_conn, "0.0.0.0", PORT)
@@ -60,10 +60,10 @@ class RaftNode:
             self.state = STATE_FOLLOWER
 
         vote_granted = False
-
         if self.voted_for is None and term >= self.current_term:
             self.voted_for = candidate
             vote_granted = True
+            self.last_heartbeat = time.time()
 
         return {
             "term": self.current_term,
@@ -72,16 +72,16 @@ class RaftNode:
 
     async def handle_heartbeat(self, msg):
         if msg["term"] >= self.current_term:
+            if msg["term"] > self.current_term or self.state == STATE_CANDIDATE:
+                self.state = STATE_FOLLOWER
             self.current_term = msg["term"]
-            self.state = STATE_FOLLOWER
             self.last_heartbeat = time.time()
         return {"ok": True}
 
     async def election_timer(self):
         while True:
-            await asyncio.sleep(0.15)
-            timeout = 0.5 + random.random()
-
+            await asyncio.sleep(0.05)
+            timeout = random.uniform(0.3, 0.5)
             if time.time() - self.last_heartbeat > timeout and self.state != STATE_LEADER:
                 await self.start_election()
 
@@ -90,27 +90,21 @@ class RaftNode:
         self.current_term += 1
         self.voted_for = self.node_id
         self.vote_count = 1
-        print(f"[Node {self.node_id}] Starting election (term {self.current_term})")
+        print(f"[Node {self.node_id}] Starting election (term {self.current_term})", flush=True)
 
-        for peer in self.peers:
-            asyncio.create_task(self.request_vote(peer))
+        tasks = [self.request_vote(peer) for peer in self.peers]
+        await asyncio.gather(*tasks)
 
-        # check election result
-        await asyncio.sleep(0.3)
-        if self.state == STATE_CANDIDATE and self.vote_count > (len(self.peers) + 1) // 2:
+        if self.vote_count > (len(self.peers) + 1) // 2:
             self.state = STATE_LEADER
-            print(f"🔥🔥 [Node {self.node_id}] is LEADER for term {self.current_term} 🔥🔥")
+            print(f"🔥🔥 [Node {self.node_id}] is LEADER for term {self.current_term} 🔥🔥", flush=True)
             asyncio.create_task(self.send_heartbeats())
 
     async def request_vote(self, peer):
         try:
             host, port = peer.split(":")
             reader, writer = await asyncio.open_connection(host, int(port))
-            msg = {
-                "type": "vote_request",
-                "term": self.current_term,
-                "candidate": self.node_id
-            }
+            msg = {"type": "vote_request", "term": self.current_term, "candidate": self.node_id}
             writer.write(json.dumps(msg).encode())
             await writer.drain()
 
@@ -120,7 +114,6 @@ class RaftNode:
             reply = json.loads(data.decode())
             if reply["vote_granted"]:
                 self.vote_count += 1
-
         except:
             pass
 
@@ -134,17 +127,12 @@ class RaftNode:
         try:
             host, port = peer.split(":")
             reader, writer = await asyncio.open_connection(host, int(port))
-            msg = {
-                "type": "heartbeat",
-                "term": self.current_term,
-                "leader": self.node_id
-            }
+            msg = {"type": "heartbeat", "term": self.current_term, "leader": self.node_id}
             writer.write(json.dumps(msg).encode())
             await writer.drain()
             writer.close()
         except:
             pass
-
 
 async def main():
     node = RaftNode(NODE_ID, PEERS)
@@ -153,4 +141,3 @@ async def main():
         await asyncio.sleep(1)
 
 asyncio.run(main())
-
