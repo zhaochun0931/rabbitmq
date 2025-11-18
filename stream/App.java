@@ -55,20 +55,9 @@ public class App {
             System.out.println("✔ Classic Queues created successfully");
 
             /* -----------------------------
-                2. Declare QUORUM QUEUE
+                2. Declare Stream QUEUE
                ----------------------------- */
-//            Map<String, Object> quorumArgs = new HashMap<>();
-//            quorumArgs.put("x-queue-type", "quorum");
-//
-//            channel.queueDeclare(
-//                    STREAM_QUEUE_NAME,
-//                    true,
-//                    false,
-//                    false,
-//                    quorumArgs
-//            );
-//
-//            System.out.println("✔ Quorum Queues created successfully");
+
 
 
 
@@ -98,7 +87,6 @@ public class App {
 
                 // Publish
                 channel.basicPublish("", CLASSIC_QUEUE_NAME, null, message.getBytes(StandardCharsets.UTF_8));
-//                channel.basicPublish("", QUORUM_QUEUE_NAME, null, message.getBytes(StandardCharsets.UTF_8));
                 channel.basicPublish("", STREAM_QUEUE_NAME, null, message.getBytes(StandardCharsets.UTF_8));
 
 
