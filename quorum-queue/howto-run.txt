@@ -10,3 +10,14 @@ gradle init --type java-application
 
 
 
+/var/lib/rabbitmq/mnesia/rabbit@node1/quorum/rabbit@node1/2F_MY_6TF8TW6BFLEN
+├── 00000002.wal
+├── 00000003.wal
+├── 2F_MY_6TF8TW6BFLEN
+│   ├── 00000001.segment
+│   ├── 00000002.segment
+│   ├── 00000003.segment
+│   ├── 00000004.segment
+│   ├── 00000005.segment
+│   ├── 00000006.segment
+│   ├── 00000007.segment
