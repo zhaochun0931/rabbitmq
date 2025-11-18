@@ -4,3 +4,12 @@ Khepri is ONLY RabbitMQ’s metadata storage engine.
 Khepri replaces Mnesia in RabbitMQ 4.x.
 
 Messages are never stored in Khepri. Only metadata.
+
+
+
+
+
+
+
+
+rabbitmqctl eval 'rabbit_khepri:is_enabled().'
