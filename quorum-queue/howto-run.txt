@@ -1,0 +1,12 @@
+docker compose up
+
+
+
+docker exec -it gradle-client bash
+
+
+gradle init --type java-application
+
+
+
+
