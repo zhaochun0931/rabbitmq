@@ -12,6 +12,7 @@ services:
       - "5671:5672"    # AMQP protocol
     volumes:
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
                   # mount host folder to data directory (Raft logs, message store, Mnesia)
       - ./data/node1:/var/lib/rabbitmq
     networks:
@@ -32,6 +33,7 @@ services:
       - "5672:5672"    # AMQP protocol
     volumes:
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
                   # mount host folder to data directory (Raft logs, message store, Mnesia)
       - ./data/node2:/var/lib/rabbitmq
     networks:
@@ -52,6 +54,7 @@ services:
       - "5673:5672"    # AMQP protocol
     volumes:
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
                   # mount host folder to data directory (Raft logs, message store, Mnesia)
       - ./data/node3:/var/lib/rabbitmq
     networks:
