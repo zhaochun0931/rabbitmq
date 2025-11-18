@@ -47,37 +47,6 @@ services:
     networks:
       - rabbitmq-net
 
-  node4:
-    image: rabbitmq:3.13.7-management
-    hostname: node4
-    container_name: node4
-    environment:
-      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
-      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
-      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
-    ports:
-      - "15674:15672"  # RabbitMQ management UI
-      - "5674:5672"    # AMQP protocol
-    volumes:
-      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
-    networks:
-      - rabbitmq-net
-  
-  node5:
-    image: rabbitmq:3.13.7-management
-    hostname: node5
-    container_name: node5
-    environment:
-      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
-      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
-      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
-    ports:
-      - "15675:15672"  # RabbitMQ management UI
-      - "5675:5672"    # AMQP protocol
-    volumes:
-      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
-    networks:
-      - rabbitmq-net
 
   grale-client:
     image: gradle
