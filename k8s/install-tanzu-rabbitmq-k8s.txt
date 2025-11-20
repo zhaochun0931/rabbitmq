@@ -125,3 +125,26 @@ rabbitmq-system      rabbitmq-cluster-operator-685fcdfdc-bbbzp      1/1     Runn
 rabbitmq-system      rabbitmq1-server-0                             1/1     Running   0          2m33s
 #
 
+
+
+
+
+
+
+✅ rabbitmq1:
+
+username="$(kubectl get secret rabbitmq1-default-user -n rabbitmq-system -o jsonpath='{.data.username}' | base64 --decode)"
+password="$(kubectl get secret rabbitmq1-default-user -n rabbitmq-system -o jsonpath='{.data.password}' | base64 --decode)"
+
+
+echo -e "username: \t $username"
+echo -e "password: \t $password"
+
+
+
+
+nohup kubectl port-forward service/rabbitmq1 -n rabbitmq-system --address 0.0.0.0 15672 5672 5552 &
+
+
+
+
