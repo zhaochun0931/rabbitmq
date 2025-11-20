@@ -38,6 +38,7 @@ kubectl create secret docker-registry my-secret \
 
 ✅
 kubectl delete secret tanzu-rabbitmq-registry-creds -n rabbitmq-system
+kubectl delete secret my-secret -n rabbitmq-system
 
 
 
