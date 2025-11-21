@@ -1,5 +1,10 @@
 rabbitmqctl eval 'khepri_import_export:export(rabbit_khepri:get_store_id(),[{if_path_matches,any,undefined}],khepri_export_erlang,"export.erl").'
 
+rabbitmqctl eval 'rabbit_upgrade_preparation:with_minimum_quorum().'
+
+
+
+
 
 rabbitmqctl eval "rabbit_misc:version()."
 
