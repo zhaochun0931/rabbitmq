@@ -1,0 +1,43 @@
+services:
+  node1:
+    image: rabbitmq.packages.broadcom.com/vmware-tanzu-rabbitmq:4.2.0
+    hostname: node1
+    container_name: node1
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    volumes:
+      - ./rabbitmq-upstream.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+    ports:
+      - "15671:15672"  # RabbitMQ management UI for node 1
+      - "5671:5672"    # AMQP protocol
+      - "5551:5552"
+    networks:
+      - rabbitmq-net
+
+
+
+  node2:
+    image: rabbitmq.packages.broadcom.com/vmware-tanzu-rabbitmq:4.2.0
+    hostname: node2
+    container_name: node2
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    volumes:
+      - ./rabbitmq-downstream.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+    ports:
+      - "15672:15672"  # RabbitMQ management UI for node 2
+      - "5672:5672"    # AMQP protocol
+      - "5552:5552"    # AMQP protocol
+    networks:
+      - rabbitmq-net
+    depends_on:
+      - node1
+
+
+networks:
+  rabbitmq-net:
+    driver: bridge
