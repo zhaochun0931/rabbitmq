@@ -21,3 +21,16 @@ gradle init --type java-application
 │   ├── 00000005.segment
 │   ├── 00000006.segment
 │   ├── 00000007.segment
+
+
+
+
+
+
+cat /var/lib/rabbitmq/mnesia/rabbit@node1/quorum/rabbit@node1/2F_MY_6TF8TW6BFLEN/config | egrep -i 'friendly_name'
+
+
+
+  membership => voter,friendly_name => "queue 'qq1' in vhost '/'",
+
+
