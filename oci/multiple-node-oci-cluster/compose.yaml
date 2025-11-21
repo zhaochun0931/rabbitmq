@@ -1,0 +1,126 @@
+services:
+  node1:
+    image: rabbitmq.packages.broadcom.com/vmware-tanzu-rabbitmq:4.2.0
+    hostname: node1
+    container_name: node1
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    volumes:
+      - ./rabbitmq-upstream.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+    ports:
+      - "15671:15672"  # RabbitMQ management UI for node 1
+      - "5671:5672"    # AMQP protocol
+      - "5551:5552"
+    networks:
+      - rabbitmq-net
+
+
+
+  node2:
+    image: rabbitmq.packages.broadcom.com/vmware-tanzu-rabbitmq:4.2.0
+    hostname: node2
+    container_name: node2
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    volumes:
+      - ./rabbitmq-upstream.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+    ports:
+      - "15672:15672"  # RabbitMQ management UI for node 2
+      - "5672:5672"    # AMQP protocol
+      - "5552:5552"    # AMQP protocol
+    networks:
+      - rabbitmq-net
+    depends_on:
+      - node1
+
+  node3:
+    image: rabbitmq.packages.broadcom.com/vmware-tanzu-rabbitmq:4.2.0
+    hostname: node3
+    container_name: node3
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    volumes:
+      - ./rabbitmq-upstream.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+    ports:
+      - "15673:15672"  # RabbitMQ management UI for node 3
+      - "5673:5672"    # AMQP protocol
+      - "5553:5552"    # AMQP protocol
+    networks:
+      - rabbitmq-net
+    depends_on:
+      - node2
+
+  node4:
+    image: rabbitmq.packages.broadcom.com/vmware-tanzu-rabbitmq:4.2.0
+    hostname: node4
+    container_name: node4
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    volumes:
+      - ./rabbitmq-downstream.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+    ports:
+      - "15674:15672"  # RabbitMQ management UI for node 3
+      - "5674:5672"    # AMQP protocol
+      - "5554:5552"    # AMQP protocol
+    networks:
+      - rabbitmq-net
+    depends_on:
+      - node3
+
+  node5:
+    image: rabbitmq.packages.broadcom.com/vmware-tanzu-rabbitmq:4.2.0
+    hostname: node5
+    container_name: node5
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    volumes:
+      - ./rabbitmq-downstream.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+    ports:
+      - "15675:15672"  # RabbitMQ management UI for node 3
+      - "5675:5672"    # AMQP protocol
+      - "5555:5552"    # AMQP protocol
+    networks:
+      - rabbitmq-net
+    depends_on:
+      - node4
+  
+  
+  node6:
+    image: rabbitmq.packages.broadcom.com/vmware-tanzu-rabbitmq:4.2.0
+    hostname: node6
+    container_name: node6
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    volumes:
+      - ./rabbitmq-downstream.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+    ports:
+      - "15676:15672"  # RabbitMQ management UI for node 3
+      - "5676:5672"    # AMQP protocol
+      - "5556:5552"    # AMQP protocol
+    networks:
+      - rabbitmq-net
+    depends_on:
+      - node5
+
+
+networks:
+  rabbitmq-net:
+    driver: bridge
