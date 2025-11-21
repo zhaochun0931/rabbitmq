@@ -72,9 +72,9 @@ rabbitmq-diagnostics inspect_local_data_available_for_standby_replication_recove
 
 
 
+rabbitmqctl promote_standby_replication_downstream_cluster
 
-
-
+rabbitmqctl promote_standby_replication_downstream_cluster --formatter pretty_table
 
 
 $ rabbitmqctl promote_standby_replication_downstream_cluster
