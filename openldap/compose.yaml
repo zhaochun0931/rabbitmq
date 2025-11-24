@@ -13,6 +13,7 @@ services:
     volumes:
       #- ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
       - ./advanced.config:/etc/rabbitmq/advanced.config
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
     networks:
       - rabbitmq-net
 
