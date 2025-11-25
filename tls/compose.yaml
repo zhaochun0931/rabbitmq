@@ -1,6 +1,7 @@
 services:
   node1:
     image: rabbitmq:management
+    container_name: node1
     hostname: node1
     environment:
       - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
@@ -17,9 +18,6 @@ services:
       - ./certs:/etc/rabbitmq/certs
     networks:
       - rabbitmq-net
-
-
-
 
 networks:
   rabbitmq-net:
