@@ -468,7 +468,7 @@ collect_system_info()
     then
         for mount_point in $(mount | awk '/^\// { print $1 }')
         do
-            flat_point="$(echo "$mount_point" | tr '/' '_')"
+            flat_point="$(echo "$mount_point" | sed 's/\//_/g')"
             collect_system "blockdev$flat_point" blockdev --getra "$mount_point"
         done
     else
