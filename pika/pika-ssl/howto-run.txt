@@ -3,3 +3,18 @@ docker compose build --no-cache
 
 
 docker compose up
+
+
+
+docker exec -it pika-client bash
+
+
+
+python app.py
+
+
+
+root@pika-client:/app# python app.py
+[✓] Connected to RabbitMQ at node1:5671
+[✓] Sent message to queue 'test': Hello from pika client! 2025-11-26 03:11:27
+root@pika-client:/app#
