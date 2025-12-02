@@ -1,0 +1,21 @@
+docker compose up
+
+
+rabbitmq-diagnostics consume_event_stream
+
+rabbitmq-diagnostics consume_event_stream --pattern queue.*
+
+{"event":"queue.created","type":"rabbit_classic_queue","user_who_performed_action":"admin","exclusive":false,"owner_pid":"","arguments":[],"auto_delete":false,"durable":true,"name":"qq1","vhost":"/","timestamp_in_ms":1764678831364}
+{"event":"node.node.stats","send_bytes":4619,"recv_bytes":605,"sock_port":25672,"sock_addr":"172.19.0.2","peer_port":42052,"peer_addr":"172.19.0.2","route":"{rabbit@node1,'rabbitmqcli-677-rabbit@node1'}","timestamp_in_ms":1764678834154}
+{"event":"node.node.stats","send_bytes":233498,"recv_bytes":121635,"sock_port":25672,"sock_addr":"172.19.0.2","peer_port":50128,"peer_addr":"172.19.0.3","route":"{rabbit@node1,rabbit@node2}","timestamp_in_ms":1764678834154}
+{"event":"node.node.stats","send_bytes":120160,"recv_bytes":92120,"sock_port":25672,"sock_addr":"172.19.0.2","peer_port":54082,"peer_addr":"172.19.0.4","route":"{rabbit@node1,rabbit@node3}","timestamp_in_ms":1764678834154}
+{"event":"node.node.stats","send_bytes":5351,"recv_bytes":609,"sock_port":25672,"sock_addr":"172.19.0.2","peer_port":42052,"peer_addr":"172.19.0.2","route":"{rabbit@node1,'rabbitmqcli-677-rabbit@node1'}","timestamp_in_ms":1764678839161}
+{"event":"node.node.stats","send_bytes":237542,"recv_bytes":125113,"sock_port":25672,"sock_addr":"172.19.0.2","peer_port":50128,"peer_addr":"172.19.0.3","route":"{rabbit@node1,rabbit@node2}","timestamp_in_ms":1764678839161}
+{"event":"node.node.stats","send_bytes":122512,"recv_bytes":94516,"sock_port":25672,"sock_addr":"172.19.0.2","peer_port":54082,"peer_addr":"172.19.0.4","route":"{rabbit@node1,rabbit@node3}","timestamp_in_ms":1764678839161}
+{"event":"node.node.stats","send_bytes":6083,"recv_bytes":609,"sock_port":25672,"sock_addr":"172.19.0.2","peer_port":42052,"peer_addr":"172.19.0.2","route":"{rabbit@node1,'rabbitmqcli-677-rabbit@node1'}","timestamp_in_ms":1764678844171}
+{"event":"node.node.stats","send_bytes":241276,"recv_bytes":128547,"sock_port":25672,"sock_addr":"172.19.0.2","peer_port":50128,"peer_addr":"172.19.0.3","route":"{rabbit@node1,rabbit@node2}","timestamp_in_ms":1764678844171}
+{"event":"node.node.stats","send_bytes":124860,"recv_bytes":96868,"sock_port":25672,"sock_addr":"172.19.0.2","peer_port":54082,"peer_addr":"172.19.0.4","route":"{rabbit@node1,rabbit@node3}","timestamp_in_ms":1764678844171}
+{"event":"node.node.stats","send_bytes":6815,"recv_bytes":609,"sock_port":25672,"sock_addr":"172.19.0.2","peer_port":42052,"peer_addr":"172.19.0.2","route":"{rabbit@node1,'rabbitmqcli-677-rabbit@node1'}","timestamp_in_ms":1764678849176}
+{"event":"node.node.stats","send_bytes":254205,"recv_bytes":132139,"sock_port":25672,"sock_addr":"172.19.0.2","peer_port":50128,"peer_addr":"172.19.0.3","route":"{rabbit@node1,rabbit@node2}","timestamp_in_ms":1764678849176}
+{"event":"node.node.stats","send_bytes":127212,"recv_bytes":99312,"sock_port":25672,"sock_addr":"172.19.0.2","peer_port":54082,"peer_addr":"172.19.0.4","route":"{rabbit@node1,rabbit@node3}","timestamp_in_ms":1764678849176}
+{"event":"queue.deleted","user_who_performed_action":"admin","type":"rabbit_classic_queue","name":"qq1","vhost":"/","timestamp_in_ms":1764678849261}

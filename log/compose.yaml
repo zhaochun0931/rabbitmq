@@ -1,0 +1,61 @@
+services:
+  node1:
+    # image: rabbitmq:management
+    image: rabbitmq:3.13.7-management
+    hostname: node1
+    container_name: node1
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15671:15672"  # RabbitMQ management UI for node 1
+      - "5671:5672"    # AMQP protocol
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    networks:
+      - rabbitmq-net
+
+
+
+  node2:
+    # image: rabbitmq:management
+    image: rabbitmq:3.13.7-management
+    hostname: node2
+    container_name: node2
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # Same cookie for all nodes
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15672:15672"  # RabbitMQ management UI for node 2
+      - "5672:5672"    # AMQP protocol
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    networks:
+      - rabbitmq-net
+    depends_on:
+      - node1
+
+  node3:
+    # image: rabbitmq:management
+    image: rabbitmq:3.13.7-management
+    hostname: node3
+    container_name: node3
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq # Same cookie for all nodes
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15673:15672"  # RabbitMQ management UI for node 3
+      - "5673:5672"    # AMQP protocol
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    networks:
+      - rabbitmq-net
+    depends_on:
+      - node1
+
+networks:
+  rabbitmq-net:
+    driver: bridge
