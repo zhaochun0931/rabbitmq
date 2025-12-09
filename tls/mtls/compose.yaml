@@ -1,0 +1,78 @@
+services:
+  node1:
+    image: rabbitmq:management
+    container_name: node1
+    hostname: node1
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15672:15672"  # RabbitMQ management UI for node 1
+      - "15671:15671"  # RabbitMQ management UI for node 1
+      - "5671:5671"    # AMQP over SSL
+      - "5672:5672"    # AMQP protocol
+      - "1883:1883"    # MQTT protocol
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./certs:/etc/rabbitmq/certs
+    networks:
+      - rabbitmq-net
+
+
+  node2:
+    image: rabbitmq:management
+    container_name: node2
+    hostname: node2
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15674:15672"  # RabbitMQ management UI for node 1
+      - "15675:15671"  # RabbitMQ management UI for node 1
+      - "5673:5671"    # AMQP over SSL
+      - "5674:5672"    # AMQP protocol
+      - "1884:1883"    # MQTT protocol
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./certs:/etc/rabbitmq/certs
+    networks:
+      - rabbitmq-net
+
+  node3:
+    image: rabbitmq:management
+    container_name: node3
+    hostname: node3
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15676:15672"  # RabbitMQ management UI for node 1
+      - "15677:15671"  # RabbitMQ management UI for node 1
+      - "5675:5671"    # AMQP over SSL
+      - "5676:5672"    # AMQP protocol
+      - "1886:1883"    # MQTT protocol
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./certs:/etc/rabbitmq/certs
+    networks:
+      - rabbitmq-net
+
+
+  pika-client:
+    build: ./app
+    container_name: pika-client
+    hostname: pika-client
+    depends_on:
+      - node1
+    volumes:
+      - ./certs:/certs
+    networks:
+      - rabbitmq-net
+
+
+networks:
+  rabbitmq-net:
+    driver: bridge
