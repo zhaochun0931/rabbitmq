@@ -40,7 +40,7 @@ Using environment '192.168.6.11' as client 'ops_manager'
 
 Using deployment 'service-instance_60743c31-63c6-4828-b2e4-0c95364a281f'
 
-Task 2400bosh
+Task 2400
 
 Task 2400 | 12:55:38 | Fetching logs for rabbitmq-server/1b8c4848-eba1-4b3e-baaa-31d997cb07d9 (2): Finding and packing log files (00:00:00)
 
