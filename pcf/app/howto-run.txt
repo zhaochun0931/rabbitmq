@@ -1,8 +1,23 @@
+├── app.py
+├── manifest.yml
+└── requirements.txt
+
+
+
+✅
 cf push
+
+
 
 cf apps
 
 
+
+
+
+
+
+✅
 curl -k https://my-app.lab29apps-tanzu-gss.lvn.broadcom.net/send/hello
 
 
