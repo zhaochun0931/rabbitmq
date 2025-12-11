@@ -87,3 +87,8 @@ Received: yyy
 Queue empty
 #
 #
+
+
+
+
+cf logs my-app --recent
