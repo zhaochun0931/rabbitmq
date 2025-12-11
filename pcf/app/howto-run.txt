@@ -89,9 +89,17 @@ Queue empty
 #
 
 
-
+✅
 
 cf logs my-app --recent
 
 
+
+✅
+
 cf env my-app
+
+
+
+✅
+cf delete my-app -f
