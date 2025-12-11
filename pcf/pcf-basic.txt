@@ -2,7 +2,7 @@ diagnostic_report.json
 
 
 
-
+bosh releases
 bosh -v
 bosh stemcells
 
