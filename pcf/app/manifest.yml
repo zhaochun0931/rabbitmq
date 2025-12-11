@@ -1,0 +1,10 @@
+---
+applications:
+  - name: my-app
+    memory: 256M
+    instances: 1
+    buildpacks:
+      - python_buildpack
+    command: python app.py
+    services:
+      - my-rabbitmq
