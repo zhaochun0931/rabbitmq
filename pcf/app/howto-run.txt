@@ -1,1 +1,43 @@
+cf push
+
+cf apps
+
+
+curl -k https://my-app.lab29apps-tanzu-gss.lvn.broadcom.net/send/hello
+
+
+
+# cf apps
+Getting apps in org system / space system as admin...
+
+name                            requested state   processes           routes
+app-usage-scheduler             started           web:1/1
+app-usage-scheduler-venerable   stopped           web:0/1
+app-usage-server                started           web:2/2             app-usage.lab29sys-tanzu-gss.lvn.broadcom.net
+app-usage-server-venerable      stopped           web:0/2             app-usage.lab29sys-tanzu-gss.lvn.broadcom.net
+app-usage-worker                started           web:1/1
+app-usage-worker-venerable      stopped           web:0/1
+apps-manager-js-blue            started           web:6/6             apps.lab29sys-tanzu-gss.lvn.broadcom.net
+apps-manager-js-green           stopped           web:0/6
+backend-cookie-response         started           web:2/2             backend-cookie-response.lab29apps-tanzu-gss.lvn.broadcom.net
+backend-no-cookie-response      started           web:2/2             backend-no-cookie-response.lab29apps-tanzu-gss.lvn.broadcom.net
+my-app                          started           web:1/1             my-app.lab29apps-tanzu-gss.lvn.broadcom.net
+nginx-proxy-app                 stopped           web:0/1             nginx-proxy-app.lab29apps-tanzu-gss.lvn.broadcom.net
+nginx-test                      started           web:1/1             nginx-test.lab29apps-tanzu-gss.lvn.broadcom.net
+nginx-test-304                  started           web:1/1             nginx-test-304.lab29apps-tanzu-gss.lvn.broadcom.net
+p-invitations-blue              started           web:2/2             p-invitations.lab29sys-tanzu-gss.lvn.broadcom.net
+p-invitations-green             stopped           web:0/2
+search-server-blue              started           web:2/2             search-server.lab29sys-tanzu-gss.lvn.broadcom.net
+search-server-green             stopped           web:0/2
+spring-music-                   started           web:1/1, task:0/0   spring-music--turbulent-bongo-pr.lab29apps-tanzu-gss.lvn.broadcom.net
+test-python-flask               started           web:2/2             test-python-flask.lab29apps-tanzu-gss.lvn.broadcom.net
+#
+#
+#
+# curl -k https://my-app.lab29apps-tanzu-gss.lvn.broadcom.net/send/hello
+Sent message: hello
+#
+#
+
+
 
