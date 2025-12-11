@@ -1,6 +1,7 @@
 diagnostic_report.json
 
 
+✅
 
 bosh releases
 bosh -v
@@ -56,9 +57,22 @@ haproxy/36a89c47-b375-4fba-a011-6bf5d550b681  running        az1  10.225.50.124 
 
 
 
-
+✅
 bosh deployments
 bosh delete-deployment -d service-instance_8bb907c3-9d0f-4ac3-9aa4-e74d5ad0a2ff
+
+
+cf delete-service my-gemfire
+
+
+
+
+
+
+✅
+
+
+
 
 
 bosh task --help
