@@ -1,8 +1,82 @@
 cf m
 
 
+✅
+
 cf create-service p.rabbitmq on-demand-plan my-rabbitmq
 
 
 cf services
+
+
+# cf service my-rabbitmq
+Showing info of service my-rabbitmq in org system / space system as admin...
+
+name:            my-rabbitmq
+guid:            60743c31-63c6-4828-b2e4-0c95364a281f
+type:            managed
+broker:          rabbitmq-odb
+offering:        p.rabbitmq
+plan:            on-demand-plan
+tags:
+offering tags:   rabbitmq
+description:     RabbitMQ service to provide dedicated instances of this high-performance multi-protocol messaging broker
+documentation:   https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-rabbitmq-on-cloud-foundry/10-0/tanzu-rabbitmq-cloud-foundry/index.html
+dashboard url:   https://rmq-60743c31-63c6-4828-b2e4-0c95364a281f.lab29sys-tanzu-gss.lvn.broadcom.net
+
+Showing status of last operation:
+   status:    create in progress
+   message:   Instance provisioning in progress
+   started:   2025-12-11T11:53:30Z
+   updated:   2025-12-11T11:53:30Z
+
+Showing bound apps:
+   There are no bound apps for this service instance.
+
+Showing sharing info:
+   This service instance is not currently being shared.
+
+   The "service_instance_sharing" feature flag is disabled for this Cloud Foundry platform.
+   Service instance sharing is disabled for this service offering.
+
+Showing upgrade status:
+   There is no upgrade available for this service.
+
+#
+
+
+
+cf service my-rabbitmq --guid
+
+# cf service my-rabbitmq --guid
+60743c31-63c6-4828-b2e4-0c95364a281f
+#
+
+
+
+✅
+bosh vms
+
+bosh vms -d service-instance_60743c31-63c6-4828-b2e4-0c95364a281f
+
+
+
+
+# bosh vms -d service-instance_60743c31-63c6-4828-b2e4-0c95364a281f
+Using environment '192.168.6.11' as client 'ops_manager'
+
+Task 2350. Done
+
+Deployment 'service-instance_60743c31-63c6-4828-b2e4-0c95364a281f'
+
+Instance                                              Process State  AZ   IPs           VM CID                                   VM Type  Active  Stemcell
+rabbitmq-server/1b8c4848-eba1-4b3e-baaa-31d997cb07d9  running        az2  192.168.6.35  vm-cf2125f9-beaf-478e-8953-16a390f33ccb  large    true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.943
+rabbitmq-server/5f47d3cb-74f4-47d1-9c1b-6dc4b58d6289  running        az3  192.168.6.33  vm-a0652adf-f9c7-4278-9121-a603596773de  large    true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.943
+rabbitmq-server/bc058051-684a-43f1-a148-794797f7868f  running        az1  192.168.6.34  vm-248533c4-4c1c-40df-94bc-1b31672bb5e3  large    true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.943
+
+3 vms
+
+Succeeded
+#
+
 
