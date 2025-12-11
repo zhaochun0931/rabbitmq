@@ -1,0 +1,55 @@
+🚀
+
+bosh vms -d service-instance_60743c31-63c6-4828-b2e4-0c95364a281f
+  
+  
+
+
+# bosh vms -d service-instance_60743c31-63c6-4828-b2e4-0c95364a281f
+Using environment '192.168.6.11' as client 'ops_manager'
+
+Task 2412. Done
+
+Deployment 'service-instance_60743c31-63c6-4828-b2e4-0c95364a281f'
+
+Instance                                              Process State  AZ   IPs           VM CID                                   VM Type  Active  Stemcell
+rabbitmq-server/1b8c4848-eba1-4b3e-baaa-31d997cb07d9  running        az2  192.168.6.35  vm-cf2125f9-beaf-478e-8953-16a390f33ccb  large    true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.943
+rabbitmq-server/5f47d3cb-74f4-47d1-9c1b-6dc4b58d6289  running        az3  192.168.6.33  vm-a0652adf-f9c7-4278-9121-a603596773de  large    true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.943
+rabbitmq-server/bc058051-684a-43f1-a148-794797f7868f  running        az1  192.168.6.34  vm-248533c4-4c1c-40df-94bc-1b31672bb5e3  large    true    bosh-vsphere-esxi-ubuntu-jammy-go_agent/1.943
+
+3 vms
+
+Succeeded
+#
+
+
+
+
+
+
+
+
+🚀
+
+bosh logs -d service-instance_60743c31-63c6-4828-b2e4-0c95364a281f rabbitmq-server/1b8c4848-eba1-4b3e-baaa-31d997cb07d9
+
+
+
+# bosh logs -d service-instance_60743c31-63c6-4828-b2e4-0c95364a281f rabbitmq-server/1b8c4848-eba1-4b3e-baaa-31d997cb07d9
+Using environment '192.168.6.11' as client 'ops_manager'
+
+Using deployment 'service-instance_60743c31-63c6-4828-b2e4-0c95364a281f'
+
+Task 2400bosh
+
+Task 2400 | 12:55:38 | Fetching logs for rabbitmq-server/1b8c4848-eba1-4b3e-baaa-31d997cb07d9 (2): Finding and packing log files (00:00:00)
+
+Task 2400 Started  Thu Dec 11 12:55:38 UTC 2025
+Task 2400 Finished Thu Dec 11 12:55:38 UTC 2025
+Task 2400 Duration 00:00:00
+Task 2400 done
+
+Downloading resource '002041fe-2c52-499a-8edf-15467d36e398' to '/root/service-instance_60743c31-63c6-4828-b2e4-0c95364a281f.rabbitmq-server.1b8c4848-eba1-4b3e-baaa-31d997cb07d9-20251211-125539-045982629.tgz'...
+
+Succeeded
+#
