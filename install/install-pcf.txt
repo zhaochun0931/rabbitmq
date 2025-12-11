@@ -1,0 +1,8 @@
+cf m
+
+
+cf create-service p.rabbitmq on-demand-plan my-rabbitmq
+
+
+cf services
+
