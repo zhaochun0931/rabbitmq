@@ -25,3 +25,17 @@ cf unbind-service my-app my-rabbitmq
 
 
 
+
+
+
+
+curl -k https://my-app.lab29apps-tanzu-gss.lvn.broadcom.net/send/hello
+
+curl -k https://my-app.lab29apps-tanzu-gss.lvn.broadcom.net/send/xxx
+
+curl -k https://my-app.lab29apps-tanzu-gss.lvn.broadcom.net/send/yyy
+
+curl -k https://my-app.lab29apps-tanzu-gss.lvn.broadcom.net/receive
+
+
+
