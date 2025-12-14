@@ -78,3 +78,10 @@ rabbitmq-server/bc058051-684a-43f1-a148-794797f7868f  running        az1  192.16
 
 Succeeded
 #
+
+
+
+✅
+cf delete-service my-rabbitmq -f
+
+
