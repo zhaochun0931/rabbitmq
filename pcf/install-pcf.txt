@@ -82,6 +82,9 @@ Succeeded
 
 
 ✅
+
+bosh delete-deployment -d service-instance_60743c31-63c6-4828-b2e4-0c95364a281f -f
+
 cf delete-service my-rabbitmq -f
 
 
