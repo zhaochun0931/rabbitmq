@@ -15,7 +15,13 @@ test-rabbit-user                  p.rabbitmq      on-demand-plan                
 
 
 
+✅
+cf bind-service my-app my-rabbitmq
 
 
 ✅
 cf unbind-service my-app my-rabbitmq
+
+
+
+
