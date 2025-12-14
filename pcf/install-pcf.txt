@@ -136,3 +136,9 @@ Getting key my-key for service instance my-rabbitmq as admin...
 #
 
 
+✅
+cf delete-service-key my-rabbitmq my-key -f
+
+
+
+
