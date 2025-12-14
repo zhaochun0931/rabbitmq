@@ -1,0 +1,21 @@
+✅
+
+cf services
+
+
+# cf services
+Getting service instances in org system / space system as admin...
+
+name                              offering        plan             bound apps                                     last operation     broker              upgrade available
+app-usage-server-metric-service   user-provided                    app-usage-server-venerable, app-usage-server   create succeeded
+my-gemfire                        p-cloudcache    extra-small      my-gemfire-app                                 create succeeded   cloudcache-broker   no
+my-rabbitmq                       p.rabbitmq      on-demand-plan   my-app                                         create succeeded   rabbitmq-odb        no
+test-rabbit-user                  p.rabbitmq      on-demand-plan                                                  create succeeded   rabbitmq-odb        no
+#
+
+
+
+
+
+✅
+cf unbind-service my-app my-rabbitmq
