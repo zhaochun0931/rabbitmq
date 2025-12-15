@@ -1,3 +1,14 @@
+cf push
+
+
+cf delete my-app -f
+
+
+
+
+
+
+
 ✅
 
 cf services
