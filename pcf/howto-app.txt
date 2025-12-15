@@ -36,6 +36,13 @@ cf unbind-service my-app my-rabbitmq
 
 
 
+🚀🚀🚀
+cf restage my-app
+
+
+
+
+
 
 
 
