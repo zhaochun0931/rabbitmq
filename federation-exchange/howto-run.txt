@@ -4,19 +4,20 @@ docker compose down -v
 
 
 
-
+🚀
 
 # go to the downstream node and add the upstream federation and policy
 
+docker exec -it rabbitmq2 bash
 
 
-
+🚀
 # Adds a federation upstream named "myfed"
 
 rabbitmqctl set_parameter federation-upstream myfed '{"uri":"amqp://admin:password@rabbitmq1:5672/%2f"}'
 
 
-
+🚀
 # Adds a policy named "mypolicy"
 
 rabbitmqctl set_policy mypolicy  "^test" '{"federation-upstream-set":"all"}' --apply-to exchanges
