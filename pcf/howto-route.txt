@@ -32,4 +32,9 @@ $
 
 
 
+
+cf delete-route lab29apps-tanzu-gss.lvn.broadcom.net --hostname my-app
+
+
+
 cf map-route my-app lab29apps-tanzu-gss.lvn.broadcom.net --hostname my-app
