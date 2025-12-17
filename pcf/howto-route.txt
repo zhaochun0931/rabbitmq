@@ -1,0 +1,30 @@
+cf routes
+
+
+
+$ cf routes
+Getting routes for org system / space system as admin...
+
+space    host                               domain                                 port   path   protocol   app-protocol   apps                                           service instance
+system   app-usage                          lab29sys-tanzu-gss.lvn.broadcom.net                  http       http1          app-usage-server-venerable, app-usage-server
+system   apps                               lab29sys-tanzu-gss.lvn.broadcom.net                  http       http1          apps-manager-js-blue
+system   search-server                      lab29sys-tanzu-gss.lvn.broadcom.net                  http       http1          search-server-blue
+system   p-invitations                      lab29sys-tanzu-gss.lvn.broadcom.net                  http       http1          p-invitations-blue
+system   test-python-flask                  lab29apps-tanzu-gss.lvn.broadcom.net                 http       http1          test-python-flask
+system   nginx-proxy-app                    lab29apps-tanzu-gss.lvn.broadcom.net                 http       http1          nginx-proxy-app
+system   nginx-test                         lab29apps-tanzu-gss.lvn.broadcom.net                 http       http1          nginx-test
+system   backend-cookie-response            lab29apps-tanzu-gss.lvn.broadcom.net                 http       http1          backend-cookie-response
+system   backend-no-cookie-response         lab29apps-tanzu-gss.lvn.broadcom.net                 http       http1          backend-no-cookie-response
+system   nginx-test-304                     lab29apps-tanzu-gss.lvn.broadcom.net                 http       http1          nginx-test-304
+system   spring-music-yisi-lean-marmot-oo   lab29apps-tanzu-gss.lvn.broadcom.net                 http
+system   spring-music--turbulent-bongo-pr   lab29apps-tanzu-gss.lvn.broadcom.net                 http
+system   python-rmq-demo                    lab29apps-tanzu-gss.lvn.broadcom.net                 http
+system   my-app                             lab29apps-tanzu-gss.lvn.broadcom.net                 http
+system   gemfire-client-pcf                 lab29apps-tanzu-gss.lvn.broadcom.net                 http       http1          gemfire-client-pcf
+system   my-gemfire-app                     lab29apps-tanzu-gss.lvn.broadcom.net                 http
+system   spring-music                       lab29apps-tanzu-gss.lvn.broadcom.net                 http
+system   test-rabbit                        lab29apps-tanzu-gss.lvn.broadcom.net                 http
+system   test-rabbit-no-start               lab29apps-tanzu-gss.lvn.broadcom.net                 http       http1          test-rabbit-no-start
+system   EFFRVF_new                         lab29apps-tanzu-gss.lvn.broadcom.net                 http       http1          EFFRVF_new
+system   app1                               lab29apps-tanzu-gss.lvn.broadcom.net                 http       http1          my-app
+$ 
