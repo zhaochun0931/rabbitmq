@@ -19,7 +19,7 @@ system   nginx-test-304                     lab29apps-tanzu-gss.lvn.broadcom.net
 system   spring-music-yisi-lean-marmot-oo   lab29apps-tanzu-gss.lvn.broadcom.net                 http
 system   spring-music--turbulent-bongo-pr   lab29apps-tanzu-gss.lvn.broadcom.net                 http
 system   python-rmq-demo                    lab29apps-tanzu-gss.lvn.broadcom.net                 http
-system   my-app                             lab29apps-tanzu-gss.lvn.broadcom.net                 http
+system   my-app                             lab29apps-tanzu-gss.lvn.broadcom.net                 http       http1          my-app
 system   gemfire-client-pcf                 lab29apps-tanzu-gss.lvn.broadcom.net                 http       http1          gemfire-client-pcf
 system   my-gemfire-app                     lab29apps-tanzu-gss.lvn.broadcom.net                 http
 system   spring-music                       lab29apps-tanzu-gss.lvn.broadcom.net                 http
@@ -28,3 +28,8 @@ system   test-rabbit-no-start               lab29apps-tanzu-gss.lvn.broadcom.net
 system   EFFRVF_new                         lab29apps-tanzu-gss.lvn.broadcom.net                 http       http1          EFFRVF_new
 system   app1                               lab29apps-tanzu-gss.lvn.broadcom.net                 http       http1          my-app
 $ 
+
+
+
+
+cf map-route my-app lab29apps-tanzu-gss.lvn.broadcom.net --hostname my-app
