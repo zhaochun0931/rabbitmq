@@ -1,0 +1,25 @@
+✅
+
+cf push blue
+cf push green
+
+
+
+
+✅
+
+cf apps
+
+cf routes
+
+cf services
+
+
+
+
+
+✅
+
+✅
+
+✅
