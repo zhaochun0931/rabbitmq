@@ -33,6 +33,11 @@ docker exec -it rabbitmq2 bash
 
 rabbitmqctl set_parameter federation-upstream myfed '{"uri":"amqp://admin:password@rabbitmq1:5672/%2f"}'
 
+rabbitmqctl set_parameter federation-upstream myfed '{"uri":"amqp://admin:password@rabbitmq1:5672/%2f", "resource-cleanup-mode": "never"}'
+
+
+
+
 
 🚀
 # Adds a policy named "mypolicy"
@@ -40,7 +45,6 @@ rabbitmqctl set_parameter federation-upstream myfed '{"uri":"amqp://admin:passwo
 rabbitmqctl set_policy mypolicy  "^test" '{"federation-upstream-set":"all"}' --apply-to exchanges
 
 
-rabbitmqctl set_policy mypolicy  "^test" '{"federation-upstream-set":"all", "resource-cleanup-mode": "never"}' --apply-to exchanges
 
 
 
