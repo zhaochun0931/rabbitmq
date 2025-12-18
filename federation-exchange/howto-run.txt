@@ -39,6 +39,13 @@ rabbitmqctl set_parameter federation-upstream myfed '{"uri":"amqp://admin:passwo
 
 rabbitmqctl set_policy mypolicy  "^test" '{"federation-upstream-set":"all"}' --apply-to exchanges
 
+
+rabbitmqctl set_policy mypolicy  "^test" '{"federation-upstream-set":"all", "resource-cleanup-mode": "never"}' --apply-to exchanges
+
+
+
+
+
 or 
 
 rabbitmqctl set_policy mypolicy  "^test" '{"federation-upstream":"myfed"}' --apply-to exchanges
@@ -55,8 +62,17 @@ rabbitmqctl clear_policy mypolicy
 
 
 
-
+✅
 create an exchange 'test1' in the down stream, this exchange will be synced automatically to up stream
+
+
+
+rabbitmqadmin -u admin -p password declare exchange name=test1 type=direct
+
+rabbitmqadmin -u admin -p password declare exchange name=test2 type=direct
+
+
+
 
 create the queue on both up and down respectively and bind to the test1 exchange,  the queue name can be different.
 
