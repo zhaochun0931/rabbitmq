@@ -19,7 +19,72 @@ cf services
 
 
 ✅
+cf bind-service blue my-rabbitmq
+
+
+2025-12-18 03:33:47.382922+00:00 [info] <0.21637.0> Created user '289cd4c9-a23e-4b43-888c-db5bb195054e'
+2025-12-18 03:33:47.383293+00:00 [info] <0.21637.0> Successfully set user tags for user '289cd4c9-a23e-4b43-888c-db5bb195054e' to [management,
+2025-12-18 03:33:47.383293+00:00 [info] <0.21637.0>                                                                                policymaker]
+2025-12-18 03:33:47.404774+00:00 [info] <0.21640.0> Successfully set permissions for user '289cd4c9-a23e-4b43-888c-db5bb195054e' in virtual host '0e4c4749-c955-4557-8566-8448fe58f6ff' to '.*', '.*', '.*'
+
+
+
+cf restage blue
+
+
+cf env blue
+
+
 
 ✅
 
+curl -k https://blue.lab29apps-tanzu-gss.lvn.broadcom.net/send/hello
+
+2025-12-18 03:37:13.773248+00:00 [info] <0.22817.0> accepting AMQP connection 192.168.6.23:39842 -> 192.168.6.40:5672
+2025-12-18 03:37:13.779482+00:00 [info] <0.22817.0> connection 192.168.6.23:39842 -> 192.168.6.40:5672: user '289cd4c9-a23e-4b43-888c-db5bb195054e' authenticated and granted access to vhost '0e4c4749-c955-4557-8566-8448fe58f6ff'
+2025-12-18 03:37:13.789829+00:00 [info] <0.22817.0> closing AMQP connection (192.168.6.23:39842 -> 192.168.6.40:5672, vhost: '0e4c4749-c955-4557-8566-8448fe58f6ff', user: '289cd4c9-a23e-4b43-888c-db5bb195054e', duration: '16ms')
+
+
+
+
+
+
+
+
+
+cf unbind-service blue my-rabbitmq
+
+2025-12-18 03:37:59.610685+00:00 [info] <0.22845.0> Deleted user '289cd4c9-a23e-4b43-888c-db5bb195054e'
+2025-12-18 03:37:59.611295+00:00 [info] <0.22847.0> Closing all connections for user '289cd4c9-a23e-4b43-888c-db5bb195054e' because the user is being deleted
+
+
+
+
 ✅
+
+
+cf bind-service green my-rabbitmq
+
+
+cf restage green
+
+curl -k https://green.lab29apps-tanzu-gss.lvn.broadcom.net/send/hello
+
+cf unbind-service green my-rabbitmq
+
+
+
+✅
+
+
+2025-12-18 03:40:47.956981+00:00 [info] <0.22365.0> accepting AMQP connection 192.168.6.23:43792 -> 192.168.6.41:5672
+2025-12-18 03:40:47.959882+00:00 [error] <0.22365.0> Error on AMQP connection <0.22365.0> (192.168.6.23:43792 -> 192.168.6.41:5672, state: starting):
+2025-12-18 03:40:47.959882+00:00 [error] <0.22365.0> PLAIN login refused: user '289cd4c9-a23e-4b43-888c-db5bb195054e' - invalid credentials
+2025-12-18 03:40:47.961214+00:00 [info] <0.22365.0> closing AMQP connection (192.168.6.23:43792 -> 192.168.6.41:5672, duration: '5ms')
+
+
+
+
+
+✅
+cf map-route green lab29apps-tanzu-gss.lvn.broadcom.net --hostname blue
