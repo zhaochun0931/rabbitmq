@@ -1,0 +1,41 @@
+kubectl get svc -n rabbitmq-system
+  
+  
+# kubectl get svc -n rabbitmq-system
+NAME              TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                        AGE
+nginx             LoadBalancer   10.105.21.46    10.1.0.100    5672:31737/TCP                 28m
+#
+  
+  
+  
+
+  
+kubectl describe svc nginx -n rabbitmq-system
+  
+  
+  
+# kubectl describe svc nginx -n rabbitmq-system
+Name:                     nginx
+Namespace:                rabbitmq-system
+Labels:                   <none>
+Annotations:              metallb.io/ip-allocated-from-pool: default-pool
+Selector:                 app.kubernetes.io/component=rabbitmq
+Type:                     LoadBalancer
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.105.21.46
+IPs:                      10.105.21.46
+LoadBalancer Ingress:     10.1.0.100 (VIP)
+Port:                     locator  5672/TCP
+TargetPort:               5672/TCP
+NodePort:                 locator  31737/TCP
+Endpoints:                10.244.0.66:5672,10.244.0.70:5672,10.244.0.67:5672
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Internal Traffic Policy:  Cluster
+Events:
+  Type    Reason       Age   From                Message
+  ----    ------       ----  ----                -------
+  Normal  IPAllocated  26m   metallb-controller  Assigned IP ["10.1.0.100"]
+
+#
