@@ -74,12 +74,19 @@ kubectl get rabbitmqclusters.rabbitmq.com
 kubectl get rabbitmqclusters.rabbitmq.com rabbitmq1
 
 
-# how to access Rabbitmq cluster
+
+
+✅ how to access Rabbitmq cluster
+
 kubectl get secrets
+
+kubectl get secrets -n rabbitmq-system
+
+
 kubectl get svc
 
-username="$(kubectl get secret rabbitmq1-default-user -o jsonpath='{.data.username}' | base64 --decode)"
-password="$(kubectl get secret rabbitmq1-default-user -o jsonpath='{.data.password}' | base64 --decode)"
+username="$(kubectl get secret -n rabbitmq-system rabbitmq1-default-user -o jsonpath='{.data.username}' | base64 --decode)"
+password="$(kubectl get secret -n rabbitmq-system rabbitmq1-default-user -o jsonpath='{.data.password}' | base64 --decode)"
 
 echo "username: $username"
 echo "password: $password"
