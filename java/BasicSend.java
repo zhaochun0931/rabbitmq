@@ -8,9 +8,19 @@ public class BasicSend {
 
     public static void main(String[] args) {
         try {
+
+            
             // Step 1: Create a connection to RabbitMQ
             ConnectionFactory factory = new ConnectionFactory();
+            
             factory.setHost("localhost");  // RabbitMQ broker's host (use your RabbitMQ server's address)
+            factory.setPort(5672);             // default AMQP port
+            factory.setUsername("guest");      // username
+            factory.setPassword("guest");      // password
+            factory.setVirtualHost("/");       // default vhost (optional)
+            
+            
+            
             try (Connection connection = factory.newConnection();
                  Channel channel = connection.createChannel()) {
 
