@@ -3,12 +3,10 @@ kind: RabbitmqCluster
 metadata:
   name: rabbitmq1
   namespace: rabbitmq-system
-  labels:
-    app: my-app
 spec:
   replicas: 1
-  imagePullSecrets:
-  - name: my-secret
+  # imagePullSecrets:
+  # - name: my-secret
   resources:
     limits:
       cpu: 100m
