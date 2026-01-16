@@ -3,41 +3,66 @@
 
 
 
-# install k8s
+✅ install k8s and make sure the k8s is ready
+
 kubectl get pods -A
 
 
 
-# install RabbitMQ Cluster Operator
+✅ install RabbitMQ Cluster Operator
 https://www.rabbitmq.com/kubernetes/operator/quickstart-operator
 
 
 kubectl apply -f https://github.com/rabbitmq/cluster-operator/releases/latest/download/cluster-operator.yml
-kubectl get all -n rabbitmq-system
+
 kubectl get crds
-kubectl get crds rabbitmqclusters.rabbitmq.com
+
 kubectl get customresourcedefinitions.apiextensions.k8s.io
 
 
+kubectl get all -n rabbitmq-system
+
+
+kubectl get crds rabbitmqclusters.rabbitmq.com
 
 
 
 
-# install cert manager
+
+
+
+✅ install cert manager
+
 kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.17.0/cert-manager.yaml
+
 kubectl get all -n cert-manager
+
 kubectl get pods --namespace cert-manager
 
 
 
 
 
-# install message topology operator
+✅ install message topology operator
+
 kubectl apply -f https://github.com/rabbitmq/messaging-topology-operator/releases/latest/download/messaging-topology-operator-with-certmanager.yaml
 
 
+kubectl get pods -n rabbitmq-system
 
-# deploy a rabbitmq cluster
+
+
+
+✅ deploy a rabbitmq cluster
+
+
+kubectl apply -f rabbitmq.yaml
+
+
+
+
+
+
 
 
 
@@ -45,6 +70,7 @@ kubectl apply -f https://github.com/rabbitmq/messaging-topology-operator/release
 
 
 kubectl get rabbitmqclusters.rabbitmq.com
+
 kubectl get rabbitmqclusters.rabbitmq.com rabbitmq1
 
 
