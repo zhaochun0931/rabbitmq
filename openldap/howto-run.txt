@@ -1,0 +1,19 @@
+docker compose  up
+
+
+docker compose up
+
+
+# Both examples will instruct the node to try LDAP first and then fall back to the internal database if the user cannot be authenticated through LDAP
+
+
+
+
+
+
+
+docker exec -it node1 bash
+
+rabbitmq-plugins enable rabbitmq_auth_backend_ldap
+
+

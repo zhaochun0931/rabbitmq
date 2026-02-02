@@ -1,0 +1,33 @@
+services:
+  node1:
+    # image: rabbitmq:management
+    image: rabbitmq:3.13.7-management
+    hostname: node1
+    container_name: node1
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15671:15672"  # RabbitMQ management UI for node 1
+      - "5671:5672"    # AMQP protocol
+    volumes:
+      #- ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./advanced.config:/etc/rabbitmq/advanced.config
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+    networks:
+      - rabbitmq-net
+
+  busybox:
+    image: busybox:latest
+    container_name: busybox_test
+    user: root                   # run as superuser
+    stdin_open: true             # keep stdin open
+    tty: true                    # allocate a pseudo-TTY
+    command: sh                 # launch an interactive shell
+    networks:
+      - rabbitmq-net
+
+
+networks:
+  rabbitmq-net:
+    driver: bridge
