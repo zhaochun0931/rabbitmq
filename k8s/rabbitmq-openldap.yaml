@@ -1,0 +1,37 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: rabbitmq1
+  namespace: rabbitmq-system
+spec:
+  replicas: 1
+  # imagePullSecrets:
+  # - name: my-secret
+  rabbitmq:
+    additionalPlugins:
+      - rabbitmq_auth_backend_ldap
+    advancedConfig: |
+      [
+      {rabbit, [
+          {auth_backends, [rabbit_auth_backend_ldap, rabbit_auth_backend_internal]}
+          ]},
+
+      {rabbitmq_auth_backend_ldap, [
+          {servers, ["10.1.0.11"]},
+          {port, 389},
+          {user_dn_pattern, "uid=${username},ou=People,dc=example,dc=com"},
+          {tag_queries, [
+              {administrator, {constant, true}},
+              {management, {constant, true}}
+          ]},
+          {log, network}
+      ]}
+
+        ].
+  resources:
+    limits:
+      cpu: 100m
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 1Gi
