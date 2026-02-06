@@ -62,6 +62,17 @@ services:
     depends_on:
       - node1
 
+
+  perf-test:
+      image: pivotalrabbitmq/perf-test:latest
+      container_name: rabbit-perf-test
+      entrypoint: ["sh", "-c", "sleep infinity"]
+      networks:
+        - rabbitmq-net
+      depends_on:
+        - node1
+
+
 networks:
   rabbitmq-net:
     driver: bridge
