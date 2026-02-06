@@ -13,6 +13,8 @@ services:
       - "5671:5672"    # AMQP protocol
     volumes:
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+  # Mounts the local ./data folder to the container's RabbitMQ data path
+      - ./node1:/var/lib/rabbitmq
     networks:
       - rabbitmq-net
 
@@ -32,6 +34,8 @@ services:
       - "5672:5672"    # AMQP protocol
     volumes:
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+  # Mounts the local ./data folder to the container's RabbitMQ data path
+      - ./node2:/var/lib/rabbitmq
     networks:
       - rabbitmq-net
     depends_on:
@@ -51,6 +55,8 @@ services:
       - "5673:5672"    # AMQP protocol
     volumes:
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+  # Mounts the local ./data folder to the container's RabbitMQ data path
+      - ./node3:/var/lib/rabbitmq
     networks:
       - rabbitmq-net
     depends_on:
