@@ -5,7 +5,12 @@ https://github.com/rabbitmq/rabbitmq-perf-test/releases
 
 java -jar perf-test.jar --uri=amqp://admin:password@node1:5672 -x2 -y0 --queue-args=x-queue-type=classic,x-queue-version=1  --flag=persistent -s=10000 --queue=perf-test
 
-java -jar perf-test.jar --uri=amqp://admin:password@node1:5672 -y10 --queue-args=x-queue-type=classic,x-queue-version=1 -queue=manual-rdq-test --flag=perf-test
+java -jar perf-test.jar --uri=amqp://admin:password@node1:5672 -x0 -y10 -queue=perf-test -p
+
+
+
+
+
 
 
 java -jar perf-test.jar --uri=amqp://admin:password@node1:5672 -y10 -queue=perf-test
