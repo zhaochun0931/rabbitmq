@@ -1,0 +1,27 @@
+In RabbitMQ, a file named 1824.rdq is a message store segment file.
+
+The number 1824 is simply a sequential identifier (a "segment ID") assigned by RabbitMQ. These files are the actual physical storage for your messages.
+
+What is inside an .rdq file?
+Message Payloads: The actual data sent by producers.   
+
+Metadata: Information such as message properties, headers, and sequence IDs.
+
+Persistent & Transient Messages: * Persistent: Stored in msg_store_persistent to survive a server restart.
+
+Transient: Stored in msg_store_transient if RabbitMQ runs low on RAM and needs to "page" messages to disk to free up memory.
+
+Key Facts About .rdq Files
+Fixed Size: By default, these files are roughly 16MB each.1 When one fills up, RabbitMQ creates the next one in the sequence (e.g., 1825.rdq).   
+[rabbitmq-discuss] RDQ files filling the disk.
+
+
+
+Shared Storage: In Classic Queues (Version 1), these files are shared across all queues in a virtual host. Multiple queues may have their messages mixed together in the same 1824.rdq file.
+
+Deletion (Compaction): RabbitMQ does not delete these files immediately after a message is read. It waits until a file contains mostly "garbage" (acknowledged messages) and then performs a compaction process to merge valid messages into new files and delete the old ones.
+
+⚠️ Important Warnings
+Do NOT manually delete or move these files. If you delete 1824.rdq from the filesystem, you will cause permanent data loss and likely corrupt the RabbitMQ database (Mnesia), preventing the service from starting.
+
+Disk Usage: If you see thousands of these files (like in your current 15GB disk issue), it means your consumers are not keeping up with your producers, or messages are being published as persistent but never acknowledged.
