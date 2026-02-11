@@ -1,4 +1,4 @@
-# prerequsite
+# prerequisite
 
 sudo apt update
 sudo apt install build-essential libncurses5-dev libncursesw5-dev libssl-dev pkg-config -y
@@ -22,7 +22,7 @@ cd otp_src_27.3/
 
 ./configure --with-ssl
 
-make
+make -j$(nproc)
 
 make install
 
