@@ -1,10 +1,15 @@
 import pika
 import time
 
+credentials = pika.PlainCredentials('your_username', 'your_password')
+
 # Establish a connection to RabbitMQ with a low heartbeat interval
 parameters = pika.ConnectionParameters(
     host='localhost',
-    heartbeat=4  # Set heartbeat to 1 second (very short)
+    port=5672,
+    heartbeat=4,  # Set heartbeat to 1 second (very short)
+    virtual_host='/',
+    credentials=credentials
 )
 
 # Establish connection to RabbitMQ
