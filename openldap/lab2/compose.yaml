@@ -17,24 +17,6 @@ services:
       - rabbitmq-net
 
 
-
-  openldap:
-    image: bitnami/openldap:latest
-    hostname: openldap
-    environment:
-      - LDAP_ADMIN_USERNAME=admin
-      - LDAP_ADMIN_PASSWORD=password
-      - LDAP_USERS=user01,user02
-      - LDAP_PASSWORDS=password,password
-      - LDAP_ROOT=dc=example,dc=com
-      - LDAP_ADMIN_DN=cn=admin,dc=example,dc=com
-    ports:
-      - "1389:1389"
-    networks:
-      - rabbitmq-net
-    depends_on:
-      - rabbitmq
-
 networks:
   rabbitmq-net:
     driver: bridge
