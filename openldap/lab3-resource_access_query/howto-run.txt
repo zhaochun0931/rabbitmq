@@ -1,0 +1,1 @@
+ldapmodify -H ldap://localhost -D "cn=admin,dc=example,dc=com" -W -f add-user.ldif
