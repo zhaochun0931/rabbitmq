@@ -1,0 +1,9 @@
+kubectl create secret generic rabbitmq-ldap-tls \
+  --from-file=ca.crt=./myca.crt \
+  --from-file=client.crt=./myserver.crt \
+  --from-file=client.key=./myserver.key
+
+
+kubectl get secret rabbitmq-ldap-tls  -o yaml
+
+
