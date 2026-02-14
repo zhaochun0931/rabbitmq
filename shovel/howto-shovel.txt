@@ -1,3 +1,2 @@
-
 rabbitmqctl set_parameter shovel my-shovel \
   '{"src-protocol": "amqp091", "src-uri": "amqp://admin:password@localhost:5672/%2f", "src-queue": "qq1", "dest-protocol": "amqp091", "dest-uri": "amqp://admin:password@hongkong:5672/%2f", "dest-queue": "qq2", "dest-queue-args": {"x-queue-type": "quorum"}}'
