@@ -1,3 +1,28 @@
+docker compose up
+
+docker compose down -v
+
+
+
+docker exec -it rabbitmq2 bash
+
+
+
+# Adds a federation upstream
+rabbitmqctl set_parameter federation-upstream my-fed '{"uri":"amqp://admin:password@rabbitmq1:5672"}'
+
+
+# Adds a policy
+rabbitmqctl set_policy my-policy "^qq" \
+    '{"federation-upstream-set":"all"}' \
+    --priority 10 \
+    --apply-to queues
+
+
+
+
+
+
 when you declare the queue in the down, the queue with the same name will be created automatically in the up.
 
 
@@ -6,12 +31,3 @@ send the message to the up,
 connect a consumer client to down and then the message will be moved from the up to down.
 
 the message will not be moved from up to down if there is no consumer connecting to the down
-
-
-
-
-
-
-docker compose up
-
-docker compose down -v
