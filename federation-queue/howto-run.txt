@@ -23,19 +23,14 @@ rabbitmqctl set_policy my-policy "^qq" \
 
 
 
-when you declare the queue in the down, the queue with the same name will be created automatically in the up.
-
-
-send the message to the up, 
+when you declare the queue qq1 in the down, the queue with the same name will be created automatically in the up.
 
 
 
+1. send the message to the up cluster
 
 
-
-
-
-connect a consumer client to down and then the message will be moved from the up to down.
+2. connect a consumer client to down and then the message will be moved from the up to down.
 
 
 docker exec -it perf-test bash
