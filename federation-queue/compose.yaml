@@ -31,7 +31,13 @@ services:
     networks:
       - rabbitmq-net
 
-
+  perf-test:
+    image: pivotalrabbitmq/perf-test:latest
+    hostname: perf-test
+    container_name: perf-test
+    entrypoint: ["tail", "-f", "/dev/null"]
+    networks:
+      - rabbitmq-net
 
 networks:
   rabbitmq-net:
