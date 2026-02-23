@@ -28,6 +28,21 @@ when you declare the queue in the down, the queue with the same name will be cre
 
 send the message to the up, 
 
+
+
+
+
+
+
+
 connect a consumer client to down and then the message will be moved from the up to down.
+
+
+docker exec -it perf-test bash
+
+java -jar perf-test.jar --uri=amqp://admin:password@rabbitmq2:5672 -x0 -y1 -queue=qq1 --predeclared -na
+
+
+
 
 the message will not be moved from up to down if there is no consumer connecting to the down
