@@ -1,0 +1,54 @@
+services:
+  node1:
+    image: rabbitmq:management
+    hostname: node1
+    container_name: node1
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15672:15672"  # RabbitMQ management UI for node 1
+      - "5672:5672"    # AMQP protocol
+      - "1883:1883"    # MQTT protocol
+    volumes:
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+    networks:
+      - rabbitmq-net
+
+  omq:
+      image: pivotalrabbitmq/omq:latest
+      container_name: omq-test
+      hostname: omq-test
+      stdin_open: true # Equivalent to -i
+      tty: true        # Equivalent to -t
+#      command: ["mqtt", "--time", "24h"]
+      command:
+        - mqtt
+        - --consumer-uri 
+        - mqtt://admin:password@node1:1883 
+        - --publisher-uri 
+        - mqtt://admin:password@node1:1883
+      networks:
+        - rabbitmq-net
+
+
+  mqtt-client:
+      image: python:3.13.12-trixie
+      container_name: mqtt-client
+      hostname: mqtt-client
+      stdin_open: true # docker run -i
+      tty: true        # docker run -t
+      command: >
+        sh -c "pip install -r /app/scripts/requirements.txt && tail -f /dev/null"
+      volumes:
+        # Mounts an entire directory
+        - ./scripts:/app/scripts
+      networks:
+        - rabbitmq-net
+
+
+
+networks:
+  rabbitmq-net:
+    driver: bridge

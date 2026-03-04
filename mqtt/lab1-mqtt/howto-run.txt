@@ -1,0 +1,14 @@
+docker compose up
+
+
+
+docker exec -it mqtt-client bash
+
+python /app/scripts/mqtt-receive.py
+
+
+
+
+docker exec -it mqtt-client bash
+
+python /app/scripts/mqtt-send.py
