@@ -1,0 +1,84 @@
+services:
+  rabbitmq1:
+    image: rabbitmq:3.13.7-management
+    hostname: rabbitmq1
+    container_name: rabbitmq1
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15671:15672"  # RabbitMQ management UI
+      - "5671:5672"    # AMQP protocol
+    volumes:
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+    networks:
+      - rabbitmq-net
+
+  rabbitmq2:
+    image: rabbitmq:3.13.7-management
+    hostname: rabbitmq2
+    container_name: rabbitmq2
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15672:15672"  # RabbitMQ management UI
+      - "5672:5672"    # AMQP protocol
+    volumes:
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+    networks:
+      - rabbitmq-net
+
+  rabbitmq3:
+    image: rabbitmq:3.13.7-management
+    hostname: rabbitmq3
+    container_name: rabbitmq3
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15673:15672"  # RabbitMQ management UI
+      - "5673:5672"    # AMQP protocol
+    volumes:
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+    networks:
+      - rabbitmq-net
+
+  rabbitmq4:
+    image: rabbitmq:3.13.7-management
+    hostname: rabbitmq4
+    container_name: rabbitmq4
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15674:15672"  # RabbitMQ management UI
+      - "5674:5672"    # AMQP protocol
+    volumes:
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+    networks:
+      - rabbitmq-net
+
+  rabbitmq5:
+    image: rabbitmq:3.13.7-management
+    hostname: rabbitmq5
+    container_name: rabbitmq5
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15675:15672"  # RabbitMQ management UI
+      - "5675:5672"    # AMQP protocol
+    volumes:
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+    networks:
+      - rabbitmq-net
+
+networks:
+  rabbitmq-net:
+    driver: bridge
