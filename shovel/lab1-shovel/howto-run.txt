@@ -1,0 +1,23 @@
+# send the message to qq1 in shanghai
+
+docker exec -it perf-test bash
+
+
+
+java -jar perf-test.jar -x 1 -y 0 -u qq1 --uri amqp://admin:password@shanghai:5672
+
+
+
+# create a quorum queue qq2 in beijing
+
+
+# set up the shovel in shanghai
+
+docker exec -it shanghai bash
+
+
+rabbitmqctl set_parameter shovel my-shovel \
+'{"src-protocol": "amqp091", "src-uri": "amqp://admin:password@localhost:5672/%2f", "src-queue": "qq1", "dest-protocol": "amqp091", "dest-uri": "amqp://admin:password@beijing:5672/%2f", "dest-queue": "qq2", "dest-queue-args": {"x-queue-type": "quorum"}}'
+
+
+
