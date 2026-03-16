@@ -1,0 +1,21 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'rabbitmq1'
+    static_configs:
+      #- targets: ['rabbitmq:15692']
+      - targets:
+          - 'rabbitmq1:15692'
+
+  - job_name: 'rabbitmq2'
+    static_configs:
+      #- targets: ['rabbitmq:15692']
+      - targets:
+          - 'rabbitmq2:15692'
+
+  - job_name: 'rabbitmq3'
+    static_configs:
+      #- targets: ['rabbitmq:15692']
+      - targets:
+          - 'rabbitmq3:15692'

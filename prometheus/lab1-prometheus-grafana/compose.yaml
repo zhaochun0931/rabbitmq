@@ -1,0 +1,84 @@
+services:
+  rabbitmq1:
+    image: rabbitmq:management
+    hostname: rabbitmq1
+    container_name: rabbitmq1
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15672:15672"  # RabbitMQ management
+      - "5672:5672"    # AMQP protocol
+      - "15692:15692"  # prometheus
+    volumes:
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    networks:
+      - rabbitmq-net
+
+  rabbitmq2:
+    image: rabbitmq:management
+    hostname: rabbitmq2
+    container_name: rabbitmq2
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "25672:15672"  # RabbitMQ management
+      - "6672:5672"    # AMQP protocol
+      - "25692:15692"  # prometheus
+    volumes:
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    networks:
+      - rabbitmq-net
+
+  rabbitmq3:
+    image: rabbitmq:management
+    hostname: rabbitmq3
+    container_name: rabbitmq3
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq  # A shared secret for clustering
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "35672:15672"  # RabbitMQ management
+      - "7672:5672"    # AMQP protocol
+      - "35692:15692"  # prometheus
+    volumes:
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    networks:
+      - rabbitmq-net
+
+  prometheus:
+    image: prom/prometheus
+    hostname: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - rabbitmq-net
+
+  grafana:
+    image: grafana/grafana-enterprise
+    hostname: grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - rabbitmq-net
+
+  perf-test:
+    image: pivotalrabbitmq/perf-test:latest
+    container_name: perf-test
+    # This keeps the container alive without running the test
+    entrypoint: ["tail", "-f", "/dev/null"]
+    networks:
+      - rabbitmq-net
+
+networks:
+  rabbitmq-net:
+    driver: bridge

@@ -1,0 +1,20 @@
+docker compose up
+
+
+http://localhost:9090
+
+
+
+
+http://localhost:3000
+
+admin/admin
+
+
+
+
+docker exec -it perf-test bash
+
+java -jar perf-test.jar -x 1 -y 0 --uri amqp://admin:password@rabbitmq1
+
+
