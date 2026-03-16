@@ -1,0 +1,65 @@
+
+# 1. Initialize your Go module (if you haven't already)
+go mod init my-raft-db
+
+# 2. Download the core Raft library
+go get github.com/hashicorp/raft
+
+# 3. Download the BoltDB storage driver
+go get github.com/hashicorp/raft-boltdb/v2
+
+# 4. Clean up and lock the dependencies
+go mod tidy
+
+
+
+
+
+Step 1: Start Node 1 (Bootstrap the DB)
+
+
+go run main.go -id node1 -raft 7000 -http 8000 -bootstrap
+
+Step 2: Insert New Data
+Open a second terminal and use the /set API to insert data into your local DB:
+
+
+curl "http://localhost:8000/set?key=username&value=admin"
+curl "http://localhost:8000/set?key=theme&value=dark_mode"
+
+
+Step 3: Verify Data
+
+
+curl "http://localhost:8000/get?key=username"
+# Output: admin
+
+Step 4: The Persistence Test (Kill & Restart)
+
+Go back to Terminal 1 and press Ctrl+C to kill the node. The app is dead.
+
+Restart the app using the exact same command:
+
+
+go run main.go -id node1 -raft 7000 -http 8000 -bootstrap
+Look at the logs. You will see:
+
+Found existing data on disk. Recovering state...
+[DB] Restored 2 keys from disk.
+
+Step 5: Read the Recovered Data
+Test the API again. Your data is still there!
+
+
+curl "http://localhost:8000/get?key=theme"
+# Output: dark_mode
+How to Add Followers
+If you want to add a second node to replicate this database, simply start it up (without the -bootstrap flag) and tell the Leader to add it:
+
+
+# Start Node 2 in a new terminal
+go run main.go -id node2 -raft 7001 -http 8001
+
+# Tell Node 1 to add Node 2
+curl "http://localhost:8000/join?id=node2&addr=127.0.0.1:7001"
+Once joined, Node 2 will automatically download all the data from Node 1 and save its own copy to data/node2/raft-log.db!
