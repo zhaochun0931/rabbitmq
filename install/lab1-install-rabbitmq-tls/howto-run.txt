@@ -1,0 +1,14 @@
+mkdir certs
+
+cd certs
+
+openssl req -x509 -new -nodes -keyout myca.key -out myca.crt -subj "/C=US/ST=State/L=City/O=MyCA/OU=IT/CN=myca.com"
+
+
+openssl req -new -nodes -keyout myserver.key -out myserver.csr -subj "/C=US/ST=State/L=City/O=Organization/OU=IT/CN=myserver.com"
+
+
+openssl x509 -req -in myserver.csr -CA myca.crt -CAkey myca.key -CAcreateserial -out myserver.crt
+
+
+
