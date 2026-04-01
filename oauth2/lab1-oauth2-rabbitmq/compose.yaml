@@ -1,0 +1,37 @@
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    command: start-dev
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    ports:
+      - "8080:8080"
+    volumes:
+      # This saves Keycloak's internal database to your host machine!
+      - ./keycloak-data:/opt/keycloak/data
+    networks:
+      - auth_network
+
+  # The instant HTTPS proxy for Keycloak
+  caddy:
+    image: caddy:alpine
+    command: caddy reverse-proxy --from https://caddy:8443 --to http://keycloak:8080 --internal-certs
+    networks:
+      - auth_network
+
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"   
+      - "15672:15672" 
+    volumes:
+      # Automatically mounts your config file so you don't have to use 'docker cp'
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    networks:
+      - auth_network
+
+networks:
+  auth_network:
+    driver: bridge

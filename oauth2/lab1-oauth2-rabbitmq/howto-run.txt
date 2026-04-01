@@ -1,0 +1,102 @@
+Keycloak UI (http://localhost:8080):
+
+Create Realm: Name it 
+rabbitmq
+
+Create Client: * ID: 
+rabbitmq-client
+
+Client authentication: ON
+
+Service account roles: ON
+
+Create Realm Roles: * 
+
+rabbitmq.tag:administrator
+rabbitmq.configure:*/*
+rabbitmq.write:*/*
+rabbitmq.read:*/*
+
+Assign Roles: Go to Clients -> rabbitmq-client -> Service accounts roles -> Assign those four roles.
+
+Map to Scope: Go to Clients -> rabbitmq-client -> Client Scopes -> rabbitmq-client-dedicated -> Add Mapper -> By Configuration -> User Realm Role.
+
+
+
+
+
+Click Add mapper -> By configuration -> User Realm Role.
+
+Configure it exactly like this:
+
+Name: extra-scopes-mapper
+
+Token Claim Name: extra_scopes (Note the new name)
+
+Multivalued: ON (This is critical—it forces Keycloak to output a JSON array, which RabbitMQ loves).
+
+Add to ID token: ON
+
+Add to access token: ON
+
+Click Save.
+
+
+
+
+
+add user:
+
+
+Step 1: Create a User in Keycloak
+You need to do this from the Keycloak Admin Console, not the login screen you are currently looking at.
+
+Open a new tab and go to http://localhost:8080/admin/. (Log in here with admin / admin).
+
+Make sure you have the rabbitmq realm selected in the top-left dropdown.
+
+On the left menu, click Users, then click Add user.
+
+Username: Type something like rabbit_admin.
+
+Click Create (or Save).
+
+Step 2: Set the User's Password
+Once the user is created, click on the Credentials tab at the top of the user's profile.
+
+Click Set Password.
+
+Type a password you want to use for the RabbitMQ UI.
+
+CRITICAL: Turn the Temporary switch to OFF. (If you leave it on, Keycloak will force you to change it on the first login, which can sometimes glitch the RabbitMQ UI redirect).
+
+Click Save.
+
+Step 3: Give the User RabbitMQ Admin Rights
+If this user doesn't have the specific RabbitMQ roles, they will log in successfully but RabbitMQ will immediately kick them out saying "Not authorized."
+
+Still on your rabbit_admin user profile, click the Role mapping tab.
+
+Click the Assign role button.
+
+In the search box, change the filter to Filter by realm roles.
+
+Check the boxes next to the four roles we created earlier:
+
+rabbitmq.tag:administrator
+
+rabbitmq.configure:*/*
+
+rabbitmq.write:*/*
+
+rabbitmq.read:*/*
+
+Click Assign.
+
+Step 4: Log In!
+Now, go back to your RabbitMQ Management UI (http://localhost:15672), click the big blue "Click here to log in" button, and enter your new rabbit_admin username and password.
+
+Keycloak will authenticate you, generate a JWT token containing your rabbitmq.tag:administrator role, and seamlessly drop you into the RabbitMQ dashboard!
+
+
+
