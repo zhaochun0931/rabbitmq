@@ -6,3 +6,15 @@ docker container prune -f
 docker compose up
 
 docker compose down -v
+
+
+
+
+
+
+rabbitmq-diagnostics status
+
+
+Interface: [::], port: 25672, protocol: clustering, purpose: inter-node and CLI tool communication
+
+
