@@ -1,0 +1,50 @@
+mkdir certs
+
+cd certs
+
+
+Step A: Create the Certificate Authority (CA)
+# Create CA key and certificate
+openssl genrsa -out ca_key.pem 2048
+openssl req -x509 -new -nodes -key ca_key.pem -days 3650 -out ca_certificate.pem -subj "/CN=MyRabbitCA"
+
+Step B: Create the Server Certificate
+# Generate Key
+openssl genrsa -out server_key.pem 2048
+# Generate CSR
+openssl req -new -key server_key.pem -out server.csr -config req.conf
+# Sign Certificate
+openssl x509 -req -in server.csr -CA ca_certificate.pem -CAkey ca_key.pem -CAcreateserial -out server_certificate.pem -days 365 -extensions v3_req -extfile req.conf
+
+Step C: Create the Client Certificate
+# Generate Key
+openssl genrsa -out client_key.pem 2048
+# Generate CSR
+openssl req -new -key client_key.pem -out client.csr -config req.conf
+# Sign Certificate
+openssl x509 -req -in client.csr -CA ca_certificate.pem -CAkey ca_key.pem -CAcreateserial -out client_certificate.pem -days 365 -extensions v3_req -extfile req.conf
+
+
+
+openssl x509 -in server_certificate.pem -text -noout
+
+
+
+
+# how to verify the inter-node tls
+
+
+rabbitmq-diagnostics listeners
+
+
+
+Interface: [::], port: 25672, protocol: clustering/ssl, purpose: inter-node and CLI tool communication over TLS
+
+
+
+rabbitmqctl cluster_status
+
+
+
+
+
