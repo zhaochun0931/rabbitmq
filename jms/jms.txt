@@ -1,0 +1,12 @@
+RabbitMQ is natively built on the AMQP (Advanced Message Queuing Protocol) protocol. However, many enterprise Java applications are built using JMS (Java Message Service), which is a standard Java API rather than a protocol.
+
+The RabbitMQ JMS Client is a library that acts as a bridge. It allows Java applications to use the familiar JMS API while communicating with a RabbitMQ broker under the hood.
+
+1. How it Works (The Bridge)
+The RabbitMQ JMS client is essentially a "wrapper." It implements the standard JMS interfaces (like ConnectionFactory, Queue, and Topic) but translates those calls into RabbitMQ’s native Java client commands.
+
+JMS Application: "I want to send a message to a Topic."
+
+RabbitMQ JMS Client: "I’ll translate that into a RabbitMQ exchange and routing_key."
+
+RabbitMQ Broker: Receives the message via AMQP.
