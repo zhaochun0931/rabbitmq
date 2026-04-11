@@ -1,0 +1,26 @@
+docker run -d -p 5672:5672 -p 15672:15672 --name my-rabbit rabbitmq:management
+
+
+
+
+
+
+
+spring init --dependencies=web,data-jpa,h2 --build=maven --java-version=17 rabbitmq-publisher
+
+
+spring init --dependencies=web,data-jpa,h2 --build=maven --java-version=17 rabbitmq-consumer
+
+
+
+
+
+cd my-project
+
+
+
+
+
+
+
+./mvnw spring-boot:run
