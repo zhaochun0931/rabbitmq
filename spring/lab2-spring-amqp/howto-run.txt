@@ -1,0 +1,38 @@
+docker run -d -p 5672:5672 -p 15672:15672 --name my-rabbit rabbitmq:management
+
+
+
+
+Spring Boot automatically connects to a RabbitMQ broker on localhost:5672 using the default username and password (guest/guest)
+
+
+
+spring init --dependencies=web,data-jpa,h2 --build=maven --java-version=17 my-project
+
+
+
+
+
+cd my-project
+
+
+
+
+
+
+
+./mvnw spring-boot:run
+
+
+
+
+4. Running the Application
+When you run the HelloWorldMessageApp class, the following will happen in order:
+
+Spring Boot auto-configures the connection to RabbitMQ.
+
+The Queue bean ensures that myQueue is created on the broker.
+
+The run method executes, utilizing RabbitTemplate to send "Hello, world!" to myQueue.
+
+The @RabbitListener detects the message on myQueue, consumes it, and prints Message read from myQueue : Hello, world! to your console.

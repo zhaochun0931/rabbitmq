@@ -1,0 +1,6 @@
+Spring AMQP comprises two modules: spring-amqp and spring-rabbit. Together, these modules provide abstractions for:
+
+AMQP entities – we create entities with the Message, Queue, Binding, and Exchange classes
+Connection Management – we connect to our RabbitMQ broker by using a CachingConnectionFactory
+Message Publishing – we use a RabbitTemplate to send messages
+Message Consumption – we use a @RabbitListener to read messages from a queue
