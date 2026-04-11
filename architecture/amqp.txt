@@ -1,0 +1,12 @@
+AMQP is made up of Exchanges, Queues, and Bindings:
+
+Exchanges are like post offices or mailboxes and clients publish a message to an AMQP exchange. There are four built-in exchange types
+Direct Exchange – Routes messages to a queue by matching a complete routing key
+Fanout Exchange – Routes messages to all the queues bound to it
+Topic Exchange – Routes messages to multiple queues by matching a routing key to a pattern
+Headers Exchange – Routes messages based on message headers
+
+Queues are bound to an exchange using a routing key
+
+Messages are sent to an exchange with a routing key. The exchange then distributes copies of messages to queues
+
