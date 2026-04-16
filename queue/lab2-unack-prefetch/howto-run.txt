@@ -1,0 +1,13 @@
+Prefetch Count (basic.qos)
+
+When autoAck is set to false (manual acknowledgements), RabbitMQ needs a way to prevent a single consumer from being overwhelmed by an infinite flood of messages.
+
+The prefetch count tells RabbitMQ: "Do not send this consumer any new messages if they already have exactly X unacknowledged messages sitting in their hands." If your consumer processes are stuck at 1,000 Unacked messages, it means:
+
+A prefetch limit of 1,000 is configured on your consumer's channel.
+
+Your consumer has pulled 1,000 messages.
+
+Your consumer has not sent a basicAck for any of them.
+
+RabbitMQ has paused delivery to this consumer until an ack is received.
