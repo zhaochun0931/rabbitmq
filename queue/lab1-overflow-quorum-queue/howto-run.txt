@@ -1,0 +1,9 @@
+Because you defined x-max-length as 10 and did not specify a different overflow behavior, RabbitMQ will use its default drop-head policy.
+
+Messages 1 through 10 will enter the queue normally.
+
+Message 11 will arrive, pushing the queue over its limit. RabbitMQ will drop Message 1 to make room.
+
+This cycle will continue until the loop finishes.
+
+The Result: If you inspect myqueue in the RabbitMQ Management UI after this code runs, you will see exactly 10 messages sitting in the queue. Because of drop-head, they will be the very last 10 messages sent: Message 2991 through Message 3000. The first 2,990 messages will have been discarded.
