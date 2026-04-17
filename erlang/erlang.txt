@@ -1,0 +1,5 @@
+The BEAM VM
+Erlang runs on a virtual machine called the BEAM. Unlike traditional languages (like C or Java) that use heavy OS threads, Erlang uses Lightweight Processes.
+
+
+
