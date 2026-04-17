@@ -1,0 +1,16 @@
+EPMD stands for Erlang Port Mapper Daemon, which is a service used by Erlang-based systems (like RabbitMQ) to help nodes find each other.
+
+
+
+
+
+1. What is EPMD?
+Think of EPMD as a "Yellow Pages" or a local DNS service for Erlang nodes.
+
+When an Erlang node starts up, it doesn't automatically know which port other nodes are listening on. It only knows their names (e.g., node1@192.168.1.10).
+
+Registration: Every node registers its name and its current listening port with the EPMD process running on its host.
+
+Lookup: When Node A wants to talk to Node B, it asks the EPMD on Node B's host: "What port is 'Node B' listening on?"
+
+Connection: EPMD provides the port, and the nodes establish a direct TCP connection.
