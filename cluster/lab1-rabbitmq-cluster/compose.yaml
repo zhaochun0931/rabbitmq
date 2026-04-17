@@ -1,7 +1,7 @@
 services:
   node1:
-    # image: rabbitmq:management
-    image: rabbitmq:3.13.7-management
+    image: rabbitmq:management
+    # image: rabbitmq:3.13.7-management
     hostname: node1
     container_name: node1
     environment:
@@ -21,8 +21,8 @@ services:
 
 
   node2:
-    # image: rabbitmq:management
-    image: rabbitmq:3.13.7-management
+    image: rabbitmq:management
+    # image: rabbitmq:3.13.7-management
     hostname: node2
     container_name: node2
     environment:
@@ -42,8 +42,8 @@ services:
       - node1
 
   node3:
-    # image: rabbitmq:management
-    image: rabbitmq:3.13.7-management
+    image: rabbitmq:management
+    # image: rabbitmq:3.13.7-management
     hostname: node3
     container_name: node3
     environment:
