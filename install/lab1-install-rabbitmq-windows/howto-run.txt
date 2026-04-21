@@ -1,0 +1,27 @@
+ERLANG_HOME
+
+
+C:\Users\xman\Downloads\rabbitmq_server-3.13.6\sbin>rabbitmq-service.bat install
+
+C:\Users\xman\Downloads\otp_win64_26.2.4\erts-14.2.4\bin\erlsrv: Service RabbitMQ added to system.
+
+
+
+
+otp_win64_26.2.4\erts-14.2.4\bin> .\erlsrv.exe list
+
+
+
+
+C:\Users\xman\Downloads\rabbitmq_server-3.13.6\sbin>rabbitmq-server.bat
+
+
+
+
+
+
+
+
+
+Node data directory: c:/Users/xman/AppData/Roaming/RabbitMQ/db/rabbit@rabbitmq-mnesia
+Raft data directory: c:/Users/xman/AppData/Roaming/RabbitMQ/db/rabbit@rabbitmq-mnesia/quorum/rabbit@rabbitmq
