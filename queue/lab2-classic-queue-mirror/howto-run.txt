@@ -1,0 +1,22 @@
+docker compose up
+
+
+
+docker exec -it node1 bash
+
+
+rabbitmqadmin -u admin -p password -H localhost declare queue name=cq-my-classic-queue durable=true
+
+
+rabbitmqadmin -u admin -p password -H localhost declare queue name=my-quorum-queue arguments='{"x-queue-type":"quorum"}'
+
+rabbitmqctl set_policy my-cq-mirroring "^cq" '{"ha-mode":"all"}' --apply-to=queues
+
+rabbitmqctl list_policies --vhost / --formatter pretty_table
+
+
+
+
+
+
+rabbitmqctl clear_policy my-cq-mirroring
