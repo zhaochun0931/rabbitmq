@@ -1,0 +1,27 @@
+docker compose up
+
+
+
+cd my-data
+
+
+
+docker exec spark-master ls /opt/spark/data
+
+
+
+
+docker exec -u root spark-master pip3 install pika -i https://pypi.tuna.tsinghua.edu.cn/simple/ --trusted-host pypi.tuna.tsinghua.edu.cn
+
+docker exec -u root spark-worker-1 pip3 install pika -i https://pypi.tuna.tsinghua.edu.cn/simple/ --trusted-host pypi.tuna.tsinghua.edu.cn
+
+docker exec -u root spark-worker-2 pip3 install pika -i https://pypi.tuna.tsinghua.edu.cn/simple/ --trusted-host pypi.tuna.tsinghua.edu.cn
+
+
+
+
+
+docker exec -it spark-master /opt/spark/bin/spark-submit \
+  --master spark://spark-master:7077 \
+  --total-executor-cores 2 \
+  /opt/spark/data/your_producer_script.py

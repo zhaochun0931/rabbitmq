@@ -1,0 +1,19 @@
+Stratio Spark-RabbitMQ is an open-source library (a "connector") that acts as the bridge between Apache Spark and RabbitMQ.
+
+Since Apache Spark does not have a "built-in" way to talk to RabbitMQ (unlike Kafka or Kinesis), you need this library to give Spark the instructions on how to authenticate, connect to a queue, and pull messages.
+
+1. What does it actually do?
+When you include this library in your Spark job, it adds a new Source and Sink to Spark's capabilities:
+
+As a Source: It allows Spark to act as a "Consumer." It listens to a RabbitMQ queue and transforms the incoming binary messages into a Spark DataFrame (rows and columns) that you can manipulate with code.
+
+As a Sink: It allows Spark to act as a "Producer." After Spark finishes calculating data, it can push those results back into a RabbitMQ exchange to notify other systems.
+
+2. How it handles the "Streaming"
+The Stratio connector works with Spark Structured Streaming. It treats the RabbitMQ queue like an infinite table:
+
+It connects to RabbitMQ using the AMQP protocol.
+
+It fetches messages in "micro-batches" (e.g., every 500ms).
+
+It acknowledges the messages back to RabbitMQ only after Spark has successfully processed them and saved the results (this ensures no data loss if a worker crashes).
