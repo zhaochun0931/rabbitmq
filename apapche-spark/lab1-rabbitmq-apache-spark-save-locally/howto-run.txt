@@ -1,0 +1,38 @@
+docker compose up
+
+
+
+cd my-data
+
+
+
+docker exec spark-master ls /opt/spark/data
+
+
+
+
+docker exec -u root spark-master pip3 install pika -i https://pypi.tuna.tsinghua.edu.cn/simple/ --trusted-host pypi.tuna.tsinghua.edu.cn
+
+
+docker exec -it spark-master /opt/spark/bin/spark-submit \
+  --master spark://spark-master:7077 \
+  /opt/spark/data/your_consumer_script.py
+
+
+docker exec -it spark-master /opt/spark/bin/spark-submit \
+  --master spark://spark-master:7077 \
+  --total-executor-cores 2 \
+  /opt/spark/data/your_consumer_script.py
+
+
+
+
+
+docker exec -it spark-master /opt/spark/bin/pyspark --master spark://spark-master:7077
+
+
+# 1. Load the data
+df = spark.read.parquet("/opt/spark/data/transactions.parquet")
+
+# 2. Show the contents
+df.show()
