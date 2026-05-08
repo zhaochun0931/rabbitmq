@@ -65,7 +65,7 @@ services:
 
   perf-test:
       image: pivotalrabbitmq/perf-test:latest
-      container_name: rabbit-perf-test
+      container_name: perf-test
       entrypoint: ["sh", "-c", "sleep infinity"]
       networks:
         - rabbitmq-net
