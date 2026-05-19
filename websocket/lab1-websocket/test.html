@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RabbitMQ Web MQTT Test</title>
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+</head>
+<body>
+    <h2>Check your browser console (F12)</h2>
+    <script>
+        // 1. Connect to RabbitMQ using the MQTT library
+        const options = {
+    username: 'mqtt_test',
+    password: 'secret'
+};
+const client = mqtt.connect('ws://localhost:15675/ws', options);
+
+        client.on('connect', function () {
+            console.log("Connected to RabbitMQ!");
+
+            // 2. Subscribe to a topic
+            client.subscribe('my/test/topic', function (err) {
+                if (!err) {
+                    // 3. Send (Publish) a message to that topic!
+                    client.publish('my/test/topic', 'Hello RabbitMQ, this is my first message!');
+                    console.log("Message sent!");
+                }
+            });
+        });
+
+        // 4. Listen for incoming messages
+        client.on('message', function (topic, message) {
+            console.log("Received a message on topic '" + topic + "':");
+            console.log(message.toString());
+        });
+    </script>
+</body>
+</html>
