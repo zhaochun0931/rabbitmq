@@ -15,3 +15,14 @@ rabbitmqctl set_permissions -p / mqtt_test ".*" ".*" ".*"
 Double-click test.html to open it in your browser.
 
 Press F12 to open the console. You should see it connect, send the message, and instantly receive its own message back!
+
+
+
+
+To bypass this:
+
+Open a new tab and go directly to https://127.0.0.1:15676.
+
+When the browser warns you that the connection is not private, click Advanced -> Proceed to 127.0.0.1 (unsafe).
+
+Once you see the blank screen/error page on that tab, go back to your test.html page and refresh it. It will connect perfectly.
