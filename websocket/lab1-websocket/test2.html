@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RabbitMQ Web MQTT Tester</title>
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; }
+        #logs { background: #1e1e1e; color: #00ff00; padding: 15px; height: 350px; overflow-y: scroll; font-family: monospace; border-radius: 5px; }
+        .error { color: #ff5555; }
+        .success { color: #55ff55; }
+        .info { color: #aaaaaa; }
+    </style>
+</head>
+<body>
+    <h2>RabbitMQ Web MQTT Tester</h2>
+    <div id="logs"></div>
+
+    <script>
+        // Helper function to print messages to the screen
+        function logMsg(msg, type = 'info') {
+            const logs = document.getElementById('logs');
+            logs.innerHTML += `<div class="${type}">[${new Date().toLocaleTimeString()}] ${msg}</div>`;
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        // --- CONFIGURE YOUR CREDENTIALS HERE ---
+        const options = {
+            username: 'admin', // Change to your RabbitMQ username
+            password: 'password'     // Change to your RabbitMQ password
+        };
+        const brokerUrl = 'ws://localhost:15675/ws';
+        // ---------------------------------------
+
+        logMsg(`Attempting to connect to ${brokerUrl}...`, 'info');
+
+        // Connect using the MQTT.js library
+        const client = mqtt.connect(brokerUrl, options);
+
+        // Event: When the connection is successful
+        client.on('connect', function () {
+            logMsg('Successfully connected to RabbitMQ!', 'success');
+
+            const topic = 'my/test/topic';
+            
+            // Subscribe to the topic
+            client.subscribe(topic, function (err) {
+                if (!err) {
+                    logMsg(`Subscribed to topic: "${topic}"`, 'info');
+                    
+                    // Publish a test message
+                    const msg = 'Hello RabbitMQ! The WebSocket is working!';
+                    client.publish(topic, msg);
+                    logMsg(`Sent message: "${msg}"`, 'info');
+                } else {
+                    logMsg(`Subscription error: ${err}`, 'error');
+                }
+            });
+        });
+
+        // Event: When a message is received
+        client.on('message', function (topic, message) {
+            logMsg(`Received message on "${topic}": <strong>${message.toString()}</strong>`, 'success');
+        });
+
+        // Event: When an error occurs (like wrong password)
+        client.on('error', function (error) {
+            logMsg(`Connection Error: ${error.message}`, 'error');
+        });
+
+        // Event: When the connection drops
+        client.on('close', function () {
+            logMsg('Connection closed.', 'error');
+        });
+    </script>
+</body>
+</html>
