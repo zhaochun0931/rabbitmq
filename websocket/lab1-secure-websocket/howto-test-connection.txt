@@ -1,0 +1,24 @@
+Open a new tab in your browser.
+
+In the address bar, type exactly about:blank and press Enter. (This opens a completely blank, rule-free page).
+
+Press F12 to open the console on this blank page.
+
+Paste your code in again. (Remember to include the "mqtt" subprotocol so RabbitMQ doesn't reject it!)
+
+
+
+
+
+
+Copy and paste this into your about:blank console:
+
+
+
+
+
+ws = new WebSocket("ws://localhost:15675/ws", "mqtt");
+
+ws.onopen = () => console.log("Success! Plain Web MQTT is connected.");
+ws.onerror = (error) => console.error("WebSocket Error:", error);
+ws.onclose = () => console.log("WebSocket connection closed.");

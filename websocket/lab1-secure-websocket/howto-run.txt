@@ -1,0 +1,17 @@
+# Create a user named 'mqtt_test' with the password 'secret'
+rabbitmqctl add_user mqtt_test secret
+
+# Make the user an administrator (optional, but easy for testing)
+rabbitmqctl set_user_tags mqtt_test administrator
+
+# Grant the user full read/write permissions on the default virtual host ("/")
+rabbitmqctl set_permissions -p / mqtt_test ".*" ".*" ".*"
+
+
+
+
+
+
+Double-click test.html to open it in your browser.
+
+Press F12 to open the console. You should see it connect, send the message, and instantly receive its own message back!

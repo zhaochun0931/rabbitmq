@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RabbitMQ Secure Web MQTT Test</title>
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+</head>
+<body>
+    <h2>Check your browser console (F12)</h2>
+    <script>
+        // Generate a random client ID to prevent disconnects if you refresh the page
+        const myClientId = 'web-tester-' + Math.random().toString(16).substring(2, 10);
+
+        const options = {
+            username: 'admin',
+            password: 'password',
+            clientId: myClientId
+        };
+
+        // 1. Connect to RabbitMQ using the secure wss:// protocol and port 15676
+        const client = mqtt.connect('wss://localhost:15676/ws', options);
+
+        client.on('connect', function () {
+            console.log("Connected to RabbitMQ securely!");
+
+            // 2. Subscribe to a topic
+            client.subscribe('my/test/topic', function (err) {
+                if (!err) {
+                    // 3. Send (Publish) a message to that topic!
+                    client.publish('my/test/topic', 'Hello RabbitMQ, this is my first SECURE message!');
+                    console.log("Message sent!");
+                }
+            });
+        });
+
+        // 4. Listen for incoming messages
+        client.on('message', function (topic, message) {
+            console.log("Received a message on topic '" + topic + "':");
+            console.log(message.toString());
+        });
+
+        // 5. Catch connection errors (helpful for debugging certificate issues)
+        client.on('error', function (error) {
+            console.error("Connection Error:", error.message || error);
+        });
+    </script>
+</body>
+</html>

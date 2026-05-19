@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RabbitMQ Secure Web MQTT Tester</title>
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; }
+        #logs { background: #1e1e1e; color: #00ff00; padding: 15px; height: 400px; overflow-y: scroll; font-family: monospace; border-radius: 5px; line-height: 1.4; }
+        .error { color: #ff5555; }
+        .success { color: #55ff55; }
+        .info { color: #aaaaaa; }
+        .highlight { color: #f1fa8c; }
+    </style>
+</head>
+<body>
+    <h2>RabbitMQ Secure Web MQTT Tester (Detailed)</h2>
+    <div id="logs"></div>
+
+    <script>
+        function logMsg(msg, type = 'info') {
+            const logs = document.getElementById('logs');
+            logs.innerHTML += `<div class="${type}">[${new Date().toLocaleTimeString()}] ${msg}</div>`;
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        // --- CONFIGURE YOUR CONNECTION DETAILS HERE ---
+        const host = '127.0.0.1';
+        const port = 15676; // <--- Changed to your secure port
+        const path = '/ws';
+        const brokerUrl = `wss://${host}:${port}${path}`; // <--- Changed to wss://
+
+        // Generate a random Client ID so multiple tabs don't kick each other off
+        const myClientId = 'web-tester-' + Math.random().toString(16).substring(2, 10);
+
+        const options = {
+            username: 'admin',     // Your RabbitMQ username
+            password: 'password',  // Your RabbitMQ password
+            clientId: myClientId,  // The unique ID identifying this connection
+            keepalive: 60,         // Ping the server every 60 seconds to keep connection open
+            clean: true,           // True = do not remember subscriptions after disconnecting
+            protocolVersion: 4     // MQTT v3.1.1
+        };
+        // ----------------------------------------------
+
+        logMsg(`--- Connection Setup ---`, 'highlight');
+        logMsg(`Broker URL: <span class="highlight">${brokerUrl}</span>`);
+        logMsg(`Port: <span class="highlight">${port}</span>`);
+        logMsg(`Client ID: <span class="highlight">${options.clientId}</span>`);
+        logMsg(`Username: <span class="highlight">${options.username}</span>`);
+        logMsg(`Keepalive: <span class="highlight">${options.keepalive}s</span>`);
+        logMsg(`------------------------`, 'highlight');
+        
+        logMsg(`Attempting to securely connect...`, 'info');
+
+        // Connect using the MQTT.js library
+        const client = mqtt.connect(brokerUrl, options);
+
+        client.on('connect', function () {
+            logMsg('Successfully connected to RabbitMQ securely!', 'success');
+
+            const topic = 'my/test/topic';
+            
+            client.subscribe(topic, function (err) {
+                if (!err) {
+                    logMsg(`Subscribed to topic: "${topic}"`, 'info');
+                    
+                    const msg = 'Hello RabbitMQ! The SECURE WebSocket is working!';
+                    client.publish(topic, msg);
+                    logMsg(`Sent message: "${msg}"`, 'info');
+                } else {
+                    logMsg(`Subscription error: ${err}`, 'error');
+                }
+            });
+        });
+
+        client.on('message', function (topic, message) {
+            logMsg(`Received message on "${topic}": <strong>${message.toString()}</strong>`, 'success');
+        });
+
+        client.on('error', function (error) {
+            logMsg(`Connection Error: ${error.message || 'Check browser console (F12) for certificate issues'}`, 'error');
+        });
+
+        client.on('close', function () {
+            logMsg('Connection closed.', 'error');
+        });
+    </script>
+</body>
+</html>
