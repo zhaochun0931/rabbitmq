@@ -1,0 +1,22 @@
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    hostname: rabbitmq
+    tty: true
+    stdin_open: true
+    ports:
+      - "5672:5672"   # AMQP protocol port
+      - "15672:15672" # Management UI
+      - "15692:15692" # Prometheus metrics
+      - "1883:1883"   # MQTT plugin port
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=rabbitmq
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=password
+    networks:
+      - rabbitmq_net
+
+networks:
+  rabbitmq_net:
+    driver: bridge
