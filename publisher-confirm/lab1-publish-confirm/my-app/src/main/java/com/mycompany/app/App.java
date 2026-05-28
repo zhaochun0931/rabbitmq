@@ -1,10 +1,8 @@
 package com.mycompany.app;
 
-
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-
 
 /**
  * Hello world!
@@ -14,6 +12,7 @@ public class App {
         System.out.println("Hello World!");
 
         ConnectionFactory factory = new ConnectionFactory();
+//        factory.setHost("172.16.204.139");
         factory.setHost("localhost");
         factory.setUsername("admin");
         factory.setPassword("password");
@@ -24,20 +23,28 @@ public class App {
             // 1. Enable publisher confirms on the channel
             channel.confirmSelect();
 
-            // 2. DECLARE THE QUEUE FIRST 👈 (This fixes your issue)
-            // Parameters: queueName, durable, exclusive, autoDelete, arguments
-            channel.queueDeclare("my_queue", false, false, false, null);
+            // 2. Declare the queue as durable (matches your latest fix)
+            channel.queueDeclare("my_queue", true, false, false, null);
 
-            String message = "Hello World!";
-            channel.basicPublish("", "my_queue", null, message.getBytes());
+            String baseMessage = "Hello World!";
 
-            // 3. Block until the broker ACKs or NACKs the message
-            if (channel.waitForConfirms(5000)) {
-                System.out.println("Message delivery confirmed.");
-            } else {
-                System.err.println("Message delivery failed (NACK received).");
+            // 3. Loop exactly 10 times
+            for (int i = 1; i <= 10; i++) {
+                // Appending the loop index so you can see unique messages in the queue
+                String message = baseMessage + " - Msg #" + i;
+
+                channel.basicPublish("", "my_queue", null, message.getBytes());
+                System.out.println("Sent: " + message);
+
+                // 4. Block and wait for the ACK for this specific message
+                if (channel.waitForConfirms(5000)) {
+                    System.out.println("-> Message " + i + " delivery confirmed by broker.");
+                } else {
+                    System.err.println("-> Message " + i + " delivery failed (NACK received).");
+                }
             }
-        }
 
+            System.out.println("\nAll 10 messages processed.");
+        }
     }
 }
