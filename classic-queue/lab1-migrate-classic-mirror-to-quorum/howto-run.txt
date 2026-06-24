@@ -1,0 +1,23 @@
+docker exec -it rabbitmq-server-3-13 rabbitmq-plugins enable rabbitmq_shovel_management
+
+docker exec -it rabbitmq-server-4-3 rabbitmq-plugins enable rabbitmq_shovel_management
+
+
+
+
+
+docker exec -it rabbitmq-server-4-3 bash
+
+
+
+
+rabbitmq-plugins enable rabbitmq_shovel_management
+
+
+
+rabbitmqadmin --username=admin --password=password declare queue --name=classic_load_test_queue --arguments='{"x-queue-type":"quorum"}'
+
+rabbitmqctl set_parameter shovel migrate-3-to-4 \
+  '{"src-protocol": "amqp091", "src-uri": "amqp://admin:password@rabbitmq-3-13:5672/%2f", "src-queue": "classic_load_test_queue", "dest-protocol": "amqp091", "dest-uri": "amqp://admin:password@localhost:5672/%2f", "dest-queue": "classic_load_test_queue", "ack-mode": "on-confirm"}'
+  
+  

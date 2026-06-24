@@ -1,0 +1,54 @@
+services:
+  # --- RabbitMQ 3.13 Instance ---
+  rabbitmq-3-13:
+    image: rabbitmq:3.13-management
+    container_name: rabbitmq-server-3-13
+    hostname: rabbitmq-node-3-13
+    restart: unless-stopped
+    ports:
+      - "5672:5672"   # Default AMQP port
+      - "15672:15672" # Default Management Web UI
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: password
+      RABBITMQ_DEFAULT_VHOST: /
+    volumes:
+      - ./rabbitmq3_data:/var/lib/rabbitmq
+      - ./rabbitmq3_logs:/var/log/rabbitmq
+    networks:
+      - rabbitmq_net
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+  # --- RabbitMQ 4.3 Instance ---
+  rabbitmq-4-3:
+    image: rabbitmq:4.3-management
+    container_name: rabbitmq-server-4-3
+    hostname: rabbitmq-node-4-3
+    restart: unless-stopped
+    ports:
+      - "5673:5672"   # Shifted AMQP port on host to 5673
+      - "15673:15672" # Shifted Management Web UI on host to 15673
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: password
+      RABBITMQ_DEFAULT_VHOST: /
+    volumes:
+      - ./rabbitmq4_data:/var/lib/rabbitmq
+      - ./rabbitmq4_logs:/var/log/rabbitmq
+    networks:
+      - rabbitmq_net
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+networks:
+  rabbitmq_net:
+    driver: bridge
