@@ -18,8 +18,6 @@ services:
     ports:
       - "5672:5672"   # AMQP port
       - "15672:15672" # Management UI
-    environment:
-      - RABBITMQ_ADVANCED_CONFIG_FILE=/etc/rabbitmq/advanced.config  # 👈 Forces RabbitMQ to load it
     volumes:
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
       - ./advanced.config:/etc/rabbitmq/advanced.config:ro          # 👈 Mounts your tag configuration
