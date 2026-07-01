@@ -15,3 +15,36 @@ docker exec -it openldap ldapwhoami -x -D "cn=admin,dc=example,dc=com" -w passwo
 
 docker exec -it openldap ldapsearch -x -b "dc=example,dc=com"
 
+
+
+
+
+
+
+
+docker exec -it rabbitmq-server bash
+
+
+rabbitmq-plugins enable rabbitmq_auth_backend_ldap
+
+
+
+
+rabbitmqctl set_log_level debug
+
+rabbitmqctl set_log_level info
+
+
+
+
+# 1. Create a user named 'internaluser' with password 'password123'
+
+rabbitmqctl add_user internaluser password
+
+# 2. Give them the 'administrator' tag so they can log into the UI
+
+rabbitmqctl set_user_tags internaluser administrator
+
+# 3. Grant them full permissions to the default vhost ("/")
+
+rabbitmqctl set_permissions -p / internaluser ".*" ".*" ".*"
