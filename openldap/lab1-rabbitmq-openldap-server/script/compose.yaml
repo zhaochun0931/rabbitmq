@@ -1,0 +1,33 @@
+services:
+  openldap:
+    build: .
+    container_name: openldap
+    hostname: openldap
+    ports:
+      - "389:389"
+    volumes:
+      - ./bootstrap.ldif:/bootstrap.ldif
+    command: ["/bin/bash", "-c", "/init.sh"]
+    networks:
+      - auth-network
+
+  rabbitmq:
+    image: rabbitmq:4.0-management
+    container_name: rabbitmq-server
+    hostname: rabbitmq-server
+    ports:
+      - "5672:5672"   # AMQP port
+      - "15672:15672" # Management UI
+    environment:
+      - RABBITMQ_ADVANCED_CONFIG_FILE=/etc/rabbitmq/advanced.config  # 👈 Forces RabbitMQ to load it
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+      - ./advanced.config:/etc/rabbitmq/advanced.config:ro          # 👈 Mounts your tag configuration
+    depends_on:
+      - openldap
+    networks:
+      - auth-network
+
+networks:
+  auth-network:
+    driver: bridge
