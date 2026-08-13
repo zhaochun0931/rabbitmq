@@ -28,6 +28,39 @@ docker exec -it samba-ad samba-tool user create testuser "User123456" \
 
 
 
+1. 测试基础认证与 Bind（验证密码是否正确）
+最常用命令，直接测试某个账号和密码能否连接 Samba 4
+
+ldapsearch -x -H ldap://127.0.0.1:389 \
+  -D "CN=testuser,CN=Users,DC=corp,DC=local" \
+  -w "User123456" \
+  -b "DC=corp,DC=local" \
+  "(sAMAccountName=testuser)"
+
+-x：使用 Simple Authentication（简单凭据认证）。
+
+-H：指定 LDAP/Samba 4 服务器地址和端口。
+
+-D：要验证用户的完整 DN（Distinguished Name）。
+
+-w：对应用户的密码。
+
+-b：查询的根节点路径（Base DN）。
+
+2. 测试 RabbitMQ 的“两阶段检索”（模拟管理员 Bind 账号去查用户）
+这个命令完全模拟 RabbitMQ LDAP 插件在后台做的事情（先用服务账号连进去，再找 sAMAccountName）：
+
+ldapsearch -x -H ldap://127.0.0.1:389 \
+  -D "CN=Administrator,CN=Users,DC=corp,DC=local" \
+  -w "Admin123456" \
+  -b "DC=corp,DC=local" \
+  "(sAMAccountName=testuser)"
+
+
+
+
+
+
 
 完成上述任一方案后，再次访问 http://localhost:15672
 
