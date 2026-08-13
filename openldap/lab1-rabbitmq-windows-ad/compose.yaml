@@ -1,0 +1,41 @@
+services:
+  samba-ad:
+    image: linuxcrafts/samba-ad-dc:latest
+    container_name: samba-ad
+    cap_add:
+      - SYS_ADMIN
+    environment:
+      - DNS_DOMAIN=corp.local
+      - ADMIN_PASSWORD=Admin123!         # 初始临时密码（须带符号，启动后会被命令修改）
+    ports:
+      - "389:389"
+      - "636:636"
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z 127.0.0.1 389 || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - ad_network
+
+  rabbitmq:
+    #image: rabbitmq:3-management
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+      - "5671:5671"
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins:ro
+      - ./advanced.config:/etc/rabbitmq/advanced.config:ro
+    depends_on:
+      samba-ad:
+        condition: service_healthy
+    networks:
+      - ad_network
+
+networks:
+  ad_network:
+    driver: bridge

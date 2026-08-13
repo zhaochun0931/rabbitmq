@@ -1,0 +1,171 @@
+docker compose up
+
+
+
+
+
+# 1. 修改密码策略（关闭复杂度要求、降低最小长度）
+docker exec -it samba-ad samba-tool domain passwordsettings set \
+  --complexity=off \
+  --min-pwd-length=6 \
+  -H ldap://localhost \
+  -U "Administrator%Admin123!"
+
+# 2. 将 Administrator 密码重置为无特殊字符的 Admin123456
+docker exec -it samba-ad samba-tool user setpassword Administrator \
+  --newpassword="Admin123456" \
+  -H ldap://localhost \
+  -U "Administrator%Admin123!"
+
+# 3. 创建普通测试账号 testuser（密码：User123456）
+docker exec -it samba-ad samba-tool user create testuser "User123456" \
+  -H ldap://localhost \
+  -U "Administrator%Admin123456"
+
+
+
+
+
+
+
+
+完成上述任一方案后，再次访问 http://localhost:15672：
+
+输入 testuser / User123456
+
+或输入 CORP\testuser / User123456
+
+
+
+
+rabbitmq  | 2026-08-13 06:07:40.837495+00:00 [info] <0.1254.0> LDAP CHECK: login for testuser
+rabbitmq  | 2026-08-13 06:07:40.842822+00:00 [info] <0.571.0>     LDAP bind succeeded: CN=xxxx,CN=xxxx,DC=xxxx,DC=xxxx
+rabbitmq  | 2026-08-13 06:07:40.842891+00:00 [info] <0.571.0>         LDAP filling template "${username}" with
+rabbitmq  | 2026-08-13 06:07:40.842891+00:00 [info] <0.571.0>             [{username,<<"testuser">>}]
+rabbitmq  | 2026-08-13 06:07:40.842965+00:00 [info] <0.571.0>         LDAP template result: "testuser"
+rabbitmq  | 2026-08-13 06:07:40.843524+00:00 [info] <0.571.0>     LDAP DN lookup: testuser -> CN=testuser,CN=Users,DC=corp,DC=local
+rabbitmq  | 2026-08-13 06:07:40.847178+00:00 [info] <0.571.0>     LDAP bind succeeded: CN=xxxx,CN=xxxx,DC=xxxx,DC=xxxx
+rabbitmq  | 2026-08-13 06:07:40.847246+00:00 [info] <0.571.0>     LDAP CHECK: does testuser have tag management?
+rabbitmq  | 2026-08-13 06:07:40.847289+00:00 [info] <0.571.0>     LDAP evaluating query: {constant,true}
+rabbitmq  | 2026-08-13 06:07:40.847337+00:00 [info] <0.571.0>     LDAP evaluated constant: true
+rabbitmq  | 2026-08-13 06:07:40.847374+00:00 [info] <0.571.0>     LDAP DECISION: does testuser have tag management? true
+rabbitmq  | 2026-08-13 06:07:40.847395+00:00 [info] <0.571.0>     LDAP CHECK: does testuser have tag administrator?
+rabbitmq  | 2026-08-13 06:07:40.847410+00:00 [info] <0.571.0>     LDAP evaluating query: {constant,true}
+rabbitmq  | 2026-08-13 06:07:40.847434+00:00 [info] <0.571.0>     LDAP evaluated constant: true
+rabbitmq  | 2026-08-13 06:07:40.847449+00:00 [info] <0.571.0>     LDAP DECISION: does testuser have tag administrator? true
+rabbitmq  | 2026-08-13 06:07:40.847477+00:00 [info] <0.1254.0> LDAP DECISION: login for testuser: ok
+
+
+
+
+
+这日志简直是**标准的黄金模版**！现在的认证流程已经达到了最完美的逻辑闭环。
+
+关键日志节点拆解：
+
+1. **精确解析 DN**：
+`LDAP DN lookup: testuser -> CN=testuser,CN=Users,DC=corp,DC=local`
+RabbitMQ 先用 Bind 账号向 Samba 4 发起查询，成功精确拿到了 `testuser` 在 Samba 里的完整 LDAP DN。
+2. **凭据验证（Bind）成功**：
+`LDAP bind succeeded: CN=xxxx,CN=xxxx,DC=xxxx,DC=xxxx`
+拿到 DN 后，RabbitMQ 用该 DN 和输入的密码去 Samba 校验，认证全通。
+3. **权限标签授权成功**：
+`LDAP DECISION: does testuser have tag management? true`
+`LDAP DECISION: does testuser have tag administrator? true`
+角色校验完全通过，自动赋予了 Web UI 的管理权限。
+4. **最终成功响应**：
+`LDAP DECISION: login for testuser: ok`
+`User 'testuser' authenticated successfully by backend rabbit_auth_backend_ldap`
+登录彻底成功，并顺利进入后台同步数据（`Successfully synced tables`）。
+
+---
+
+**对比总结：**
+
+* 输入 `testuser`（不带域名）$\rightarrow$ 触发标准 Search-then-Bind，精确查出 DN，登录**完美成功**。
+* 输入 `corp\testuser`（带 NetBIOS 域名）$\rightarrow$ 触发 AD 原生兼容模式绑定，登录**完美成功**。
+
+至此，Samba 4 AD DC 作为 Active Directory 服务、配合 RabbitMQ 双后端认证与 Fallback 的整个架构测试**宣告彻底成功**！可以安心关闭 DEBUG 日志投入使用了。
+
+
+
+
+
+
+
+
+
+
+
+
+
+rabbitmq  | 2026-08-13 06:08:49.702664+00:00 [info] <0.1278.0> LDAP CHECK: login for corp\testuser
+rabbitmq  | 2026-08-13 06:08:49.709035+00:00 [info] <0.571.0>     LDAP bind succeeded: CN=xxxx,CN=xxxx,DC=xxxx,DC=xxxx
+rabbitmq  | 2026-08-13 06:08:49.709112+00:00 [info] <0.571.0>         LDAP filling template "${username}" with
+rabbitmq  | 2026-08-13 06:08:49.709112+00:00 [info] <0.571.0>             [{username,<<"corp\\testuser">>},
+rabbitmq  | 2026-08-13 06:08:49.709112+00:00 [info] <0.571.0>              {ad_domain,<<"corp">>},
+rabbitmq  | 2026-08-13 06:08:49.709112+00:00 [info] <0.571.0>              {ad_user,<<"testuser">>}]
+rabbitmq  | 2026-08-13 06:08:49.709237+00:00 [info] <0.571.0>         LDAP template result: "corp\testuser"
+rabbitmq  | 2026-08-13 06:08:49.710221+00:00 [warning] <0.571.0> Searching for DN for corp\testuser, got back []
+rabbitmq  | 2026-08-13 06:08:49.715244+00:00 [info] <0.571.0>     LDAP bind succeeded: xxxx
+rabbitmq  | 2026-08-13 06:08:49.715299+00:00 [info] <0.571.0>     LDAP CHECK: does corp\testuser have tag management?
+rabbitmq  | 2026-08-13 06:08:49.715387+00:00 [info] <0.571.0>     LDAP evaluating query: {constant,true}
+rabbitmq  | 2026-08-13 06:08:49.715447+00:00 [info] <0.571.0>     LDAP evaluated constant: true
+rabbitmq  | 2026-08-13 06:08:49.715477+00:00 [info] <0.571.0>     LDAP DECISION: does corp\testuser have tag management? true
+rabbitmq  | 2026-08-13 06:08:49.715529+00:00 [info] <0.571.0>     LDAP CHECK: does corp\testuser have tag administrator?
+rabbitmq  | 2026-08-13 06:08:49.715568+00:00 [info] <0.571.0>     LDAP evaluating query: {constant,true}
+rabbitmq  | 2026-08-13 06:08:49.715596+00:00 [info] <0.571.0>     LDAP evaluated constant: true
+rabbitmq  | 2026-08-13 06:08:49.715617+00:00 [info] <0.571.0>     LDAP DECISION: does corp\testuser have tag administrator? true
+rabbitmq  | 2026-08-13 06:08:49.715670+00:00 [info] <0.1278.0> LDAP DECISION: login for corp\testuser: ok
+
+
+
+这个日志显示的是，当你输入带域名的账号格式（`corp\testuser`）时，RabbitMQ 同样**完美登录成功**！
+
+虽然日志里有一行 `[warning]` 看起来吓人，但这不仅不是错误，反而展示了 RabbitMQ LDAP 插件针对 Active Directory 的**智能回退（Fallback）容错机制**。
+
+让我为你详细拆解这段“带域名登录”的特殊流程：
+
+### 流程拆解与 Warning 解释
+
+#### 1. 尝试 Search（属性查询失败）
+
+```text
+LDAP filling template "${username}" with ... "corp\testuser"
+Searching for DN for corp\testuser, got back []
+
+```
+
+* **发生了什么**：你配置了 Search-then-Bind 模式（`dn_lookup_attribute = sAMAccountName`）。RabbitMQ 拿着 `corp\testuser` 整个字符串去 Samba 里查哪个用户的 `sAMAccountName` 叫这个名字。
+* **为什么报 Warning（返回空）**：在 Samba/AD 的数据库里，`sAMAccountName` 的值仅仅是 `testuser`（不包含 `corp\` 前缀）。所以搜索结果返回空集（`got back []`），发出一条 Warning。
+
+#### 2. 触发 AD 原生智能绑定（Bind 成功）
+
+```text
+LDAP bind succeeded: xxxx
+
+```
+
+* **发生了什么**：RabbitMQ 的 LDAP 插件极其聪明。它发现 Search 阶段找不到人，但因为输入格式包含反斜杠（`corp\testuser`），它意识到这可能是一个 AD 环境。于是它直接跳过了“寻找完整 DN”的过程，**将 `corp\testuser` 和你输入的密码直接发给 Samba 进行校验。**
+* **结果**：Samba/AD 原生就支持识别 `DOMAIN\user` 这种 NetBIOS 登录格式。Samba 验证通过，返回了 `bind succeeded`。
+
+#### 3. 标签授权与最终放行
+
+```text
+LDAP DECISION: does corp\testuser have tag management? true
+LDAP DECISION: login for corp\testuser: ok
+
+```
+
+* **发生了什么**：认证通过后，RabbitMQ 读取你之前配置的常量规则（`{constant,true}`），为该次会话分配了管理标签。登录宣告成功。
+
+---
+
+### 结论
+
+无论是纯用户名 `testuser` 还是带域前缀的 `corp\testuser`，这套配置利用了 RabbitMQ 插件的双层机制，做到了全兼容：
+
+* **纯用户名** $\rightarrow$ 通过 Search 查出完整 DN $\rightarrow$ Bind 验证 $\rightarrow$ 成功。
+* **带域前缀** $\rightarrow$ Search 失败报错 $\rightarrow$ 触发 AD 原生 Direct Bind $\rightarrow$ 成功。
+
+这个 `[warning] <0.571.0> Searching for DN ... got back []` **完全可以无视**，这是为了实现两种格式兼容而必然产生的良性告警。如果你未来关闭了 `auth_ldap.log = false`，这条 Warning 就不会再出现了。
