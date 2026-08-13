@@ -29,7 +29,7 @@ docker exec -it samba-ad samba-tool user create testuser "User123456" \
 
 
 
-完成上述任一方案后，再次访问 http://localhost:15672：
+完成上述任一方案后，再次访问 http://localhost:15672
 
 输入 testuser / User123456
 
