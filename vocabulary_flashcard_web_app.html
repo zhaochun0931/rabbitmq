@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordSpark - 智能分组与生词复习背单词</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+
+        /* Card Flip 3D Animation */
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+        .dark ::-webkit-scrollbar-thumb { background: #475569; }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
+
+    <!-- Header Navigation Bar -->
+    <header class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-30 transition-colors shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('study')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+                    <i data-lucide="book-open" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">WordSpark</h1>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">精准分组背诵 & 生词复习</p>
+                </div>
+            </div>
+
+            <!-- Tab Navigation Buttons -->
+            <nav class="flex items-center space-x-1 sm:space-x-2 bg-slate-100 dark:bg-slate-700/50 p-1 rounded-xl">
+                <button id="nav-study" onclick="switchTab('study')" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all flex items-center space-x-1.5 bg-white dark:bg-slate-800 shadow-sm text-blue-600 dark:text-blue-400">
+                    <i data-lucide="layers" class="w-4 h-4"></i>
+                    <span class="hidden sm:inline">分组背诵</span>
+                </button>
+                <button id="nav-starred" onclick="switchTab('starred')" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all flex items-center space-x-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">
+                    <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                    <span>生词本</span>
+                    <span id="nav-starred-count" class="px-1.5 py-0.5 text-[10px] bg-amber-100 dark:bg-amber-900/50 text-amber-800 dark:text-amber-300 font-bold rounded-full">0</span>
+                </button>
+                <button id="nav-list" onclick="switchTab('list')" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all flex items-center space-x-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">
+                    <i data-lucide="list" class="w-4 h-4"></i>
+                    <span class="hidden sm:inline">词汇表</span>
+                </button>
+                <button id="nav-settings" onclick="switchTab('settings')" class="px-3 py-1.5 rounded-lg text-sm font-medium transition-all flex items-center space-x-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">
+                    <i data-lucide="settings" class="w-4 h-4"></i>
+                    <span class="hidden sm:inline">设置 & 导入</span>
+                </button>
+            </nav>
+
+            <!-- Audio Status & Theme Toggle -->
+            <div class="flex items-center space-x-2">
+                <button id="audio-status-btn" onclick="userUnlockAudio()" class="px-2.5 py-1.5 bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-300 rounded-lg text-xs font-semibold flex items-center space-x-1 border border-amber-300 dark:border-amber-700 animate-pulse">
+                    <i data-lucide="volume-x" class="w-3.5 h-3.5" id="audio-status-icon"></i>
+                    <span id="audio-status-text" class="hidden sm:inline">激活发音</span>
+                </button>
+
+                <button onclick="toggleDarkMode()" class="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-700 transition" title="切换暗黑模式">
+                    <i data-lucide="moon" id="theme-icon-dark" class="w-5 h-5 hidden"></i>
+                    <i data-lucide="sun" id="theme-icon-light" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Audio Unlock Banner -->
+    <div id="audio-unlock-banner" class="bg-amber-500 text-white px-4 py-2 text-xs sm:text-sm font-medium text-center flex items-center justify-center space-x-2 shadow-md">
+        <i data-lucide="volume-2" class="w-4 h-4 animate-bounce"></i>
+        <span>初次使用请先激活发音引擎：</span>
+        <button onclick="userUnlockAudio()" class="px-3 py-0.5 bg-white text-amber-800 rounded-lg font-bold text-xs hover:bg-amber-100 shadow-sm transition">
+            点击立即激活 🔊
+        </button>
+    </div>
+
+    <main class="flex-1 max-w-5xl w-full mx-auto p-4 sm:p-6 flex flex-col justify-between">
+        
+        <!-- PAGE 1: STUDY TAB (Regular & Review Mode) -->
+        <div id="tab-study" class="space-y-5">
+            
+            <!-- Daily Stats Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div class="bg-white dark:bg-slate-800 p-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-sm flex items-center space-x-3">
+                    <div class="p-2.5 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+                        <i data-lucide="target" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400">词库总计</div>
+                        <div class="text-base font-bold text-slate-800 dark:text-slate-100" id="stat-total-words">0 词</div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-slate-800 p-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-sm flex items-center space-x-3">
+                    <div class="p-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400">
+                        <i data-lucide="check-circle" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400">已熟练掌握</div>
+                        <div class="text-base font-bold text-slate-800 dark:text-slate-100" id="stat-mastered">0</div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-slate-800 p-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-sm flex items-center space-x-3 cursor-pointer" onclick="switchTab('starred')">
+                    <div class="p-2.5 rounded-xl bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400">
+                        <i data-lucide="star" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400">收藏生词本</div>
+                        <div class="text-base font-bold text-amber-600 dark:text-amber-400" id="stat-starred-count">0</div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-slate-800 p-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 shadow-sm flex items-center space-x-3">
+                    <div class="p-2.5 rounded-xl bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">
+                        <i data-lucide="folder-kanban" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-500 dark:text-slate-400">背诵模式/组</div>
+                        <div class="text-base font-bold text-slate-800 dark:text-slate-100" id="stat-current-group">常规第 1 组</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Auto Play & Mode Banner Bar -->
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 rounded-2xl shadow-lg shadow-blue-500/10 flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center space-x-3">
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="auto-play-toggle" onchange="toggleAutoPlay()" class="sr-only peer">
+                        <div class="w-11 h-6 bg-blue-400/50 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-400"></div>
+                    </label>
+                    <div>
+                        <span class="font-bold text-sm sm:text-base flex items-center space-x-1">
+                            <span>自动播读模式</span>
+                            <span class="text-xs font-normal opacity-80">(快捷键 A)</span>
+                        </span>
+                        <p class="text-xs text-blue-100">自动切词、朗读与翻面</p>
+                    </div>
+                </div>
+
+                <!-- Mode Indicator / Quick Switch Button -->
+                <div class="flex items-center space-x-2">
+                    <button id="mode-toggle-btn" onclick="toggleStarredReviewMode()" class="px-4 py-2 bg-amber-400 hover:bg-amber-300 text-amber-950 font-bold rounded-xl text-xs flex items-center space-x-1.5 shadow-md transition">
+                        <i data-lucide="bookmark" class="w-4 h-4"></i>
+                        <span id="mode-toggle-btn-text">开启生词本专属复习</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Group & Controls Bar -->
+            <div id="regular-controls-bar" class="flex flex-wrap items-center justify-between gap-3 bg-white dark:bg-slate-800 p-3 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/60">
+                <!-- Group Dropdown -->
+                <div class="flex items-center space-x-2">
+                    <button onclick="prevGroup()" class="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition disabled:opacity-40" id="btn-prev-group" title="上一组">
+                        <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                    </button>
+                    
+                    <div class="flex items-center space-x-1">
+                        <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">组选择:</span>
+                        <select id="group-select" onchange="onGroupSelectChange(this.value)" class="bg-slate-50 dark:bg-slate-700 text-slate-800 dark:text-slate-100 font-bold text-xs py-1.5 px-3 rounded-xl border border-slate-200 dark:border-slate-600 focus:outline-none">
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+
+                    <button onclick="nextGroup()" class="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition disabled:opacity-40" id="btn-next-group" title="下一组">
+                        <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+
+                <div class="flex items-center space-x-2">
+                    <button onclick="shuffleCurrentGroup()" class="px-3 py-1.5 text-xs font-medium text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-xl transition flex items-center space-x-1">
+                        <i data-lucide="shuffle" class="w-3.5 h-3.5"></i>
+                        <span>打乱本组</span>
+                    </button>
+                    <button onclick="restartCurrentGroup()" class="px-3 py-1.5 text-xs font-medium text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-xl transition flex items-center space-x-1">
+                        <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                        <span>重背本组</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Starred Review Active Notice Banner (Hidden in Regular mode) -->
+            <div id="starred-mode-banner" class="hidden bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 p-3 rounded-2xl flex items-center justify-between">
+                <div class="flex items-center space-x-2 text-amber-800 dark:text-amber-300 text-xs font-semibold">
+                    <i data-lucide="alert-circle" class="w-4 h-4"></i>
+                    <span>当前处于：生词本专属复习模式 (集中背诵标记生词及未掌握词)</span>
+                </div>
+                <button onclick="toggleStarredReviewMode(false)" class="text-xs text-slate-500 underline hover:text-slate-800 dark:hover:text-slate-200">
+                    退出生词模式
+                </button>
+            </div>
+
+            <div class="space-y-1.5">
+                <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 px-1 font-medium">
+                    <span class="flex items-center space-x-2">
+                        <span id="group-range-text">本组进度 (词汇范围)</span>
+                        <span id="auto-play-indicator" class="hidden text-emerald-600 dark:text-emerald-400 font-bold animate-pulse">
+                            ● 自动播放中...
+                        </span>
+                    </span>
+                    <span id="batch-progress-text">0 / 0 词</span>
+                </div>
+                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden relative">
+                    <div id="batch-progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Flashcard Main View -->
+            <div id="flashcard-wrapper" class="perspective-1000 w-full min-h-[320px] sm:min-h-[360px] my-2 cursor-pointer select-none" onclick="flipCard()">
+                <div id="flashcard" class="transform-style-3d relative w-full h-full min-h-[320px] sm:min-h-[360px] rounded-3xl transition-transform duration-500 shadow-xl border border-slate-200/80 dark:border-slate-700/80 bg-white dark:bg-slate-800">
+                    
+                    <!-- Front of Card (Word) -->
+                    <div class="backface-hidden absolute inset-0 w-full h-full p-6 sm:p-8 flex flex-col justify-between rounded-3xl bg-white dark:bg-slate-800">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400" id="card-status-badge">
+                                词汇序号
+                            </span>
+
+                            <div class="flex items-center space-x-2">
+                                <!-- STAR/UNSTAR BUTTON -->
+                                <button onclick="toggleStarCurrentWord(event)" id="card-star-btn" class="p-2.5 rounded-full bg-slate-100 dark:bg-slate-700 hover:bg-amber-50 dark:hover:bg-amber-900/30 text-slate-400 hover:text-amber-500 transition shadow-sm" title="标记生词 (快捷键 S)">
+                                    <i data-lucide="star" class="w-5 h-5" id="card-star-icon"></i>
+                                </button>
+                                
+                                <button onclick="speakCurrentWord(event)" class="p-2.5 px-3.5 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 hover:scale-105 active:scale-95 transition shadow-sm flex items-center space-x-1" title="点击朗读">
+                                    <i data-lucide="volume-2" class="w-5 h-5"></i>
+                                    <span class="text-xs font-bold hidden sm:inline">朗读</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="text-center my-auto py-4">
+                            <h2 class="text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3" id="card-word">
+                                Loading...
+                            </h2>
+                            <p class="text-slate-400 dark:text-slate-500 text-sm font-medium" id="card-phonetic">
+                                [点击卡片或按空格翻面查看释义]
+                            </p>
+                        </div>
+
+                        <div class="flex items-center justify-between text-xs text-slate-400 dark:text-slate-500">
+                            <span class="flex items-center space-x-1">
+                                <i data-lucide="mouse-pointer-click" class="w-3.5 h-3.5"></i>
+                                <span>点击翻面</span>
+                            </span>
+                            <span>快捷键: [S] 收藏生词 &nbsp; [1/←] 没记住 &nbsp; [3/→] 记住了</span>
+                        </div>
+                    </div>
+
+                    <!-- Back of Card (Definition) -->
+                    <div class="backface-hidden rotate-y-180 absolute inset-0 w-full h-full p-6 sm:p-8 flex flex-col justify-between rounded-3xl bg-slate-900 text-white dark:bg-slate-950 border border-slate-800">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                            <div class="flex items-center space-x-3">
+                                <h3 class="text-2xl font-bold text-blue-400" id="card-back-word">Word</h3>
+                                <button onclick="speakCurrentWord(event)" class="p-1.5 rounded-full bg-slate-800 text-slate-300 hover:text-white transition">
+                                    <i data-lucide="volume-2" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                            <span class="text-xs text-slate-400">详细解析</span>
+                        </div>
+
+                        <!-- Multiline Scrollable Definition Container -->
+                        <div class="my-auto py-3 overflow-y-auto max-h-[190px] text-left pr-2 space-y-2">
+                            <p class="text-slate-200 text-base sm:text-lg whitespace-pre-line leading-relaxed font-normal" id="card-definition">
+                                释义载入中...
+                            </p>
+                        </div>
+
+                        <div class="text-center text-xs text-slate-500 border-t border-slate-800 pt-2">
+                            评估结果将实时同步至您的学习进度
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Learning Action Buttons -->
+            <div class="grid grid-cols-3 gap-3 pt-1">
+                <button onclick="evaluateCard('forgot')" class="flex flex-col items-center justify-center p-3 sm:p-4 rounded-2xl bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-700 dark:bg-rose-950/40 dark:hover:bg-rose-900/50 dark:border-rose-900 dark:text-rose-300 transition active:scale-95 shadow-sm">
+                    <i data-lucide="x-circle" class="w-6 h-6 mb-1 text-rose-500"></i>
+                    <span class="font-bold text-sm sm:text-base">没记住</span>
+                    <span class="text-[10px] text-rose-500/80 mt-0.5">自动加生词本 [1 / ←]</span>
+                </button>
+
+                <button onclick="evaluateCard('review')" class="flex flex-col items-center justify-center p-3 sm:p-4 rounded-2xl bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-700 dark:bg-amber-950/40 dark:hover:bg-amber-900/50 dark:border-amber-900 dark:text-amber-300 transition active:scale-95 shadow-sm">
+                    <i data-lucide="help-circle" class="w-6 h-6 mb-1 text-amber-500"></i>
+                    <span class="font-bold text-sm sm:text-base">模糊 / 犹豫</span>
+                    <span class="text-[10px] text-amber-500/80 mt-0.5">稍后复习 [数字 2]</span>
+                </button>
+
+                <button onclick="evaluateCard('mastered')" class="flex flex-col items-center justify-center p-3 sm:p-4 rounded-2xl bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-700 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/50 dark:border-emerald-900 dark:text-emerald-300 transition active:scale-95 shadow-sm">
+                    <i data-lucide="check-circle-2" class="w-6 h-6 mb-1 text-emerald-500"></i>
+                    <span class="font-bold text-sm sm:text-base">记住了</span>
+                    <span class="text-[10px] text-emerald-500/80 mt-0.5">标记熟练 [3 / →]</span>
+                </button>
+            </div>
+            
+            <!-- Group Completion Modal Box -->
+            <div id="session-complete-box" class="hidden text-center py-10 px-6 bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-xl space-y-4">
+                <div class="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mx-auto text-2xl">
+                    🎉
+                </div>
+                <h3 class="text-2xl font-bold text-slate-800 dark:text-white" id="complete-title">本组背诵完毕！</h3>
+                <p class="text-slate-500 dark:text-slate-400 max-w-md mx-auto text-sm" id="complete-desc">
+                    您已完成本组单词的学习，点击下方按钮开始下一组背诵。
+                </p>
+                <div class="pt-2 flex flex-wrap justify-center gap-3">
+                    <button id="btn-complete-next-group" onclick="nextGroup()" class="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-lg shadow-blue-500/30 transition flex items-center space-x-2">
+                        <span>进入下一组背诵</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                    <button id="btn-complete-review-starred" onclick="toggleStarredReviewMode(true)" class="px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold shadow-lg shadow-amber-500/20 transition flex items-center space-x-1.5">
+                        <i data-lucide="star" class="w-4 h-4 fill-white"></i>
+                        <span>复习生词本</span>
+                    </button>
+                    <button onclick="restartCurrentGroup()" class="px-6 py-3 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 font-semibold transition">
+                        重背本组
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- PAGE 2: STARRED WORDS (生词本) TAB -->
+        <div id="tab-starred" class="hidden space-y-4">
+            <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center space-x-2">
+                        <i data-lucide="star" class="w-5 h-5 text-amber-400 fill-amber-400"></i>
+                        <span>生词本管理 & 专属复习</span>
+                    </h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">这里收录了您收藏以及标记为“没记住”的词汇</p>
+                </div>
+
+                <div class="flex items-center space-x-2">
+                    <button onclick="toggleStarredReviewMode(true)" class="px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-xs font-bold shadow-md shadow-amber-500/20 transition flex items-center space-x-1.5">
+                        <i data-lucide="play-circle" class="w-4 h-4"></i>
+                        <span>开启生词卡片复习</span>
+                    </button>
+                    <button onclick="unstarAllWords()" class="px-3 py-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-900/30 text-slate-600 dark:text-slate-300 rounded-xl text-xs font-semibold transition">
+                        清空生词本
+                    </button>
+                </div>
+            </div>
+
+            <!-- Starred Table -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 overflow-hidden shadow-sm">
+                <div class="p-3.5 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-700/40">
+                    <span class="text-xs font-bold text-slate-500 dark:text-slate-400" id="starred-table-count">包含 0 个生词</span>
+                    <input type="text" id="search-starred-input" oninput="renderStarredList()" placeholder="搜索生词..." class="px-3 py-1 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg text-xs focus:outline-none">
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-50/50 dark:bg-slate-700/20 text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700 font-semibold text-xs">
+                            <tr>
+                                <th class="p-3.5 pl-5">单词</th>
+                                <th class="p-3.5">解析释义</th>
+                                <th class="p-3.5 text-right pr-5">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="starred-list-tbody" class="divide-y divide-slate-100 dark:divide-slate-700/50">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 3: WORD LIST TAB -->
+        <div id="tab-list" class="hidden space-y-4">
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-700/60">
+                <div class="relative flex-1">
+                    <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="search-word-input" oninput="renderWordList()" placeholder="搜索单词或中文释义..." class="w-full pl-9 pr-4 py-2 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <div class="flex items-center space-x-2">
+                    <select id="filter-status-select" onchange="renderWordList()" class="px-3 py-2 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl text-sm focus:outline-none">
+                        <option value="all">全部单词</option>
+                        <option value="mastered">已掌握</option>
+                        <option value="review">生词 / 需复习</option>
+                        <option value="unlearned">未背诵</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Table of Words -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 overflow-hidden shadow-sm">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-50 dark:bg-slate-700/50 text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700 font-semibold">
+                            <tr>
+                                <th class="p-3.5 pl-5">单词</th>
+                                <th class="p-3.5">中文释义</th>
+                                <th class="p-3.5">状态</th>
+                                <th class="p-3.5 text-right pr-5">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="word-list-tbody" class="divide-y divide-slate-100 dark:divide-slate-700/50">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 4: SETTINGS & IMPORT TAB -->
+        <div id="tab-settings" class="hidden space-y-6">
+            <!-- Study Settings Box -->
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 space-y-4">
+                <h3 class="text-base font-bold text-slate-800 dark:text-slate-100 flex items-center space-x-2">
+                    <i data-lucide="sliders" class="w-5 h-5 text-blue-500"></i>
+                    <span>背诵参数与发音设置</span>
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1.5">
+                            每组背诵单词量 (Batch Size)
+                        </label>
+                        <select id="setting-batch-size" onchange="updateSettings()" class="w-full p-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-sm">
+                            <option value="5">每组 5 个单词</option>
+                            <option value="10" selected>每组 10 个单词 (推荐)</option>
+                            <option value="15">每组 15 个单词</option>
+                            <option value="20">每组 20 个单词</option>
+                            <option value="50">每组 50 个单词</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1.5">
+                            切换单词自动发音
+                        </label>
+                        <select id="setting-auto-speak" onchange="updateSettings()" class="w-full p-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-sm">
+                            <option value="true" selected>开启 (推荐)</option>
+                            <option value="false">关闭</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1.5">
+                            自动连播切换间隔 (秒)
+                        </label>
+                        <select id="auto-delay-select" onchange="updateAutoDelaySetting()" class="w-full p-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-sm">
+                            <option value="2500">2.5 秒 (快速)</option>
+                            <option value="3500" selected>3.5 秒 (标准推荐)</option>
+                            <option value="5000">5.0 秒 (从容)</option>
+                            <option value="7000">7.0 秒 (慢速思考)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1.5">
+                            发音引擎与口音
+                        </label>
+                        <select id="audio-engine-select" onchange="updateAudioEngineSetting()" class="w-full p-2.5 bg-slate-50 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl text-sm">
+                            <option value="youdao_en" selected>在线美音 (推荐 · 有道云)</option>
+                            <option value="youdao_uk">在线英音 (有道云)</option>
+                            <option value="web_speech">浏览器本地 Web Speech 引擎</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CSV Import Box -->
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 space-y-4">
+                <h3 class="text-base font-bold text-slate-800 dark:text-slate-100 flex items-center space-x-2">
+                    <i data-lucide="file-up" class="w-5 h-5 text-emerald-500"></i>
+                    <span>导入自定义 CSV 词汇文件</span>
+                </h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400">
+                    完全兼容双引号括起来的多行复杂释义 CSV 文件
+                </p>
+
+                <div class="border-2 border-dashed border-slate-200 dark:border-slate-700 hover:border-blue-500 dark:hover:border-blue-500 rounded-2xl p-6 text-center cursor-pointer transition" onclick="document.getElementById('csv-file-input').click()">
+                    <i data-lucide="upload-cloud" class="w-10 h-10 mx-auto text-slate-400 mb-2"></i>
+                    <p class="text-sm font-medium text-slate-700 dark:text-slate-300">点击选择或拖拽 CSV 文件至此处</p>
+                    <p class="text-xs text-slate-400 mt-1">支持 .csv / .txt 格式</p>
+                    <input type="file" id="csv-file-input" accept=".csv,.txt" class="hidden" onchange="handleFileUpload(event)">
+                </div>
+
+                <div class="space-y-2">
+                    <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400">粘贴 CSV 文本数据:</label>
+                    <textarea id="csv-paste-area" rows="4" class="w-full p-3 font-mono text-xs bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="cover,&quot;n. 封面，封皮；盖子；掩蔽物;幌子，借口&#10;vt. 包括；采访，报导；涉及&#10;vi. 覆盖；代替&quot;"></textarea>
+                    <div class="flex justify-end space-x-2">
+                        <button onclick="loadPastedCSV()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold shadow-sm transition">
+                            导入所粘贴文本
+                        </button>
+                        <button onclick="restoreDefaultSample()" class="px-4 py-2 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-xl text-xs font-semibold transition">
+                            重置示例词库
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clear Progress -->
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200/80 dark:border-slate-700/60 space-y-4">
+                <h3 class="text-base font-bold text-slate-800 dark:text-slate-100 flex items-center space-x-2">
+                    <i data-lucide="database" class="w-5 h-5 text-indigo-500"></i>
+                    <span>进度管理与清除</span>
+                </h3>
+                <div class="flex flex-wrap gap-3">
+                    <button onclick="clearAllData()" class="px-4 py-2.5 bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-300 rounded-xl text-xs font-semibold hover:bg-rose-100 transition flex items-center space-x-1.5">
+                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        <span>清空所有历史背诵进度</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Hidden Audio Player -->
+    <audio id="fallback-audio-player" class="hidden" preload="auto"></audio>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Sample CSV Built-in Data with Multiline text
+        const SAMPLE_CSV = `word,definition
+cover,"n. 封面，封皮；盖子；掩蔽物;幌子，借口
+vt. 包括；采访，报导；涉及
+vi. 覆盖；代替"
+abandon,"vt. 放弃，抛弃；离弃
+n. 放任，狂热"
+brilliant,"adj. 杰出的；璀璨的，闪耀的；极好的"
+challenge,"n. 挑战；质疑
+vt. 向…挑战"
+recommend,"vt. 推荐，介绍；建议"
+resilient,"adj. 有弹性的；适应力强的"
+perspective,"n. 观点，看法；透视图"
+meticulous,"adj. 一丝不苟的，缜密的"
+pragmatic,"adj. 务实的，注重实效的"
+ubiquitous,"adj. 无所不在的，普遍存在的"
+innovate,"vt. 创新，革新
+vi. 创办，发明"
+evaluate,"vt. 评估，评价；求…的值"
+subsequent,"adj. 随后的，后来的"
+comprehensive,"adj. 综合的，广泛的；理解的"
+fluctuate,"vi. 波动，涨落；摇摆"
+implement,"vt. 实施，执行
+n. 工具，器具"
+advocate,"vt. 提倡，主张
+n. 拥护者，提倡者"
+profound,"adj. 深厚的；深刻的；渊博的"
+persevere,"vi. 坚持不懈，不屈不挠"
+eloquent,"adj. 雄辩的，有说服力的"`;
+
+        // State Variables
+        let words = [];             // All word objects
+        let batchSize = 10;         // Words per group
+        let currentGroupIndex = 0;  // Regular group index
+        let inGroupIndex = 0;       // Index within current active batch
+        let currentGroupWords = []; // Active sub-list of words being cards-studied
+
+        // Starred Mode state
+        let isStarredMode = false;  // Whether in dedicated Starred Review mode
+        let regularSessionState = {
+            groupIndex: 0,
+            inGroupIndex: 0,
+            isGroupCompleted: false
+        };
+
+        let isFlipped = false;
+        let autoSpeakOnShow = true;
+
+        // Auto Play & Audio Timers
+        let isAutoPlay = false;
+        let autoDelay = 3500;
+        let autoPlayTimer = null;
+
+        // Dual Audio Engine Configuration
+        let audioEngineMode = 'youdao_en';
+        let isAudioUnlocked = false;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initApp();
+            lucide.createIcons();
+            setupKeyboardShortcuts();
+
+            ['click', 'touchstart', 'keydown'].forEach(evt => {
+                document.addEventListener(evt, autoUnlockAudioHandler, { once: true });
+            });
+        });
+
+        // Helper: Resilient Word Index Finder (handles missing IDs & cross-format data)
+        function findWordIndex(item) {
+            if (!item) return -1;
+            let idx = -1;
+            if (item.id) {
+                idx = words.findIndex(w => w.id === item.id);
+            }
+            if (idx === -1 && item.word) {
+                idx = words.findIndex(w => w.word.toLowerCase() === item.word.toLowerCase());
+            }
+            return idx;
+        }
+
+        // Helper: Data normalization to ensure 100% sync
+        function normalizeWordData() {
+            words.forEach((w, idx) => {
+                if (!w.id) w.id = 'w_' + idx + '_' + Math.random().toString(36).substr(2, 7);
+                if (w.isStarred === undefined) {
+                    w.isStarred = (w.status === 'review');
+                }
+                if (!w.status) {
+                    w.status = w.isStarred ? 'review' : 'unlearned';
+                }
+                // Unify status and star
+                if (w.isStarred) {
+                    w.status = 'review';
+                }
+            });
+        }
+
+        function initApp() {
+            loadProgress();
+
+            if (!words || words.length === 0) {
+                parseAndSetCSV(SAMPLE_CSV, false);
+            } else {
+                normalizeWordData();
+            }
+
+            updateSettingsUI();
+            updateStatsUI();
+            loadGroup(currentGroupIndex, inGroupIndex);
+        }
+
+        // ================= DEDICATED STARRED REVIEW MODE =================
+        function toggleStarredReviewMode(enable) {
+            const willEnable = (enable === undefined) ? !isStarredMode : enable;
+            if (willEnable) {
+                startStarredReview();
+            } else {
+                exitStarredReview();
+            }
+        }
+
+        function startStarredReview() {
+            // Strictly gather all words currently in Starred Book
+            const starredWords = words.filter(w => w.isStarred);
+
+            if (starredWords.length === 0) {
+                showNotification('生词本中暂无生词！先标记或在背诵中选择"没记住"');
+                return;
+            }
+
+            // Save the exact state of regular study before entering review
+            if (!isStarredMode) {
+                const totalInCurrentGroup = currentGroupWords.length;
+                regularSessionState = {
+                    groupIndex: currentGroupIndex,
+                    inGroupIndex: inGroupIndex,
+                    isGroupCompleted: (totalInCurrentGroup > 0 && inGroupIndex >= totalInCurrentGroup)
+                };
+            }
+
+            isStarredMode = true;
+            currentGroupWords = [...starredWords];
+            inGroupIndex = 0;
+            isFlipped = false;
+
+            document.getElementById('starred-mode-banner').classList.remove('hidden');
+            document.getElementById('regular-controls-bar').classList.add('hidden');
+            document.getElementById('mode-toggle-btn-text').innerText = '退出生词本复习';
+
+            switchTab('study');
+            renderCurrentCard();
+            updateBatchProgressUI();
+            updateStatsUI();
+            showNotification(`⭐ 已进入生词本复习 (共 ${currentGroupWords.length} 词，记住了会自动移出)`);
+        }
+
+        function exitStarredReview() {
+            isStarredMode = false;
+            document.getElementById('starred-mode-banner').classList.add('hidden');
+            document.getElementById('regular-controls-bar').classList.remove('hidden');
+            document.getElementById('mode-toggle-btn-text').innerText = '开启生词本专属复习';
+
+            const totalGroups = getTotalGroups();
+            let targetGroup = regularSessionState.groupIndex;
+            let targetInGroup = regularSessionState.inGroupIndex;
+
+            // If the user had already finished that group before entering Starred Review,
+            // advance to the NEXT group smoothly!
+            if (regularSessionState.isGroupCompleted) {
+                if (targetGroup < totalGroups - 1) {
+                    targetGroup = targetGroup + 1;
+                }
+                targetInGroup = 0;
+            }
+
+            loadGroup(targetGroup, targetInGroup);
+            showNotification(`已切回常规分组背诵 (第 ${targetGroup + 1} 组)`);
+        }
+
+        function toggleStarCurrentWord(e) {
+            if (e) e.stopPropagation();
+            if (currentGroupWords.length === 0 || inGroupIndex >= currentGroupWords.length) return;
+
+            const currentItem = currentGroupWords[inGroupIndex];
+            const globalIndex = findWordIndex(currentItem);
+
+            if (globalIndex !== -1) {
+                const newState = !words[globalIndex].isStarred;
+                words[globalIndex].isStarred = newState;
+                words[globalIndex].status = newState ? 'review' : 'mastered';
+                currentItem.isStarred = newState;
+
+                if (isStarredMode && !newState) {
+                    // Removed from starred list while in review mode
+                    currentGroupWords.splice(inGroupIndex, 1);
+                    showNotification(`☆ 已从生词本移出: ${words[globalIndex].word}`);
+                    saveProgress();
+                    updateStatsUI();
+                    updateBatchProgressUI();
+                    renderCurrentCard();
+                    return;
+                }
+
+                updateStarIconUI(newState);
+                saveProgress();
+                updateStatsUI();
+
+                if (newState) {
+                    showNotification(`★ 已加入生词本: ${words[globalIndex].word}`);
+                } else {
+                    showNotification(`☆ 已从生词本移出: ${words[globalIndex].word}`);
+                }
+            }
+        }
+
+        function updateStarIconUI(isStarred) {
+            const btn = document.getElementById('card-star-btn');
+            const icon = document.getElementById('card-star-icon');
+
+            if (isStarred) {
+                btn.className = "p-2.5 rounded-full bg-amber-100 dark:bg-amber-900/50 text-amber-500 shadow-sm transition";
+                icon.className = "w-5 h-5 fill-amber-400 text-amber-400";
+            } else {
+                btn.className = "p-2.5 rounded-full bg-slate-100 dark:bg-slate-700 hover:bg-amber-50 dark:hover:bg-amber-900/30 text-slate-400 hover:text-amber-500 transition shadow-sm";
+                icon.className = "w-5 h-5 text-slate-400";
+            }
+            lucide.createIcons();
+        }
+
+        // ================= GROUP & BATCH NAVIGATION =================
+        function getTotalGroups() {
+            if (!words || words.length === 0) return 1;
+            return Math.max(1, Math.ceil(words.length / batchSize));
+        }
+
+        function loadGroup(groupIdx, targetInGroupIndex = 0) {
+            clearTimeout(autoPlayTimer);
+            isStarredMode = false;
+
+            document.getElementById('starred-mode-banner').classList.add('hidden');
+            document.getElementById('regular-controls-bar').classList.remove('hidden');
+            document.getElementById('mode-toggle-btn-text').innerText = '开启生词本专属复习';
+
+            const totalGroups = getTotalGroups();
+            if (groupIdx < 0) groupIdx = 0;
+            if (groupIdx >= totalGroups) groupIdx = totalGroups - 1;
+
+            currentGroupIndex = groupIdx;
+            isFlipped = false;
+
+            const start = currentGroupIndex * batchSize;
+            const end = Math.min(start + batchSize, words.length);
+            currentGroupWords = words.slice(start, end);
+
+            // Safely clamp inGroupIndex
+            inGroupIndex = Math.min(targetInGroupIndex, currentGroupWords.length);
+
+            // Update session tracking
+            regularSessionState = {
+                groupIndex: currentGroupIndex,
+                inGroupIndex: inGroupIndex,
+                isGroupCompleted: (currentGroupWords.length > 0 && inGroupIndex >= currentGroupWords.length)
+            };
+
+            updateGroupSelectDropdown();
+            updateStatsUI();
+            updateBatchProgressUI();
+            renderCurrentCard();
+            saveProgress();
+        }
+
+        function nextGroup() {
+            const totalGroups = getTotalGroups();
+            if (currentGroupIndex < totalGroups - 1) {
+                loadGroup(currentGroupIndex + 1, 0);
+                showNotification(`进入第 ${currentGroupIndex + 1} 组`);
+            } else {
+                showNotification('已是最后一组！');
+                loadGroup(currentGroupIndex, 0);
+            }
+        }
+
+        function prevGroup() {
+            if (currentGroupIndex > 0) {
+                loadGroup(currentGroupIndex - 1, 0);
+                showNotification(`返回第 ${currentGroupIndex + 1} 组`);
+            }
+        }
+
+        function onGroupSelectChange(val) {
+            loadGroup(parseInt(val, 10), 0);
+        }
+
+        function restartCurrentGroup() {
+            inGroupIndex = 0;
+            isFlipped = false;
+            renderCurrentCard();
+            updateBatchProgressUI();
+            showNotification('从本组第一个单词重新开始');
+        }
+
+        function shuffleCurrentGroup() {
+            currentGroupWords = currentGroupWords.sort(() => Math.random() - 0.5);
+            inGroupIndex = 0;
+            isFlipped = false;
+            renderCurrentCard();
+            updateBatchProgressUI();
+            showNotification('已打乱本组顺序');
+        }
+
+        function updateGroupSelectDropdown() {
+            const totalGroups = getTotalGroups();
+            const selectEl = document.getElementById('group-select');
+            selectEl.innerHTML = '';
+
+            for (let i = 0; i < totalGroups; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                const startNum = i * batchSize + 1;
+                const endNum = Math.min((i + 1) * batchSize, words.length);
+                option.text = `第 ${i + 1} 组 (#${startNum}-${endNum})`;
+                if (i === currentGroupIndex) option.selected = true;
+                selectEl.appendChild(option);
+            }
+
+            document.getElementById('btn-prev-group').disabled = (currentGroupIndex === 0);
+            document.getElementById('btn-next-group').disabled = (currentGroupIndex >= totalGroups - 1);
+            document.getElementById('stat-current-group').innerText = `常规第 ${currentGroupIndex + 1} / ${totalGroups} 组`;
+        }
+
+        // ================= CARD RENDER & EVALUATION =================
+        function renderCurrentCard() {
+            clearTimeout(autoPlayTimer);
+
+            const flashcardWrapper = document.getElementById('flashcard-wrapper');
+            const completeBox = document.getElementById('session-complete-box');
+            const cardEl = document.getElementById('flashcard');
+
+            if (currentGroupWords.length === 0 || inGroupIndex >= currentGroupWords.length) {
+                flashcardWrapper.classList.add('hidden');
+                completeBox.classList.remove('hidden');
+
+                if (isStarredMode) {
+                    const remainingStarred = words.filter(w => w.isStarred).length;
+                    document.getElementById('complete-title').innerText = `生词本复习完毕！`;
+                    document.getElementById('complete-desc').innerText = remainingStarred === 0 
+                        ? `太棒了！所有生词已全部掌握并移出生词本！`
+                        : `本轮生词卡片已背完，生词本中剩余 ${remainingStarred} 个词。`;
+
+                    // Configure buttons for exiting Starred Mode
+                    const totalGroups = getTotalGroups();
+                    const nextGroupNum = (regularSessionState.isGroupCompleted 
+                        ? Math.min(regularSessionState.groupIndex + 2, totalGroups) 
+                        : regularSessionState.groupIndex + 1);
+
+                    const btnNext = document.getElementById('btn-complete-next-group');
+                    btnNext.classList.remove('hidden');
+                    document.getElementById('btn-complete-next-text').innerText = `返回常规背诵 (第 ${nextGroupNum} 组)`;
+                    btnNext.onclick = () => exitStarredReview();
+
+                    const btnReview = document.getElementById('btn-complete-review-starred');
+                    if (remainingStarred > 0) {
+                        btnReview.classList.remove('hidden');
+                        document.getElementById('btn-complete-review-text').innerText = `再复习剩余生词 (${remainingStarred})`;
+                        btnReview.onclick = () => startStarredReview();
+                    } else {
+                        btnReview.classList.add('hidden');
+                    }
+
+                    document.getElementById('btn-complete-restart').classList.add('hidden');
+                } else {
+                    const totalGroups = getTotalGroups();
+                    regularSessionState.isGroupCompleted = true;
+
+                    document.getElementById('complete-title').innerText = `第 ${currentGroupIndex + 1} 组背诵完毕！`;
+                    document.getElementById('complete-desc').innerText = `您已完成本组单词的学习，点击进入下一组。`;
+
+                    const btnNext = document.getElementById('btn-complete-next-group');
+                    btnNext.onclick = () => nextGroup();
+                    if (currentGroupIndex < totalGroups - 1) {
+                        btnNext.classList.remove('hidden');
+                        document.getElementById('btn-complete-next-text').innerText = `进入第 ${currentGroupIndex + 2} 组背诵`;
+                    } else {
+                        btnNext.classList.add('hidden');
+                    }
+
+                    const starredCount = words.filter(w => w.isStarred).length;
+                    const btnReview = document.getElementById('btn-complete-review-starred');
+                    btnReview.classList.remove('hidden');
+                    document.getElementById('btn-complete-review-text').innerText = `复习生词本 (${starredCount} 词)`;
+                    btnReview.onclick = () => startStarredReview();
+
+                    const btnRestart = document.getElementById('btn-complete-restart');
+                    btnRestart.classList.remove('hidden');
+                    btnRestart.onclick = () => restartCurrentGroup();
+                }
+                return;
+            }
+
+            flashcardWrapper.classList.remove('hidden');
+            completeBox.classList.add('hidden');
+
+            isFlipped = false;
+            cardEl.classList.remove('rotate-y-180');
+
+            const item = currentGroupWords[inGroupIndex];
+            const globalIndex = findWordIndex(item) + 1;
+
+            document.getElementById('card-word').innerText = item.word;
+            document.getElementById('card-back-word').innerText = item.word;
+            document.getElementById('card-definition').innerText = item.definition;
+
+            const modeLabel = isStarredMode ? '生词卡' : '总序号';
+            document.getElementById('card-status-badge').innerText = `${modeLabel} #${globalIndex > 0 ? globalIndex : '⭐'} (进度 ${inGroupIndex + 1}/${currentGroupWords.length})`;
+
+            updateStarIconUI(item.isStarred);
+
+            if (autoSpeakOnShow || isAutoPlay) {
+                setTimeout(() => speakCurrentWord(), 150);
+            }
+
+            if (isAutoPlay) {
+                autoPlayTimer = setTimeout(() => {
+                    if (!isFlipped) flipCard();
+                    autoPlayTimer = setTimeout(() => {
+                        evaluateCard('next_auto');
+                    }, autoDelay);
+                }, autoDelay / 1.8);
+            }
+        }
+
+        function flipCard() {
+            const cardEl = document.getElementById('flashcard');
+            isFlipped = !isFlipped;
+            if (isFlipped) {
+                cardEl.classList.add('rotate-y-180');
+            } else {
+                cardEl.classList.remove('rotate-y-180');
+            }
+        }
+
+        function evaluateCard(rating) {
+            clearTimeout(autoPlayTimer);
+            if (currentGroupWords.length === 0 || inGroupIndex >= currentGroupWords.length) return;
+
+            const currentItem = currentGroupWords[inGroupIndex];
+            const globalIndex = findWordIndex(currentItem);
+
+            if (globalIndex !== -1 && rating !== 'next_auto') {
+                if (rating === 'mastered') {
+                    // UNIVERSAL SYNC: Mastered words are ALWAYS removed from the Starred Book!
+                    const wasStarred = words[globalIndex].isStarred;
+                    words[globalIndex].status = 'mastered';
+                    words[globalIndex].isStarred = false;
+
+                    if (isStarredMode) {
+                        // Immediately remove from the active review list
+                        currentGroupWords.splice(inGroupIndex, 1);
+                        showNotification(`🎉 掌握: ${words[globalIndex].word} (已从生词本移出)`);
+
+                        saveProgress();
+                        updateStatsUI();
+                        updateBatchProgressUI();
+                        renderCurrentCard();
+                        return;
+                    } else if (wasStarred) {
+                        showNotification(`🎉 掌握: ${words[globalIndex].word} (已从生词本移出)`);
+                    }
+                } else if (rating === 'forgot') {
+                    // Forgot words are ALWAYS added to Starred Book
+                    words[globalIndex].status = 'review';
+                    words[globalIndex].isStarred = true;
+                    showNotification(`★ 已加入生词本: ${words[globalIndex].word}`);
+                } else if (rating === 'review') {
+                    words[globalIndex].status = 'review';
+                    words[globalIndex].isStarred = true;
+                    showNotification(`★ 模糊词已入生词本: ${words[globalIndex].word}`);
+                }
+                words[globalIndex].lastReviewed = new Date().toISOString();
+            }
+
+            inGroupIndex++;
+
+            if (!isStarredMode) {
+                regularSessionState.inGroupIndex = inGroupIndex;
+                regularSessionState.isGroupCompleted = (inGroupIndex >= currentGroupWords.length);
+            }
+
+            saveProgress();
+            updateStatsUI();
+            updateBatchProgressUI();
+            renderCurrentCard();
+        }
+
+        function toggleAutoPlay() {
+            isAutoPlay = document.getElementById('auto-play-toggle').checked;
+            const indicator = document.getElementById('auto-play-indicator');
+
+            if (isAutoPlay) {
+                indicator.classList.remove('hidden');
+                userUnlockAudio();
+                showNotification('⚡ 自动连播与发音已启动');
+                renderCurrentCard();
+            } else {
+                indicator.classList.add('hidden');
+                clearTimeout(autoPlayTimer);
+                showNotification('已暂停自动连播');
+            }
+        }
+
+        // ================= AUDIO ENGINE LOGIC =================
+        function autoUnlockAudioHandler() {
+            if (!isAudioUnlocked) userUnlockAudio();
+        }
+
+        function userUnlockAudio() {
+            isAudioUnlocked = true;
+            if ('speechSynthesis' in window) {
+                try {
+                    window.speechSynthesis.resume();
+                    const silentUtterance = new SpeechSynthesisUtterance('');
+                    silentUtterance.volume = 0;
+                    window.speechSynthesis.speak(silentUtterance);
+                } catch(e) {}
+            }
+
+            const audioPlayer = document.getElementById('fallback-audio-player');
+            if (audioPlayer) {
+                audioPlayer.src = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==';
+                audioPlayer.play().then(() => audioPlayer.pause()).catch(() => {});
+            }
+
+            const banner = document.getElementById('audio-unlock-banner');
+            if (banner) banner.classList.add('hidden');
+
+            const statusBtn = document.getElementById('audio-status-btn');
+            const statusText = document.getElementById('audio-status-text');
+            const statusIcon = document.getElementById('audio-status-icon');
+
+            if (statusBtn) {
+                statusBtn.className = "px-2.5 py-1.5 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 rounded-lg text-xs font-semibold flex items-center space-x-1 border border-emerald-300 dark:border-emerald-700";
+                if (statusText) statusText.innerText = "发音已激活";
+                if (statusIcon) statusIcon.setAttribute('data-lucide', 'volume-2');
+                lucide.createIcons();
+            }
+        }
+
+        function speakWord(wordText) {
+            if (!wordText) return;
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            const audioPlayer = document.getElementById('fallback-audio-player');
+            if (audioPlayer) audioPlayer.pause();
+
+            if (audioEngineMode === 'web_speech' && 'speechSynthesis' in window) {
+                try {
+                    const utterance = new SpeechSynthesisUtterance(wordText);
+                    utterance.lang = 'en-US';
+                    utterance.rate = 0.9;
+                    window.speechSynthesis.speak(utterance);
+                } catch (e) {
+                    playYoudaoAudio(wordText, 2);
+                }
+            } else {
+                const type = (audioEngineMode === 'youdao_uk') ? 1 : 2;
+                playYoudaoAudio(wordText, type);
+            }
+        }
+
+        function playYoudaoAudio(wordText, type = 2) {
+            const audioPlayer = document.getElementById('fallback-audio-player');
+            if (!audioPlayer) return;
+            audioPlayer.src = `https://dict.youdao.com/dictvoice?type=${type}&audio=${encodeURIComponent(wordText)}`;
+            audioPlayer.play().catch(err => {
+                if ('speechSynthesis' in window) {
+                    const utterance = new SpeechSynthesisUtterance(wordText);
+                    utterance.lang = 'en-US';
+                    window.speechSynthesis.speak(utterance);
+                }
+            });
+        }
+
+        function speakCurrentWord(e) {
+            if (e) e.stopPropagation();
+            if (currentGroupWords.length === 0 || inGroupIndex >= currentGroupWords.length) return;
+            speakWord(currentGroupWords[inGroupIndex].word);
+        }
+
+        // ================= CSV PARSER =================
+        function parseCSV(text) {
+            const results = [];
+            let i = 0, curField = '', curRow = [], inQuotes = false;
+
+            while (i < text.length) {
+                const c = text[i];
+                const nextC = text[i + 1];
+
+                if (inQuotes) {
+                    if (c === '"') {
+                        if (nextC === '"') { curField += '"'; i += 2; }
+                        else { inQuotes = false; i++; }
+                    } else { curField += c; i++; }
+                } else {
+                    if (c === '"') { inQuotes = true; i++; }
+                    else if (c === ',') { curRow.push(curField.trim()); curField = ''; i++; }
+                    else if (c === '\r' || c === '\n') {
+                        curRow.push(curField.trim());
+                        if (curRow.some(f => f.length > 0)) results.push(curRow);
+                        curRow = []; curField = '';
+                        if (c === '\r' && nextC === '\n') i++;
+                        i++;
+                    } else { curField += c; i++; }
+                }
+            }
+            if (curField.length > 0 || curRow.length > 0) {
+                curRow.push(curField.trim());
+                if (curRow.some(f => f.length > 0)) results.push(curRow);
+            }
+            return results;
+        }
+
+        function parseAndSetCSV(csvContent, showMsg = true) {
+            const parsedRows = parseCSV(csvContent);
+            if (!parsedRows || parsedRows.length === 0) return;
+
+            let startIndex = 0;
+            if (parsedRows[0][0].toLowerCase().includes('word') || parsedRows[0][0].toLowerCase().includes('单词')) {
+                startIndex = 1;
+            }
+
+            const newWords = [];
+            for (let i = startIndex; i < parsedRows.length; i++) {
+                const row = parsedRows[i];
+                if (row.length >= 2 && row[0]) {
+                    newWords.push({
+                        id: 'w_' + Math.random().toString(36).substr(2, 9),
+                        word: row[0].trim(),
+                        definition: row[1] || '',
+                        status: 'unlearned',
+                        isStarred: false,
+                        lastReviewed: null
+                    });
+                }
+            }
+
+            if (newWords.length > 0) {
+                words = newWords;
+                currentGroupIndex = 0;
+                inGroupIndex = 0;
+                saveProgress();
+                loadGroup(0, 0);
+                renderWordList();
+                renderStarredList();
+                if (showMsg) showNotification(`成功导入 ${newWords.length} 个单词！`);
+            }
+        }
+
+        // ================= STARRED LIST RENDER =================
+        function renderStarredList() {
+            const tbody = document.getElementById('starred-list-tbody');
+            const searchVal = (document.getElementById('search-starred-input').value || '').toLowerCase().trim();
+
+            tbody.innerHTML = '';
+
+            // Strictly filter by isStarred to maintain 100% synchronization
+            const starred = words.filter(w => w.isStarred && (w.word.toLowerCase().includes(searchVal) || w.definition.toLowerCase().includes(searchVal)));
+
+            document.getElementById('starred-table-count').innerText = `包含 ${starred.length} 个生词`;
+
+            if (starred.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="3" class="p-8 text-center text-slate-400 text-sm">生词本为空，点击卡片右上角 ⭐ 或在背诵中点击“没记住”即可加入</td></tr>`;
+                return;
+            }
+
+            starred.forEach(w => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 dark:hover:bg-slate-700/30 transition';
+
+                tr.innerHTML = `
+                    <td class="p-3.5 pl-5 font-bold text-slate-800 dark:text-slate-100 flex items-center space-x-2">
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                        <span>${escapeHtml(w.word)}</span>
+                    </td>
+                    <td class="p-3.5 text-slate-600 dark:text-slate-300 whitespace-pre-line">${escapeHtml(w.definition)}</td>
+                    <td class="p-3.5 text-right pr-5">
+                        <div class="flex items-center justify-end space-x-2">
+                            <button onclick="speakWord('${escapeHtml(w.word)}')" class="p-1.5 rounded bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-300" title="朗读">
+                                <i data-lucide="volume-2" class="w-4 h-4"></i>
+                            </button>
+                            <button onclick="toggleStarWordById('${w.id}')" class="px-2 py-1 rounded bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-medium" title="移出生词本">
+                                移除
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            lucide.createIcons();
+        }
+
+        function toggleStarWordById(id) {
+            const idx = words.findIndex(w => w.id === id);
+            if (idx !== -1) {
+                const newState = !words[idx].isStarred;
+                words[idx].isStarred = newState;
+                words[idx].status = newState ? 'review' : 'mastered';
+
+                // If currently in review mode and unstarring, remove from current session
+                if (isStarredMode && !newState) {
+                    const sessionIdx = currentGroupWords.findIndex(w => w.id === id);
+                    if (sessionIdx !== -1) {
+                        currentGroupWords.splice(sessionIdx, 1);
+                    }
+                }
+
+                saveProgress();
+                updateStatsUI();
+                renderStarredList();
+                renderWordList();
+                showNotification(newState ? `★ 已加入生词本: ${words[idx].word}` : `☆ 已移出生词本: ${words[idx].word}`);
+            }
+        }
+
+        function unstarAllWords() {
+            if (window.confirm('确定要清空所有已收藏生词吗？')) {
+                words.forEach(w => {
+                    w.isStarred = false;
+                    if (w.status === 'review') w.status = 'mastered';
+                });
+                if (isStarredMode) {
+                    currentGroupWords = [];
+                }
+                saveProgress();
+                updateStatsUI();
+                renderStarredList();
+                renderWordList();
+                showNotification('生词本已清空');
+            }
+        }
+
+        // ================= UI & STORAGE UPDATES =================
+        function updateStatsUI() {
+            const total = words.length;
+            const mastered = words.filter(w => w.status === 'mastered' && !w.isStarred).length;
+            const starredCount = words.filter(w => w.isStarred).length;
+
+            document.getElementById('stat-total-words').innerText = `${total} 词`;
+            document.getElementById('stat-mastered').innerText = mastered;
+            document.getElementById('stat-starred-count').innerText = `${starredCount} 词`;
+            document.getElementById('nav-starred-count').innerText = starredCount;
+        }
+
+        function updateBatchProgressUI() {
+            const totalInGroup = currentGroupWords.length;
+            const currentProgress = Math.min(inGroupIndex, totalInGroup);
+            const percentage = totalInGroup > 0 ? (currentProgress / totalInGroup) * 100 : 0;
+
+            if (isStarredMode) {
+                document.getElementById('group-range-text').innerText = `生词本复习进度 (剩余 ${totalInGroup} 词)`;
+            } else {
+                const startNum = currentGroupIndex * batchSize + 1;
+                const endNum = Math.min((currentGroupIndex + 1) * batchSize, words.length);
+                document.getElementById('group-range-text').innerText = `本组范围: #${startNum} - #${endNum}`;
+            }
+
+            document.getElementById('batch-progress-text').innerText = `${currentProgress} / ${totalInGroup} 词`;
+            document.getElementById('batch-progress-bar').style.width = `${percentage}%`;
+        }
+
+        function saveProgress() {
+            const dataToSave = {
+                words: words,
+                batchSize: batchSize,
+                currentGroupIndex: currentGroupIndex,
+                inGroupIndex: inGroupIndex,
+                autoDelay: autoDelay,
+                audioEngineMode: audioEngineMode,
+                autoSpeakOnShow: autoSpeakOnShow,
+                regularSessionState: regularSessionState
+            };
+            localStorage.setItem('wordspark_v3_data', JSON.stringify(dataToSave));
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('wordspark_v3_data') || localStorage.getItem('wordspark_v2_data');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    if (parsed.words) words = parsed.words;
+                    if (parsed.batchSize) batchSize = parsed.batchSize;
+                    if (parsed.currentGroupIndex !== undefined) currentGroupIndex = parsed.currentGroupIndex;
+                    if (parsed.inGroupIndex !== undefined) inGroupIndex = parsed.inGroupIndex;
+                    if (parsed.autoDelay) autoDelay = parsed.autoDelay;
+                    if (parsed.audioEngineMode) audioEngineMode = parsed.audioEngineMode;
+                    if (parsed.autoSpeakOnShow !== undefined) autoSpeakOnShow = parsed.autoSpeakOnShow;
+                    if (parsed.regularSessionState) regularSessionState = parsed.regularSessionState;
+
+                    // If user had finished the group when they left, automatically advance to next group on resume
+                    const totalGroups = getTotalGroups();
+                    if (inGroupIndex >= batchSize && currentGroupIndex < totalGroups - 1) {
+                        currentGroupIndex++;
+                        inGroupIndex = 0;
+                    }
+                } catch (e) {
+                    console.error('Error loading stored data', e);
+                }
+            }
+        }
+
+        function updateSettingsUI() {
+            const batchEl = document.getElementById('setting-batch-size');
+            if (batchEl) batchEl.value = batchSize;
+
+            const autoSpeakEl = document.getElementById('setting-auto-speak');
+            if (autoSpeakEl) autoSpeakEl.value = autoSpeakOnShow.toString();
+
+            const autoDelayEl = document.getElementById('auto-delay-select');
+            if (autoDelayEl) autoDelayEl.value = autoDelay;
+
+            const audioEngineEl = document.getElementById('audio-engine-select');
+            if (audioEngineEl) audioEngineEl.value = audioEngineMode;
+        }
+
+        function updateSettings() {
+            const batchEl = document.getElementById('setting-batch-size');
+            if (batchEl) batchSize = parseInt(batchEl.value, 10);
+
+            const autoSpeakEl = document.getElementById('setting-auto-speak');
+            if (autoSpeakEl) autoSpeakOnShow = autoSpeakEl.value === 'true';
+
+            saveProgress();
+            loadGroup(0, 0);
+            showNotification('设置已保存！');
+        }
+
+        function updateAutoDelaySetting() {
+            const autoDelayEl = document.getElementById('auto-delay-select');
+            if (autoDelayEl) {
+                autoDelay = parseInt(autoDelayEl.value, 10);
+                saveProgress();
+                showNotification(`自动连播间隔已设置为 ${autoDelay / 1000} 秒`);
+            }
+        }
+
+        function updateAudioEngineSetting() {
+            const audioEngineEl = document.getElementById('audio-engine-select');
+            if (audioEngineEl) {
+                audioEngineMode = audioEngineEl.value;
+                userUnlockAudio();
+                saveProgress();
+                showNotification(`发音引擎已更新`);
+            }
+        }
+
+        function switchTab(tabName) {
+            ['study', 'starred', 'list', 'settings'].forEach(t => {
+                const tabEl = document.getElementById(`tab-${t}`);
+                const navBtn = document.getElementById(`nav-${t}`);
+                if (t === tabName) {
+                    tabEl.classList.remove('hidden');
+                    if (t === 'starred') {
+                        navBtn.className = 'px-3 py-1.5 rounded-lg text-sm font-medium transition-all flex items-center space-x-1.5 bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 shadow-sm';
+                    } else {
+                        navBtn.className = 'px-3 py-1.5 rounded-lg text-sm font-medium transition-all flex items-center space-x-1.5 bg-white dark:bg-slate-800 shadow-sm text-blue-600 dark:text-blue-400';
+                    }
+                } else {
+                    tabEl.classList.add('hidden');
+                    navBtn.className = 'px-3 py-1.5 rounded-lg text-sm font-medium transition-all flex items-center space-x-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white';
+                }
+            });
+
+            if (tabName === 'list') renderWordList();
+            if (tabName === 'starred') renderStarredList();
+        }
+
+        function renderWordList() {
+            const tbody = document.getElementById('word-list-tbody');
+            const searchVal = document.getElementById('search-word-input').value.toLowerCase().trim();
+            const filterStatus = document.getElementById('filter-status-select').value;
+
+            tbody.innerHTML = '';
+
+            const filtered = words.filter(w => {
+                const matchesSearch = w.word.toLowerCase().includes(searchVal) || w.definition.toLowerCase().includes(searchVal);
+                let matchesStatus = true;
+                if (filterStatus === 'mastered') matchesStatus = (w.status === 'mastered' && !w.isStarred);
+                if (filterStatus === 'review') matchesStatus = w.isStarred;
+                if (filterStatus === 'unlearned') matchesStatus = (w.status === 'unlearned' && !w.isStarred);
+                return matchesSearch && matchesStatus;
+            });
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="p-8 text-center text-slate-400 text-sm">没有匹配到相关词汇</td></tr>`;
+                return;
+            }
+
+            filtered.forEach(w => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 dark:hover:bg-slate-700/30 transition';
+
+                let statusBadge = '';
+                if (w.isStarred) {
+                    statusBadge = `<span class="px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300">生词/需复习</span>`;
+                } else if (w.status === 'mastered') {
+                    statusBadge = `<span class="px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300">已掌握</span>`;
+                } else {
+                    statusBadge = `<span class="px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300">未背诵</span>`;
+                }
+
+                tr.innerHTML = `
+                    <td class="p-3.5 pl-5 font-bold text-slate-800 dark:text-slate-100 flex items-center space-x-2">
+                        ${w.isStarred ? '<i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>' : ''}
+                        <span>${escapeHtml(w.word)}</span>
+                    </td>
+                    <td class="p-3.5 text-slate-600 dark:text-slate-300 whitespace-pre-line">${escapeHtml(w.definition)}</td>
+                    <td class="p-3.5">${statusBadge}</td>
+                    <td class="p-3.5 text-right pr-5">
+                        <div class="flex items-center justify-end space-x-2">
+                            <button onclick="speakWord('${escapeHtml(w.word)}')" class="p-1.5 rounded bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-300" title="朗读">
+                                <i data-lucide="volume-2" class="w-4 h-4"></i>
+                            </button>
+                            <button onclick="toggleStarWordById('${w.id}')" class="p-1.5 rounded bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-600 dark:text-slate-300" title="收藏/取消生词">
+                                <i data-lucide="star" class="w-4 h-4 ${w.isStarred ? 'fill-amber-400 text-amber-400' : ''}"></i>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            lucide.createIcons();
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                parseAndSetCSV(e.target.result);
+            };
+            reader.readAsText(file);
+        }
+
+        function loadPastedCSV() {
+            const text = document.getElementById('csv-paste-area').value;
+            if (!text.trim()) {
+                showNotification('请粘贴 CSV 格式数据');
+                return;
+            }
+            parseAndSetCSV(text);
+        }
+
+        function restoreDefaultSample() {
+            parseAndSetCSV(SAMPLE_CSV);
+        }
+
+        function clearAllData() {
+            if (window.confirm('确定要重置清空所有背诵进度与生词本吗？')) {
+                localStorage.removeItem('wordspark_v3_data');
+                localStorage.removeItem('wordspark_v2_data');
+                words = [];
+                initApp();
+                showNotification('重置成功');
+            }
+        }
+
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', (e) => {
+                if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') return;
+
+                if (e.code === 'Space') {
+                    e.preventDefault();
+                    flipCard();
+                } else if (e.key === 's' || e.key === 'S') {
+                    toggleStarCurrentWord();
+                } else if (e.key === '1' || e.code === 'ArrowLeft') {
+                    evaluateCard('forgot');
+                } else if (e.key === '2') {
+                    evaluateCard('review');
+                } else if (e.key === '3' || e.code === 'ArrowRight') {
+                    evaluateCard('mastered');
+                } else if (e.key === 'a' || e.key === 'A') {
+                    const toggle = document.getElementById('auto-play-toggle');
+                    toggle.checked = !toggle.checked;
+                    toggleAutoPlay();
+                }
+            });
+        }
+
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                document.getElementById('theme-icon-light').classList.remove('hidden');
+                document.getElementById('theme-icon-dark').classList.add('hidden');
+            } else {
+                html.classList.add('dark');
+                document.getElementById('theme-icon-light').classList.add('hidden');
+                document.getElementById('theme-icon-dark').classList.remove('hidden');
+            }
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function showNotification(msg) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-5 right-5 bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold shadow-2xl z-50 transition-all opacity-100';
+            toast.innerText = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
