@@ -1,0 +1,46 @@
+services:
+  shanghai:
+    image: rabbitmq:4.2-management
+    # image: rabbitmq:management
+    hostname: shanghai
+    container_name: shanghai
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15672:15672"  # RabbitMQ management
+      - "5672:5672"    # AMQP protocol
+    volumes:
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+      - ./data/shanghai:/var/lib/rabbitmq  # 保存上海节点的数据到本地 ./data/shanghai
+    networks:
+      - rabbitmq-net
+
+  beijing:
+    image: rabbitmq:4.2-management
+    # image: rabbitmq:management
+    hostname: beijing
+    container_name: beijing
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin        # Set the default username
+      - RABBITMQ_DEFAULT_PASS=password    # Set the default password
+    ports:
+      - "15772:15672"  # RabbitMQ management
+      - "5772:5672"    # AMQP protocol
+    volumes:
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+      - ./data/beijing:/var/lib/rabbitmq   # 保存北京节点的数据到本地 ./data/beijing
+    networks:
+      - rabbitmq-net
+
+  perf-test:
+    image: pivotalrabbitmq/perf-test:latest
+    hostname: perf-test
+    container_name: perf-test
+    entrypoint: ["tail", "-f", "/dev/null"]
+    networks:
+      - rabbitmq-net
+
+networks:
+  rabbitmq-net:
+    driver: bridge
