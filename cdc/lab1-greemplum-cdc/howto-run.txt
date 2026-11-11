@@ -1,0 +1,100 @@
+CREATE DATABASE my_database;
+
+\c my_database;
+
+
+CREATE TABLE t1 (
+    id int PRIMARY KEY, 
+    yourmessage text
+) DISTRIBUTED BY (id);
+
+CREATE TABLE t2 (
+    id int PRIMARY KEY, 
+    yourmessage text
+) DISTRIBUTED BY (id);
+
+
+
+CREATE PUBLICATION mypub FOR TABLE t1, t2;
+
+
+CREATE FEED myfeed
+  CONNECTION 'host=localhost port=5672 user=admin password=password vhost=/ exchange=amq.topic'
+  PUBLICATION mypub
+  WITH (
+    target = rabbitmq,
+    plugin = wal2json,
+    target_options='{"ssl","false"}'
+  );
+
+
+
+SELECT oid, subname FROM pg_subscription WHERE subname = 'myfeed';
+
+
+
+
+
+SELECT 
+    s.oid, 
+    s.subname, 
+    d.datname AS target_database, 
+    current_database() AS current_database
+FROM pg_subscription s
+JOIN pg_database d ON s.subdbid = d.oid
+WHERE s.subname = 'myfeed';
+
+
+
+
+
+
+create a queue in rabbitmq and bind it to amq.topic exchange with routing key #
+
+
+
+
+INSERT INTO t1 (id, yourmessage)
+SELECT g, 'test'
+FROM generate_series(1, 10) AS g;
+
+
+INSERT INTO t2 (id, yourmessage)
+SELECT g, 'test'
+FROM generate_series(2, 100) AS g;
+
+
+
+
+select * from t1;
+
+
+
+
+
+
+
+
+
+
+UPDATE t1 
+SET yourmessage = 'test' || to_char(clock_timestamp(), 'YYYY-MM-DD HH24:MI:SS');
+
+
+
+
+UPDATE t2 
+SET yourmessage = 'test' || to_char(clock_timestamp(), 'YYYY-MM-DD HH24:MI:SS');
+
+
+
+DROP FEED myfeed;
+
+drop PUBLICATION mypub;
+
+
+
+
+
+
+
