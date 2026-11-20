@@ -1,0 +1,71 @@
+services:
+  rabbit1:
+    image: rabbitmq:4.2-management
+    container_name: rabbit1
+    hostname: rabbit1
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=secret_cookie_for_stream_test
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=password
+    ports:
+      - "15672:15672" # 管理界面
+      - "5672:5672"   # AMQP 端口
+      - "5552:5552"   # Stream 协议端口
+    volumes:
+      - ./rabbit1_data:/var/lib/rabbitmq
+    command: >
+      bash -c "
+        echo '[rabbitmq_management,rabbitmq_stream,rabbitmq_stream_management].' > /etc/rabbitmq/enabled_plugins &&
+        docker-entrypoint.sh rabbitmq-server
+      "
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - rmq-net
+
+  rabbit2:
+    image: rabbitmq:4.2-management
+    container_name: rabbit2
+    hostname: rabbit2
+    depends_on:
+      rabbit1:
+        condition: service_healthy
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=secret_cookie_for_stream_test
+    volumes:
+      - ./rabbit2_data:/var/lib/rabbitmq
+    command: >
+      bash -c "
+        echo '[rabbitmq_management,rabbitmq_stream,rabbitmq_stream_management].' > /etc/rabbitmq/enabled_plugins &&
+        printf 'cluster_formation.peer_discovery_backend = classic_config\ncluster_formation.classic_config.nodes.1 = rabbit@rabbit1\n' > /etc/rabbitmq/conf.d/20-cluster.conf &&
+        docker-entrypoint.sh rabbitmq-server
+      "
+    networks:
+      - rmq-net
+
+  rabbit3:
+    image: rabbitmq:4.2-management
+    container_name: rabbit3
+    hostname: rabbit3
+    depends_on:
+      rabbit1:
+        condition: service_healthy
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=secret_cookie_for_stream_test
+    volumes:
+      - ./rabbit3_data:/var/lib/rabbitmq
+    command: >
+      bash -c "
+        echo '[rabbitmq_management,rabbitmq_stream,rabbitmq_stream_management].' > /etc/rabbitmq/enabled_plugins &&
+        printf 'cluster_formation.peer_discovery_backend = classic_config\ncluster_formation.classic_config.nodes.1 = rabbit@rabbit1\n' > /etc/rabbitmq/conf.d/20-cluster.conf &&
+        docker-entrypoint.sh rabbitmq-server
+      "
+    networks:
+      - rmq-net
+
+networks:
+  rmq-net:
+    driver: bridge

@@ -1,0 +1,7 @@
+docker exec -it rabbit1 bash
+
+rabbitmqadmin -u admin -p password declare queue --name test-stream --type stream
+
+rabbitmq-streams coordinator_status
+
+rabbitmq-streams stream_status test-stream
